@@ -9,3 +9,8 @@ To use the NetHack Companion, you must build the files from source. You must fir
 g++ -o main.exe *.cpp -lncursesw
 ```
 
+## TO DO
+- Handle resizing window
+- Load and save data between runs
+- Journals: intrinsics, notes, ascension kit (user-defined?),
+- Notes: message lookup, dangerous creatures (user-defined?), xp to level up, wand engraving, ring sink, shop lookup
