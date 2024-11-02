@@ -1,2 +1,11 @@
 # nethack-companion
  ASCII-based NetHack companion app to contain useful character information between runs
+
+## Installation
+
+To use the NetHack Companion, you must build the files from source. You must first install [ncurses](https://invisible-mirror.net/archives/ncurses/). Then, compile using the following command (it is necessary that the flag "-lncursesw" is at the END of the list of flags):
+
+```bash
+g++ -o main.exe *.cpp -lncursesw
+```
+
