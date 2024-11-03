@@ -45,7 +45,7 @@ class GameMap
             id = _id;
             sizey = _sizey;
             sizex = _sizex;
-            play_win = newwin(totrow-5, totcol, 0, 0);
+            play_win = newwin(totrow, totcol, 0, 0);
             init_map(sizey, sizex);
         }
 
@@ -93,18 +93,30 @@ class Menu {
             my_win = newwin(sizey, sizex, locy, locx);
             if (justify == 0) {
                 // top-left
-                mvwaddstr(my_win, 1, 1, menu_name.c_str());
+                int title_lines = count_newlines(menu_name);
+                std::string title_to_print = menu_name; 
+                for (int i = 0; i < title_lines; ++i) {
+                    std::string line = title_to_print.substr(0, title_to_print.find("\n"));
+                    title_to_print.erase(0, title_to_print.find("\n") + ((std::string)"\n").length());
+                    mvwaddstr(my_win, 1 + i, 1, line.c_str());
+                }
                 int option_count = 0;
                 for (std::vector<std::string>::const_iterator it = options_list.begin(); it != options_list.end(); ++it) {
-                    mvwaddstr(my_win, 2 + option_count, 1, num_to_alphabet(option_count).c_str());
+                    mvwaddstr(my_win, 2 + title_lines + option_count, 1, num_to_alphabet(option_count).c_str());
                     waddstr(my_win, ") "); 
                     waddstr(my_win, it->c_str());
                     ++option_count;
                 }
-                mvwaddstr(my_win, 3 + option_count, 1, exit_msg.c_str());
+                mvwaddstr(my_win, 3 + title_lines + option_count, 1, exit_msg.c_str());
             } else if (justify == 1) {
                 // centered
-                mvwaddstr(my_win, (int)(totrow/2 -2), (int)((totcol - menu_name.length())/2), menu_name.c_str());
+                int title_lines = count_newlines(menu_name);
+                std::string title_to_print = menu_name; 
+                for (int i = 0; i < title_lines; ++i) {
+                    std::string line = title_to_print.substr(0, title_to_print.find("\n"));
+                    title_to_print.erase(0, title_to_print.find("\n") + ((std::string)"\n").length());
+                    mvwaddstr(my_win, (int)(totrow/2 -2 - title_lines + i), (int)((totcol - line.length())/2), line.c_str());
+                }
                 int option_count = 0;
                 for (std::vector<std::string>::const_iterator it = options_list.begin(); it != options_list.end(); ++it) {
                     mvwaddstr(my_win, (int)(totrow/2 + option_count), (int)(totcol/2 - 5), num_to_alphabet(option_count).c_str());
@@ -112,7 +124,7 @@ class Menu {
                     waddstr(my_win, it->c_str());
                     ++option_count;
                 }
-                mvwaddstr(my_win, (int)(totrow/2 + 1 + option_count), (int)(totcol/2 - 5), exit_msg.c_str());
+                mvwaddstr(my_win, (int)(totrow/2 + 1 + title_lines + option_count), (int)(totcol/2 - 5), exit_msg.c_str());
             } 
             box(my_win, 0, 0);
             wrefresh(my_win);
@@ -158,10 +170,8 @@ int main() {
     start_color();
     init_pair(1, COLOR_WHITE, COLOR_BLACK);
 
-    totrow = 30;
-    totcol = 75;
-    int playrow = totrow-5;
-    int playcol = totcol;
+    totrow = 32;
+    totcol = 110; //82 for main screen, +38 for sidebar
 
     // Read in file names now
     std::vector<std::string> character_filenames = get_filenames("data");
@@ -169,11 +179,11 @@ int main() {
     // Initialize background GameMap called PlayMap
     // The GameMap defines the total area of the app, but otherwise really shouldn't change
     GameMap PlayMap(
-        0, playrow, playcol
+        0, totrow, totcol
     );
    
     Menu profile_menu(
-        "NETHACK COMPANION", 30, 75, 0, 0, character_filenames, "", 1
+        ascii_title, totrow, totcol, 0, 0, character_filenames, "", 1
     );
 
     profile_menu.open_menu();
