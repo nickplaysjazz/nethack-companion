@@ -1,5 +1,8 @@
 #include <iostream>
 #include <ncurses\ncurses.h>
+#include <vector>
+
+#include "utilities.h"
 
 int totrow, totcol;
 
@@ -64,13 +67,13 @@ class Menu {
     private: 
         std::string menu_name;
         int sizey, sizex, locy, locx;
-        std::string options_list; 
+        std::vector<std::string> options_list; 
         int close_button; 
         WINDOW *my_win; 
 
     public: 
         // constructor
-        Menu(const std::string & _menu_name, int _sizey, int _sizex, int _locy, int _locx, const std::string & _options_list, int _close_button = 27) {
+        Menu(const std::string & _menu_name, int _sizey, int _sizex, int _locy, int _locx, const std::vector<std::string> & _options_list, int _close_button = 27) {
             menu_name = _menu_name;
             sizey = _sizey;
             sizex = _sizex;
@@ -82,8 +85,15 @@ class Menu {
 
         void open_menu() {
             my_win = newwin(sizey, sizex, locy, locx);
-            mvwaddstr(my_win, 1, 1, menu_name.c_str());
-            mvwaddstr(my_win, 3, 1, options_list.c_str());
+            mvwaddstr(my_win, (int)(totrow/2 -2), (int)((totcol - menu_name.length())/2), menu_name.c_str());
+            int option_count = 0;
+            for (std::vector<std::string>::const_iterator it = options_list.begin(); it != options_list.end(); ++it) {
+                mvwaddstr(my_win, (int)(totrow/2 + option_count), (int)(totcol/2 - 5), num_to_alphabet(option_count).c_str());
+                waddstr(my_win, ") "); 
+                waddstr(my_win, it->c_str());
+                ++option_count;
+                // TODO check for options being too long for size of screen
+            }
             box(my_win, 0, 0);
             wrefresh(my_win);
         }
@@ -138,10 +148,9 @@ int main() {
     GameMap PlayMap(
         0, playrow, playcol
     );
-
-    // Initialize menus
+   
     Menu profile_menu(
-        "NETHACK COMPANION", 10, 25, (int)totrow/3, (int)totcol/3, "A: Example A \n Esc: Quit"
+        "NETHACK COMPANION", 30, 75, 0, 0, std::vector<std::string> {"test", "one", "two"}
     );
 
     profile_menu.open_menu();
