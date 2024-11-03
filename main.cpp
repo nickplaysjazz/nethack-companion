@@ -2,6 +2,7 @@
 #include <ncurses\ncurses.h>
 #include <vector>
 
+#include "io.h"
 #include "utilities.h"
 
 int totrow, totcol;
@@ -68,32 +69,51 @@ class Menu {
         std::string menu_name;
         int sizey, sizex, locy, locx;
         std::vector<std::string> options_list; 
+        std::string exit_msg; 
+        int justify;        // 0 is top-left, 1 is middle-center
         int close_button; 
         WINDOW *my_win; 
 
     public: 
         // constructor
-        Menu(const std::string & _menu_name, int _sizey, int _sizex, int _locy, int _locx, const std::vector<std::string> & _options_list, int _close_button = 27) {
+        Menu(const std::string & _menu_name, int _sizey, int _sizex, int _locy, int _locx, const std::vector<std::string> & _options_list, const std::string & _exit_msg, int _justify = 0, int _close_button = 27) {
             menu_name = _menu_name;
             sizey = _sizey;
             sizex = _sizex;
             locy = _locy;
             locx = _locx;
             options_list = _options_list;
+            exit_msg = _exit_msg;
+            justify = _justify; 
             close_button = _close_button;
         }
 
         void open_menu() {
+            // TODO check for options being too long for size of screen
             my_win = newwin(sizey, sizex, locy, locx);
-            mvwaddstr(my_win, (int)(totrow/2 -2), (int)((totcol - menu_name.length())/2), menu_name.c_str());
-            int option_count = 0;
-            for (std::vector<std::string>::const_iterator it = options_list.begin(); it != options_list.end(); ++it) {
-                mvwaddstr(my_win, (int)(totrow/2 + option_count), (int)(totcol/2 - 5), num_to_alphabet(option_count).c_str());
-                waddstr(my_win, ") "); 
-                waddstr(my_win, it->c_str());
-                ++option_count;
-                // TODO check for options being too long for size of screen
-            }
+            if (justify == 0) {
+                // top-left
+                mvwaddstr(my_win, 1, 1, menu_name.c_str());
+                int option_count = 0;
+                for (std::vector<std::string>::const_iterator it = options_list.begin(); it != options_list.end(); ++it) {
+                    mvwaddstr(my_win, 2 + option_count, 1, num_to_alphabet(option_count).c_str());
+                    waddstr(my_win, ") "); 
+                    waddstr(my_win, it->c_str());
+                    ++option_count;
+                }
+                mvwaddstr(my_win, 3 + option_count, 1, exit_msg.c_str());
+            } else if (justify == 1) {
+                // centered
+                mvwaddstr(my_win, (int)(totrow/2 -2), (int)((totcol - menu_name.length())/2), menu_name.c_str());
+                int option_count = 0;
+                for (std::vector<std::string>::const_iterator it = options_list.begin(); it != options_list.end(); ++it) {
+                    mvwaddstr(my_win, (int)(totrow/2 + option_count), (int)(totcol/2 - 5), num_to_alphabet(option_count).c_str());
+                    waddstr(my_win, ") "); 
+                    waddstr(my_win, it->c_str());
+                    ++option_count;
+                }
+                mvwaddstr(my_win, (int)(totrow/2 + 1 + option_count), (int)(totcol/2 - 5), exit_msg.c_str());
+            } 
             box(my_win, 0, 0);
             wrefresh(my_win);
         }
@@ -143,6 +163,9 @@ int main() {
     int playrow = totrow-5;
     int playcol = totcol;
 
+    // Read in file names now
+    std::vector<std::string> character_filenames = get_filenames("data");
+
     // Initialize background GameMap called PlayMap
     // The GameMap defines the total area of the app, but otherwise really shouldn't change
     GameMap PlayMap(
@@ -150,7 +173,7 @@ int main() {
     );
    
     Menu profile_menu(
-        "NETHACK COMPANION", 30, 75, 0, 0, std::vector<std::string> {"test", "one", "two"}
+        "NETHACK COMPANION", 30, 75, 0, 0, character_filenames, "", 1
     );
 
     profile_menu.open_menu();

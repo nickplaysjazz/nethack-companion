@@ -9,7 +9,7 @@ int count_newlines(const std::string & input_string) {
     return num_newlines;
 }
 
-std::string num_to_alphabet(const int & input_num) {
+std::string num_to_alphabet(int input_num) {
     switch (input_num) {
         case 0: 
             return "a";
