@@ -10,6 +10,8 @@ g++ -o main.exe *.cpp -lncursesw
 ```
 
 ## TO DO
+- Need generic Menu class from which ProfileMenu, MainMenu, etc. inherit from. Then you can override ActionHandlers, text generation, etc.
+- New submenu button handling
 - Handle resizing window
 - Load and save data between runs, deleting characters
 - Journals: intrinsics, notes, ascension kit (user-defined?),

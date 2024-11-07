@@ -3,6 +3,7 @@
 #include <vector>
 
 #include "io.h"
+#include "submenu.h"
 #include "utilities.h"
 
 int totrow, totcol;
@@ -93,7 +94,7 @@ class Menu {
             my_win = newwin(sizey, sizex, locy, locx);
             if (justify == 0) {
                 // top-left
-                int title_lines = count_newlines(menu_name);
+                int title_lines = count_newlines(menu_name) + 1;
                 std::string title_to_print = menu_name; 
                 for (int i = 0; i < title_lines; ++i) {
                     std::string line = title_to_print.substr(0, title_to_print.find("\n"));
@@ -107,10 +108,10 @@ class Menu {
                     waddstr(my_win, it->c_str());
                     ++option_count;
                 }
-                mvwaddstr(my_win, 3 + title_lines + option_count, 1, exit_msg.c_str());
+                mvwaddstr(my_win, 4 + option_count, 1, exit_msg.c_str());
             } else if (justify == 1) {
                 // centered
-                int title_lines = count_newlines(menu_name);
+                int title_lines = count_newlines(menu_name) + 1;
                 std::string title_to_print = menu_name; 
                 for (int i = 0; i < title_lines; ++i) {
                     std::string line = title_to_print.substr(0, title_to_print.find("\n"));
@@ -124,7 +125,7 @@ class Menu {
                     waddstr(my_win, it->c_str());
                     ++option_count;
                 }
-                mvwaddstr(my_win, (int)(totrow/2 + 1 + title_lines + option_count), (int)(totcol/2 - 5), exit_msg.c_str());
+                mvwaddstr(my_win, (int)(totrow/2 + 1 + option_count), (int)(totcol/2 - 5), exit_msg.c_str());
             } 
             box(my_win, 0, 0);
             wrefresh(my_win);
@@ -137,14 +138,22 @@ class Menu {
         }
 
         // returns true if still running game, false if quitting game
-        bool menu_action_handler() {
+        bool menu_action_handler(Menu & parent_menu) {
             while (true) {
                 int ch = getch();
                 if (ch == close_button) {
                     // closing button
                     close_menu();
+                    parent_menu.open_menu();
                     return true;
-                } 
+                } else if (ch == 97) {
+                    close_menu();
+
+                    // TODO
+                    IntrinsicMenu intrinsics(30, 60, 0, 0);
+                    intrinsics.menu_action_handler();
+                    intrinsics.open_menu(); 
+                }
             }
         }
 };
@@ -175,6 +184,8 @@ int main() {
 
     // Read in file names now
     std::vector<std::string> character_filenames = get_filenames("data");
+    character_filenames.push_back("Create New Character");
+    character_filenames.push_back("Delete Character"); 
 
     // Initialize background GameMap called PlayMap
     // The GameMap defines the total area of the app, but otherwise really shouldn't change
@@ -183,7 +194,11 @@ int main() {
     );
    
     Menu profile_menu(
-        ascii_title, totrow, totcol, 0, 0, character_filenames, "", 1
+        ascii_title, totrow, totcol, 0, 0, character_filenames, "Esc) Exit", 1
+    );
+
+    Menu main_menu(
+        "Options", totrow, totcol, 0, 0, std::vector<std::string> {"Intrinsics"}, "Esc) Switch Profile", 1
     );
 
     profile_menu.open_menu();
@@ -202,9 +217,11 @@ int main() {
                 is_running = false; 
                 endwin();
                 break; 
-            default:
-                refresh();
-                break;
+            case 97:
+                // a 
+                main_menu.open_menu(); 
+                is_running = main_menu.menu_action_handler(profile_menu);
+                break; 
         }
     }
 
