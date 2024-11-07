@@ -4,7 +4,7 @@
 
 #include "io.h"
 #include "menu.h"
-#include "playmap.h"
+#include "gamemap.h"
 #include "submenu.h"
 #include "utilities.h"
 
@@ -33,25 +33,25 @@ int main() {
     // Read in file names now
     std::vector<std::string> character_filenames = get_filenames("data");
 
-    // TODO handle this better
+    // TODO handle this better by changing ProfileMenu's rendering. What keys will these use? Enter and backspace, maybe? Space? 
     character_filenames.push_back("Create New Character");
     character_filenames.push_back("Delete Character"); 
 
-    // Initialize background GameMap called PlayMap
-    // The GameMap defines the total area of the app, but otherwise really shouldn't change
-    totrow = 31;
-    totcol = 110; //82 for main screen, +38 for sidebar
+    // Initialize a GameMap. This will be blank and likely untouched
+    totrow = 32;    // really there is 32, but some weird bug causes the bottom row to disappear occasionally
+    totcol = 110;   //82 for main screen, +38 for sidebar
     GameMap PlayMap(
         0, totrow, totcol, totrow, totcol
     );
    
-    Menu profile_menu(
-        ascii_title, totrow, totcol, 0, 0, character_filenames, "Esc) Exit", 1, 27
+    // Initialize necessary submenus now
+    ProfileMenu profile_menu(
+        PlayMap, totrow, totcol, 0, 0, ascii_title, character_filenames, 27
     );
 
-    Menu main_menu(
-        "Options", totrow, totcol, 0, 0, std::vector<std::string> {"Intrinsics"}, "Esc) Switch Profile", 1, 27
-    );
+    //Menu main_menu(
+    //    "Options", totrow, totcol, 0, 0, std::vector<std::string> {"Intrinsics"}, "Esc) Switch Profile", 1, 27
+    //);
 
     profile_menu.open_menu();
 	refresh();
@@ -62,19 +62,8 @@ int main() {
         // Check for input
         int ch = getch();
 
-        // Handle inputs
-        switch (ch) {
-            case 27:
-                // escape button
-                is_running = false; 
-                endwin();
-                break; 
-            case 97:
-                // a 
-                main_menu.open_menu(); 
-                is_running = main_menu.menu_action_handler(profile_menu);
-                break; 
-        }
+        // handle input. Set is_running false to quit loop, but otherwise will remain true
+        is_running = profile_menu.menu_action_handler(ch);
     }
 
 	return 0;

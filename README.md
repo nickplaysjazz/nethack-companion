@@ -10,7 +10,7 @@ g++ -o main.exe *.cpp -lncursesw
 ```
 
 ## TO DO
-- Need generic Menu class from which ProfileMenu, MainMenu, etc. inherit from. Then you can override ActionHandlers, text generation, etc.
+- FIX closing Menu with action handler. Need to fix how action handler should switch between different MenuActionHandlers whenever you want. 
 - New submenu button handling
 - Handle resizing window
 - Load and save data between runs, deleting characters
