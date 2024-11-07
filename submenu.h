@@ -11,7 +11,7 @@ class IntrinsicMenu
         IntrinsicMenu(int _sizey, int _sizex, int _locy, int _locx);
         void open_menu();
         void close_menu();
-        bool menu_action_handler(); 
+        //bool menu_action_handler(); 
 };
 
 #endif

@@ -19,10 +19,11 @@ void IntrinsicMenu::close_menu() {
     delwin(my_win);
 } 
 
-bool IntrinsicMenu::menu_action_handler() {
-    while (true) {
-        int ch = getch();
-        // switch (ch):
-            // TODO
-    }
-}
+// TODO 
+// bool IntrinsicMenu::menu_action_handler() {
+//     while (true) {
+//         int ch = getch();
+//         switch (ch):
+// 
+//     }
+// }
