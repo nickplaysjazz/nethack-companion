@@ -42,7 +42,9 @@ void ProfileMenu::render_menu() {
             waddstr(my_win, it->c_str());
             ++option_count;
         }
-        mvwaddstr(my_win, (int)(my_row/2 + 1 + option_count), (int)(my_col/2 - 5), ((std::string)"Esc) Quit").c_str());
+        mvwaddstr(my_win,(int)(my_row/2 + 1 + option_count), (int)(my_col/2 - 5), ((std::string)"Enter) Create New Character").c_str());
+        mvwaddstr(my_win,(int)(my_row/2 + 2 + option_count), (int)(my_col/2 - 5), ((std::string)"Backspace) Delete Character").c_str());
+        mvwaddstr(my_win, (int)(my_row/2 + 4 + option_count), (int)(my_col/2 - 5), ((std::string)"Esc) Quit").c_str());
 }
 
 bool ProfileMenu::menu_action_handler(int ch) {

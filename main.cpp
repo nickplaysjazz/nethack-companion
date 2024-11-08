@@ -1,3 +1,4 @@
+#include <functional>
 #include <iostream>
 #include <ncurses\ncurses.h>
 #include <vector>
@@ -31,11 +32,8 @@ int main() {
     init_pair(1, COLOR_WHITE, COLOR_BLACK);
 
     // Read in file names now
+    // TODO handle if there are too many files to print on screen? Probably just throw an exception
     std::vector<std::string> character_filenames = get_filenames("data");
-
-    // TODO handle this better by changing ProfileMenu's rendering. What keys will these use? Enter and backspace, maybe? Space? 
-    character_filenames.push_back("Create New Character");
-    character_filenames.push_back("Delete Character"); 
 
     // Initialize a GameMap. This will be blank and likely untouched
     totrow = 32;    // really there is 32, but some weird bug causes the bottom row to disappear occasionally
@@ -53,11 +51,14 @@ int main() {
     //    "Options", totrow, totcol, 0, 0, std::vector<std::string> {"Intrinsics"}, "Esc) Switch Profile", 1, 27
     //);
 
+    //(profile_menu->*action_handler)(0); 
+
     profile_menu.open_menu();
 	refresh();
 
     // GAME LOOP BELOW 
     bool is_running = true;
+
     while (is_running) {
         // Check for input
         int ch = getch();

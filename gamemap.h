@@ -2,7 +2,6 @@
 #define PLAYMAP_H
 
 #include <ncurses/ncurses.h>
-
 class GameMap 
 {
     private: 
@@ -14,6 +13,9 @@ class GameMap
         int sizey, sizex;
         int totrow, totcol; 
         WINDOW *play_win;
+
+        //typedef bool (Menu::*ActionHandlerType)(int); 
+        //ActionHandlerType action_handler = &Menu::menu_action_handler;
 
         // constructor 
         GameMap(int _id, int _totrow, int _totcol, int _sizey, int _sizex);

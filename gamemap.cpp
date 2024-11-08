@@ -1,3 +1,4 @@
+#include <functional>
 #include <ncurses/ncurses.h>
 
 #include "gamemap.h"
