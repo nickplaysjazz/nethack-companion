@@ -2,6 +2,9 @@
 #define PLAYMAP_H
 
 #include <ncurses/ncurses.h>
+
+#include "menu.h"
+
 class GameMap 
 {
     private: 
@@ -22,6 +25,7 @@ class GameMap
         // default constructor with no parameters is required for compilation when GameMap is passed as a parameter to a class in another file
         GameMap();
         void update_map(int maxy, int maxx);
+        bool action_handler(Menu& menu, int ch); 
 };
 
 #endif

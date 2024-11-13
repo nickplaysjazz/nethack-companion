@@ -64,7 +64,7 @@ int main() {
         int ch = getch();
 
         // handle input. Set is_running false to quit loop, but otherwise will remain true
-        is_running = profile_menu.menu_action_handler(ch);
+        is_running = PlayMap.action_handler(profile_menu, ch);
     }
 
 	return 0;
