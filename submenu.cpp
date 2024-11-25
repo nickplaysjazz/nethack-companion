@@ -1,11 +1,11 @@
 #include <ncurses/ncurses.h>
 #include <iostream>
 
+#include "menu.h"
 #include "submenu.h"
 #include "utilities.h"
 
 ProfileMenu::ProfileMenu(
-    const GameMap & _play_map,
     int _sizey, 
     int _sizex, 
     int _locy, 
@@ -15,7 +15,6 @@ ProfileMenu::ProfileMenu(
     int _close_button = 27
     ) 
 {
-    play_map = _play_map; 
     sizey = _sizey;
     sizex = _sizex;
     locy = _locy;
@@ -27,8 +26,8 @@ ProfileMenu::ProfileMenu(
 
 void ProfileMenu::render_menu() {
         int title_lines = count_newlines(menu_name) + 1;
-        int my_row = play_map.totrow;
-        int my_col = play_map.totcol; 
+        int my_row = sizey;
+        int my_col = sizex; 
         std::string title_to_print = menu_name; 
         for (int i = 0; i < title_lines; ++i) {
             std::string line = title_to_print.substr(0, title_to_print.find("\n"));
@@ -47,21 +46,6 @@ void ProfileMenu::render_menu() {
         mvwaddstr(my_win, (int)(my_row/2 + 4 + option_count), (int)(my_col/2 - 5), ((std::string)"Esc) Quit").c_str());
 }
 
-bool ProfileMenu::menu_action_handler(int ch) {
-    switch (ch) {
-        // todo handle variable case
-        case 27:
-            // TODO fix closing the right menu, right now it closes the parent Menu window instead of the child ProfileMenu window. 
-            // might need to pass the window into close_menu()... 
-            //close_menu();
-            std::cout<<"test: esc has been hit, goodbye"<<std::endl;
-            return false; 
-            break;
-        default:
-            return true;
-            break;
-    }
-}
 
 // IntrinsicMenu::IntrinsicMenu(int _sizey, int _sizex, int _locy, int _locx) {
 //     sizey = _sizey;

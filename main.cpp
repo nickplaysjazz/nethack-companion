@@ -1,15 +1,22 @@
 #include <functional>
+#include <csignal>
 #include <iostream>
 #include <ncurses\ncurses.h>
 #include <vector>
 
 #include "io.h"
+#include "input_handlers.h"
 #include "menu.h"
 #include "gamemap.h"
 #include "submenu.h"
 #include "utilities.h"
 
 int totrow, totcol;
+
+void user_early_exit(int signal_number) {
+    // this is where we handle saving and quitting when exiting from the terminal abnormally
+   std::cout << "\nInterrupt signal (" << signal_number << ") received.";
+}
 
 int main() {
     // Start curses
@@ -31,11 +38,16 @@ int main() {
     start_color();
     init_pair(1, COLOR_WHITE, COLOR_BLACK);
 
+    // Catch early termination by closing window
+    signal(SIGTERM, user_early_exit);
+    // Catch early termination by ctrl-c 
+    signal(SIGINT, user_early_exit);
+
     // Read in file names now
     // TODO handle if there are too many files to print on screen? Probably just throw an exception
     std::vector<std::string> character_filenames = get_filenames("data");
 
-    // Initialize a GameMap. This will be blank and likely untouched
+    // Initialize a GameMap. This will be blank for now
     totrow = 32;    // really there is 32, but some weird bug causes the bottom row to disappear occasionally
     totcol = 110;   //82 for main screen, +38 for sidebar
     GameMap PlayMap(
@@ -44,7 +56,7 @@ int main() {
    
     // Initialize necessary submenus now
     ProfileMenu profile_menu(
-        PlayMap, totrow, totcol, 0, 0, ascii_title, character_filenames, 27
+        PlayMap.totrow, PlayMap.totcol, 0, 0, ascii_title, character_filenames, 27
     );
 
     //Menu main_menu(
@@ -64,7 +76,7 @@ int main() {
         int ch = getch();
 
         // handle input. Set is_running false to quit loop, but otherwise will remain true
-        is_running = PlayMap.action_handler(profile_menu, ch);
+        is_running = profile_menu_action_handler(profile_menu, ch);
     }
 
 	return 0;

@@ -3,12 +3,11 @@
 #include <string>
 #include <vector>
 
-#include "menu.h"
 #include "gamemap.h"
+#include "menu.h"
 #include "utilities.h"
 
 Menu::Menu(
-    const GameMap & _play_map,
     int _sizey, 
     int _sizex, 
     int _locy, 
@@ -18,7 +17,6 @@ Menu::Menu(
     int _close_button = 27
     ) 
 {
-    play_map = _play_map; 
     sizey = _sizey;
     sizex = _sizex;
     locy = _locy;
@@ -49,12 +47,6 @@ void Menu::close_menu() {
     wrefresh(my_win);
     delwin(my_win);
 }
-
-// This function should ALWAYS be overriden
-bool Menu::menu_action_handler(int ch) {
-    throw std::runtime_error("Menu::menu_action_handler() must be overriden!");
-}
-
 
 
 // Menu::Menu(

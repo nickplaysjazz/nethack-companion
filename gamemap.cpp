@@ -2,7 +2,6 @@
 #include <ncurses/ncurses.h>
 
 #include "gamemap.h"
-#include "menu.h"
 
 GameMap::GameMap(int _id, int _totrow, int _totcol, int _sizey, int _sizex) {
     id = _id;
@@ -51,8 +50,4 @@ void GameMap::update_map(int maxy, int maxx) {
     }
     wattroff(play_win, COLOR_PAIR(1));
     wrefresh(play_win);
-}
-
-bool GameMap::action_handler(Menu& menu, int ch) {
-    return menu.menu_action_handler(ch); 
 }

@@ -5,14 +5,11 @@
 #include <string>
 #include <vector>
 
-#include "gamemap.h"
-
 // Menu is the DEFAULT behavior for any SubMenu. SubMenu inherits from Menu and overrides function as needed
 class Menu {
     protected: 
-        WINDOW *my_win; 
+        WINDOW *my_win;
 
-        GameMap play_map; 
         int sizey, sizex, locy, locx;
         std::string menu_name;
         std::vector<std::string> options_list; 
@@ -20,7 +17,6 @@ class Menu {
 
     public: 
         Menu(
-            const GameMap & _play_map,
             int _sizey, 
             int _sizex, 
             int _locy, 
@@ -33,7 +29,6 @@ class Menu {
         void open_menu();
         virtual void render_menu();
         void close_menu();
-        virtual bool menu_action_handler(int ch);
 };
 
 #endif
