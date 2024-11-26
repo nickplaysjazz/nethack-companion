@@ -10,7 +10,7 @@ class Menu {
     protected: 
         WINDOW *my_win;
 
-        int sizey, sizex, locy, locx;
+        int locy, locx, sizey, sizex;
         std::string menu_name;
         std::vector<std::string> options_list; 
         int close_button; 
@@ -29,6 +29,12 @@ class Menu {
         void open_menu();
         virtual void render_menu();
         void close_menu();
+
+        
+        std::vector<int> get_location(); 
+        WINDOW *get_my_win();
+        std::vector<std::string> get_options_list();
+        std::vector<int> get_size();
 };
 
 #endif

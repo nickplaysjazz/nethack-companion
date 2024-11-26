@@ -15,6 +15,7 @@ class ProfileMenu : public Menu {
             int _close_button
         );
         void render_menu() override;
+        void set_options_list(std::vector<std::string> new_options_list); 
 };
 
 // class IntrinsicMenu

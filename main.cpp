@@ -13,7 +13,7 @@
 
 int totrow, totcol;
 
-void user_early_exit(int signal_number) {
+void save_and_exit(int signal_number) {
     // this is where we handle saving and quitting when exiting from the terminal abnormally
    std::cout << "\nInterrupt signal (" << signal_number << ") received.";
 }
@@ -39,9 +39,9 @@ int main() {
     init_pair(1, COLOR_WHITE, COLOR_BLACK);
 
     // Catch early termination by closing window
-    signal(SIGTERM, user_early_exit);
+    signal(SIGTERM, save_and_exit);
     // Catch early termination by ctrl-c 
-    signal(SIGINT, user_early_exit);
+    signal(SIGINT, save_and_exit);
 
     // Read in file names now
     // TODO handle if there are too many files to print on screen? Probably just throw an exception
@@ -56,7 +56,7 @@ int main() {
    
     // Initialize necessary submenus now
     ProfileMenu profile_menu(
-        PlayMap.totrow, PlayMap.totcol, 0, 0, ascii_title, character_filenames, 27
+        PlayMap.get_map_tot_row_col()[0], PlayMap.get_map_tot_row_col()[1], 0, 0, ascii_title, character_filenames, 27
     );
 
     //Menu main_menu(

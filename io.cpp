@@ -15,6 +15,16 @@ std::vector<std::string> get_filenames(const std::string & dirname) {
     return filename_list;
 }
 
+std::vector<std::string> get_filepaths(const std::string & dirname) {
+    std::filesystem::path file_directory =  std::filesystem::current_path().append(dirname) ; 
+    std::vector<std::string> filepath_list; 
+    for (const auto & file : std::filesystem::directory_iterator(file_directory)) {
+        std::string filename = file.path().string(); 
+        filepath_list.push_back(filename);
+    }
+    return filepath_list;
+}
+
 int load_file(const std::string & filename) {
     std::string line;
     std::ifstream my_file (filename);
@@ -40,4 +50,8 @@ int save_file(const std::string & filename) {
     } else {
         return 1;
     }
+}
+
+void delete_file(const std::string & filename) {
+    std::remove(filename.c_str());
 }

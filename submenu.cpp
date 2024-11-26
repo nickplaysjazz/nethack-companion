@@ -28,6 +28,7 @@ void ProfileMenu::render_menu() {
         int title_lines = count_newlines(menu_name) + 1;
         int my_row = sizey;
         int my_col = sizex; 
+        box(my_win, 0, 0);
         std::string title_to_print = menu_name; 
         for (int i = 0; i < title_lines; ++i) {
             std::string line = title_to_print.substr(0, title_to_print.find("\n"));
@@ -42,10 +43,13 @@ void ProfileMenu::render_menu() {
             ++option_count;
         }
         mvwaddstr(my_win,(int)(my_row/2 + 1 + option_count), (int)(my_col/2 - 5), ((std::string)"Enter) Create New Character").c_str());
-        mvwaddstr(my_win,(int)(my_row/2 + 2 + option_count), (int)(my_col/2 - 5), ((std::string)"Backspace) Delete Character").c_str());
+        mvwaddstr(my_win,(int)(my_row/2 + 2 + option_count), (int)(my_col/2 - 5), ((std::string)"Delete) Delete Character").c_str());
         mvwaddstr(my_win, (int)(my_row/2 + 4 + option_count), (int)(my_col/2 - 5), ((std::string)"Esc) Quit").c_str());
 }
 
+void ProfileMenu::set_options_list(std::vector<std::string> new_options_list) {
+    options_list = new_options_list;
+}
 
 // IntrinsicMenu::IntrinsicMenu(int _sizey, int _sizex, int _locy, int _locx) {
 //     sizey = _sizey;

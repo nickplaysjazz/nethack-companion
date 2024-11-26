@@ -33,7 +33,6 @@ void Menu::open_menu() {
     // TODO need to create ProfileMenu my_win, not the Menu my_win, when this is called. 
     my_win = newwin(sizey, sizex, locy, locx);
     render_menu();
-    box(my_win, 0, 0);
     wrefresh(my_win);
 }
 
@@ -47,6 +46,24 @@ void Menu::close_menu() {
     wrefresh(my_win);
     delwin(my_win);
 }
+
+
+std::vector<int> Menu::get_location() {
+    return std::vector<int> {locy, locx};
+}
+
+WINDOW *Menu::get_my_win() {
+    return my_win;
+}
+
+std::vector<std::string> Menu::get_options_list() {
+    return options_list; 
+}
+
+std::vector<int> Menu::get_size() {
+    return std::vector<int> {sizey, sizex};
+}
+
 
 
 // Menu::Menu(

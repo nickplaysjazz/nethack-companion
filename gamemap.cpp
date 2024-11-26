@@ -1,5 +1,6 @@
 #include <functional>
 #include <ncurses/ncurses.h>
+#include <vector>
 
 #include "gamemap.h"
 
@@ -50,4 +51,11 @@ void GameMap::update_map(int maxy, int maxx) {
     }
     wattroff(play_win, COLOR_PAIR(1));
     wrefresh(play_win);
+}
+
+std::vector<int> GameMap::get_map_size() {
+    return std::vector<int> {sizey, sizex};
+}
+std::vector<int> GameMap::get_map_tot_row_col() {
+    return std::vector<int> {totrow, totcol};
 }
