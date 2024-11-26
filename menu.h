@@ -29,7 +29,14 @@ class Menu {
         void open_menu();
         virtual void render_menu();
         void close_menu();
-
+        int create_popup(
+            Menu & menu_name,
+            WINDOW *my_popup_name,
+            std::string my_popup_title,
+            std::vector<std::string> my_options_list,
+            std::vector<int> progress_buttons, 
+            std::vector<int> exit_buttons
+        );
         
         std::vector<int> get_location(); 
         WINDOW *get_my_win();

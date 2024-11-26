@@ -11,9 +11,9 @@ g++ -o main.exe *.cpp -lncursesw
 
 ## TO DO
 - FIX closing Menu with action handler. Need to fix how action handler should switch between different MenuActionHandlers whenever you want. 
-- New submenu button handling
+- New submenu button handling (done!)
 - Handle resizing window
-- Load and save data between runs, deleting characters
+- Load and save data between runs, creating new files (can delete now!)
 - Journals: intrinsics, notes, ascension kit (user-defined?),
 - Notes: message lookup, dangerous creatures (user-defined?), xp to level up, wand engraving, ring sink, shop lookup
 - Date of run (?)

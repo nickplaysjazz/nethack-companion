@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <ncurses/ncurses.h>
 #include <stdexcept>
 #include <string>
@@ -47,7 +48,6 @@ void Menu::close_menu() {
     delwin(my_win);
 }
 
-
 std::vector<int> Menu::get_location() {
     return std::vector<int> {locy, locx};
 }
@@ -64,7 +64,58 @@ std::vector<int> Menu::get_size() {
     return std::vector<int> {sizey, sizex};
 }
 
+int Menu::create_popup(
+    Menu & menu_name,
+    WINDOW *my_popup_name,
+    std::string my_popup_title,
+    std::vector<std::string> my_options_list,
+    std::vector<int> progress_buttons, 
+    std::vector<int> exit_buttons
+) {
+    int my_row = 4 + my_options_list.size(); 
+    if (my_options_list.size() == 0) {
+        my_row--; 
+    }
+    int my_col = 0;
+    for (int j = 0; j < (int)my_options_list.size(); ++j) {
+        if ((int)my_options_list[j].length() + 3 > my_col) {my_col = (int)my_options_list[j].length();}
+    }
+    if ((int)my_popup_title.length() > my_col) {my_col = (int)my_popup_title.length();}
+    my_col = my_col + 2; 
 
+    my_popup_name = newwin(my_row, my_col, menu_name.get_size()[0]/2 - my_row/2, menu_name.get_size()[1]/2 - my_col/2);
+    box(my_popup_name, 0, 0);
+    mvwaddstr(my_popup_name, 1, 1, my_popup_title.c_str());
+    int option_count = 0;
+    for (std::vector<std::string>::const_iterator it = my_options_list.begin(); it != my_options_list.end(); ++it) {
+        mvwaddstr(my_popup_name, 3 + option_count, 1, num_to_alphabet(option_count).c_str());
+        waddstr(my_popup_name, ") "); 
+        waddstr(my_popup_name, it->c_str());
+        ++option_count;
+    }
+
+    // render Delete window
+    wrefresh(my_popup_name);
+
+    // loop Delete window
+    bool is_inner_loop_running = true;
+    while (is_inner_loop_running) {
+        int ch1 = getch();
+        if (std::find(exit_buttons.begin(), exit_buttons.end(), ch1) != exit_buttons.end()) { 
+            werase(my_popup_name);
+            wrefresh(my_popup_name);
+            delwin(my_popup_name);
+            touchwin(menu_name.get_my_win());
+            refresh();
+            wrefresh(menu_name.get_my_win());
+            is_inner_loop_running = false;
+            return -1; 
+        } else if (std::find(progress_buttons.begin(), progress_buttons.end(), ch1) != progress_buttons.end()) {
+            return ch1;  
+        }
+    }
+    return -1;
+}
 
 // Menu::Menu(
 //     const std::string & _menu_name, 
