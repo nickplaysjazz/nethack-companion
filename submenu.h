@@ -3,9 +3,26 @@
 
 #include "menu.h"
 
+class MainMenu : public Menu {
+    public: 
+        MainMenu(
+            WINDOW *_my_main_menu_win,
+            int _sizey, 
+            int _sizex, 
+            int _locy, 
+            int _locx, 
+            const std::string & _menu_name, 
+            const std::vector<std::string> & _options_list, 
+            int _close_button
+        );
+        void render_menu(std::string & file_title);
+        void render_menu() override;
+};
+
 class ProfileMenu : public Menu {
     public: 
         ProfileMenu(
+            WINDOW *_my_profile_menu_win,
             int _sizey, 
             int _sizex, 
             int _locy, 

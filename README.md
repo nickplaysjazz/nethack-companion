@@ -1,5 +1,5 @@
 # nethack-companion
- ASCII-based NetHack companion app to contain useful character information between runs
+ASCII-based NetHack companion app to contain useful character information between runs
 
 ## Installation
 
@@ -11,8 +11,7 @@ g++ -o main.exe *.cpp -lncursesw
 
 ## TO DO
 - FIX closing Menu with action handler. Need to fix how action handler should switch between different MenuActionHandlers whenever you want. 
-- Handle resizing window
-- Prevent creating > 10 files
+- Handle resizing window (this might be impossible with PDCurses, need to look into this)
 - Is not currently loading & saving data, but will create/delete files
 - Journals: intrinsics, notes, ascension kit (user-defined?),
 - Notes: message lookup, dangerous creatures (user-defined?), xp to level up, wand engraving, ring sink, shop lookup

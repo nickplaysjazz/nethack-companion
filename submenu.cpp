@@ -5,16 +5,17 @@
 #include "submenu.h"
 #include "utilities.h"
 
-ProfileMenu::ProfileMenu(
+MainMenu::MainMenu(
+    WINDOW *_my_main_menu_win,
     int _sizey, 
     int _sizex, 
     int _locy, 
     int _locx, 
     const std::string & _menu_name, 
     const std::vector<std::string> & _options_list, 
-    int _close_button = 27
-    ) 
-{
+    int _close_button
+) {
+    my_win = _my_main_menu_win;
     sizey = _sizey;
     sizex = _sizex;
     locy = _locy;
@@ -24,7 +25,51 @@ ProfileMenu::ProfileMenu(
     close_button = _close_button;
 };
 
-void ProfileMenu::render_menu() {
+void MainMenu::render_menu() {
+    // necessary but this version is not used
+    return;
+}
+
+void MainMenu::render_menu(std::string & file_title) {
+    menu_name = file_title;
+    int my_row = sizey;
+    int my_col = sizex; 
+    box(my_win, 0, 0);
+
+    mvwaddstr(my_win, 1, my_col/2 - file_title.length()/2, file_title.c_str());
+
+    int option_count = 0;
+    for (std::vector<std::string>::const_iterator it = options_list.begin(); it != options_list.end(); ++it) {
+        mvwaddstr(my_win, (int)(my_row/2 + option_count), (int)(my_col/2 - 5), num_to_alphabet(option_count).c_str());
+        waddstr(my_win, ") "); 
+        waddstr(my_win, it->c_str());
+        ++option_count;
+    }
+    mvwaddstr(my_win, (int)(my_row/2 + 4 + option_count), (int)(my_col/2 - 5), ((std::string)"Esc) Quit").c_str());
+}
+
+ProfileMenu::ProfileMenu(
+    WINDOW *_my_profile_menu_win,
+    int _sizey, 
+    int _sizex, 
+    int _locy, 
+    int _locx, 
+    const std::string & _menu_name, 
+    const std::vector<std::string> & _options_list, 
+    int _close_button = 27
+    ) 
+{
+    my_win = _my_profile_menu_win;
+    sizey = _sizey;
+    sizex = _sizex;
+    locy = _locy;
+    locx = _locx;
+    menu_name = _menu_name;
+    options_list = _options_list;
+    close_button = _close_button;
+};
+
+void ProfileMenu::render_menu() { 
     int title_lines = count_newlines(menu_name) + 1;
     int my_row = sizey;
     int my_col = sizex; 

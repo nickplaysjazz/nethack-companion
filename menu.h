@@ -17,6 +17,7 @@ class Menu {
 
     public: 
         Menu(
+            WINDOW *_my_menu_win,
             int _sizey, 
             int _sizex, 
             int _locy, 
