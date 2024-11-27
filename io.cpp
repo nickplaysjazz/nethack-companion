@@ -41,13 +41,26 @@ int load_file(const std::string & filename) {
 }
 
 int save_file(const std::string & filename) {
-    std::ofstream my_file; 
+    std::ofstream my_file;
     my_file.open(filename); 
     if (my_file.is_open()) {
         my_file<<"\ntesting write to a file";
         my_file.close();
         return 0;
     } else {
+        return 1;
+    }
+}
+
+int create_file(const std::string & filename) {
+    std::ofstream my_file;
+    std::filesystem::path file_directory =  std::filesystem::current_path().append("data") ; 
+    my_file.open(file_directory.append(filename));
+    if (my_file.is_open()) {
+        my_file.close();
+        return 0; 
+    }
+    else {
         return 1;
     }
 }

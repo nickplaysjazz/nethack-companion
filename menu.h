@@ -37,6 +37,13 @@ class Menu {
             std::vector<int> progress_buttons, 
             std::vector<int> exit_buttons
         );
+        std::string create_text_prompt(
+            Menu & menu_name,
+            WINDOW *my_text_prompt_name,
+            std::string my_text_prompt_title,
+            std::vector<int> progress_buttons, 
+            std::vector<int> exit_buttons
+        );
         
         std::vector<int> get_location(); 
         WINDOW *get_my_win();

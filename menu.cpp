@@ -94,10 +94,10 @@ int Menu::create_popup(
         ++option_count;
     }
 
-    // render Delete window
+    // render window
     wrefresh(my_popup_name);
 
-    // loop Delete window
+    // loop window
     bool is_inner_loop_running = true;
     while (is_inner_loop_running) {
         int ch1 = getch();
@@ -115,6 +115,66 @@ int Menu::create_popup(
         }
     }
     return -1;
+}
+
+std::string Menu::create_text_prompt(
+    Menu & menu_name,
+    WINDOW *my_text_prompt_name,
+    std::string my_text_prompt_title,
+    std::vector<int> progress_buttons, 
+    std::vector<int> exit_buttons
+) {
+    // create popup
+    int my_row = 4; 
+    int my_col = 2 + (int)my_text_prompt_title.length();
+    my_text_prompt_name = newwin(my_row, my_col, menu_name.get_size()[0]/2 - my_row/2, menu_name.get_size()[1]/2 - my_col/2);
+    box(my_text_prompt_name, 0, 0);
+    mvwaddstr(my_text_prompt_name, 1, 1, my_text_prompt_title.c_str());
+
+    // render
+    wrefresh(my_text_prompt_name);
+
+    // loop
+    bool is_text_prompt_running = true;
+    int xpos = 1;
+    std::string return_string = ""; 
+    while (is_text_prompt_running) {
+        int ch = getch();
+        if (std::find(exit_buttons.begin(), exit_buttons.end(), ch) != exit_buttons.end()) { 
+            werase(my_text_prompt_name);
+            wrefresh(my_text_prompt_name);
+            delwin(my_text_prompt_name);
+            touchwin(menu_name.get_my_win());
+            refresh();
+            wrefresh(menu_name.get_my_win());
+            is_text_prompt_running = false;
+            return "";
+        } else if (std::find(progress_buttons.begin(), progress_buttons.end(), ch) != progress_buttons.end()) {
+            werase(my_text_prompt_name);
+            wrefresh(my_text_prompt_name);
+            delwin(my_text_prompt_name);
+            touchwin(menu_name.get_my_win());
+            refresh();
+            wrefresh(menu_name.get_my_win());
+            is_text_prompt_running = false;
+            return return_string;
+        } else if ((ch >= int('a') && ch <= int('z')) || (ch >= int('A') && ch <= int('Z')) || (ch >= int('0') && ch <= int('9')) || (ch == 32) || (std::find(legal_special_characters.begin(), legal_special_characters.end(), ch) != legal_special_characters.end())) {
+            if (xpos+1 <= (int)my_text_prompt_title.length()+1) {
+                mvwaddch(my_text_prompt_name, 2, xpos, keycode_to_char(ch));
+                return_string = return_string + keycode_to_char(ch); 
+                wrefresh(my_text_prompt_name);
+                ++xpos;
+            } 
+        } else if (ch == 8) {
+            if (xpos-1 >= 1) {
+                mvwaddch(my_text_prompt_name, 2, xpos-1, ' ');
+                wrefresh(my_text_prompt_name);
+                return_string = return_string.substr(0, return_string.size() - 1); 
+                --xpos;
+            }
+        }
+    }
+    return "";
 }
 
 // Menu::Menu(
