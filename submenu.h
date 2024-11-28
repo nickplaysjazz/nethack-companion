@@ -4,6 +4,10 @@
 #include "menu.h"
 
 class MainMenu : public Menu {
+    private:
+        WINDOW *my_main_menu_intrinsics_box;
+        WINDOW *my_main_menu_title_box;
+
     public: 
         MainMenu(
             WINDOW *_my_main_menu_win,
@@ -17,6 +21,10 @@ class MainMenu : public Menu {
         );
         void render_menu(std::string & file_title);
         void render_menu() override;
+        void set_my_main_menu_intrinsics_box(WINDOW *win);
+        void set_my_main_menu_title_box(WINDOW *win);
+        WINDOW *get_my_main_menu_intrinsics_box();
+        WINDOW *get_my_main_menu_title_box();
 };
 
 class ProfileMenu : public Menu {

@@ -5,13 +5,21 @@
 #include <vector>
 
 std::vector<std::string> get_filenames(const std::string & dirname) {
-    std::filesystem::path file_directory =  std::filesystem::current_path().append(dirname) ; 
-    std::vector<std::string> filename_list; 
-    for (const auto & file : std::filesystem::directory_iterator(file_directory)) {
-        std::string filename = file.path().string(); 
-        filename = filename.substr(filename.find(dirname) + dirname.length() + 1);
-        filename_list.push_back(filename);
-    }
+        std::filesystem::path file_directory =  std::filesystem::current_path().append(dirname) ; 
+        std::vector<std::string> filename_list; 
+        for (const auto & file : std::filesystem::directory_iterator(file_directory)) {
+            std::string filename = file.path().string(); 
+            filename = filename.substr(filename.find(dirname) + dirname.length() + 1);
+            std::size_t pos_to_erase = filename.find(".dat");
+            // ignore if file is not .dat
+            try {
+                filename.erase(pos_to_erase);
+            } catch (std::out_of_range const&) {
+                std::cout<<"Unrecognized file "<<filename<< "!"<<std::endl;
+                continue;
+            }
+            filename_list.push_back(filename);
+        }
     return filename_list;
 }
 
@@ -52,9 +60,10 @@ int save_file(const std::string & filename) {
     }
 }
 
-int create_file(const std::string & filename) {
+int create_file(std::string filename) {
     std::ofstream my_file;
-    std::filesystem::path file_directory =  std::filesystem::current_path().append("data") ; 
+    std::filesystem::path file_directory =  std::filesystem::current_path().append("data"); 
+    filename = filename.append(".dat");
     my_file.open(file_directory.append(filename));
     if (my_file.is_open()) {
         my_file.close();

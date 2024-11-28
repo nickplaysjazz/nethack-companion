@@ -9,5 +9,6 @@ std::string num_to_alphabet(int input_num);
 char keycode_to_char(int keycode); 
 
 extern std::vector<int> legal_special_characters;
+extern std::vector<std::string> properties_list;
 
 #endif 

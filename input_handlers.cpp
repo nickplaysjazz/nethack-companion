@@ -17,6 +17,65 @@ int main_menu_action_handler(MainMenu & main_menu, ProfileMenu & profile_menu, i
         profile_menu.render_menu();
 
         return 0;
+    } else if (ch == int('p')) {
+        // intrinsics
+        std::string intrinsics_title = "PROPERTIES p)";
+        WINDOW *intrinsics_box = main_menu.get_my_main_menu_intrinsics_box();
+        wattron(intrinsics_box, COLOR_PAIR(4));
+        wattron(intrinsics_box, A_STANDOUT);
+        mvwaddstr(intrinsics_box, 1, intrinsics_title.length()/2, intrinsics_title.c_str());
+        wattroff(intrinsics_box, COLOR_PAIR(4));
+        wattroff(intrinsics_box, A_STANDOUT);
+
+        int option_count = 0;
+        for (std::vector<std::string>::const_iterator it = properties_list.begin(); it != properties_list.end(); ++it) {
+            mvwaddstr(intrinsics_box, 3+option_count, 1, num_to_alphabet(option_count).c_str());
+            waddstr(intrinsics_box, ") "); 
+            waddstr(intrinsics_box, it->c_str());
+            ++option_count;
+        }
+
+        wrefresh(intrinsics_box);
+
+        int num_options = (int)properties_list.size();
+        std::vector<int> properties_buttons;
+        for (int i = 0; i < num_options; ++i) {
+            properties_buttons.push_back(int('a') + i); 
+        }
+
+        // intrinsics submenu
+        bool is_inner_loop_running = true;
+        while (is_inner_loop_running) {
+            int ch1 = getch();
+            if (ch1 == 27) {
+                wattron(intrinsics_box, COLOR_PAIR(4));
+                mvwaddstr(intrinsics_box, 1, intrinsics_title.length()/2, intrinsics_title.c_str());
+                wattroff(intrinsics_box, COLOR_PAIR(4));
+
+                int option_count = 0;
+                for (std::vector<std::string>::const_iterator it = properties_list.begin(); it != properties_list.end(); ++it) {
+                    mvwaddstr(intrinsics_box, 3+option_count, 1, "   ");
+                    waddstr(intrinsics_box, it->c_str());
+                    ++option_count;
+                }
+
+                wrefresh(intrinsics_box);
+
+                is_inner_loop_running = false;
+            } else if (std::find(properties_buttons.begin(), properties_buttons.end(), ch1) != properties_buttons.end()) {
+                // Finding the index of val
+                std::vector<int>::iterator it = find(properties_buttons.begin(), properties_buttons.end(), ch1);
+                int index = it - properties_buttons.begin();
+
+                std::cout<<index<<std::endl;
+
+                //mvwaddstr(intrinsics_box, 3+index, 1, num_to_alphabet(option_count).c_str());
+                //waddstr(intrinsics_box, ") "); 
+                //waddstr(intrinsics_box, it->c_str());
+            }
+        }
+
+        return 1;
     }
     return 1; 
 }
@@ -30,17 +89,13 @@ int profile_menu_action_handler(ProfileMenu & profile_menu, MainMenu & main_menu
 
     if (ch == 330) // Delete key 
     {
-        std::vector<int> progress_buttons_list {};
-        for (int i = 0; i < (int)profile_menu.get_options_list().size(); ++i) {
-            progress_buttons_list.push_back(int('a') + i);
-        }
         WINDOW *my_delwin = NULL;
         int result = profile_menu.create_popup(
             profile_menu,
             my_delwin,
             "While file do you want to delete?",
             profile_menu.get_options_list(),
-            progress_buttons_list,
+            progress_buttons,
             std::vector<int> {27, 32}
         );
 
@@ -96,7 +151,7 @@ int profile_menu_action_handler(ProfileMenu & profile_menu, MainMenu & main_menu
         return 0;
     } else if (ch == 27) { // escape
         WINDOW *my_goodbye_win;
-        std::string exit_msg = "Files saved. Press any key to exit...";
+        std::string exit_msg = "Saving files. Press any key to exit...";
         my_goodbye_win = newwin(3, exit_msg.length()+2, profile_menu.get_size()[0]/2 - 1/2, profile_menu.get_size()[1]/2 - exit_msg.length()/2);
         wattron(my_goodbye_win, COLOR_PAIR(2));
         box(my_goodbye_win, 0, 0);

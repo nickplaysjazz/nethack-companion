@@ -25,6 +25,22 @@ MainMenu::MainMenu(
     close_button = _close_button;
 };
 
+    void MainMenu::set_my_main_menu_intrinsics_box(WINDOW *win) {
+        my_main_menu_intrinsics_box = win;
+    }
+
+    void MainMenu::set_my_main_menu_title_box(WINDOW *win) {
+        my_main_menu_title_box = win;
+    }
+
+    WINDOW *MainMenu::get_my_main_menu_intrinsics_box() {
+        return my_main_menu_intrinsics_box;
+    }
+    
+    WINDOW *MainMenu::get_my_main_menu_title_box() {
+        return my_main_menu_title_box;
+    }
+
 void MainMenu::render_menu() {
     // necessary but this version is not used
     return;
@@ -33,19 +49,35 @@ void MainMenu::render_menu() {
 void MainMenu::render_menu(std::string & file_title) {
     menu_name = file_title;
     int my_row = sizey;
-    int my_col = sizex; 
+    (void) my_row;
+    int my_col = sizex;
     box(my_win, 0, 0);
 
-    mvwaddstr(my_win, 1, my_col/2 - file_title.length()/2, file_title.c_str());
+    my_main_menu_title_box = subwin(my_win, 3, my_col, 0, 0);
+    box(my_main_menu_title_box, 0, 0);
+    wattron(my_main_menu_title_box, COLOR_PAIR(3));
+    mvwaddstr(my_main_menu_title_box, 1, my_col/2 - file_title.length()/2, file_title.c_str());
+    wattroff(my_main_menu_title_box, COLOR_PAIR(3));
 
-    int option_count = 0;
-    for (std::vector<std::string>::const_iterator it = options_list.begin(); it != options_list.end(); ++it) {
-        mvwaddstr(my_win, (int)(my_row/2 + option_count), (int)(my_col/2 - 5), num_to_alphabet(option_count).c_str());
-        waddstr(my_win, ") "); 
-        waddstr(my_win, it->c_str());
-        ++option_count;
-    }
-    mvwaddstr(my_win, (int)(my_row/2 + 4 + option_count), (int)(my_col/2 - 5), ((std::string)"Esc) Quit").c_str());
+    // int option_count = 0;
+    // for (std::vector<std::string>::const_iterator it = options_list.begin(); it != options_list.end(); ++it) {
+    //     mvwaddstr(my_win, (int)(my_row/2 + option_count), (int)(my_col/2 - 5), num_to_alphabet(option_count).c_str());
+    //     waddstr(my_win, ") "); 
+    //     waddstr(my_win, it->c_str());
+    //     ++option_count;
+    // }
+    // mvwaddstr(my_win, (int)(my_row/2 + 4 + option_count), (int)(my_col/2 - 5), ((std::string)"Esc) Quit").c_str());
+
+    
+    my_main_menu_intrinsics_box = subwin(my_win, 24, 30, 2, 0);
+    box(my_main_menu_intrinsics_box, 0, 0);
+    std::string intrinsics_title = "PROPERTIES p)";
+    wattron(my_main_menu_intrinsics_box, COLOR_PAIR(4));
+    mvwaddstr(my_main_menu_intrinsics_box, 1, intrinsics_title.length()/2, intrinsics_title.c_str());
+    wattroff(my_main_menu_intrinsics_box, COLOR_PAIR(4));
+    for (int i = 0; i < (int)properties_list.size(); ++i) {
+        mvwaddstr(my_main_menu_intrinsics_box, 3+i, 4, properties_list[i].c_str());
+    } 
 }
 
 ProfileMenu::ProfileMenu(

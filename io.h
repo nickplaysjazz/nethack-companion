@@ -8,6 +8,6 @@ std::vector<std::string> get_filenames(const std::string & dirname);
 std::vector<std::string> get_filepaths(const std::string & dirname);
 int load_file(const std::string & filename);
 int save_file(const std::string & filename);
-int create_file(const std::string & filename);
+int create_file(std::string filename);
 
 #endif

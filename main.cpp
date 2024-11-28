@@ -8,6 +8,7 @@
 #include "input_handlers.h"
 #include "menu.h"
 #include "gamemap.h"
+#include "savefile.h"
 #include "submenu.h"
 #include "utilities.h"
 
@@ -38,6 +39,8 @@ int main() {
     start_color();
     init_pair(1, COLOR_WHITE, COLOR_BLACK);
     init_pair(2, COLOR_MAGENTA, COLOR_BLACK);
+    init_pair(3, COLOR_CYAN, COLOR_BLACK);
+    init_pair(4, COLOR_YELLOW, COLOR_BLACK);
 
     // Catch early termination by closing window
     signal(SIGTERM, save_and_exit);
@@ -46,6 +49,8 @@ int main() {
 
     // Read in file names now
     std::vector<std::string> character_filenames = get_filenames("data");
+
+    // TODO load savefiles?
 
     // Initialize a GameMap. This will be blank for now
     // in NetHack there are 32 rows; 82 col for main screen and +38 for sidebar
@@ -63,7 +68,7 @@ int main() {
 
     WINDOW *my_main_menu_win = NULL;
     MainMenu main_menu(
-        my_main_menu_win, PlayMap.get_map_tot_row_col()[0], PlayMap.get_map_tot_row_col()[1], 0, 0, "", std::vector<std::string> {"intrinsics","blah1","blah2"}, 27
+        my_main_menu_win, PlayMap.get_map_tot_row_col()[0], PlayMap.get_map_tot_row_col()[1], 0, 0, "", std::vector<std::string> {""}, 27
     );
 
     profile_menu.open_menu();

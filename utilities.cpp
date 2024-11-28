@@ -155,3 +155,38 @@ char keycode_to_char(int keycode) {
 }
 
 std::vector<int> legal_special_characters = {32,33,35,36,37,38,39,40,41,43,44,45,59,61,64,91,93,94,95,96,123,125,126};
+
+// important intrinsics & extrinsics
+std::vector<std::string> properties_list = {
+    //	"aggravate monster",
+    //	"amphibiousness",
+    "cold resistance",
+    //	"conflict",
+    "disintegration resistance",
+    "fire resistance",
+    //	"food appraisal",
+    //	"hunger",
+    "infravision",
+    "invisible",
+    //	"jumping",
+    //	"levitation",
+    "magic resistance",
+    "poison resistance",
+    //	"polymorph control",
+    //	"polymorphitis",
+    "protection",
+    //	"protection from shape changers",
+    "reflection",
+    //	"regeneration",
+    "searching",
+    "see invisible",
+    "shock resistance",
+    "sleep resistance",
+    "speed",
+    "stealth",
+    "telepathy",
+    "teleport control",
+    "teleportitis",
+    //	"unbreathing",
+    "warning"
+};
