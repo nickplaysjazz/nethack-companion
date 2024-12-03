@@ -9,33 +9,26 @@
 #include "submenu.h"
 #include "utilities.h"
 
-int main_menu_action_handler(MainMenu & main_menu, ProfileMenu & profile_menu, int ch) {
+int main_menu_action_handler(MainMenu & main_menu, ProfileMenu & profile_menu, Savefile & my_save, int ch) {
     if (ch == 27) {
         // escape
         main_menu.close_menu();
         profile_menu.open_menu();
         profile_menu.render_menu();
 
+        my_save.flip_active_state();
+
         return 0;
     } else if (ch == int('p')) {
         // intrinsics
         std::string intrinsics_title = "PROPERTIES p)";
         WINDOW *intrinsics_box = main_menu.get_my_main_menu_intrinsics_box();
+
         wattron(intrinsics_box, COLOR_PAIR(4));
         wattron(intrinsics_box, A_STANDOUT);
         mvwaddstr(intrinsics_box, 1, intrinsics_title.length()/2, intrinsics_title.c_str());
         wattroff(intrinsics_box, COLOR_PAIR(4));
         wattroff(intrinsics_box, A_STANDOUT);
-
-        int option_count = 0;
-        for (std::vector<std::string>::const_iterator it = properties_list.begin(); it != properties_list.end(); ++it) {
-            mvwaddstr(intrinsics_box, 3+option_count, 1, num_to_alphabet(option_count).c_str());
-            waddstr(intrinsics_box, ") "); 
-            waddstr(intrinsics_box, it->c_str());
-            ++option_count;
-        }
-
-        wrefresh(intrinsics_box);
 
         int num_options = (int)properties_list.size();
         std::vector<int> properties_buttons;
@@ -43,10 +36,48 @@ int main_menu_action_handler(MainMenu & main_menu, ProfileMenu & profile_menu, i
             properties_buttons.push_back(int('a') + i); 
         }
 
+        int option_count = 0;
+        for (std::vector<std::string>::const_iterator it = properties_list.begin(); it != properties_list.end(); ++it) {
+            if (my_save.get_intrinsics()[option_count] == 1) {
+                wattron(intrinsics_box, COLOR_PAIR(4));
+                wattron(intrinsics_box, A_STANDOUT);
+            }
+            mvwaddstr(intrinsics_box, 3+option_count, 1, num_to_alphabet(option_count).c_str());
+            waddstr(intrinsics_box, ") "); 
+            waddstr(intrinsics_box, it->c_str());
+            if (my_save.get_intrinsics()[option_count] == 1) {
+                wattroff(intrinsics_box, COLOR_PAIR(4));
+                wattroff(intrinsics_box, A_STANDOUT);
+            }
+            ++option_count;
+        }
+
+        wrefresh(intrinsics_box);
+
         // intrinsics submenu
         bool is_inner_loop_running = true;
         while (is_inner_loop_running) {
+            // highlight those already selected
+            for (int i = 0; i < (int)properties_buttons.size(); ++i) {
+                if (my_save.get_intrinsics()[i] == 1) {
+                    wattron(intrinsics_box, COLOR_PAIR(4));
+                    wattron(intrinsics_box, A_STANDOUT);
+                    mvwaddstr(intrinsics_box, 3+i, 1, num_to_alphabet(i).c_str());
+                    waddstr(intrinsics_box, ") "); 
+                    waddstr(intrinsics_box, properties_list[i].c_str());
+                    wattroff(intrinsics_box, COLOR_PAIR(4));
+                    wattroff(intrinsics_box, A_STANDOUT);
+                } else {
+                    mvwaddstr(intrinsics_box, 3+i, 1, num_to_alphabet(i).c_str());
+                    waddstr(intrinsics_box, ") "); 
+                    waddstr(intrinsics_box, properties_list[i].c_str());
+                }
+            }
+
+            wrefresh(intrinsics_box);
+
             int ch1 = getch();
+
             if (ch1 == 27) {
                 wattron(intrinsics_box, COLOR_PAIR(4));
                 mvwaddstr(intrinsics_box, 1, intrinsics_title.length()/2, intrinsics_title.c_str());
@@ -63,15 +94,21 @@ int main_menu_action_handler(MainMenu & main_menu, ProfileMenu & profile_menu, i
 
                 is_inner_loop_running = false;
             } else if (std::find(properties_buttons.begin(), properties_buttons.end(), ch1) != properties_buttons.end()) {
+                std::vector<int> save_intrinsics = my_save.get_intrinsics();
+
+                std::cout<<std::endl;
+
                 // Finding the index of val
                 std::vector<int>::iterator it = find(properties_buttons.begin(), properties_buttons.end(), ch1);
                 int index = it - properties_buttons.begin();
 
-                std::cout<<index<<std::endl;
+                if (save_intrinsics[index] == 0) {
+                    save_intrinsics[index] = 1;
+                } else {
+                    save_intrinsics[index] = 0;
+                }
 
-                //mvwaddstr(intrinsics_box, 3+index, 1, num_to_alphabet(option_count).c_str());
-                //waddstr(intrinsics_box, ") "); 
-                //waddstr(intrinsics_box, it->c_str());
+                my_save.set_intrinics(save_intrinsics);
             }
         }
 
@@ -80,7 +117,7 @@ int main_menu_action_handler(MainMenu & main_menu, ProfileMenu & profile_menu, i
     return 1; 
 }
 
-int profile_menu_action_handler(ProfileMenu & profile_menu, MainMenu & main_menu, int ch) {
+int profile_menu_action_handler(ProfileMenu & profile_menu, MainMenu & main_menu, Savefile & my_savefile, int ch) {
     int num_options = (int)profile_menu.get_options_list().size();
     std::vector<int> progress_buttons;
     for (int i = 0; i < num_options; ++i) {
@@ -166,6 +203,8 @@ int profile_menu_action_handler(ProfileMenu & profile_menu, MainMenu & main_menu
         main_menu.open_menu();
         main_menu.render_menu(profile_menu.get_options_list()[ch - int('a')]);
         wrefresh(main_menu.get_my_win());
+
+        try_load_file((profile_menu.get_options_list()[ch - int('a')]).append(".dat"), my_savefile);
 
         return 1;
     } else {

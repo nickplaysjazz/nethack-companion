@@ -12,11 +12,17 @@
 #include "submenu.h"
 #include "utilities.h"
 
-int totrow, totcol;
+// MUST be global in order to be saved on improper exit
+Savefile my_open_save;
 
 void save_and_exit(int signal_number) {
     // this is where we handle saving and quitting, even abnormally
    // std::cout << "\nInterrupt signal (" << signal_number << ") received.";
+
+   if (my_open_save.is_active()) {
+        save_file("test", my_open_save);
+   }
+
 }
 
 int main() {
@@ -42,11 +48,6 @@ int main() {
     init_pair(3, COLOR_CYAN, COLOR_BLACK);
     init_pair(4, COLOR_YELLOW, COLOR_BLACK);
 
-    // Catch early termination by closing window
-    signal(SIGTERM, save_and_exit);
-    // Catch early termination by ctrl-c 
-    signal(SIGINT, save_and_exit);
-
     // Read in file names now
     std::vector<std::string> character_filenames = get_filenames("data");
 
@@ -54,8 +55,8 @@ int main() {
 
     // Initialize a GameMap. This will be blank for now
     // in NetHack there are 32 rows; 82 col for main screen and +38 for sidebar
-    totrow = 32; 
-    totcol = 110;
+    int totrow = 32; 
+    int totcol = 110;
     GameMap PlayMap(
         0, totrow, totcol, totrow, totcol
     );
@@ -71,6 +72,11 @@ int main() {
         my_main_menu_win, PlayMap.get_map_tot_row_col()[0], PlayMap.get_map_tot_row_col()[1], 0, 0, "", std::vector<std::string> {""}, 27
     );
 
+    // Catch early termination by closing window
+    signal(SIGTERM, save_and_exit);
+    // Catch early termination by ctrl-c 
+    signal(SIGINT, save_and_exit);
+
     profile_menu.open_menu();
 	refresh();
 
@@ -85,11 +91,11 @@ int main() {
         switch (action_handler) {
             case 0:
                 // profile menu
-                action_handler = profile_menu_action_handler(profile_menu, main_menu, ch); 
+                action_handler = profile_menu_action_handler(profile_menu, main_menu, my_open_save, ch); 
                 break;
             case 1:
                 // main menu
-                action_handler = main_menu_action_handler(main_menu, profile_menu, ch);
+                action_handler = main_menu_action_handler(main_menu, profile_menu, my_open_save, ch);
                 break; 
             case 99:
                 // quit

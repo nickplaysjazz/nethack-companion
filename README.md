@@ -16,6 +16,7 @@ g++ -o main.exe *.cpp -lncursesw
 - Journals: intrinsics, notes, ascension kit (user-defined?),
 - Notes: message lookup, dangerous creatures (user-defined?), xp to level up, wand engraving, ring sink, shop lookup
 - Date of run (?)
+- Checksum on input files
 
 ## Acknowledgments 
 The FIGlet ASCII font "Standard" was created by Glenn Chappell & Ian Chai 3/93 based on Frank's .sig. The font is used here under a BSD-3-Clause license. For more information, see http://www.figlet.org/. 

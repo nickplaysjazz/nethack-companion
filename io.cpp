@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 
+#include "savefile.h"
+
 std::vector<std::string> get_filenames(const std::string & dirname) {
         std::filesystem::path file_directory =  std::filesystem::current_path().append(dirname) ; 
         std::vector<std::string> filename_list; 
@@ -33,30 +35,53 @@ std::vector<std::string> get_filepaths(const std::string & dirname) {
     return filepath_list;
 }
 
-int load_file(const std::string & filename) {
+Savefile try_load_file(const std::string & filename, Savefile & my_savefile) {
     std::string line;
     std::ifstream my_file (filename);
-    if (my_file.is_open()) {
+
+    std::filesystem::path full_filename =  std::filesystem::current_path().append("data").append(filename); 
+
+    my_file.open(full_filename);
+    
+    if (my_file.is_open() && !std::filesystem::is_empty(full_filename)) {
+        int l = 0;
         while (getline(my_file, line)) {
-            std::cout<<line<<"\n";
+            // intrinsics
+            if (l == 0) {
+                std::vector<int> intrinsics_list (line.begin(), line.end());
+                my_savefile.set_intrinics(intrinsics_list);
+            }
         }
+        my_file.close();
+
+        my_savefile.flip_active_state();
+
+        return my_savefile;
+    } else if (my_file.is_open() && std::filesystem::is_empty(full_filename)) {
+        my_file.close();
+
+        my_savefile.flip_active_state();
+
+        return my_savefile;
+    } else {
+        throw std::invalid_argument("Cannot open desired file " + filename + "!!");
+    }
+}
+
+int save_file(const std::string & filename, Savefile & file_to_save) {
+    std::ofstream my_file;
+    my_file.open(filename); 
+    if (my_file.is_open()) {
+        // intrinsics
+        std::vector<int> file_intrinsics = file_to_save.get_intrinsics();
+        for (int i = 0; i < (int)properties_list.size(); ++i) {
+            my_file<<file_intrinsics[i];
+        }        
+        my_file<<std::endl;
         my_file.close();
         return 0;
     } else {
         return 1; 
-    }
-    return 0; 
-}
-
-int save_file(const std::string & filename) {
-    std::ofstream my_file;
-    my_file.open(filename); 
-    if (my_file.is_open()) {
-        my_file<<"\ntesting write to a file";
-        my_file.close();
-        return 0;
-    } else {
-        return 1;
     }
 }
 
