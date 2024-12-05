@@ -19,9 +19,9 @@ void save_and_exit(int signal_number) {
     // this is where we handle saving and quitting, even abnormally
    // std::cout << "\nInterrupt signal (" << signal_number << ") received.";
 
-   if (my_open_save.is_active()) {
-        save_file("test", my_open_save);
-   }
+    if (my_open_save.is_active()) {
+        save_file(my_open_save.get_filename(), my_open_save);
+    }
 
 }
 

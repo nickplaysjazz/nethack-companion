@@ -35,7 +35,7 @@ std::vector<std::string> get_filepaths(const std::string & dirname) {
     return filepath_list;
 }
 
-Savefile try_load_file(const std::string & filename, Savefile & my_savefile) {
+Savefile try_load_file(std::string & filename, Savefile & my_savefile) {
     std::string line;
     std::ifstream my_file (filename);
 
@@ -43,24 +43,28 @@ Savefile try_load_file(const std::string & filename, Savefile & my_savefile) {
 
     my_file.open(full_filename);
     
-    if (my_file.is_open() && !std::filesystem::is_empty(full_filename)) {
-        int l = 0;
-        while (getline(my_file, line)) {
-            // intrinsics
-            if (l == 0) {
-                std::vector<int> intrinsics_list (line.begin(), line.end());
-                my_savefile.set_intrinics(intrinsics_list);
+    if (my_file.is_open()) {
+        if (!std::filesystem::is_empty(full_filename)) {
+            while (getline(my_file, line)) {
+                // intrinsics
+                std::vector<bool> list;
+
+                for (int i = 0; i < (int)line.length(); ++i) {
+                    if (line[i] == '1')  {
+                        list.push_back(1);
+                    } else if (line[i] == '0') {
+                        list.push_back(0);
+                    }
+                }
+
+                my_savefile.set_intrinics(list);
             }
         }
         my_file.close();
 
         my_savefile.flip_active_state();
-
-        return my_savefile;
-    } else if (my_file.is_open() && std::filesystem::is_empty(full_filename)) {
-        my_file.close();
-
-        my_savefile.flip_active_state();
+        std::string my_loc_name = "data\\";
+        my_savefile.set_filename(my_loc_name.append(filename));
 
         return my_savefile;
     } else {
@@ -70,14 +74,13 @@ Savefile try_load_file(const std::string & filename, Savefile & my_savefile) {
 
 int save_file(const std::string & filename, Savefile & file_to_save) {
     std::ofstream my_file;
-    my_file.open(filename); 
+    my_file.open(filename, std::ofstream::out | std::ofstream::trunc); 
     if (my_file.is_open()) {
         // intrinsics
-        std::vector<int> file_intrinsics = file_to_save.get_intrinsics();
+        std::vector<bool> file_intrinsics = file_to_save.get_intrinsics();
         for (int i = 0; i < (int)properties_list.size(); ++i) {
-            my_file<<file_intrinsics[i];
+            my_file<<file_intrinsics[i]<<" ";
         }        
-        my_file<<std::endl;
         my_file.close();
         return 0;
     } else {

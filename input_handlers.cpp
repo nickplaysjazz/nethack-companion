@@ -17,6 +17,8 @@ int main_menu_action_handler(MainMenu & main_menu, ProfileMenu & profile_menu, S
         profile_menu.render_menu();
 
         my_save.flip_active_state();
+        save_file(my_save.get_filename(), my_save);
+        my_save.clear();
 
         return 0;
     } else if (ch == int('p')) {
@@ -94,9 +96,7 @@ int main_menu_action_handler(MainMenu & main_menu, ProfileMenu & profile_menu, S
 
                 is_inner_loop_running = false;
             } else if (std::find(properties_buttons.begin(), properties_buttons.end(), ch1) != properties_buttons.end()) {
-                std::vector<int> save_intrinsics = my_save.get_intrinsics();
-
-                std::cout<<std::endl;
+                std::vector<bool> save_intrinsics = my_save.get_intrinsics();
 
                 // Finding the index of val
                 std::vector<int>::iterator it = find(properties_buttons.begin(), properties_buttons.end(), ch1);
@@ -188,7 +188,7 @@ int profile_menu_action_handler(ProfileMenu & profile_menu, MainMenu & main_menu
         return 0;
     } else if (ch == 27) { // escape
         WINDOW *my_goodbye_win;
-        std::string exit_msg = "Saving files. Press any key to exit...";
+        std::string exit_msg = "Press any key to exit...";
         my_goodbye_win = newwin(3, exit_msg.length()+2, profile_menu.get_size()[0]/2 - 1/2, profile_menu.get_size()[1]/2 - exit_msg.length()/2);
         wattron(my_goodbye_win, COLOR_PAIR(2));
         box(my_goodbye_win, 0, 0);

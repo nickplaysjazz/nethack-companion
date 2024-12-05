@@ -7,14 +7,21 @@
 
 class Savefile {
     private:
-        std::vector<int> intrinsics;
+        std::vector<bool> intrinsics;
         bool is_active_save = false;
+        std::string filename; 
 
     public:
         Savefile();
 
-        std::vector<int> get_intrinsics();
-        void set_intrinics(std::vector<int> & new_intrinsics);
+        void clear();
+
+        std::vector<bool> get_intrinsics();
+        std::string get_filename();
+
+        void set_filename(std::string & new_filename);
+        void set_intrinics(std::vector<bool> & new_intrinsics);
+
         void flip_active_state();
         bool is_active();
 };

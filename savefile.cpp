@@ -6,14 +6,29 @@
 
 Savefile::Savefile(
 ) {
-    intrinsics = std::vector<int> (properties_list.size(), 0);
+    intrinsics = std::vector<bool> (properties_list.size(), 0);
 };
 
-std::vector<int> Savefile::get_intrinsics() {
+void Savefile::clear() {
+    for (int i = 0; i < (int)properties_list.size(); ++i) {
+        intrinsics[i] = 0;
+    }
+    filename = "";
+}
+
+std::vector<bool> Savefile::get_intrinsics() {
     return intrinsics;
 }
 
-void Savefile::set_intrinics(std::vector<int> & new_intrinsics) {
+std::string Savefile::get_filename() {
+    return filename; 
+}
+
+void Savefile::set_filename(std::string & new_filename) {
+    filename = new_filename;
+}
+
+void Savefile::set_intrinics(std::vector<bool> & new_intrinsics) {
     intrinsics = new_intrinsics;
 }
 
