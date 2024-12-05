@@ -2,6 +2,7 @@
 #include <iostream>
 
 #include "menu.h"
+#include "savefile.h"
 #include "submenu.h"
 #include "utilities.h"
 
@@ -46,7 +47,7 @@ void MainMenu::render_menu() {
     return;
 }
 
-void MainMenu::render_menu(std::string & file_title) {
+void MainMenu::render_menu(std::string & file_title, Savefile & my_save) {
     menu_name = file_title;
     int my_row = sizey;
     (void) my_row;
@@ -67,7 +68,6 @@ void MainMenu::render_menu(std::string & file_title) {
     //     ++option_count;
     // }
     // mvwaddstr(my_win, (int)(my_row/2 + 4 + option_count), (int)(my_col/2 - 5), ((std::string)"Esc) Quit").c_str());
-
     
     my_main_menu_intrinsics_box = subwin(my_win, 24, 30, 2, 0);
     box(my_main_menu_intrinsics_box, 0, 0);
@@ -75,8 +75,15 @@ void MainMenu::render_menu(std::string & file_title) {
     wattron(my_main_menu_intrinsics_box, COLOR_PAIR(4));
     mvwaddstr(my_main_menu_intrinsics_box, 1, intrinsics_title.length()/2, intrinsics_title.c_str());
     wattroff(my_main_menu_intrinsics_box, COLOR_PAIR(4));
+
     for (int i = 0; i < (int)properties_list.size(); ++i) {
+        if (my_save.get_intrinsics()[i] == 1) {
+            wattron(my_main_menu_intrinsics_box, COLOR_PAIR(4));
+        }
         mvwaddstr(my_main_menu_intrinsics_box, 3+i, 4, properties_list[i].c_str());
+        if (my_save.get_intrinsics()[i] == 1) {
+            wattroff(my_main_menu_intrinsics_box, COLOR_PAIR(4));
+        }
     } 
 }
 

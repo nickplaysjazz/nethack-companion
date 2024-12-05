@@ -42,7 +42,6 @@ int main_menu_action_handler(MainMenu & main_menu, ProfileMenu & profile_menu, S
         for (std::vector<std::string>::const_iterator it = properties_list.begin(); it != properties_list.end(); ++it) {
             if (my_save.get_intrinsics()[option_count] == 1) {
                 wattron(intrinsics_box, COLOR_PAIR(4));
-                wattron(intrinsics_box, A_STANDOUT);
             }
             mvwaddstr(intrinsics_box, 3+option_count, 1, num_to_alphabet(option_count).c_str());
             waddstr(intrinsics_box, ") "); 
@@ -86,9 +85,15 @@ int main_menu_action_handler(MainMenu & main_menu, ProfileMenu & profile_menu, S
                 wattroff(intrinsics_box, COLOR_PAIR(4));
 
                 int option_count = 0;
-                for (std::vector<std::string>::const_iterator it = properties_list.begin(); it != properties_list.end(); ++it) {
+                for (int i = 0; i < (int)properties_list.size(); ++i) {
+                    if (my_save.get_intrinsics()[i] == 1) {
+                        wattron(intrinsics_box, COLOR_PAIR(4));
+                    }
                     mvwaddstr(intrinsics_box, 3+option_count, 1, "   ");
-                    waddstr(intrinsics_box, it->c_str());
+                    waddstr(intrinsics_box, properties_list[i].c_str());
+                    if (my_save.get_intrinsics()[i] == 1) {
+                        wattroff(intrinsics_box, COLOR_PAIR(4));
+                    }
                     ++option_count;
                 }
 
@@ -200,11 +205,12 @@ int profile_menu_action_handler(ProfileMenu & profile_menu, MainMenu & main_menu
         return 99; 
     } else if (std::find(progress_buttons.begin(), progress_buttons.end(), ch) != progress_buttons.end()) {
         profile_menu.close_menu();
+        try_load_file((profile_menu.get_options_list()[ch - int('a')]).append(".dat"), my_savefile);
+
         main_menu.open_menu();
-        main_menu.render_menu(profile_menu.get_options_list()[ch - int('a')]);
+        main_menu.render_menu(profile_menu.get_options_list()[ch - int('a')], my_savefile);
         wrefresh(main_menu.get_my_win());
 
-        try_load_file((profile_menu.get_options_list()[ch - int('a')]).append(".dat"), my_savefile);
 
         return 1;
     } else {

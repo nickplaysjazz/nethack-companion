@@ -43,15 +43,17 @@ int main() {
         return 1; 
     }
     start_color();
+    // default 
     init_pair(1, COLOR_WHITE, COLOR_BLACK);
+    // subbox color
     init_pair(2, COLOR_MAGENTA, COLOR_BLACK);
+    // title
     init_pair(3, COLOR_CYAN, COLOR_BLACK);
+    // properties
     init_pair(4, COLOR_YELLOW, COLOR_BLACK);
 
     // Read in file names now
     std::vector<std::string> character_filenames = get_filenames("data");
-
-    // TODO load savefiles?
 
     // Initialize a GameMap. This will be blank for now
     // in NetHack there are 32 rows; 82 col for main screen and +38 for sidebar

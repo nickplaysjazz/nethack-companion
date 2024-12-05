@@ -2,6 +2,7 @@
 #define SUBMENU_H
 
 #include "menu.h"
+#include "savefile.h"
 
 class MainMenu : public Menu {
     private:
@@ -19,7 +20,7 @@ class MainMenu : public Menu {
             const std::vector<std::string> & _options_list, 
             int _close_button
         );
-        void render_menu(std::string & file_title);
+        void render_menu(std::string & file_title, Savefile & my_save);
         void render_menu() override;
         void set_my_main_menu_intrinsics_box(WINDOW *win);
         void set_my_main_menu_title_box(WINDOW *win);
