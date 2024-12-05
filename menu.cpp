@@ -82,7 +82,9 @@ int Menu::create_popup(
         if ((int)my_options_list[j].length() + 3 > my_col) {my_col = (int)my_options_list[j].length();}
     }
     if ((int)my_popup_title.length() > my_col) {my_col = (int)my_popup_title.length();}
-    my_col = my_col + 2; 
+    my_col = my_col + 2;
+
+    // TODO graphical bug when title name is max number of characters.  
 
     my_popup_name = newwin(my_row, my_col, menu_name.get_size()[0]/2 - my_row/2, menu_name.get_size()[1]/2 - my_col/2);
     wattron(my_popup_name, COLOR_PAIR(2));

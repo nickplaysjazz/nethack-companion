@@ -74,9 +74,9 @@ int main() {
         my_main_menu_win, PlayMap.get_map_tot_row_col()[0], PlayMap.get_map_tot_row_col()[1], 0, 0, "", std::vector<std::string> {""}, 27
     );
 
-    // Catch early termination by closing window
-    signal(SIGTERM, save_and_exit);
-    // Catch early termination by ctrl-c 
+    // Catch early termination by closing window. FIXME not really working.
+    signal(SIGBREAK, save_and_exit);
+    // Catch early termination by ctrl-c. This is working. 
     signal(SIGINT, save_and_exit);
 
     profile_menu.open_menu();
