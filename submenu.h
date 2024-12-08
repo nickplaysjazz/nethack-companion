@@ -28,10 +28,15 @@ class MainMenu : public Menu {
         void render_intrinsics_menu_off(Savefile & my_save);
         void render_intrinsics_menu_on(Savefile & my_save);
 
+        void render_notes_menu_on(Savefile & my_save);
+        void render_notes_menu_off(Savefile & my_save); 
+
         void set_my_main_menu_intrinsics_box(WINDOW *win);
         void set_my_main_menu_title_box(WINDOW *win);
+        void set_my_main_menu_notes_box(WINDOW *win);
         WINDOW *get_my_main_menu_intrinsics_box();
         WINDOW *get_my_main_menu_title_box();
+        WINDOW *get_my_main_menu_notes_box();
 };
 
 class ProfileMenu : public Menu {
