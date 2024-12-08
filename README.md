@@ -10,13 +10,12 @@ g++ -o main.exe *.cpp -lncursesw
 ```
 
 ## TO DO
-- FIX closing Menu with action handler. Need to fix how action handler should switch between different MenuActionHandlers whenever you want. 
 - Handle resizing window (this might be impossible with PDCurses, need to look into this)
-- Is not currently loading & saving data, but will create/delete files
-- Journals: intrinsics, notes, ascension kit (user-defined?),
+- Journals:  notes, ascension kit (user-defined?),
 - Notes: message lookup, dangerous creatures (user-defined?), xp to level up, wand engraving, ring sink, shop lookup
 - Date of run (?)
 - Checksum on input files
+- Binary file for inputs instead, maybe json? Need to use istream 
 
 ## Acknowledgments 
 The FIGlet ASCII font "Standard" was created by Glenn Chappell & Ian Chai 3/93 based on Frank's .sig. The font is used here under a BSD-3-Clause license. For more information, see http://www.figlet.org/. 

@@ -51,6 +51,8 @@ int main() {
     init_pair(3, COLOR_CYAN, COLOR_BLACK);
     // properties
     init_pair(4, COLOR_YELLOW, COLOR_BLACK);
+    // notes
+    init_pair(5, COLOR_GREEN, COLOR_BLACK);
 
     // Read in file names now
     std::vector<std::string> character_filenames = get_filenames("data");

@@ -54,26 +54,19 @@ void MainMenu::render_menu(std::string & file_title, Savefile & my_save) {
     int my_col = sizex;
     box(my_win, 0, 0);
 
+    // title
     my_main_menu_title_box = subwin(my_win, 3, my_col, 0, 0);
     box(my_main_menu_title_box, 0, 0);
     wattron(my_main_menu_title_box, COLOR_PAIR(3));
     mvwaddstr(my_main_menu_title_box, 1, my_col/2 - file_title.length()/2, file_title.c_str());
     wattroff(my_main_menu_title_box, COLOR_PAIR(3));
-
-    // int option_count = 0;
-    // for (std::vector<std::string>::const_iterator it = options_list.begin(); it != options_list.end(); ++it) {
-    //     mvwaddstr(my_win, (int)(my_row/2 + option_count), (int)(my_col/2 - 5), num_to_alphabet(option_count).c_str());
-    //     waddstr(my_win, ") "); 
-    //     waddstr(my_win, it->c_str());
-    //     ++option_count;
-    // }
-    // mvwaddstr(my_win, (int)(my_row/2 + 4 + option_count), (int)(my_col/2 - 5), ((std::string)"Esc) Quit").c_str());
     
-    my_main_menu_intrinsics_box = subwin(my_win, 24, 30, 2, 0);
+    // intrinsics
+    my_main_menu_intrinsics_box = subwin(my_win, 23, 30, 2, 0);
     box(my_main_menu_intrinsics_box, 0, 0);
     std::string intrinsics_title = "PROPERTIES p)";
     wattron(my_main_menu_intrinsics_box, COLOR_PAIR(4));
-    mvwaddstr(my_main_menu_intrinsics_box, 1, intrinsics_title.length()/2, intrinsics_title.c_str());
+    mvwaddstr(my_main_menu_intrinsics_box, 1, 15 - intrinsics_title.length()/2, intrinsics_title.c_str());
     wattroff(my_main_menu_intrinsics_box, COLOR_PAIR(4));
 
     for (int i = 0; i < (int)properties_list.size(); ++i) {
@@ -85,6 +78,94 @@ void MainMenu::render_menu(std::string & file_title, Savefile & my_save) {
             wattroff(my_main_menu_intrinsics_box, COLOR_PAIR(4));
         }
     } 
+
+    // notes
+    my_main_menu_notes_box = subwin(my_win, 23, 30, 2, 80);
+    box(my_main_menu_notes_box, 0, 0);
+    std::string notes_title = "NOTES n)";
+    wattron(my_main_menu_notes_box, COLOR_PAIR(5));
+    mvwaddstr(my_main_menu_notes_box, 1, 15 - notes_title.length()/2, notes_title.c_str());
+    wattroff(my_main_menu_notes_box, COLOR_PAIR(5));
+}
+
+void MainMenu::render_intrinsics_menu_default(Savefile & my_save) {
+    // render properties menu
+    std::string intrinsics_title = "PROPERTIES p)";
+    WINDOW *intrinsics_box = get_my_main_menu_intrinsics_box();
+
+    wattron(intrinsics_box, COLOR_PAIR(4));
+    wattron(intrinsics_box, A_STANDOUT);
+    mvwaddstr(intrinsics_box, 1, 15 - intrinsics_title.length()/2, intrinsics_title.c_str());
+    wattroff(intrinsics_box, COLOR_PAIR(4));
+    wattroff(intrinsics_box, A_STANDOUT);
+
+    int num_options = (int)properties_list.size();
+    std::vector<int> properties_buttons;
+    for (int i = 0; i < num_options; ++i) {
+        properties_buttons.push_back(int('a') + i); 
+    }
+
+    int option_count = 0;
+    for (std::vector<std::string>::const_iterator it = properties_list.begin(); it != properties_list.end(); ++it) {
+        if (my_save.get_intrinsics()[option_count] == 1) {
+            wattron(intrinsics_box, COLOR_PAIR(4));
+        }
+        mvwaddstr(intrinsics_box, 3+option_count, 1, num_to_alphabet(option_count).c_str());
+        waddstr(intrinsics_box, ") "); 
+        waddstr(intrinsics_box, it->c_str());
+        if (my_save.get_intrinsics()[option_count] == 1) {
+            wattroff(intrinsics_box, COLOR_PAIR(4));
+            wattroff(intrinsics_box, A_STANDOUT);
+        }
+        ++option_count;
+    }
+
+    wrefresh(intrinsics_box);
+}
+
+void MainMenu::render_intrinsics_menu_on(Savefile & my_save) {
+    WINDOW * intrinsics_box = get_my_main_menu_intrinsics_box();
+    // highlight those already selected
+    for (int i = 0; i < (int)properties_list.size(); ++i) {
+        if (my_save.get_intrinsics()[i] == 1) {
+            wattron(intrinsics_box, COLOR_PAIR(4));
+            wattron(intrinsics_box, A_STANDOUT);
+            mvwaddstr(intrinsics_box, 3+i, 1, num_to_alphabet(i).c_str());
+            waddstr(intrinsics_box, ") "); 
+            waddstr(intrinsics_box, properties_list[i].c_str());
+            wattroff(intrinsics_box, COLOR_PAIR(4));
+            wattroff(intrinsics_box, A_STANDOUT);
+        } else {
+            mvwaddstr(intrinsics_box, 3+i, 1, num_to_alphabet(i).c_str());
+            waddstr(intrinsics_box, ") "); 
+            waddstr(intrinsics_box, properties_list[i].c_str());
+        }
+    }
+    wrefresh(intrinsics_box);
+}
+
+void MainMenu::render_intrinsics_menu_off(Savefile & my_save) {
+    WINDOW *intrinsics_box = get_my_main_menu_intrinsics_box();
+    std::string intrinsics_title = "PROPERTIES p)";
+
+    wattron(intrinsics_box, COLOR_PAIR(4));
+    mvwaddstr(intrinsics_box, 1, 15 - intrinsics_title.length()/2, intrinsics_title.c_str());
+    wattroff(intrinsics_box, COLOR_PAIR(4));
+
+    int option_count = 0;
+    for (int i = 0; i < (int)properties_list.size(); ++i) {
+        if (my_save.get_intrinsics()[i] == 1) {
+            wattron(intrinsics_box, COLOR_PAIR(4));
+        }
+        mvwaddstr(intrinsics_box, 3+option_count, 1, "   ");
+        waddstr(intrinsics_box, properties_list[i].c_str());
+        if (my_save.get_intrinsics()[i] == 1) {
+            wattroff(intrinsics_box, COLOR_PAIR(4));
+        }
+        ++option_count;
+    }
+
+    wrefresh(intrinsics_box);
 }
 
 ProfileMenu::ProfileMenu(
@@ -134,28 +215,3 @@ void ProfileMenu::render_menu() {
 void ProfileMenu::set_options_list(std::vector<std::string> new_options_list) {
     options_list = new_options_list;
 }
-
-// IntrinsicMenu::IntrinsicMenu(int _sizey, int _sizex, int _locy, int _locx) {
-//     sizey = _sizey;
-//     sizex = _sizex;
-//     locy = _locy;
-//     locx = _locx;
-// }
-
-// void IntrinsicMenu::open_menu() {
-//     my_win = newwin(sizey, sizex, locy, locx);
-// }
-
-// void IntrinsicMenu::close_menu() {
-//     werase(my_win);
-//     wrefresh(my_win);
-//     delwin(my_win);
-// } 
-
-// bool IntrinsicMenu::menu_action_handler() {
-//     while (true) {
-//         int ch = getch();
-//         switch (ch):
-// 
-//     }
-// }
