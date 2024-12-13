@@ -45,19 +45,31 @@ Savefile try_load_file(std::string & filename, Savefile & my_savefile) {
     
     if (my_file.is_open()) {
         if (!std::filesystem::is_empty(full_filename)) {
+            int line_no = 0; 
             while (getline(my_file, line)) {
-                // intrinsics
-                std::vector<bool> list;
+                if (line_no == 0) {
+                    // intrinsics
+                    std::vector<bool> list;
 
-                for (int i = 0; i < (int)line.length(); ++i) {
-                    if (line[i] == '1')  {
-                        list.push_back(1);
-                    } else if (line[i] == '0') {
-                        list.push_back(0);
+                    for (int i = 0; i < (int)line.length(); ++i) {
+                        if (line[i] == '1')  {
+                            list.push_back(1);
+                        } else if (line[i] == '0') {
+                            list.push_back(0);
+                        }
                     }
-                }
 
-                my_savefile.set_intrinics(list);
+                    my_savefile.set_intrinics(list);
+                } else if (line_no == 1) {
+                    // notes
+                    std::vector<char> notes_l; 
+                    for (int i = 0; i < (int)line.length(); ++i) {
+                        char cstr = line[i];
+                        notes_l.push_back(cstr);
+                    }
+                    my_savefile.set_notes(notes_l);
+                }
+                ++line_no; 
             }
         }
         my_file.close();
@@ -81,6 +93,12 @@ int save_file(const std::string & filename, Savefile & file_to_save) {
         for (int i = 0; i < (int)properties_list.size(); ++i) {
             my_file<<file_intrinsics[i]<<" ";
         }        
+        my_file<<std::endl;
+        // notes
+        std::vector<char> file_notes = file_to_save.get_notes();
+        for (int i = 0; i < (int)file_notes.size(); ++i) {
+            my_file<<file_notes[i];
+        }
         my_file.close();
         return 0;
     } else {

@@ -43,15 +43,15 @@ int main() {
         return 1; 
     }
     start_color();
-    // default 
+    // default color
     init_pair(1, COLOR_WHITE, COLOR_BLACK);
     // subbox color
     init_pair(2, COLOR_MAGENTA, COLOR_BLACK);
-    // title
+    // character title color
     init_pair(3, COLOR_CYAN, COLOR_BLACK);
-    // properties
+    // properties color
     init_pair(4, COLOR_YELLOW, COLOR_BLACK);
-    // notes
+    // notes color
     init_pair(5, COLOR_GREEN, COLOR_BLACK);
 
     // Read in file names now
@@ -76,9 +76,9 @@ int main() {
         my_main_menu_win, PlayMap.get_map_tot_row_col()[0], PlayMap.get_map_tot_row_col()[1], 0, 0, "", std::vector<std::string> {""}, 27
     );
 
-    // Catch early termination by closing window. FIXME not really working.
+    // Catch early termination by closing window.
     signal(SIGBREAK, save_and_exit);
-    // Catch early termination by ctrl-c. This is working. 
+    // Catch early termination by ctrl-c.
     signal(SIGINT, save_and_exit);
 
     profile_menu.open_menu();
@@ -91,7 +91,6 @@ int main() {
         // Check for input
         int ch = getch();
 
-        // state machine
         switch (action_handler) {
             case 0:
                 // profile menu

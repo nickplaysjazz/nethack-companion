@@ -11,11 +11,13 @@ g++ -o main.exe *.cpp -lncursesw
 
 ## TO DO
 - Handle resizing window (this might be impossible with PDCurses, need to look into this)
-- Journals:  notes, ascension kit (user-defined?),
-- Notes: message lookup, dangerous creatures (user-defined?), xp to level up, wand engraving, ring sink, shop lookup
+- Ability to create a checklist? 
+- Notes section: better handling (delete key, word wrap-around, typing before a set of words pushes those words, etc.)
+- Various menus: message lookup, dangerous creatures (user-defined?), xp to level up, wand engraving, ring sink, shop lookup
+- Price list by charisma. 
 - Date of run (?)
-- Checksum on input files
-- Binary file for inputs instead, maybe json? Need to use istream 
+- Input file improvements: Checksum on input file, Binary file for inputs instead, maybe json? Need to use istream 
+- Make it so that you cannot create a file with no name
 
 ## Acknowledgments 
 The FIGlet ASCII font "Standard" was created by Glenn Chappell & Ian Chai 3/93 based on Frank's .sig. The font is used here under a BSD-3-Clause license. For more information, see http://www.figlet.org/. 

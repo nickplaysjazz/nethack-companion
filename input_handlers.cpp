@@ -168,15 +168,93 @@ int properties_menu_action_handler(MainMenu & main_menu, Savefile & my_save) {
 
 int notes_menu_action_handler(MainMenu & main_menu, Savefile & my_save) {
     main_menu.render_notes_menu_on(my_save);
-
+    
+    int xpos = 1;
+    int ypos = 2;
     bool is_inner_loop_running = true;
+    wmove(main_menu.get_my_main_menu_notes_box(), ypos, xpos); 
+
     while (is_inner_loop_running) {
+        // Make flashing cursor visible again
+        curs_set(1);
+
         int ch1 = getch();
 
         if (ch1 == 27) {
+            // Make flashing cursor invisible
+            curs_set(0);
+
+            std::vector<char> notes_panel; 
+            for (int x = 1; x <= 28; ++x) {
+                for (int y = 2; y <= 21; ++y) {
+                    wmove(main_menu.get_my_main_menu_notes_box(), y, x); 
+                    char current_ch = winch(main_menu.get_my_main_menu_notes_box());
+                    notes_panel.push_back(current_ch); 
+                }
+            }        
+            my_save.set_notes(notes_panel); 
+
             main_menu.render_notes_menu_off(my_save);
 
             is_inner_loop_running = false;
+        } else if ((ch1 >= int('a') && ch1 <= int('z')) || (ch1 >= int('A') && ch1 <= int('Z')) || (ch1 >= int('0') && ch1 <= int('9')) || (ch1 == 32) || (std::find(legal_special_characters.begin(), legal_special_characters.end(), ch1) != legal_special_characters.end())) {
+            if (xpos+1 <= 29) {
+                waddch(main_menu.get_my_main_menu_notes_box(), keycode_to_char(ch1));
+                wrefresh(main_menu.get_my_main_menu_notes_box());
+                ++xpos;
+            } 
+        } else if (ch1 == 8) {
+            // backspace
+            if (xpos-1 >= 1) {
+                mvwaddch(main_menu.get_my_main_menu_notes_box(), ypos, xpos-1, ' ');
+                --xpos;
+                wmove(main_menu.get_my_main_menu_notes_box(), ypos, xpos); 
+                wrefresh(main_menu.get_my_main_menu_notes_box()); 
+            } else if (ypos - 1 >= 2) {
+                xpos = 29;
+                --ypos;
+                wmove(main_menu.get_my_main_menu_notes_box(), ypos, xpos); 
+                wrefresh(main_menu.get_my_main_menu_notes_box());
+            }
+        } else if (ch1 == 330) {
+            // delete 
+            
+        } else if (ch1 == 10) {
+            // enter
+            if (ypos+1 <= 21) {
+                ++ypos;
+                xpos = 1;
+                wmove(main_menu.get_my_main_menu_notes_box(), ypos, xpos); 
+                wrefresh(main_menu.get_my_main_menu_notes_box());
+            }
+        } else if (ch1 == 258) {
+            //down arrow
+            if (ypos+1 <= 21) {
+                ++ypos;
+                wmove(main_menu.get_my_main_menu_notes_box(), ypos, xpos); 
+                wrefresh(main_menu.get_my_main_menu_notes_box());
+            }
+        } else if (ch1 == 259) {
+            //up arrow
+            if (ypos-1 >= 2) {
+                --ypos;
+                wmove(main_menu.get_my_main_menu_notes_box(), ypos, xpos); 
+                wrefresh(main_menu.get_my_main_menu_notes_box());
+            }
+        } else if (ch1 == 260) {
+            //left arrow
+            if (xpos-1 >= 1) {
+                --xpos;
+                wmove(main_menu.get_my_main_menu_notes_box(), ypos, xpos); 
+                wrefresh(main_menu.get_my_main_menu_notes_box());
+            }
+        } else if (ch1 == 261) {
+            //right arrow
+            if (xpos+1 <= 29) {
+                ++xpos;
+                wmove(main_menu.get_my_main_menu_notes_box(), ypos, xpos); 
+                wrefresh(main_menu.get_my_main_menu_notes_box());
+            }
         }
     }
 

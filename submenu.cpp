@@ -94,12 +94,23 @@ void MainMenu::render_menu(std::string & file_title, Savefile & my_save) {
     wattron(my_main_menu_notes_box, COLOR_PAIR(5));
     mvwaddstr(my_main_menu_notes_box, 1, 15 - notes_title.length()/2, notes_title.c_str());
     wattroff(my_main_menu_notes_box, COLOR_PAIR(5));
+
+    my_save.get_notes();
+
+    std::vector<char> notes_text = my_save.get_notes(); 
+    int i = 0;
+    for (int x = 1; x <= 28; ++x) {
+        for (int y = 2; y <= 21; ++y) {
+            mvwaddch(my_main_menu_notes_box, y, x, notes_text[i]); 
+            ++i;
+        }
+    }
+
 }
 
 void MainMenu::render_intrinsics_menu_default(Savefile & my_save) {
     // render properties menu
     std::string intrinsics_title = "PROPERTIES p)";
-    //WINDOW *intrinsics_box = get_my_main_menu_intrinsics_box();
 
     wattron(my_main_menu_intrinsics_box, COLOR_PAIR(4));
     wattron(my_main_menu_intrinsics_box, A_STANDOUT);
@@ -132,7 +143,6 @@ void MainMenu::render_intrinsics_menu_default(Savefile & my_save) {
 }
 
 void MainMenu::render_intrinsics_menu_on(Savefile & my_save) {
-    //WINDOW * intrinsics_box = get_my_main_menu_intrinsics_box();
     // highlight those already selected
     for (int i = 0; i < (int)properties_list.size(); ++i) {
         if (my_save.get_intrinsics()[i] == 1) {
@@ -153,7 +163,6 @@ void MainMenu::render_intrinsics_menu_on(Savefile & my_save) {
 }
 
 void MainMenu::render_intrinsics_menu_off(Savefile & my_save) {
-    //WINDOW *intrinsics_box = get_my_main_menu_intrinsics_box();
     std::string intrinsics_title = "PROPERTIES p)";
 
     wattron(my_main_menu_intrinsics_box, COLOR_PAIR(4));
@@ -183,6 +192,16 @@ void MainMenu::render_notes_menu_on(Savefile & my_save) {
     mvwaddstr(my_main_menu_notes_box, 1, 15 - notes_title.length()/2, notes_title.c_str());
     wattroff(my_main_menu_notes_box, COLOR_PAIR(5));
     wattroff(my_main_menu_notes_box, A_STANDOUT);
+
+    std::vector<char> notes_text = my_save.get_notes(); 
+    int i = 0;
+    for (int x = 1; x <= 28; ++x) {
+        for (int y = 2; y <= 21; ++y) {
+            mvwaddch(my_main_menu_notes_box, y, x, notes_text[i]); 
+            ++i;
+        }
+    }        
+    wmove(my_main_menu_notes_box, 2, 1); 
 
     wrefresh(my_main_menu_notes_box);
 }
