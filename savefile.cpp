@@ -14,7 +14,7 @@ void Savefile::clear() {
         intrinsics[i] = 0;
     }
     filename = "";
-    notes = {}; 
+    notes = std::vector<char> (560, int(' '));
 }
 
 std::vector<bool> Savefile::get_intrinsics() {
@@ -28,7 +28,6 @@ std::string Savefile::get_filename() {
 std::vector<char> Savefile::get_notes() {
     return notes; 
 }
-
 
 void Savefile::set_filename(std::string & new_filename) {
     filename = new_filename;

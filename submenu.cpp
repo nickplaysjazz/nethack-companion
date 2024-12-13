@@ -95,8 +95,6 @@ void MainMenu::render_menu(std::string & file_title, Savefile & my_save) {
     mvwaddstr(my_main_menu_notes_box, 1, 15 - notes_title.length()/2, notes_title.c_str());
     wattroff(my_main_menu_notes_box, COLOR_PAIR(5));
 
-    my_save.get_notes();
-
     std::vector<char> notes_text = my_save.get_notes(); 
     int i = 0;
     for (int x = 1; x <= 28; ++x) {

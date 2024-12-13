@@ -53,6 +53,8 @@ int main() {
     init_pair(4, COLOR_YELLOW, COLOR_BLACK);
     // notes color
     init_pair(5, COLOR_GREEN, COLOR_BLACK);
+    // price ID color
+    init_pair(6, COLOR_RED, COLOR_BLACK);
 
     // Read in file names now
     std::vector<std::string> character_filenames = get_filenames("data");
