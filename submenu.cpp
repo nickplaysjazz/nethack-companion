@@ -72,7 +72,7 @@ void MainMenu::render_menu(std::string & file_title, Savefile & my_save) {
     // intrinsics
     my_main_menu_intrinsics_box = subwin(my_win, 23, 30, 2, 0);
     box(my_main_menu_intrinsics_box, 0, 0);
-    std::string intrinsics_title = "PROPERTIES p)";
+    std::string intrinsics_title = "INTRINSICS i)";
     wattron(my_main_menu_intrinsics_box, COLOR_PAIR(4));
     mvwaddstr(my_main_menu_intrinsics_box, 1, 15 - intrinsics_title.length()/2, intrinsics_title.c_str());
     wattroff(my_main_menu_intrinsics_box, COLOR_PAIR(4));
@@ -104,11 +104,18 @@ void MainMenu::render_menu(std::string & file_title, Savefile & my_save) {
         }
     }
 
+    // price ID
+    my_main_menu_price_ID_box = subwin(my_win, 23, 52, 2, 29);
+    box(my_main_menu_price_ID_box, 0, 0); 
+    std::string price_ID_title = "PRICE ID p)";
+    wattron(my_main_menu_price_ID_box, COLOR_PAIR(6));
+    mvwaddstr(my_main_menu_price_ID_box, 1, 25 - price_ID_title.length()/2, price_ID_title.c_str());
+    wattroff(my_main_menu_price_ID_box, COLOR_PAIR(6));
 }
 
 void MainMenu::render_intrinsics_menu_default(Savefile & my_save) {
     // render properties menu
-    std::string intrinsics_title = "PROPERTIES p)";
+    std::string intrinsics_title = "INTRINSICS i)";
 
     wattron(my_main_menu_intrinsics_box, COLOR_PAIR(4));
     wattron(my_main_menu_intrinsics_box, A_STANDOUT);
@@ -161,7 +168,7 @@ void MainMenu::render_intrinsics_menu_on(Savefile & my_save) {
 }
 
 void MainMenu::render_intrinsics_menu_off(Savefile & my_save) {
-    std::string intrinsics_title = "PROPERTIES p)";
+    std::string intrinsics_title = "INTRINSICS i)";
 
     wattron(my_main_menu_intrinsics_box, COLOR_PAIR(4));
     mvwaddstr(my_main_menu_intrinsics_box, 1, 15 - intrinsics_title.length()/2, intrinsics_title.c_str());
@@ -211,6 +218,26 @@ void MainMenu::render_notes_menu_off(Savefile & my_save) {
     wattroff(my_main_menu_notes_box, COLOR_PAIR(5));
 
     wrefresh(my_main_menu_notes_box);
+}
+
+void MainMenu::render_price_ID_menu_on(Savefile & my_save) {
+    std::string price_ID_title = "PRICE ID p)";
+    wattron(my_main_menu_price_ID_box, COLOR_PAIR(6));
+    wattron(my_main_menu_price_ID_box, A_STANDOUT);
+    mvwaddstr(my_main_menu_price_ID_box, 1, 25 - price_ID_title.length()/2, price_ID_title.c_str());
+    wattroff(my_main_menu_price_ID_box, A_STANDOUT);
+    wattroff(my_main_menu_price_ID_box, COLOR_PAIR(6));
+
+    wrefresh(my_main_menu_price_ID_box);
+}
+
+void MainMenu::render_price_ID_menu_off(Savefile & my_save) {
+    std::string price_ID_title = "PRICE ID p)";
+    wattron(my_main_menu_price_ID_box, COLOR_PAIR(6));
+    mvwaddstr(my_main_menu_price_ID_box, 1, 25 - price_ID_title.length()/2, price_ID_title.c_str());
+    wattroff(my_main_menu_price_ID_box, COLOR_PAIR(6));
+
+    wrefresh(my_main_menu_price_ID_box);
 }
 
 ProfileMenu::ProfileMenu(

@@ -21,12 +21,15 @@ int main_menu_action_handler(MainMenu & main_menu, ProfileMenu & profile_menu, S
         my_save.clear();
 
         return 0;
-    } else if (ch == int('p')) {
+    } else if (ch == int('i')) {
         // intrinsics
         properties_menu_action_handler(main_menu, my_save);
     } else if (ch == int('n')) {
         // notes
         notes_menu_action_handler(main_menu, my_save);
+    } else if (ch == int('p')) {
+        // price ID
+        price_ID_menu_action_handler(main_menu, my_save);
     }
     return 1; 
 }
@@ -258,5 +261,22 @@ int notes_menu_action_handler(MainMenu & main_menu, Savefile & my_save) {
         }
     }
 
+    return 1; 
+}
+
+int price_ID_menu_action_handler(MainMenu & main_menu, Savefile & my_save) {
+    main_menu.render_price_ID_menu_on(my_save);
+    
+    bool is_inner_loop_running = true;
+    while (is_inner_loop_running) {
+        int ch1 = getch();
+
+        if (ch1 == 27) {
+            // escape
+            main_menu.render_price_ID_menu_off(my_save);
+
+            is_inner_loop_running = false;
+        }
+    }
     return 1; 
 }

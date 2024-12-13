@@ -18,6 +18,7 @@ g++ -o main.exe *.cpp -lncursesw
 - Date of run (?)
 - Input file improvements: Checksum on input file, Binary file for inputs instead, maybe json? Need to use istream 
 - Make it so that you cannot create a file with no name
+- Hit ? at any time and a menu appears with controls
 
 ## Acknowledgments 
 The FIGlet ASCII font "Standard" was created by Glenn Chappell & Ian Chai 3/93 based on Frank's .sig. The font is used here under a BSD-3-Clause license. For more information, see http://www.figlet.org/. 
