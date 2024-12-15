@@ -38,6 +38,10 @@ void MainMenu::set_my_main_menu_notes_box(WINDOW *win) {
     my_main_menu_notes_box = win;
 }
 
+void MainMenu::set_my_main_menu_price_ID_box(WINDOW *win) {
+    my_main_menu_price_ID_box = win;
+}
+
 WINDOW *MainMenu::get_my_main_menu_intrinsics_box() {
     return my_main_menu_intrinsics_box;
 }
@@ -48,6 +52,10 @@ WINDOW *MainMenu::get_my_main_menu_title_box() {
 
 WINDOW *MainMenu::get_my_main_menu_notes_box() {
     return my_main_menu_notes_box;
+}
+
+WINDOW *MainMenu::get_my_main_menu_price_ID_box() {
+    return my_main_menu_price_ID_box;
 }
 
 void MainMenu::render_menu() {
@@ -111,6 +119,29 @@ void MainMenu::render_menu(std::string & file_title, Savefile & my_save) {
     wattron(my_main_menu_price_ID_box, COLOR_PAIR(6));
     mvwaddstr(my_main_menu_price_ID_box, 1, 25 - price_ID_title.length()/2, price_ID_title.c_str());
     wattroff(my_main_menu_price_ID_box, COLOR_PAIR(6));
+
+    std::string price_ID_cha = "             Ch: ";
+    mvwaddstr(my_main_menu_price_ID_box, 2, 2, price_ID_cha.c_str());
+
+    std::string charisma_ch = std::to_string(my_save.get_charisma());
+    if (charisma_ch.size() != 2) {
+        charisma_ch = " " + charisma_ch;
+    }
+    mvwaddstr(get_my_main_menu_price_ID_box(), 2, 18, charisma_ch.c_str());
+    wrefresh(get_my_main_menu_price_ID_box());
+    std::string price_ID_being_duped = "    Being duped? ";
+    mvwaddstr(my_main_menu_price_ID_box, 3, 2, price_ID_being_duped.c_str());
+    std::string price_ID_headings = "  SELL PRICES       BUY PRICES       ITEM LIST";
+    mvwaddstr(my_main_menu_price_ID_box, 4, 2, price_ID_headings.c_str());
+    std::string delimiters = "                                              ";
+    for (int ys = 4; ys <= 21; ++ys) {
+        mvwaddch(my_main_menu_price_ID_box, ys, 18, ACS_VLINE);
+        mvwaddch(my_main_menu_price_ID_box, ys, 35, ACS_VLINE);
+    }
+
+    for (int ys = 5; ys <= 21; ++ys) {
+        mvwaddstr(my_main_menu_price_ID_box, ys, 42, "...");
+    }
 }
 
 void MainMenu::render_intrinsics_menu_default(Savefile & my_save) {
@@ -228,6 +259,16 @@ void MainMenu::render_price_ID_menu_on(Savefile & my_save) {
     wattroff(my_main_menu_price_ID_box, A_STANDOUT);
     wattroff(my_main_menu_price_ID_box, COLOR_PAIR(6));
 
+    std::string cha_instr = "(use arrow keys)";
+    mvwaddstr(my_main_menu_price_ID_box, 2, 25, cha_instr.c_str());
+    std::string dupe_instr = "(use enter key)";
+    mvwaddstr(my_main_menu_price_ID_box, 3, 25, dupe_instr.c_str());
+    
+    for (int ys = 5; ys <= 21; ++ys) {
+            mvwaddstr(my_main_menu_price_ID_box, ys, 42, num_to_alphabet(ys - 5).c_str());
+            waddstr(my_main_menu_price_ID_box, ") "); 
+    }
+
     wrefresh(my_main_menu_price_ID_box);
 }
 
@@ -236,6 +277,15 @@ void MainMenu::render_price_ID_menu_off(Savefile & my_save) {
     wattron(my_main_menu_price_ID_box, COLOR_PAIR(6));
     mvwaddstr(my_main_menu_price_ID_box, 1, 25 - price_ID_title.length()/2, price_ID_title.c_str());
     wattroff(my_main_menu_price_ID_box, COLOR_PAIR(6));
+
+    std::string cha_instr = "                ";
+    mvwaddstr(my_main_menu_price_ID_box, 2, 25, cha_instr.c_str());
+    std::string dupe_instr = "               ";
+    mvwaddstr(my_main_menu_price_ID_box, 3, 25, dupe_instr.c_str());
+
+    for (int ys = 5; ys <= 21; ++ys) {
+        mvwaddstr(my_main_menu_price_ID_box, ys, 42, "...");
+    }
 
     wrefresh(my_main_menu_price_ID_box);
 }

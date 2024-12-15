@@ -68,6 +68,35 @@ Savefile try_load_file(std::string & filename, Savefile & my_savefile) {
                         notes_l.push_back(cstr);
                     }
                     my_savefile.set_notes(notes_l);
+                } else if (line_no == 2) {
+                    // price ID
+                    std::vector<int> price_v;
+                    for (int i = 0; i <= (int)line.length(); ++i) {
+                        int cstr = line[i];
+                        price_v.push_back(cstr);
+                    }
+                    std::vector<int> digits;
+                    for (int i = 0; i <= (int)price_v.size(); ++i) {
+                        if (price_v[i] == 0) {
+                            break;
+                        } 
+                        digits.push_back(price_v[i] - int('0'));
+                    }
+
+                    if (digits.size() == 1) {
+                        int cha = digits[0];
+                        my_savefile.set_charisma(cha);
+                    } else {
+                        int cha = digits[1];
+                        if (digits[0] == 2) {
+                            cha = cha + 20;
+                        } else if (digits[0] == 1) {
+                            cha = cha + 10;
+                        } else {
+                            cha = 0;
+                        }
+                        my_savefile.set_charisma(cha);
+                    }                    
                 }
                 ++line_no; 
             }
@@ -99,6 +128,9 @@ int save_file(const std::string & filename, Savefile & file_to_save) {
         for (int i = 0; i < (int)file_notes.size(); ++i) {
             my_file<<file_notes[i];
         }
+        my_file<<std::endl;
+        // price ID
+        my_file<<std::to_string(file_to_save.get_charisma());
         my_file.close();
         return 0;
     } else {

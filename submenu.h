@@ -38,9 +38,11 @@ class MainMenu : public Menu {
         void set_my_main_menu_intrinsics_box(WINDOW *win);
         void set_my_main_menu_title_box(WINDOW *win);
         void set_my_main_menu_notes_box(WINDOW *win);
+        void set_my_main_menu_price_ID_box(WINDOW *win); 
         WINDOW *get_my_main_menu_intrinsics_box();
         WINDOW *get_my_main_menu_title_box();
         WINDOW *get_my_main_menu_notes_box();
+        WINDOW *get_my_main_menu_price_ID_box();
 };
 
 class ProfileMenu : public Menu {

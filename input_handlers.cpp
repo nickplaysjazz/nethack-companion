@@ -96,7 +96,9 @@ int profile_menu_action_handler(ProfileMenu & profile_menu, MainMenu & main_menu
             std::vector<int> {27}
         );
 
-        create_file(filename);
+        if (filename != "") {
+            create_file(filename);
+        }
         profile_menu.set_options_list(get_filenames("data"));
         werase(profile_menu.get_my_win());
         profile_menu.render_menu();
@@ -276,6 +278,35 @@ int price_ID_menu_action_handler(MainMenu & main_menu, Savefile & my_save) {
             main_menu.render_price_ID_menu_off(my_save);
 
             is_inner_loop_running = false;
+        } else if (ch1 == 259 || ch1 == 261) {
+            // up or right arrow
+            int current_cha = my_save.get_charisma(); 
+            if (current_cha < 25) {
+                ++current_cha;
+                my_save.set_charisma(current_cha);
+
+                std::string charisma_ch = std::to_string(my_save.get_charisma());
+                if (charisma_ch.size() != 2) {
+                    charisma_ch = " " + charisma_ch;
+                }
+                mvwaddstr(main_menu.get_my_main_menu_price_ID_box(), 2, 18, charisma_ch.c_str());
+                wrefresh(main_menu.get_my_main_menu_price_ID_box());
+            }
+        } else if (ch1 == 258 || ch1 == 260) {
+            // down or left arrow
+            int current_cha = my_save.get_charisma(); 
+            if (current_cha > 3) {
+                --current_cha;
+                my_save.set_charisma(current_cha);
+
+                std::string charisma_ch = std::to_string(my_save.get_charisma());
+                if (charisma_ch.size() != 2) {
+                    charisma_ch = " " + charisma_ch;
+                }
+
+                mvwaddstr(main_menu.get_my_main_menu_price_ID_box(), 2, 18, charisma_ch.c_str());
+                wrefresh(main_menu.get_my_main_menu_price_ID_box());
+            }
         }
     }
     return 1; 

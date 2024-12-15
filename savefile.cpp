@@ -7,6 +7,7 @@ Savefile::Savefile(
 ) {
     intrinsics = std::vector<bool> (properties_list.size(), 0);
     notes = std::vector<char> (560, int(' '));
+    charisma = 10;
 };
 
 void Savefile::clear() {
@@ -15,6 +16,7 @@ void Savefile::clear() {
     }
     filename = "";
     notes = std::vector<char> (560, int(' '));
+    charisma = 10;
 }
 
 std::vector<bool> Savefile::get_intrinsics() {
@@ -29,6 +31,10 @@ std::vector<char> Savefile::get_notes() {
     return notes; 
 }
 
+int Savefile::get_charisma() {
+    return charisma;
+}
+
 void Savefile::set_filename(std::string & new_filename) {
     filename = new_filename;
 }
@@ -39,6 +45,10 @@ void Savefile::set_intrinics(std::vector<bool> & new_intrinsics) {
 
 void Savefile::set_notes(std::vector<char> & new_notes) {
     notes = new_notes; 
+}
+
+void Savefile::set_charisma(int new_charisma) {
+    charisma = new_charisma; 
 }
 
 void Savefile::flip_active_state() {
