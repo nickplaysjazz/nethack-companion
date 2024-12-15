@@ -14,7 +14,7 @@ g++ -o main.exe *.cpp -lncursesw
 - Ability to create a checklist? 
 - Notes section: better handling (delete key, word wrap-around, typing before a set of words pushes those words, etc.). Could even do vertical scrolling. We can also allow periods, colons, etc here, just not in filenames.  
 - Various menus: message lookup, dangerous creatures (user-defined?), xp to level up, wand engraving, ring sink, shop lookup
-- Price list by charisma. 
+- Price list by charisma. Better handling of runoff into second window (can't see heading, can't go backwards)
 - Date of run (?)
 - Input file improvements: Checksum on input file, Binary file for inputs instead, maybe json? Need to use istream 
 - Make it so that you cannot create a file with solely spaces

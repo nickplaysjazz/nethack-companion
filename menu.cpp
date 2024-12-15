@@ -130,57 +130,126 @@ int Menu::create_popup_long(
     std::vector<int> exit_buttons
 ) {
     int my_row = my_rows.size() + 2; 
-    int my_col = 0;
-    for (int j = 0; j < (int)my_rows.size(); ++j) {
-        if ((int)my_rows[j].length() > my_col) {my_col = (int)my_rows[j].length();}
-    }
-    my_col = my_col + 2;
 
-    my_popup_name = newwin(my_row, my_col, menu_name.get_size()[0]/2 - my_row/2, menu_name.get_size()[1]/2 - my_col/2);
-    wattron(my_popup_name, COLOR_PAIR(2));
-    box(my_popup_name, 0, 0);
-    wattroff(my_popup_name, COLOR_PAIR(2));
-    int option_count = 0;
-    for (std::vector<std::string>::const_iterator it = my_rows.begin(); it != my_rows.end(); ++it) {
-        mvwaddstr(my_popup_name, option_count+1, 1, it->c_str());
-        ++option_count;
-    }
+    if (my_row < menu_name.get_size()[0]) {
+        int my_col = 0;
+        for (int j = 0; j < (int)my_rows.size(); ++j) {
+            if ((int)my_rows[j].length() > my_col) {my_col = (int)my_rows[j].length();}
+        }
+        my_col = my_col + 2;
+        
+        my_popup_name = newwin(my_row, my_col, menu_name.get_size()[0]/2 - my_row/2, menu_name.get_size()[1]/2 - my_col/2);
+        wattron(my_popup_name, COLOR_PAIR(2));
+        box(my_popup_name, 0, 0);
+        wattroff(my_popup_name, COLOR_PAIR(2));
 
-    // render window
-    wrefresh(my_popup_name);
+        int option_count = 0;
+        for (std::vector<std::string>::const_iterator it = my_rows.begin(); it != my_rows.end(); ++it) {
+            mvwaddstr(my_popup_name, option_count+1, 1, it->c_str());
+            ++option_count;
+        }
 
-    if (exit_buttons.empty() && progress_buttons.empty()) {
-        // any button will close 
-        int ch1 = getch();
-        (void) ch1; 
-        werase(my_popup_name);
+        // render window
         wrefresh(my_popup_name);
-        delwin(my_popup_name);
-        touchwin(menu_name.get_my_win());
-        refresh();
-        wrefresh(menu_name.get_my_win());
-        return -1; 
+
+        if (exit_buttons.empty() && progress_buttons.empty()) {
+            // any button will close 
+            int ch1 = getch();
+            (void) ch1; 
+            werase(my_popup_name);
+            wrefresh(my_popup_name);
+            delwin(my_popup_name);
+            touchwin(menu_name.get_my_win());
+            refresh();
+            wrefresh(menu_name.get_my_win());
+            return -1; 
+        } else {
+            // loop window
+            int ch1 = getch(); 
+            bool is_inner_loop_running = true;
+            while (is_inner_loop_running) {
+                
+                if (std::find(exit_buttons.begin(), exit_buttons.end(), ch1) != exit_buttons.end()) { 
+                    werase(my_popup_name);
+                    wrefresh(my_popup_name);
+                    delwin(my_popup_name);
+                    touchwin(menu_name.get_my_win());
+                    refresh();
+                    wrefresh(menu_name.get_my_win());
+                    is_inner_loop_running = false;
+                    return -1; 
+                } else if (std::find(progress_buttons.begin(), progress_buttons.end(), ch1) != progress_buttons.end()) {
+                    return ch1;  
+                }
+            }
+        }
     } else {
-        // loop window
-        int ch1 = getch(); 
-        bool is_inner_loop_running = true;
-        while (is_inner_loop_running) {
-            
-            if (std::find(exit_buttons.begin(), exit_buttons.end(), ch1) != exit_buttons.end()) { 
+        // need to subdivide into multiple windows
+        int rows_to_get_rid_of = my_row;
+        int pos = 0;
+        while (rows_to_get_rid_of > 0) {
+            std::vector<std::string>::const_iterator first = my_rows.begin() + pos;
+            std::vector<std::string>::const_iterator last = my_rows.begin() + pos + std::min(menu_name.get_size()[0] - 2, my_row-2-pos);
+            std::vector<std::string> my_new_rows(first, last);
+
+            int my_new_row = my_new_rows.size() + 2; 
+            int my_col = 0;
+            for (int j = 0; j < (int)my_new_rows.size(); ++j) {
+                if ((int)my_new_rows[j].length() > my_col) {my_col = (int)my_new_rows[j].length();}
+            }
+            my_col = my_col + 2;
+
+            my_popup_name = newwin(my_new_row, my_col, menu_name.get_size()[0]/2 - my_new_row/2, menu_name.get_size()[1]/2 - my_col/2);
+            wattron(my_popup_name, COLOR_PAIR(2));
+            box(my_popup_name, 0, 0);
+            wattroff(my_popup_name, COLOR_PAIR(2));
+
+            int option_count = 0;
+            for (std::vector<std::string>::const_iterator it = my_new_rows.begin(); it != my_new_rows.end(); ++it) {
+                mvwaddstr(my_popup_name, option_count+1, 1, it->c_str());
+                ++option_count;
+            }
+
+            // render window
+            wrefresh(my_popup_name);
+
+            if ((rows_to_get_rid_of > menu_name.get_size()[0]) || (exit_buttons.empty() && progress_buttons.empty())) {
+                // need to continue, or close window entirely
+                // any button will close 
+                int ch1 = getch();
+                (void) ch1; 
                 werase(my_popup_name);
                 wrefresh(my_popup_name);
                 delwin(my_popup_name);
                 touchwin(menu_name.get_my_win());
                 refresh();
                 wrefresh(menu_name.get_my_win());
-                is_inner_loop_running = false;
-                return -1; 
-            } else if (std::find(progress_buttons.begin(), progress_buttons.end(), ch1) != progress_buttons.end()) {
-                return ch1;  
+                if (rows_to_get_rid_of < menu_name.get_size()[0]) {
+                    return -1; 
+                }
+                rows_to_get_rid_of = rows_to_get_rid_of - my_new_row; 
+                pos = pos + my_new_row; 
+            } else {
+                // loop window
+                int ch1 = getch(); 
+                bool is_inner_loop_running = true;
+                while (is_inner_loop_running) {
+                    if (std::find(exit_buttons.begin(), exit_buttons.end(), ch1) != exit_buttons.end()) { 
+                        werase(my_popup_name);
+                        wrefresh(my_popup_name);
+                        delwin(my_popup_name);
+                        touchwin(menu_name.get_my_win());
+                        refresh();
+                        wrefresh(menu_name.get_my_win());
+                        is_inner_loop_running = false;
+                        return -1; 
+                    } else if (std::find(progress_buttons.begin(), progress_buttons.end(), ch1) != progress_buttons.end()) {
+                        return ch1;  
+                    }
+                }
             }
         }
     }
-
     return -1;
 }
 
