@@ -38,6 +38,13 @@ class Menu {
             std::vector<int> progress_buttons, 
             std::vector<int> exit_buttons
         );
+        int create_popup_long(
+            Menu & menu_name,
+            WINDOW *my_popup_name,
+            std::vector<std::string> my_rows,
+            std::vector<int> progress_buttons, 
+            std::vector<int> exit_buttons
+        );
         std::string create_text_prompt(
             Menu & menu_name,
             WINDOW *my_text_prompt_name,

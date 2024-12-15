@@ -318,6 +318,18 @@ int price_ID_menu_action_handler(MainMenu & main_menu, Savefile & my_save) {
                 mvwaddstr(main_menu.get_my_main_menu_price_ID_box(), 4, 19, print_no.c_str());       
             }
             main_menu.render_prices(my_save); 
+        } else if (ch1 >= int('a') && ch1 <= int('p')) {
+            WINDOW *my_long_popup = NULL;
+            std::vector<std::string> my_rows = {"this whole screen", "will have some info", "about what the items will be", "with the prices you can see on the left side of the table!"};
+            std::vector<int> buttons = {};
+            std::vector<int> buttons2 = {};
+            main_menu.create_popup_long(
+                main_menu, 
+                my_long_popup,
+                my_rows,
+                buttons,
+                buttons2
+            );
         }
     }
     return 1; 

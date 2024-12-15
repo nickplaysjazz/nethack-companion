@@ -122,6 +122,68 @@ int Menu::create_popup(
     return -1;
 }
 
+int Menu::create_popup_long(
+    Menu & menu_name,
+    WINDOW *my_popup_name,
+    std::vector<std::string> my_rows,
+    std::vector<int> progress_buttons, 
+    std::vector<int> exit_buttons
+) {
+    int my_row = my_rows.size() + 2; 
+    int my_col = 0;
+    for (int j = 0; j < (int)my_rows.size(); ++j) {
+        if ((int)my_rows[j].length() > my_col) {my_col = (int)my_rows[j].length();}
+    }
+    my_col = my_col + 2;
+
+    my_popup_name = newwin(my_row, my_col, menu_name.get_size()[0]/2 - my_row/2, menu_name.get_size()[1]/2 - my_col/2);
+    wattron(my_popup_name, COLOR_PAIR(2));
+    box(my_popup_name, 0, 0);
+    wattroff(my_popup_name, COLOR_PAIR(2));
+    int option_count = 0;
+    for (std::vector<std::string>::const_iterator it = my_rows.begin(); it != my_rows.end(); ++it) {
+        mvwaddstr(my_popup_name, option_count+1, 1, it->c_str());
+        ++option_count;
+    }
+
+    // render window
+    wrefresh(my_popup_name);
+
+    if (exit_buttons.empty() && progress_buttons.empty()) {
+        // any button will close 
+        int ch1 = getch();
+        (void) ch1; 
+        werase(my_popup_name);
+        wrefresh(my_popup_name);
+        delwin(my_popup_name);
+        touchwin(menu_name.get_my_win());
+        refresh();
+        wrefresh(menu_name.get_my_win());
+        return -1; 
+    } else {
+        // loop window
+        int ch1 = getch(); 
+        bool is_inner_loop_running = true;
+        while (is_inner_loop_running) {
+            
+            if (std::find(exit_buttons.begin(), exit_buttons.end(), ch1) != exit_buttons.end()) { 
+                werase(my_popup_name);
+                wrefresh(my_popup_name);
+                delwin(my_popup_name);
+                touchwin(menu_name.get_my_win());
+                refresh();
+                wrefresh(menu_name.get_my_win());
+                is_inner_loop_running = false;
+                return -1; 
+            } else if (std::find(progress_buttons.begin(), progress_buttons.end(), ch1) != progress_buttons.end()) {
+                return ch1;  
+            }
+        }
+    }
+
+    return -1;
+}
+
 std::string Menu::create_text_prompt(
     Menu & menu_name,
     WINDOW *my_text_prompt_name,
