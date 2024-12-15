@@ -11,6 +11,8 @@ class MainMenu : public Menu {
         WINDOW *my_main_menu_notes_box;
         WINDOW *my_main_menu_price_ID_box; 
 
+        std::string my_filename;
+
     public: 
         MainMenu(
             WINDOW *_my_main_menu_win,
@@ -44,6 +46,8 @@ class MainMenu : public Menu {
         WINDOW *get_my_main_menu_title_box();
         WINDOW *get_my_main_menu_notes_box();
         WINDOW *get_my_main_menu_price_ID_box();
+
+        std::string get_filetitle(); 
 };
 
 class ProfileMenu : public Menu {

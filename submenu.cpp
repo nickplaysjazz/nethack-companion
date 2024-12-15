@@ -58,6 +58,10 @@ WINDOW *MainMenu::get_my_main_menu_price_ID_box() {
     return my_main_menu_price_ID_box;
 }
 
+std::string MainMenu::get_filetitle() {
+    return my_filename;
+}
+
 void MainMenu::render_menu() {
     // necessary but this version is not used
     return;
@@ -65,6 +69,7 @@ void MainMenu::render_menu() {
 
 void MainMenu::render_menu(std::string & file_title, Savefile & my_save) {
     menu_name = file_title;
+    my_filename = file_title;
     int my_row = sizey;
     (void) my_row;
     int my_col = sizex;
@@ -80,6 +85,10 @@ void MainMenu::render_menu(std::string & file_title, Savefile & my_save) {
     // intrinsics
     my_main_menu_intrinsics_box = subwin(my_win, 23, 30, 2, 0);
     box(my_main_menu_intrinsics_box, 0, 0);
+    mvwaddch(my_main_menu_intrinsics_box, 0, 0, ACS_LTEE);
+    mvwaddch(my_main_menu_intrinsics_box, 0, 29, ACS_TTEE);
+    mvwaddch(my_main_menu_intrinsics_box, 22, 0, ACS_LTEE);
+    mvwaddch(my_main_menu_intrinsics_box, 22, 29, ACS_BTEE);
     std::string intrinsics_title = "INTRINSICS i)";
     wattron(my_main_menu_intrinsics_box, COLOR_PAIR(4));
     mvwaddstr(my_main_menu_intrinsics_box, 1, 15 - intrinsics_title.length()/2, intrinsics_title.c_str());
@@ -98,6 +107,10 @@ void MainMenu::render_menu(std::string & file_title, Savefile & my_save) {
     // notes
     my_main_menu_notes_box = subwin(my_win, 23, 30, 2, 80);
     box(my_main_menu_notes_box, 0, 0);
+    mvwaddch(my_main_menu_notes_box, 0, 0, ACS_TTEE);
+    mvwaddch(my_main_menu_notes_box, 0, 29, ACS_RTEE);
+    mvwaddch(my_main_menu_notes_box, 22, 0, ACS_BTEE);
+    mvwaddch(my_main_menu_notes_box, 22, 29, ACS_RTEE);
     std::string notes_title = "NOTES n)";
     wattron(my_main_menu_notes_box, COLOR_PAIR(5));
     mvwaddstr(my_main_menu_notes_box, 1, 15 - notes_title.length()/2, notes_title.c_str());
@@ -115,6 +128,10 @@ void MainMenu::render_menu(std::string & file_title, Savefile & my_save) {
     // price ID
     my_main_menu_price_ID_box = subwin(my_win, 23, 52, 2, 29);
     box(my_main_menu_price_ID_box, 0, 0); 
+    mvwaddch(my_main_menu_price_ID_box, 0, 0, ACS_TTEE);
+    mvwaddch(my_main_menu_price_ID_box, 0, 51, ACS_TTEE);
+    mvwaddch(my_main_menu_price_ID_box, 23, 0, ACS_BTEE);
+    mvwaddch(my_main_menu_price_ID_box, 22, 51, ACS_BTEE);
     std::string price_ID_title = "PRICE ID p)";
     wattron(my_main_menu_price_ID_box, COLOR_PAIR(6));
     mvwaddstr(my_main_menu_price_ID_box, 1, 25 - price_ID_title.length()/2, price_ID_title.c_str());
@@ -152,6 +169,12 @@ void MainMenu::render_menu(std::string & file_title, Savefile & my_save) {
     }
 
     render_prices(my_save);
+
+    // sokoban, could make this a subwin
+    std::string sokoban_str = "s) SOKOBAN PRACTICE";
+    wattron(my_win, COLOR_PAIR(7));
+    mvwaddstr(my_win, 26, 1, sokoban_str.c_str());
+    wattroff(my_win, COLOR_PAIR(7));
 }
 
 void MainMenu::render_intrinsics_menu_default(Savefile & my_save) {

@@ -6,6 +6,7 @@
 
 #include "input_handlers.h"
 #include "io.h"
+#include "sokoban.h"
 #include "submenu.h"
 #include "utilities.h"
 
@@ -30,6 +31,13 @@ int main_menu_action_handler(MainMenu & main_menu, ProfileMenu & profile_menu, S
     } else if (ch == int('p')) {
         // price ID
         price_ID_menu_action_handler(main_menu, my_save);
+    } else if (ch == int('s')) {
+        // sokoban
+        main_menu.close_menu();
+
+        Sokoban my_sokoban(main_menu.get_size()[0], main_menu.get_size()[1]); 
+
+        my_sokoban.open();
     }
     return 1; 
 }

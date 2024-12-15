@@ -55,6 +55,8 @@ int main() {
     init_pair(5, COLOR_GREEN, COLOR_BLACK);
     // price ID color
     init_pair(6, COLOR_RED, COLOR_BLACK);
+    // sokoban
+    init_pair(7, COLOR_BLUE, COLOR_BLACK);
 
     // Read in file names now
     std::vector<std::string> character_filenames = get_filenames("data");
