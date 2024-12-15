@@ -34,6 +34,7 @@ class MainMenu : public Menu {
 
         void render_price_ID_menu_on(Savefile & my_save); 
         void render_price_ID_menu_off(Savefile & my_save); 
+        void render_prices(Savefile & my_save);
 
         void set_my_main_menu_intrinsics_box(WINDOW *win);
         void set_my_main_menu_title_box(WINDOW *win);

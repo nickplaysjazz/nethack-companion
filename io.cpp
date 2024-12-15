@@ -97,6 +97,17 @@ Savefile try_load_file(std::string & filename, Savefile & my_savefile) {
                         }
                         my_savefile.set_charisma(cha);
                     }                    
+                } else if (line_no == 3) {
+                    //being duped
+                    bool is_duping;
+                    for (int i = 0; i < (int)line.length(); ++i) {
+                        if (line[i] == '1')  {
+                            is_duping = true;
+                        } else if (line[i] == '0') {
+                            is_duping = false; 
+                        }
+                    }
+                    my_savefile.set_is_being_duped(is_duping); 
                 }
                 ++line_no; 
             }
@@ -131,6 +142,9 @@ int save_file(const std::string & filename, Savefile & file_to_save) {
         my_file<<std::endl;
         // price ID
         my_file<<std::to_string(file_to_save.get_charisma());
+        my_file<<std::endl;
+        // is_duped
+        my_file<<file_to_save.get_is_being_duped(); 
         my_file.close();
         return 0;
     } else {

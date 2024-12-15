@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <array>
 #include <string>
 #include <vector>
 
@@ -190,3 +191,5 @@ std::vector<std::string> properties_list = {
     //	"unbreathing",
     "warning"
 };
+
+std::array<int, 16> item_base_prices = {8, 20, 30, 50, 60, 80, 100, 150, 175, 200, 250, 300, 400, 500, 600, 700};

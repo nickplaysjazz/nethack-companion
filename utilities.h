@@ -1,6 +1,7 @@
 #ifndef UTILITIES_H
 #define UTILITIES_H
 
+#include <array>
 #include <string>
 
 extern std::string ascii_title; 
@@ -10,5 +11,6 @@ char keycode_to_char(int keycode);
 
 extern std::vector<int> legal_special_characters;
 extern std::vector<std::string> properties_list;
+extern std::array<int, 16> item_base_prices;
 
 #endif 

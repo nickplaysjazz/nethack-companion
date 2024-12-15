@@ -55,6 +55,18 @@ void Savefile::flip_active_state() {
     is_active_save = !is_active_save;
 }
 
+void Savefile::flip_is_being_duped() {
+    is_being_duped = !is_being_duped;
+}
+
+void Savefile::set_is_being_duped(bool in) {
+    is_being_duped = in;
+}
+
 bool Savefile::is_active() {
     return is_active_save;
+}
+
+bool Savefile::get_is_being_duped() {
+    return is_being_duped;
 }
