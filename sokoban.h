@@ -10,15 +10,23 @@ class Sokoban
 {
     private: 
         int sizey, sizex;
-        ///MainMenu & main_menu;
-        //Savefile & my_save;
+        WINDOW *my_sokoban_window;
+        WINDOW *my_level_select = NULL;
 
     public: 
         // constructor 
-        Sokoban(int _sizey, int _sizex);
+        Sokoban(WINDOW *_my_sokoban_window, int _sizey, int _sizex);
 
         void open(); 
-        int sokoban_action_handler(int ch); 
+        void close();
+        
+        int sokoban_action_handler(MainMenu & main_menu, Savefile & my_save, int ch); 
+        void render_level_select_menu();
+
+        std::vector<int> get_win_size();
+        WINDOW * get_my_win();
+
+        void set_my_win(WINDOW* new_win);
 };
 
 #endif

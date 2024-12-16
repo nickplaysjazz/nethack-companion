@@ -67,7 +67,7 @@ void MainMenu::render_menu() {
     return;
 }
 
-void MainMenu::render_menu(std::string & file_title, Savefile & my_save) {
+void MainMenu::render_menu(std::string file_title, Savefile & my_save) {
     menu_name = file_title;
     my_filename = file_title;
     int my_row = sizey;

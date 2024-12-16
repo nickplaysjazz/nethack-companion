@@ -9,6 +9,7 @@
 #include "menu.h"
 #include "gamemap.h"
 #include "savefile.h"
+#include "sokoban.h"
 #include "submenu.h"
 #include "utilities.h"
 
@@ -80,6 +81,12 @@ int main() {
         my_main_menu_win, PlayMap.get_map_tot_row_col()[0], PlayMap.get_map_tot_row_col()[1], 0, 0, "", std::vector<std::string> {""}, 27
     );
 
+    // Also initialize Sokoban map
+    WINDOW *my_sokoban_win = NULL;
+    Sokoban my_sokoban(
+        my_sokoban_win, totrow, totcol
+    );
+
     // Catch early termination by closing window.
     signal(SIGBREAK, save_and_exit);
     // Catch early termination by ctrl-c.
@@ -102,8 +109,12 @@ int main() {
                 break;
             case 1:
                 // main menu
-                action_handler = main_menu_action_handler(main_menu, profile_menu, my_open_save, ch);
+                action_handler = main_menu_action_handler(main_menu, profile_menu, my_sokoban, my_open_save, ch);
                 break; 
+            case 2:
+                // sokoban
+                action_handler = my_sokoban.sokoban_action_handler(main_menu, my_open_save, ch);
+                break;
             case 99:
                 // quit
                 save_and_exit(0);

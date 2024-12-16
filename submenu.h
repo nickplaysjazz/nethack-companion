@@ -24,7 +24,7 @@ class MainMenu : public Menu {
             const std::vector<std::string> & _options_list, 
             int _close_button
         );
-        void render_menu(std::string & file_title, Savefile & my_save);
+        void render_menu(std::string file_title, Savefile & my_save);
         void render_menu() override;
 
         void render_intrinsics_menu_default(Savefile & my_save);

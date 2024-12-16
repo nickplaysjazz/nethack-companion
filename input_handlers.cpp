@@ -10,7 +10,7 @@
 #include "submenu.h"
 #include "utilities.h"
 
-int main_menu_action_handler(MainMenu & main_menu, ProfileMenu & profile_menu, Savefile & my_save, int ch) {
+int main_menu_action_handler(MainMenu & main_menu, ProfileMenu & profile_menu, Sokoban & my_sokoban, Savefile & my_save, int ch) {
     if (ch == 27) {
         // escape
         main_menu.close_menu();
@@ -34,10 +34,9 @@ int main_menu_action_handler(MainMenu & main_menu, ProfileMenu & profile_menu, S
     } else if (ch == int('s')) {
         // sokoban
         main_menu.close_menu();
-
-        Sokoban my_sokoban(main_menu.get_size()[0], main_menu.get_size()[1]); 
-
         my_sokoban.open();
+
+        return 2;
     }
     return 1; 
 }
