@@ -21,6 +21,8 @@ g++ -o main.exe *.cpp -lncursesw
 - Hit ? at any time and a menu appears with controls
 - Change filename, perhaps with VAL-DWA-LAW etc notation. Could also pregen intrinsics from this? 
 - Handle capital keyboard inputs and lowercase? 
+- constexpr on the utilities 
+- Get rid of file select on sokoban, just pull up the first one and control from side panel
 
 ## Acknowledgments 
 The FIGlet ASCII font "Standard" was created by Glenn Chappell & Ian Chai 3/93 based on Frank's .sig. The font is used here under a BSD-3-Clause license. For more information, see http://www.figlet.org/. 

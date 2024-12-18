@@ -1,5 +1,6 @@
 #include <algorithm>
 #include <array>
+#include <ncurses/curses.h>
 #include <string>
 #include <vector>
 
@@ -379,3 +380,17 @@ std::vector<std::vector<std::string>> items_by_prices = {
      "     finger of death",
      "     cancellation"}
 };
+
+std::array<std::string, 11> sokoban_1a = {{
+    {"-------- ------ "},
+    {"|<|>...---....| "},
+    {"|^|-.00....0..| "},
+    {"|^||..00|.0.0.| "},
+    {"|^||....|.....| "},
+    {"|^|------0----| "},
+    {"|^|    |......| "},
+    {"|^------......| "},
+    {"|..^^^^0000...| "},
+    {"|..-----......| "},
+    {"----   -------- "}
+}};

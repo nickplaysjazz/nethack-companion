@@ -14,4 +14,6 @@ extern std::vector<std::string> properties_list;
 extern std::array<int, 16> item_base_prices;
 extern std::vector<std::vector<std::string>> items_by_prices; 
 
-#endif 
+extern std::array<std::string, 11> sokoban_1a;
+
+#endif
