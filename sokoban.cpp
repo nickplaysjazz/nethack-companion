@@ -1,11 +1,11 @@
-#include <array>
+#include <algorithm>
 #include <string>
-#include <iostream> // TODO REMOVE
+#include <vector>
 
 #include "submenu.h"
 #include "sokoban.h"
 
-Player::Player(WINDOW* _play_window, std::array<std::string, 11> & _play_map, int _initx, int _inity) {
+Player::Player(WINDOW* _play_window, std::vector<std::string> & _play_map, int _initx, int _inity) {
     posx = _initx;
     posy = _inity;
     play_window = _play_window;
@@ -20,7 +20,7 @@ std::vector<int> Player::get_yx() {
     return {posy, posx};
 }
 
-std::array<std::string, 11>& Player::get_map() {
+std::vector<std::string>& Player::get_map() {
     return play_map;
 }
 
@@ -29,8 +29,24 @@ void Player::set_yx(int newy, int newx) {
     posy = newy;
 }
 
+std::vector<int> Player::yx_to_game_map_yx(int lvl_id) {
+    if (lvl_id == 0) {
+        return {posy - 12 + 1, posx - 36 + 3 };
+    }
+
+    return {-1, -1};
+}
+
+
 void Player::pl_move(int dy, int dx) {
     // check for legal movement here
+    std::vector<char> walls = {'-','|'};
+    std::vector<int> game_yx = yx_to_game_map_yx(0); 
+
+    if (std::find(walls.begin(), walls.end(), (char)play_map[game_yx[0]+dy][game_yx[1]+dx]) != walls.end()) {
+        return;
+    }
+
     set_yx(posy+dy, posx+dx);
 
     render();
@@ -108,26 +124,33 @@ void Sokoban::render_level_select_menu() {
     wrefresh(my_level_select);
 }
 
-void Sokoban::render_game_map() {
-    for (int i = 0; i < (int)sokoban_1a.size(); ++i) {
-        mvwaddstr(my_sokoban_play, 16 - (int)sokoban_1a.size()/2 + i, 41 - sokoban_1a[i].length()/2, sokoban_1a[i].c_str());
+void Sokoban::render_game_map(int lvl_id) {
+    if (lvl_id == 0) {
+        // 1a
+        for (int i = 0; i < (int)sokoban_1a.size(); ++i) {
+            mvwaddstr(my_sokoban_play, 16 - (int)sokoban_1a.size()/2 + i, 41 - sokoban_1a[i].length()/2, sokoban_1a[i].c_str());
+        }
     }
 }
 
 void Sokoban::enter_level(int lvl_id) {
-    (void) lvl_id;
+    // render game map
+    render_game_map(lvl_id);
 
-    render_game_map();
+    // move player to stairway and render
+    if (lvl_id == 0) {
+        get_my_player().set_yx(12, 36);
+    }
+    get_my_player().render();
 
-    // command list render
-
+    // command list render on other side
 }
 
-void Sokoban::sokoban_play_handler() {
+void Sokoban::sokoban_play_handler(int lvl_id) {
     bool is_running = true;
     while (is_running) {
         int ch1 = getch();
-        render_game_map();
+        render_game_map(lvl_id);
         if (ch1 == 27) {
             return;
         } else if (ch1 == 258) {
@@ -166,22 +189,21 @@ int Sokoban::sokoban_action_handler(MainMenu & main_menu, Savefile & my_save, in
 
         return 1;
     } else if (ch >= int('a') && ch <= int('h')) {
-        // open sokoban levels
-        enter_level(0);
-
         werase(my_level_select);
         wrefresh(my_level_select);
         delwin(my_level_select);
 
         Player my_player(
-            my_sokoban_play, sokoban_1a, 36, 12
+            my_sokoban_play, sokoban_1a, 0, 0
         );
         set_my_player(my_player);
-        render_game_map();
-        my_player.render();
 
-        sokoban_play_handler();
+        // open sokoban levels
+        enter_level(0);
 
+        sokoban_play_handler(0);
+
+        // once we have exited sokoban, render level select menu again
         render_level_select_menu();
 
         return 2; 
