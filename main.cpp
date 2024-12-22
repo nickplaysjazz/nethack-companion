@@ -73,12 +73,12 @@ int main() {
     // Initialize necessary submenus now
     WINDOW *my_profile_menu_win = NULL;
     ProfileMenu profile_menu(
-        my_profile_menu_win, PlayMap.get_map_tot_row_col()[0], PlayMap.get_map_tot_row_col()[1], 0, 0, ascii_title, character_filenames, 27
+        my_profile_menu_win, totrow, totcol, 0, 0, ascii_title, character_filenames, 27
     );
 
     WINDOW *my_main_menu_win = NULL;
     MainMenu main_menu(
-        my_main_menu_win, PlayMap.get_map_tot_row_col()[0], PlayMap.get_map_tot_row_col()[1], 0, 0, "", std::vector<std::string> {""}, 27
+        my_main_menu_win, totrow, totcol, 0, 0, "", std::vector<std::string> {""}, 27
     );
 
     // Also initialize Sokoban map

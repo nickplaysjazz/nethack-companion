@@ -34,7 +34,7 @@ int main_menu_action_handler(MainMenu & main_menu, ProfileMenu & profile_menu, S
     } else if (ch == int('s')) {
         // sokoban
         main_menu.close_menu();
-        my_sokoban.open();
+        my_sokoban.init_game();
 
         return 2;
     }
