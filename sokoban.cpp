@@ -206,6 +206,14 @@ int Sokoban::sokoban_action_handler(MainMenu & main_menu, Savefile & my_save, in
             } else if (current_lvl_id == 7) {
                 sokoban_map = sokoban_4b;
             } 
+            if (is_flip_vert) {
+                std::reverse(sokoban_map.begin(), sokoban_map.end());
+            }
+            if (is_flip_horiz) {
+                for (int i = 0; i < (int)sokoban_map.size(); ++i) {
+                    std::reverse(sokoban_map[i].begin(), sokoban_map[i].end());
+                }
+            }
             enter_level(current_lvl_id);
         } else if (ch == 258) {
             attempt_player_move(1, 0); 
