@@ -15,5 +15,12 @@ extern std::array<int, 16> item_base_prices;
 extern std::vector<std::vector<std::string>> items_by_prices; 
 
 extern std::vector<std::string> sokoban_1a;
+extern std::vector<std::string> sokoban_1b;
+extern std::vector<std::string> sokoban_2a;
+extern std::vector<std::string> sokoban_2b;
+extern std::vector<std::string> sokoban_3a;
+extern std::vector<std::string> sokoban_3b;
+extern std::vector<std::string> sokoban_4a;
+extern std::vector<std::string> sokoban_4b;
 
 #endif

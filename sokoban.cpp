@@ -81,19 +81,27 @@ void Sokoban::render_game_map() {
     for (int i = 0; i < (int)sokoban_map.size(); ++i) {
         mvwaddstr(my_sokoban_play, sizey/2 - (int)sokoban_map.size()/2 + i, sizex/2 - sokoban_map[i].length()/2 - 28/2, sokoban_map[i].c_str());
     }
-    wrefresh(my_sokoban_play);
+    // do not refresh play window, since rendering the player always occurs next & refreshes map!
 }
 
 void Sokoban::enter_level(int lvl_id) {
+    // delete previous map
+    werase(my_sokoban_play);
+    box(my_sokoban_play, 0, 0);
+
     // render game map
     render_game_map();
 
     // move player to stairway and render
-    if (lvl_id == 0) {
-        player_pos = {12, 36};
+    for (int i = 0; i < (int)sokoban_map.size(); ++i) {
+        for (int j = 0; j < (int)sokoban_map[i].length(); ++j) {
+            if (sokoban_map[i][j] == '>') {
+                player_pos[0] = i + sizey/2 - (int)sokoban_map.size()/2;
+                player_pos[1] = j + sizex/2 - 28/2 - sokoban_map[0].length()/2;
+            }
+        }
     }
     render_player();
-
 }
 
 void Sokoban::attempt_player_move(int dy, int dx) {
@@ -101,29 +109,24 @@ void Sokoban::attempt_player_move(int dy, int dx) {
     std::vector<char> walls = {'-','|'};
     int map_y = player_pos[0] - sizey/2 + (int)sokoban_map.size()/2;
     int map_x = player_pos[1] - sizex/2 + 28/2 + sokoban_map[0].length()/2; 
-
     // can't move into walls
     if ((char)sokoban_map[map_y+dy][map_x+dx] == '^' || std::find(walls.begin(), walls.end(), (char)sokoban_map[map_y+dy][map_x+dx]) != walls.end()) {
         return;
     }
-
     // can't move diagonally through boulders
     if ((abs(dx) + abs(dy) == 2) && (((char)sokoban_map[map_y+dy][map_x] == '0' || std::find(walls.begin(), walls.end(), (char)sokoban_map[map_y+dy][map_x]) != walls.end()) && ((char)sokoban_map[map_y][map_x+dx] == '0' || std::find(walls.begin(), walls.end(), (char)sokoban_map[map_y][map_x+dx]) != walls.end()))) {
         return;
     }
-
     // boulder
     if ((char)sokoban_map[map_y+dy][map_x+dx] == '0') {
         // cannot move boulders diagonally
         if (abs(dx) + abs(dy) == 2) {
             return;
         }
-        
         // check if wall or boulder is beyond
         if (((char)sokoban_map[map_y+2*dy][map_x+2*dx] == '0') || (std::find(walls.begin(), walls.end(), (char)sokoban_map[map_y+2*dy][map_x+2*dx]) != walls.end())) {
             return;
         } 
-
         // check if pit is beyond
         if ((char)sokoban_map[map_y+2*dy][map_x+2*dx] == '^') {
             sokoban_map[map_y+2*dy][map_x+2*dx] = '.';
@@ -132,15 +135,12 @@ void Sokoban::attempt_player_move(int dy, int dx) {
             player_pos[1] = player_pos[1] + dx;
             return;
         }
-
         // otherwise push boulder
         sokoban_map[map_y+dy][map_x+dx]= '.';
         sokoban_map[map_y+2*dy][map_x+2*dx] = '0';
     } 
-
     player_pos[0] = player_pos[0] + dy;
     player_pos[1] = player_pos[1] + dx;
-
     // check for exiting level
     
 }
@@ -159,14 +159,25 @@ int Sokoban::sokoban_action_handler(MainMenu & main_menu, Savefile & my_save, in
             is_running = false;
             return 1;
         } else if (ch >= int('a') && ch <= int('h')) {
-            // werase(my_level_select);
-            // wrefresh(my_level_select);
-            // delwin(my_level_select);
-
-            // change levels here!!       
-
-            // once we have exited sokoban, render level select menu again
-            //render_level_select_menu();
+            // change level
+            if (ch - int('a') == 0) {
+                sokoban_map = sokoban_1a;
+            } else if (ch - int('a') == 1) {
+                sokoban_map = sokoban_1b;
+            } else if (ch - int('a') == 2) {
+                sokoban_map = sokoban_2a;
+            } else if (ch - int('a') == 3) {
+                sokoban_map = sokoban_2b;
+            } else if (ch - int('a') == 4) {
+                sokoban_map = sokoban_3a;
+            } else if (ch - int('a') == 5) {
+                sokoban_map = sokoban_3b;
+            } else if (ch - int('a') == 6) {
+                sokoban_map = sokoban_4a;            
+            } else if (ch - int('a') == 7) {
+                sokoban_map = sokoban_4b;
+            } 
+            enter_level(ch - int('a'));
         } else if (ch == 258) {
             attempt_player_move(1, 0); 
             render_game_map();
