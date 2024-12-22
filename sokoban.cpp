@@ -27,8 +27,9 @@ void Sokoban::set_my_win(WINDOW* new_win) {
 
 void Sokoban::init_game() {
     // initialize sokoban display
+    current_lvl_id = 0;
     init_sokoban_windows();
-    render_sokoban_command_list();
+    render_sokoban_command_list(current_lvl_id);
 
     // set map to level 1a
     sokoban_map = sokoban_1a;
@@ -52,22 +53,39 @@ void Sokoban::close_sokoban_windows() {
     delwin(my_sokoban_window);
 }
 
-void Sokoban::render_sokoban_command_list() {
+void Sokoban::render_sokoban_command_list(int lvl_id) {
+    std::string cmd_title = "SOKOBAN PRACTICE";
+    std::string lvl_select = "Select level:";
     std::vector<std::string> lvl_list = {"a) Level 1a", "b) Level 1b", "c) Level 2a", "d) Level 2b", "e) Level 3a", "f) Level 3b", "g) Level 4a", "h) Level 4b"};
-    // std::string title = "Select a level:";
+    std::vector<std::string> flip_list = {"1) Flip horizontal", "2) Flip vertical"};
     std::string esc_msg = "Esc) Exit";
 
-    // my_level_select = subwin(my_sokoban_window, 12+2, title.length() + 2, sizey/2 - 6, sizex/2 - title.length()/2);
-    // wattron(my_level_select, COLOR_PAIR(2));
-    // box(my_level_select, 0, 0);
-    // wattroff(my_level_select, COLOR_PAIR(2));
-    // mvwaddstr(my_level_select, 1, 1, title.c_str());
+    wattron(my_sokoban_msg, COLOR_PAIR(7));
+    mvwaddstr(my_sokoban_msg, 1, cmd_title.size()/2 - 2, cmd_title.c_str());
+    wattroff(my_sokoban_msg, COLOR_PAIR(7));
 
+    mvwaddstr(my_sokoban_msg, 4, 1, lvl_select.c_str());
     for (int i = 0; i < (int)lvl_list.size(); ++i) {
-        mvwaddstr(my_sokoban_msg, i+3, lvl_list[i].size()/2, lvl_list[i].c_str());
+        if (lvl_id == i) {
+            wattron(my_sokoban_msg, A_STANDOUT);
+        }
+        mvwaddstr(my_sokoban_msg, i+5, lvl_list[i].size()/2 + 2, lvl_list[i].c_str());
+        if (lvl_id == i) {
+            wattroff(my_sokoban_msg, A_STANDOUT);
+        }
     }
 
-    mvwaddstr(my_sokoban_msg, 12, esc_msg.size()/2, esc_msg.c_str());
+    for (int i = 0; i < (int)flip_list.size(); ++i) {
+        if ((is_flip_horiz == true && i == 0) || (is_flip_vert == true && i == 1)) {
+            wattron(my_sokoban_msg, A_STANDOUT);
+        }
+        mvwaddstr(my_sokoban_msg, 15+i, 7, flip_list[i].c_str());
+        if ((is_flip_horiz == true && i == 0) || (is_flip_vert == true && i == 1)) {
+            wattroff(my_sokoban_msg, A_STANDOUT);
+        }
+    }
+
+    mvwaddstr(my_sokoban_msg, 29, esc_msg.size()/2 + 1, esc_msg.c_str());
 
     wrefresh(my_sokoban_msg);
 }
@@ -85,6 +103,9 @@ void Sokoban::render_game_map() {
 }
 
 void Sokoban::enter_level(int lvl_id) {
+    //update cmd window
+    render_sokoban_command_list(lvl_id);
+
     // delete previous map
     werase(my_sokoban_play);
     box(my_sokoban_play, 0, 0);
@@ -158,26 +179,34 @@ int Sokoban::sokoban_action_handler(MainMenu & main_menu, Savefile & my_save, in
 
             is_running = false;
             return 1;
-        } else if (ch >= int('a') && ch <= int('h')) {
+        } else if ((ch >= int('a') && ch <= int('h')) || (ch == int('1')) || (ch == int('2'))) {
             // change level
-            if (ch - int('a') == 0) {
+            if (ch == int('1')) {
+                is_flip_horiz = !is_flip_horiz;
+            } else if (ch == int('2')) {
+                is_flip_vert = !is_flip_vert;
+            }
+            if (ch >= int('a') && ch <= int('h')) {
+                current_lvl_id = ch - int('a');
+            }
+            if (current_lvl_id == 0) {
                 sokoban_map = sokoban_1a;
-            } else if (ch - int('a') == 1) {
+            } else if (current_lvl_id == 1) {
                 sokoban_map = sokoban_1b;
-            } else if (ch - int('a') == 2) {
+            } else if (current_lvl_id == 2) {
                 sokoban_map = sokoban_2a;
-            } else if (ch - int('a') == 3) {
+            } else if (current_lvl_id== 3) {
                 sokoban_map = sokoban_2b;
-            } else if (ch - int('a') == 4) {
+            } else if (current_lvl_id== 4) {
                 sokoban_map = sokoban_3a;
-            } else if (ch - int('a') == 5) {
+            } else if (current_lvl_id== 5) {
                 sokoban_map = sokoban_3b;
-            } else if (ch - int('a') == 6) {
+            } else if (current_lvl_id == 6) {
                 sokoban_map = sokoban_4a;            
-            } else if (ch - int('a') == 7) {
+            } else if (current_lvl_id == 7) {
                 sokoban_map = sokoban_4b;
             } 
-            enter_level(ch - int('a'));
+            enter_level(current_lvl_id);
         } else if (ch == 258) {
             attempt_player_move(1, 0); 
             render_game_map();
@@ -210,10 +239,9 @@ int Sokoban::sokoban_action_handler(MainMenu & main_menu, Savefile & my_save, in
             attempt_player_move(-1, -1);
             render_game_map();
             render_player();
-        }
+        } 
         ch = getch();
     }
-
     return -1;
 }
 

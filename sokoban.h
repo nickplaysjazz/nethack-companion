@@ -17,6 +17,9 @@ class Sokoban
         WINDOW *my_sokoban_play = NULL;
         //Player player;
         std::vector<int> player_pos = {0,0};
+        int current_lvl_id = 0;
+        bool is_flip_horiz = false;
+        bool is_flip_vert = false;
 
         std::vector<std::string> sokoban_map;
 
@@ -27,7 +30,7 @@ class Sokoban
         void init_game();
         void init_sokoban_windows(); 
         void close_sokoban_windows();
-        void render_sokoban_command_list();
+        void render_sokoban_command_list(int lvl_id);
 
         int sokoban_action_handler(MainMenu & main_menu, Savefile & my_save, int ch); 
         void enter_level(int lvl_id);
