@@ -56,3 +56,4 @@ Stretch goals:
 - Perhaps name can include the NetHack VAL-DWA-LAW-etc. notation. Could also pregen intrinsics from this? 
 - Handle capital keyboard inputs versus lowercase?
 - C++ improvements: use constexpr on utilities, use arrays instead of only vectors, double-check passing by copying in functions
+

@@ -83,12 +83,12 @@ void MainMenu::render_menu(std::string file_title, Savefile & my_save) {
     wattroff(my_main_menu_title_box, COLOR_PAIR(3));
     
     // intrinsics
-    my_main_menu_intrinsics_box = subwin(my_win, 23, 30, 2, 0);
+    my_main_menu_intrinsics_box = subwin(my_win, 30, 30, 2, 0);
     box(my_main_menu_intrinsics_box, 0, 0);
     mvwaddch(my_main_menu_intrinsics_box, 0, 0, ACS_LTEE);
     mvwaddch(my_main_menu_intrinsics_box, 0, 29, ACS_TTEE);
-    mvwaddch(my_main_menu_intrinsics_box, 22, 0, ACS_LTEE);
-    mvwaddch(my_main_menu_intrinsics_box, 22, 29, ACS_BTEE);
+    mvwaddch(my_main_menu_intrinsics_box, 29, 0, ACS_LLCORNER);
+    mvwaddch(my_main_menu_intrinsics_box, 29, 29, ACS_BTEE);
     std::string intrinsics_title = "INTRINSICS i)";
     wattron(my_main_menu_intrinsics_box, COLOR_PAIR(4));
     mvwaddstr(my_main_menu_intrinsics_box, 1, 15 - intrinsics_title.length()/2, intrinsics_title.c_str());
@@ -105,12 +105,12 @@ void MainMenu::render_menu(std::string file_title, Savefile & my_save) {
     } 
 
     // notes
-    my_main_menu_notes_box = subwin(my_win, 23, 30, 2, 80);
+    my_main_menu_notes_box = subwin(my_win, 30, 30, 2, 80);
     box(my_main_menu_notes_box, 0, 0);
     mvwaddch(my_main_menu_notes_box, 0, 0, ACS_TTEE);
     mvwaddch(my_main_menu_notes_box, 0, 29, ACS_RTEE);
-    mvwaddch(my_main_menu_notes_box, 22, 0, ACS_BTEE);
-    mvwaddch(my_main_menu_notes_box, 22, 29, ACS_RTEE);
+    mvwaddch(my_main_menu_notes_box, 29, 0, ACS_BTEE);
+    mvwaddch(my_main_menu_notes_box, 29, 29, ACS_LRCORNER);
     std::string notes_title = "NOTES n)";
     wattron(my_main_menu_notes_box, COLOR_PAIR(5));
     mvwaddstr(my_main_menu_notes_box, 1, 15 - notes_title.length()/2, notes_title.c_str());
@@ -119,7 +119,7 @@ void MainMenu::render_menu(std::string file_title, Savefile & my_save) {
     std::vector<char> notes_text = my_save.get_notes(); 
     int i = 0;
     for (int x = 1; x <= 28; ++x) {
-        for (int y = 2; y <= 21; ++y) {
+        for (int y = 2; y <= 28; ++y) {
             mvwaddch(my_main_menu_notes_box, y, x, notes_text[i]); 
             ++i;
         }
@@ -130,8 +130,8 @@ void MainMenu::render_menu(std::string file_title, Savefile & my_save) {
     box(my_main_menu_price_ID_box, 0, 0); 
     mvwaddch(my_main_menu_price_ID_box, 0, 0, ACS_TTEE);
     mvwaddch(my_main_menu_price_ID_box, 0, 51, ACS_TTEE);
-    mvwaddch(my_main_menu_price_ID_box, 22, 0, ACS_BTEE);
-    mvwaddch(my_main_menu_price_ID_box, 22, 51, ACS_BTEE);
+    mvwaddch(my_main_menu_price_ID_box, 22, 0, ACS_LTEE);
+    mvwaddch(my_main_menu_price_ID_box, 22, 51, ACS_RTEE);
     std::string price_ID_title = "PRICE ID p)";
     wattron(my_main_menu_price_ID_box, COLOR_PAIR(6));
     mvwaddstr(my_main_menu_price_ID_box, 1, 25 - price_ID_title.length()/2, price_ID_title.c_str());
@@ -173,19 +173,19 @@ void MainMenu::render_menu(std::string file_title, Savefile & my_save) {
     // sokoban
     std::string sokoban_str = "s) SOKOBAN PRACTICE";
     wattron(my_win, COLOR_PAIR(7));
-    mvwaddstr(my_win, 26, 1, sokoban_str.c_str());
+    mvwaddstr(my_win, 26, 31, sokoban_str.c_str());
     wattroff(my_win, COLOR_PAIR(7));
 
     // xp
     std::string xp_str = "x) XP TO LVL";
     wattron(my_win, COLOR_PAIR(8));
-    mvwaddstr(my_win, 27, 1, xp_str.c_str());
+    mvwaddstr(my_win, 27, 31, xp_str.c_str());
     wattroff(my_win, COLOR_PAIR(8));
 
     // wand engrave
     std::string engrave_str = "z) WAND ENGRAVE ID";
     wattron(my_win, COLOR_PAIR(9));
-    mvwaddstr(my_win, 28, 1, engrave_str.c_str());
+    mvwaddstr(my_win, 28, 31, engrave_str.c_str());
     wattroff(my_win, COLOR_PAIR(9));
 
 }
@@ -278,7 +278,7 @@ void MainMenu::render_notes_menu_on(Savefile & my_save) {
     std::vector<char> notes_text = my_save.get_notes(); 
     int i = 0;
     for (int x = 1; x <= 28; ++x) {
-        for (int y = 2; y <= 21; ++y) {
+        for (int y = 2; y <= 28; ++y) {
             mvwaddch(my_main_menu_notes_box, y, x, notes_text[i]); 
             ++i;
         }

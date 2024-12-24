@@ -218,7 +218,7 @@ int notes_menu_action_handler(MainMenu & main_menu, Savefile & my_save) {
 
             std::vector<char> notes_panel; 
             for (int x = 1; x <= 28; ++x) {
-                for (int y = 2; y <= 21; ++y) {
+                for (int y = 2; y <= 28; ++y) {
                     wmove(main_menu.get_my_main_menu_notes_box(), y, x); 
                     char current_ch = winch(main_menu.get_my_main_menu_notes_box());
                     notes_panel.push_back(current_ch); 
@@ -253,7 +253,7 @@ int notes_menu_action_handler(MainMenu & main_menu, Savefile & my_save) {
             
         } else if (ch1 == 10) {
             // enter
-            if (ypos+1 <= 21) {
+            if (ypos+1 <= 28) {
                 ++ypos;
                 xpos = 1;
                 wmove(main_menu.get_my_main_menu_notes_box(), ypos, xpos); 
@@ -261,7 +261,7 @@ int notes_menu_action_handler(MainMenu & main_menu, Savefile & my_save) {
             }
         } else if (ch1 == 258) {
             //down arrow
-            if (ypos+1 <= 21) {
+            if (ypos+1 <= 28) {
                 ++ypos;
                 wmove(main_menu.get_my_main_menu_notes_box(), ypos, xpos); 
                 wrefresh(main_menu.get_my_main_menu_notes_box());
