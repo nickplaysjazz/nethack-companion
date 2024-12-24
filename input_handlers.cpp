@@ -47,6 +47,16 @@ int main_menu_action_handler(MainMenu & main_menu, ProfileMenu & profile_menu, S
             {},
             {}
         );
+    } else if (ch == int('z')) {
+        // wand engrave
+        WINDOW *my_engrave_win = NULL;
+        main_menu.create_popup_long(
+            main_menu,
+            my_engrave_win,
+            engrave_list,
+            {},
+            {}
+        );
     }
     return 1; 
 }

@@ -40,21 +40,19 @@ The FIGlet ASCII font "Standard" was created by Glenn Chappell & Ian Chai 3/93 b
 Version 1.0: 
 - Handle resizing window, or preventing window resizing. (This may be impossible with ncurses, need to look into this)
 - List of edible/inedible creatures (and add'l effects on eating)
-- Table of wand engrave results
-- Better price list handling (if list is too long, it just spills onto a second table. Can we make it the table double-column instead?). Default "being_duped" state is TRUE, but should probably be false. 
-- Prevent creating a file with only spaces in name
+- Better price list handling (if list is too long, it just spills onto a second table. Can we make it the table double-column instead?). 
 - Prayer timeout counter with % chance
 
 Stretch goals:
-- User-defined checklist? 
-- Better notes section handling (functional delete key, word wrap-around, typing before a set of words pushes those words, vertical scrolling, etc.)
-- NetHack message lookup menu
+- Checklist -- user can add items and check them off? 
+- Better notes section handling (functioning delete key, word bumps to next line when reaching end of line, typing/deleting before a set of words moves words, maybe even vertical scrolling, etc.)
+- NetHack message lookup menu (maybe just 'you feel' & 'you hear' messages?)
 - Sink ring ID table
 - Display start date of run
 - Speedrun timer
 - Input file improvements (use checksum on input file, use binary file for inputs/maybe json, use istream c++ features)
 - Create help button with "?" that shows controls
-- Ability to change filename
+- Ability to change filename. Chop off prepended spaces in file names. Prevent overwriting of file names. 
 - Perhaps name can include the NetHack VAL-DWA-LAW-etc. notation. Could also pregen intrinsics from this? 
 - Handle capital keyboard inputs versus lowercase?
 - C++ improvements: use constexpr on utilities, use arrays instead of only vectors, double-check passing by copying in functions

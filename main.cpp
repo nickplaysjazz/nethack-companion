@@ -63,6 +63,8 @@ int main() {
     init_pair(7, COLOR_BLUE, COLOR_BLACK);
     // xp 
     init_pair(8, COLOR_WHITE, COLOR_BLACK);
+    // wand engrave
+    init_pair(9, COLOR_MAGENTA, COLOR_BLACK);
 
     // if needed, create /data/ folder
     create_data_folder();
