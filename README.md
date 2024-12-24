@@ -40,7 +40,6 @@ The FIGlet ASCII font "Standard" was created by Glenn Chappell & Ian Chai 3/93 b
 Version 1.0: 
 - Handle resizing window, or preventing window resizing. (This may be impossible with ncurses, need to look into this)
 - List of edible/inedible creatures (and add'l effects on eating)
-- Table of wand engrave results
 - Better price list handling (if list is too long, it just spills onto a second table. Can we make it the table double-column instead?). 
 - Prayer timeout counter with % chance
 
