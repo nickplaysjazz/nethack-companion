@@ -41,7 +41,6 @@ Version 1.0:
 - Handle resizing window, or preventing window resizing. (This may be impossible with ncurses, need to look into this)
 - Notes section should allow periods, colons, slashes, and other special characters which are forbidden in filenames. 
 - List of edible/inedible creatures (and add'l effects on eating)
-- Table of XP to level up
 - Table of wand engrave results
 - Better price list handling (if list is too long, it just spills onto a second table. Can we make it the table double-column instead?). Default "being_duped" state is TRUE, but should probably be false. 
 - Prevent creating a file with only spaces in name

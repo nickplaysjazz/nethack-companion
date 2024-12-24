@@ -37,6 +37,16 @@ int main_menu_action_handler(MainMenu & main_menu, ProfileMenu & profile_menu, S
         my_sokoban.init_game();
 
         return 2;
+    } else if (ch == int('x')) {
+        // xp level
+        WINDOW * my_xp_window = NULL;
+        main_menu.create_popup_long(
+            main_menu,
+            my_xp_window, 
+            xp_to_level,
+            {},
+            {}
+        );
     }
     return 1; 
 }

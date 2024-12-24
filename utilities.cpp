@@ -383,6 +383,13 @@ std::vector<std::vector<std::string>> items_by_prices = {
      "     cancellation"}
 };
 
+std::vector<std::string> xp_to_level = {
+    "Lvl 1    0", "Lvl 2    20", "Lvl 3    40", "Lvl 4    80", "Lvl 5    160", "Lvl 6    320", "Lvl 7    640", "Lvl 8    1,280", "Lvl 9    2,560", "Lvl 10   5,120", 
+    "Lvl 11   10,000", "Lvl 12   20,000", "Lvl 13   40,000", "Lvl 14   80,000", "Lvl 15   160,000", "Lvl 16   320,000", "Lvl 17   640,000", "Lvl 18   1,280,000", 
+    "Lvl 19   2,560,000", "Lvl 20   5,120,000", "Lvl 21   10,000,000", "Lvl 22   20,000,000", "Lvl 23   30,000,000", "Lvl 24   40,000,000", "Lvl 25   50,000,000", 
+    "Lvl 26   60,000,000", "Lvl 27   70,000,000", "Lvl 28   80,000,000", "Lvl 29   90,000,000", "Lvl 30   100,000,000"
+};
+
 std::vector<std::string> sokoban_1a = {
     "-------- ------ ",
     "|<|>...---....| ",

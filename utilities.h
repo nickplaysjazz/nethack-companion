@@ -13,6 +13,7 @@ extern std::vector<int> legal_special_characters;
 extern std::vector<std::string> properties_list;
 extern std::array<int, 16> item_base_prices;
 extern std::vector<std::vector<std::string>> items_by_prices; 
+extern std::vector<std::string> xp_to_level;
 
 extern std::vector<std::string> sokoban_1a;
 extern std::vector<std::string> sokoban_1b;

@@ -58,6 +58,8 @@ int main() {
     init_pair(6, COLOR_RED, COLOR_BLACK);
     // sokoban
     init_pair(7, COLOR_BLUE, COLOR_BLACK);
+    // xp 
+    init_pair(8, COLOR_WHITE, COLOR_BLACK);
 
     // if needed, create /data/ folder
     create_data_folder();

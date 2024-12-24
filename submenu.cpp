@@ -170,11 +170,18 @@ void MainMenu::render_menu(std::string file_title, Savefile & my_save) {
 
     render_prices(my_save);
 
-    // sokoban, could make this a subwin
+    // sokoban
     std::string sokoban_str = "s) SOKOBAN PRACTICE";
     wattron(my_win, COLOR_PAIR(7));
     mvwaddstr(my_win, 26, 1, sokoban_str.c_str());
     wattroff(my_win, COLOR_PAIR(7));
+
+    // xp
+    std::string xp_str = "x) XP TO LVL";
+    wattron(my_win, COLOR_PAIR(8));
+    mvwaddstr(my_win, 27, 1, xp_str.c_str());
+    wattroff(my_win, COLOR_PAIR(8));
+
 }
 
 void MainMenu::render_intrinsics_menu_default(Savefile & my_save) {
