@@ -303,7 +303,7 @@ std::string Menu::create_text_prompt(
                 wrefresh(my_text_prompt_name);
                 ++xpos;
             } 
-        } else if (ch == 8) {
+        } else if (ch == 8 || ch == KEY_BACKSPACE) {
             if (xpos-1 >= 1) {
                 mvwaddch(my_text_prompt_name, 2, xpos-1, ' ');
                 wrefresh(my_text_prompt_name);
