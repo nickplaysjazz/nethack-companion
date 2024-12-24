@@ -182,6 +182,12 @@ void MainMenu::render_menu(std::string file_title, Savefile & my_save) {
     mvwaddstr(my_win, 27, 1, xp_str.c_str());
     wattroff(my_win, COLOR_PAIR(8));
 
+    // wand engrave
+    std::string engrave_str = "z) WAND ENGRAVE ID";
+    wattron(my_win, COLOR_PAIR(9));
+    mvwaddstr(my_win, 28, 1, engrave_str.c_str());
+    wattroff(my_win, COLOR_PAIR(9));
+
 }
 
 void MainMenu::render_intrinsics_menu_default(Savefile & my_save) {

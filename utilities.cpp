@@ -391,6 +391,38 @@ std::vector<std::string> xp_to_level = {
     "Lvl 26   60,000,000", "Lvl 27   70,000,000", "Lvl 28   80,000,000", "Lvl 29   90,000,000", "Lvl 30   100,000,000"
 };
 
+std::vector<std::string> engrave_list = {
+    "A few ice cubes drop from the wand. ........................... cold",
+    "A lit field surrounds you! .................................... light",
+    "Gravel flies up from the floor! ............................... digging",
+    "Lightning arcs from the wand. You are blinded by the flash! ... lightning",
+    "No message or effect. ......................................... locking",
+    "                                                                nothing ",
+    "                                                                opening ",
+    "                                                                probing ",
+    "                                                                secret door detection ",
+    "                                                                undead turning ",
+    "                                                                wand is cancelled (x:-1) ",
+    "The <floor> is riddled by bullet holes! ....................... magic missile",
+    "The bugs on the <floor> slow down! ............................ slow monster",
+    "The bugs on the <floor> speed up! ............................. speed monster",
+    "The bugs on the <floor> stop moving! .......................... death",
+    "                                                                sleep",
+    "The engraving now reads: <random message> * ................... polymorph",
+    "The engraving on the <floor> vanishes! * ...................... cancellation",
+    "                              (if existing engraving is burned) cold",
+    "                                                                make invisible",
+    "                        (engraving is moved elsewhere in level) teleportation",
+    "The wand is too worn out to engrave. .......................... wand is exhausted (x:0)",
+    "The wand unsuccessfully fights your attempt to write! ......... striking",
+    "",
+    "                          * No message if no existing engraving ",
+    "        Note that wands of digging, fire, and lightning self-ID "
+    //"This <wand> is a wand of digging! ............................. digging",
+    //"This <wand> is a wand of fire! ................................ fire",
+    //"This <wand> is a wand of lightning! ........................... lightning",
+};
+
 std::vector<std::string> sokoban_1a = {
     "-------- ------ ",
     "|<|>...---....| ",
