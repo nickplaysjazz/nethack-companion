@@ -169,3 +169,14 @@ int create_file(std::string filename) {
 void delete_file(const std::string & filename) {
     std::remove(filename.c_str());
 }
+
+void create_data_folder() {
+    const std::string folderName = "data";
+    std::filesystem::path folderPath = folderName;
+
+    if (std::filesystem::exists(folderPath) && std::filesystem::is_directory(folderPath)) {
+        return;
+    } else {
+        std::filesystem::create_directory(folderPath);
+    }
+}

@@ -100,6 +100,9 @@ void Sokoban::render_game_map() {
         mvwaddstr(my_sokoban_play, sizey/2 - (int)sokoban_map.size()/2 + i, sizex/2 - sokoban_map[i].length()/2 - 28/2, sokoban_map[i].c_str());
     }
     // do not refresh play window, since rendering the player always occurs next & refreshes map!
+
+    std::string turn_msg = "Turns: " + std::to_string(turn_count);
+    mvwaddstr(my_sokoban_play, 1, sizex - 30 - turn_msg.length(), turn_msg.c_str());
 }
 
 void Sokoban::enter_level(int lvl_id) {
@@ -154,16 +157,18 @@ void Sokoban::attempt_player_move(int dy, int dx) {
             sokoban_map[map_y+dy][map_x+dx] = '.';
             player_pos[0] = player_pos[0] + dy;
             player_pos[1] = player_pos[1] + dx;
+            ++turn_count;
             return;
         }
         // otherwise push boulder
         sokoban_map[map_y+dy][map_x+dx]= '.';
         sokoban_map[map_y+2*dy][map_x+2*dx] = '0';
+        ++turn_count;
     } 
+    ++turn_count;
     player_pos[0] = player_pos[0] + dy;
     player_pos[1] = player_pos[1] + dx;
-    // check for exiting level
-    
+    // check for exiting level?
 }
 
 int Sokoban::sokoban_action_handler(MainMenu & main_menu, Savefile & my_save, int ch) {
@@ -181,6 +186,7 @@ int Sokoban::sokoban_action_handler(MainMenu & main_menu, Savefile & my_save, in
             return 1;
         } else if ((ch >= int('a') && ch <= int('h')) || (ch == int('1')) || (ch == int('2'))) {
             // change level
+            turn_count = 0;
             if (ch == int('1')) {
                 is_flip_horiz = !is_flip_horiz;
             } else if (ch == int('2')) {

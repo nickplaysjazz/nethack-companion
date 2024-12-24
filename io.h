@@ -11,5 +11,6 @@ std::vector<std::string> get_filepaths(const std::string & dirname);
 Savefile try_load_file(std::string & filename, Savefile & my_savefile);
 int save_file(const std::string & filename, Savefile & file_to_save);
 int create_file(std::string filename);
+void create_data_folder();
 
 #endif

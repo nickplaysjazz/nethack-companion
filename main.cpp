@@ -59,6 +59,9 @@ int main() {
     // sokoban
     init_pair(7, COLOR_BLUE, COLOR_BLACK);
 
+    // if needed, create /data/ folder
+    create_data_folder();
+
     // Read in file names now
     std::vector<std::string> character_filenames = get_filenames("data");
 

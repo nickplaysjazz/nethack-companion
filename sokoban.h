@@ -21,6 +21,8 @@ class Sokoban
         bool is_flip_horiz = false;
         bool is_flip_vert = false;
 
+        int turn_count = 0;
+
         std::vector<std::string> sokoban_map;
 
     public: 
