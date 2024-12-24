@@ -113,7 +113,7 @@ int profile_menu_action_handler(ProfileMenu & profile_menu, MainMenu & main_menu
             std::vector<int> {27}
         );
 
-        if (filename != "") {
+        if (filename != "" && !std::all_of(filename.begin(),filename.end(),isspace)) {
             create_file(filename);
         }
         profile_menu.set_options_list(get_filenames("data"));
