@@ -163,7 +163,6 @@ void Sokoban::attempt_player_move(int dy, int dx) {
         // otherwise push boulder
         sokoban_map[map_y+dy][map_x+dx]= '.';
         sokoban_map[map_y+2*dy][map_x+2*dx] = '0';
-        ++turn_count;
     } 
     ++turn_count;
     player_pos[0] = player_pos[0] + dy;
