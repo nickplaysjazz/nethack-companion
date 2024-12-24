@@ -159,6 +159,7 @@ char keycode_to_char(int keycode) {
 }
 
 std::vector<int> legal_special_characters = {32,33,35,36,37,38,39,40,41,43,44,45,59,61,64,91,93,94,95,96,123,125,126};
+std::vector<int> notes_special_characters = {32,33,63,64,35,36,37,94,38,42,40,41,95,45,43,61,91,93,123,125,124,92,58,59,39,34,60,62,44,46,47,96,126};
 
 // important intrinsics & extrinsics
 std::vector<std::string> properties_list = {
