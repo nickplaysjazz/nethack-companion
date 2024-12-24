@@ -27,6 +27,9 @@ void save_and_exit(int signal_number) {
 }
 
 int main() {
+    // TODO: This is a bandaid, preferably a proper resizing handler will be implemented if possible
+    std::system("mode con: cols=110 lines=32");
+
     // Start curses
 	initscr();
     // Do not print characters that are input by user
