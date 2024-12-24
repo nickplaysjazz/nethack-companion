@@ -130,7 +130,7 @@ void MainMenu::render_menu(std::string file_title, Savefile & my_save) {
     box(my_main_menu_price_ID_box, 0, 0); 
     mvwaddch(my_main_menu_price_ID_box, 0, 0, ACS_TTEE);
     mvwaddch(my_main_menu_price_ID_box, 0, 51, ACS_TTEE);
-    mvwaddch(my_main_menu_price_ID_box, 23, 0, ACS_BTEE);
+    mvwaddch(my_main_menu_price_ID_box, 22, 0, ACS_BTEE);
     mvwaddch(my_main_menu_price_ID_box, 22, 51, ACS_BTEE);
     std::string price_ID_title = "PRICE ID p)";
     wattron(my_main_menu_price_ID_box, COLOR_PAIR(6));
@@ -298,8 +298,8 @@ void MainMenu::render_price_ID_menu_on(Savefile & my_save) {
     mvwaddstr(my_main_menu_price_ID_box, 4, 25, dupe_instr.c_str());
     
     for (int ys = 6; ys <= 21; ++ys) {
-            mvwaddstr(my_main_menu_price_ID_box, ys, 42, num_to_alphabet(ys - 6).c_str());
-            waddstr(my_main_menu_price_ID_box, ") "); 
+        mvwaddstr(my_main_menu_price_ID_box, ys, 42, num_to_alphabet(ys - 6).c_str());
+        waddstr(my_main_menu_price_ID_box, ") "); 
     }
 
     // will render in render_prices
