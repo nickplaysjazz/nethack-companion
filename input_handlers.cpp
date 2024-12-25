@@ -178,17 +178,32 @@ int properties_menu_action_handler(MainMenu & main_menu, Savefile & my_save) {
             main_menu.render_intrinsics_menu_off(my_save);
 
             is_inner_loop_running = false;
-        } else if (std::find(properties_buttons.begin(), properties_buttons.end(), ch1) != properties_buttons.end()) {
-            std::vector<bool> save_intrinsics = my_save.get_intrinsics();
+        } else if (std::find(properties_buttons.begin(), properties_buttons.end(), ch1) != properties_buttons.end() || (ch1 == int('S'))) {
+            std::vector<int> save_intrinsics = my_save.get_intrinsics();
 
             // Finding the index of val
             std::vector<int>::iterator it = find(properties_buttons.begin(), properties_buttons.end(), ch1);
             int index = it - properties_buttons.begin();
+            if (ch1 == int('S')) {
+                index = 18;
+            }
 
-            if (save_intrinsics[index] == 0) {
-                save_intrinsics[index] = 1;
+            if (index == 18) {
+                if (ch1 == int('S')) {
+                    if (save_intrinsics[index] > 0) {
+                        --save_intrinsics[index];
+                    }
+                } else if (ch1 == int('s')) {
+                    if (save_intrinsics[index] < 2) {
+                        ++save_intrinsics[index];
+                    }
+                }
             } else {
-                save_intrinsics[index] = 0;
+                if (save_intrinsics[index] == 0) {
+                    save_intrinsics[index] = 1;
+                } else {
+                    save_intrinsics[index] = 0;
+                }
             }
 
             my_save.set_intrinics(save_intrinsics);

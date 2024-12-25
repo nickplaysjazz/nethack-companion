@@ -98,7 +98,12 @@ void MainMenu::render_menu(std::string file_title, Savefile & my_save) {
         if (my_save.get_intrinsics()[i] == 1) {
             wattron(my_main_menu_intrinsics_box, COLOR_PAIR(4));
         }
-        mvwaddstr(my_main_menu_intrinsics_box, 3+i, 4, properties_list[i].c_str());
+        mvwaddstr(my_main_menu_intrinsics_box, 3+i, 5, properties_list[i].c_str());
+        if (i == 18) {
+            // speed
+            std::string speed_num = " " + std::to_string(my_save.get_intrinsics()[i]);
+            mvwaddstr(my_main_menu_intrinsics_box, 3+i, 10, speed_num.c_str());
+        }
         if (my_save.get_intrinsics()[i] == 1) {
             wattroff(my_main_menu_intrinsics_box, COLOR_PAIR(4));
         }
@@ -208,13 +213,17 @@ void MainMenu::render_intrinsics_menu_default(Savefile & my_save) {
 
     int option_count = 0;
     for (std::vector<std::string>::const_iterator it = properties_list.begin(); it != properties_list.end(); ++it) {
-        if (my_save.get_intrinsics()[option_count] == 1) {
+        if (my_save.get_intrinsics()[option_count] >= 1) {
             wattron(my_main_menu_intrinsics_box, COLOR_PAIR(4));
         }
         mvwaddstr(my_main_menu_intrinsics_box, 3+option_count, 1, num_to_alphabet(option_count).c_str());
         waddstr(my_main_menu_intrinsics_box, ") "); 
-        waddstr(my_main_menu_intrinsics_box, it->c_str());
-        if (my_save.get_intrinsics()[option_count] == 1) {
+        mvwaddstr(my_main_menu_intrinsics_box, 3+option_count, 5, it->c_str());
+        if (option_count == 18) {
+            std::string speed_num = " " + std::to_string(my_save.get_intrinsics()[option_count]);
+            mvwaddstr(my_main_menu_intrinsics_box, 3+option_count, 10, speed_num.c_str());
+        }
+        if (my_save.get_intrinsics()[option_count] >= 1) {
             wattroff(my_main_menu_intrinsics_box, COLOR_PAIR(4));
             wattroff(my_main_menu_intrinsics_box, A_STANDOUT);
         }
@@ -227,18 +236,30 @@ void MainMenu::render_intrinsics_menu_default(Savefile & my_save) {
 void MainMenu::render_intrinsics_menu_on(Savefile & my_save) {
     // highlight those already selected
     for (int i = 0; i < (int)properties_list.size(); ++i) {
-        if (my_save.get_intrinsics()[i] == 1) {
+        if (my_save.get_intrinsics()[i] >= 1) {
             wattron(my_main_menu_intrinsics_box, COLOR_PAIR(4));
             wattron(my_main_menu_intrinsics_box, A_STANDOUT);
             mvwaddstr(my_main_menu_intrinsics_box, 3+i, 1, num_to_alphabet(i).c_str());
-            waddstr(my_main_menu_intrinsics_box, ") "); 
-            waddstr(my_main_menu_intrinsics_box, properties_list[i].c_str());
+            waddstr(my_main_menu_intrinsics_box, ")  "); 
+            if (i == 18) {
+                // speed
+                mvwaddstr(my_main_menu_intrinsics_box, 3+i, 1, ((std::string)("S/s)")).c_str());
+                std::string speed_num = " " + std::to_string(my_save.get_intrinsics()[i]);
+                mvwaddstr(my_main_menu_intrinsics_box, 3+i, 10, speed_num.c_str());
+            }
+            mvwaddstr(my_main_menu_intrinsics_box, 3+i, 5, properties_list[i].c_str());
             wattroff(my_main_menu_intrinsics_box, COLOR_PAIR(4));
             wattroff(my_main_menu_intrinsics_box, A_STANDOUT);
         } else {
             mvwaddstr(my_main_menu_intrinsics_box, 3+i, 1, num_to_alphabet(i).c_str());
-            waddstr(my_main_menu_intrinsics_box, ") "); 
-            waddstr(my_main_menu_intrinsics_box, properties_list[i].c_str());
+            waddstr(my_main_menu_intrinsics_box, ")  "); 
+            if (i == 18) {
+                // speed
+                mvwaddstr(my_main_menu_intrinsics_box, 3+i, 1, ((std::string)("S/s)")).c_str());
+                std::string speed_num = " " + std::to_string(my_save.get_intrinsics()[i]);
+                mvwaddstr(my_main_menu_intrinsics_box, 3+i, 10, speed_num.c_str());
+            }
+            mvwaddstr(my_main_menu_intrinsics_box, 3+i, 5, properties_list[i].c_str());
         }
     }
     wrefresh(my_main_menu_intrinsics_box);
@@ -253,12 +274,17 @@ void MainMenu::render_intrinsics_menu_off(Savefile & my_save) {
 
     int option_count = 0;
     for (int i = 0; i < (int)properties_list.size(); ++i) {
-        if (my_save.get_intrinsics()[i] == 1) {
+        if (my_save.get_intrinsics()[i] >= 1) {
             wattron(my_main_menu_intrinsics_box, COLOR_PAIR(4));
         }
-        mvwaddstr(my_main_menu_intrinsics_box, 3+option_count, 1, "   ");
-        waddstr(my_main_menu_intrinsics_box, properties_list[i].c_str());
-        if (my_save.get_intrinsics()[i] == 1) {
+        mvwaddstr(my_main_menu_intrinsics_box, 3+option_count, 1, "    ");
+        mvwaddstr(my_main_menu_intrinsics_box, 3+option_count, 5, properties_list[i].c_str());
+        if (i == 18) {
+            // speed
+            std::string speed_num = " " + std::to_string(my_save.get_intrinsics()[i]);
+            mvwaddstr(my_main_menu_intrinsics_box, 3+i, 10, speed_num.c_str());
+        }
+        if (my_save.get_intrinsics()[i] >= 1) {
             wattroff(my_main_menu_intrinsics_box, COLOR_PAIR(4));
         }
         ++option_count;

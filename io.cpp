@@ -49,13 +49,15 @@ Savefile try_load_file(std::string & filename, Savefile & my_savefile) {
             while (getline(my_file, line)) {
                 if (line_no == 0) {
                     // intrinsics
-                    std::vector<bool> list;
+                    std::vector<int> list;
 
                     for (int i = 0; i < (int)line.length(); ++i) {
                         if (line[i] == '1')  {
                             list.push_back(1);
                         } else if (line[i] == '0') {
                             list.push_back(0);
+                        } else if (line[i] == '2') {
+                            list.push_back(2);
                         }
                     }
 
@@ -129,7 +131,7 @@ int save_file(const std::string & filename, Savefile & file_to_save) {
     my_file.open(filename, std::ofstream::out | std::ofstream::trunc); 
     if (my_file.is_open()) {
         // intrinsics
-        std::vector<bool> file_intrinsics = file_to_save.get_intrinsics();
+        std::vector<int> file_intrinsics = file_to_save.get_intrinsics();
         for (int i = 0; i < (int)properties_list.size(); ++i) {
             my_file<<file_intrinsics[i]<<" ";
         }        

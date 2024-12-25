@@ -39,9 +39,10 @@ The FIGlet ASCII font "Standard" was created by Glenn Chappell & Ian Chai 3/93 b
 ## TO DO
 Version 1.0: 
 - Handle resizing window, or preventing window resizing. (This may be impossible with ncurses, need to look into this)
-- List of edible/inedible creatures (and add'l effects on eating)
+- New menu accessed in lower middle-left: List of edible/inedible creatures (and add'l effects on eating)
 - Better price list handling (if list is too long, it just spills onto a second table. Can we make it the table double-column instead?). 
-- Prayer timeout counter with % chance
+- New submenu in lower middle-right: Prayer timeout counter with % chance
+- Intrinsics improvements: add additional uncommon intrinsics in another menu. Add counters instead of binaries for protection, speed
 
 Stretch goals:
 - Checklist -- user can add items and check them off? 

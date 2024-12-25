@@ -167,7 +167,7 @@ std::vector<std::string> properties_list = {
     //	"amphibiousness",
     "cold resistance",
     //	"conflict",
-    "disintegration resistance",
+    "disintegration resist.",
     "fire resistance",
     //	"food appraisal",
     //	"hunger",
