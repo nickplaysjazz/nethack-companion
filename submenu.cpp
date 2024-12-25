@@ -99,6 +99,11 @@ void MainMenu::render_menu(std::string file_title, Savefile & my_save) {
             wattron(my_main_menu_intrinsics_box, COLOR_PAIR(4));
         }
         mvwaddstr(my_main_menu_intrinsics_box, 3+i, 5, properties_list[i].c_str());
+        if (i == 7) {
+            // magic cancellation
+            std::string mc_num = " " + std::to_string(my_save.get_intrinsics()[i]);
+            mvwaddstr(my_main_menu_intrinsics_box, 3+i, 23, mc_num.c_str());
+        }
         if (i == 18) {
             // speed
             std::string speed_num = " " + std::to_string(my_save.get_intrinsics()[i]);
@@ -219,7 +224,13 @@ void MainMenu::render_intrinsics_menu_default(Savefile & my_save) {
         mvwaddstr(my_main_menu_intrinsics_box, 3+option_count, 1, num_to_alphabet(option_count).c_str());
         waddstr(my_main_menu_intrinsics_box, ") "); 
         mvwaddstr(my_main_menu_intrinsics_box, 3+option_count, 5, it->c_str());
+        if (option_count == 7) {
+            // magic cancellation
+            std::string mc_num = " " + std::to_string(my_save.get_intrinsics()[option_count]);
+            mvwaddstr(my_main_menu_intrinsics_box, 3+option_count, 23, mc_num.c_str());
+        }
         if (option_count == 18) {
+            //speed
             std::string speed_num = " " + std::to_string(my_save.get_intrinsics()[option_count]);
             mvwaddstr(my_main_menu_intrinsics_box, 3+option_count, 10, speed_num.c_str());
         }
@@ -241,6 +252,12 @@ void MainMenu::render_intrinsics_menu_on(Savefile & my_save) {
             wattron(my_main_menu_intrinsics_box, A_STANDOUT);
             mvwaddstr(my_main_menu_intrinsics_box, 3+i, 1, num_to_alphabet(i).c_str());
             waddstr(my_main_menu_intrinsics_box, ")  "); 
+            if (i == 7) {
+                // magic cancellation
+                mvwaddstr(my_main_menu_intrinsics_box, 3+i, 1, ((std::string)("H/h)")).c_str());
+                std::string mc_num = " " + std::to_string(my_save.get_intrinsics()[i]);
+                mvwaddstr(my_main_menu_intrinsics_box, 3+i, 23, mc_num.c_str());
+            }
             if (i == 18) {
                 // speed
                 mvwaddstr(my_main_menu_intrinsics_box, 3+i, 1, ((std::string)("S/s)")).c_str());
@@ -253,6 +270,12 @@ void MainMenu::render_intrinsics_menu_on(Savefile & my_save) {
         } else {
             mvwaddstr(my_main_menu_intrinsics_box, 3+i, 1, num_to_alphabet(i).c_str());
             waddstr(my_main_menu_intrinsics_box, ")  "); 
+            if (i == 7) {
+                // magic cancellation
+                mvwaddstr(my_main_menu_intrinsics_box, 3+i, 1, ((std::string)("H/h)")).c_str());
+                std::string mc_num = " " + std::to_string(my_save.get_intrinsics()[i]);
+                mvwaddstr(my_main_menu_intrinsics_box, 3+i, 23, mc_num.c_str());
+            }
             if (i == 18) {
                 // speed
                 mvwaddstr(my_main_menu_intrinsics_box, 3+i, 1, ((std::string)("S/s)")).c_str());
@@ -279,6 +302,11 @@ void MainMenu::render_intrinsics_menu_off(Savefile & my_save) {
         }
         mvwaddstr(my_main_menu_intrinsics_box, 3+option_count, 1, "    ");
         mvwaddstr(my_main_menu_intrinsics_box, 3+option_count, 5, properties_list[i].c_str());
+        if (i == 7) {
+            // magic cancellation
+            std::string mc_num = " " + std::to_string(my_save.get_intrinsics()[i]);
+            mvwaddstr(my_main_menu_intrinsics_box, 3+i, 23, mc_num.c_str());
+        }
         if (i == 18) {
             // speed
             std::string speed_num = " " + std::to_string(my_save.get_intrinsics()[i]);
