@@ -275,6 +275,11 @@ void MainMenu::render_intrinsics_menu_on(Savefile & my_save) {
                 mvwaddstr(my_main_menu_intrinsics_box, 3+i, 1, ((std::string)("L/l)")).c_str());
                 std::string prot_num = " " + std::to_string(my_save.get_intrinsics()[i]);
                 mvwaddstr(my_main_menu_intrinsics_box, 3+i, 15, prot_num.c_str());
+                wattroff(my_main_menu_intrinsics_box, COLOR_PAIR(4));
+                wattroff(my_main_menu_intrinsics_box, A_STANDOUT);
+                waddstr(my_main_menu_intrinsics_box, ((std::string)" ").c_str());
+                wattron(my_main_menu_intrinsics_box, COLOR_PAIR(4));
+                wattron(my_main_menu_intrinsics_box, A_STANDOUT);
             }
             mvwaddstr(my_main_menu_intrinsics_box, 3+i, 5, properties_list[i].c_str());
             wattroff(my_main_menu_intrinsics_box, COLOR_PAIR(4));
