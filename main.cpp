@@ -52,7 +52,7 @@ int main() {
     init_pair(1, COLOR_WHITE, COLOR_BLACK);
     // subbox color
     init_pair(2, COLOR_MAGENTA, COLOR_BLACK);
-    // character title color
+    // character title color, profile page title
     init_pair(3, COLOR_CYAN, COLOR_BLACK);
     // properties color
     init_pair(4, COLOR_YELLOW, COLOR_BLACK);
@@ -61,11 +61,11 @@ int main() {
     // price ID color
     init_pair(6, COLOR_RED, COLOR_BLACK);
     // sokoban
-    init_pair(7, COLOR_BLUE, COLOR_BLACK);
+    //init_pair(7, COLOR_BLUE, COLOR_BLACK);
     // xp 
-    init_pair(8, COLOR_WHITE, COLOR_BLACK);
+    //init_pair(8, COLOR_WHITE, COLOR_BLACK);
     // wand engrave
-    init_pair(9, COLOR_MAGENTA, COLOR_BLACK);
+    //init_pair(9, COLOR_MAGENTA, COLOR_BLACK);
 
     // if needed, create /data/ folder
     create_data_folder();

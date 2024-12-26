@@ -186,21 +186,21 @@ void MainMenu::render_menu(std::string file_title, Savefile & my_save) {
 
     // sokoban
     std::string sokoban_str = "s) SOKOBAN PRACTICE";
-    wattron(my_win, COLOR_PAIR(7));
+    wattron(my_win, COLOR_PAIR(3));
     mvwaddstr(my_win, 26, 31, sokoban_str.c_str());
-    wattroff(my_win, COLOR_PAIR(7));
+    wattroff(my_win, COLOR_PAIR(3));
 
     // xp
     std::string xp_str = "x) XP TO LVL";
-    wattron(my_win, COLOR_PAIR(8));
+    wattron(my_win, COLOR_PAIR(3));
     mvwaddstr(my_win, 27, 31, xp_str.c_str());
-    wattroff(my_win, COLOR_PAIR(8));
+    wattroff(my_win, COLOR_PAIR(3));
 
     // wand engrave
     std::string engrave_str = "z) WAND ENGRAVE ID";
-    wattron(my_win, COLOR_PAIR(9));
+    wattron(my_win, COLOR_PAIR(3));
     mvwaddstr(my_win, 28, 31, engrave_str.c_str());
-    wattroff(my_win, COLOR_PAIR(9));
+    wattroff(my_win, COLOR_PAIR(3));
 
 }
 
@@ -487,11 +487,13 @@ void ProfileMenu::render_menu() {
     int my_col = sizex; 
     box(my_win, 0, 0);
     std::string title_to_print = menu_name; 
+    wattron(my_win, COLOR_PAIR(3));
     for (int i = 0; i < title_lines; ++i) {
         std::string line = title_to_print.substr(0, title_to_print.find("\n"));
         title_to_print.erase(0, title_to_print.find("\n") + ((std::string)"\n").length());
         mvwaddstr(my_win, (int)(my_row/2 -2 - title_lines + i), (int)((my_col - line.length())/2), line.c_str());
     }
+    wattroff(my_win, COLOR_PAIR(3));
     int option_count = 0;
     for (std::vector<std::string>::const_iterator it = options_list.begin(); it != options_list.end(); ++it) {
         mvwaddstr(my_win, (int)(my_row/2 + option_count), (int)(my_col/2 - 5), num_to_alphabet(option_count).c_str());

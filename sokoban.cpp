@@ -60,9 +60,9 @@ void Sokoban::render_sokoban_command_list(int lvl_id) {
     std::vector<std::string> flip_list = {"1) Flip horizontal", "2) Flip vertical"};
     std::string esc_msg = "Esc) Exit";
 
-    wattron(my_sokoban_msg, COLOR_PAIR(7));
+    wattron(my_sokoban_msg, COLOR_PAIR(3));
     mvwaddstr(my_sokoban_msg, 1, cmd_title.size()/2 - 2, cmd_title.c_str());
-    wattroff(my_sokoban_msg, COLOR_PAIR(7));
+    wattroff(my_sokoban_msg, COLOR_PAIR(3));
 
     mvwaddstr(my_sokoban_msg, 4, 1, lvl_select.c_str());
     for (int i = 0; i < (int)lvl_list.size(); ++i) {
