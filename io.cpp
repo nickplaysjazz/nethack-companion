@@ -55,7 +55,7 @@ Savefile try_load_file(std::string & filename, Savefile & my_savefile) {
                         if (line[i] == int(' ') || i == 23) {
                             continue;
                         } else {
-                            if (i == 22) {
+                            if (i == 22 && line[i+1] != int(' ')) {
                                 list.push_back((line[i] - int('0'))*10 + line[i+1] - int('0'));
                             } else {
                                 list.push_back(line[i] - int('0')); 
