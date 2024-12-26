@@ -218,7 +218,7 @@ int properties_menu_action_handler(MainMenu & main_menu, Savefile & my_save) {
                         --save_intrinsics[index];
                     }
                 } else if (ch1 == int('l')) {
-                    if (save_intrinsics[index] < 9) {
+                    if (save_intrinsics[index] < 99) {
                         ++save_intrinsics[index];
                     }
                 }
