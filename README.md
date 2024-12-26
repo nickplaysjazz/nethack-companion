@@ -42,7 +42,7 @@ Version 1.0:
 - New menu accessed in lower middle-left: List of edible/inedible creatures (and add'l effects on eating)
 - Better price list handling (if list is too long, it just spills onto a second table. Can we make it the table double-column instead?). 
 - New submenu in lower middle-right: Prayer timeout counter with % chance
-- Intrinsics improvements: add additional uncommon intrinsics in another menu. Add counters instead of binaries for protection, speed
+- Intrinsics improvements: add additional uncommon intrinsics in another menu (protection from shape changers, aggravate monsters, amphibiousness, conflict, food appraisal, hunger, jumping, unbreathing)
 
 Stretch goals:
 - Checklist -- user can add items and check them off? 
@@ -58,3 +58,4 @@ Stretch goals:
 - Handle capital keyboard inputs versus lowercase?
 - C++ improvements: use constexpr on utilities, use arrays instead of only vectors, double-check passing by copying in functions
 
+- Extra intrinsics

@@ -95,7 +95,7 @@ void MainMenu::render_menu(std::string file_title, Savefile & my_save) {
     wattroff(my_main_menu_intrinsics_box, COLOR_PAIR(4));
 
     for (int i = 0; i < (int)properties_list.size(); ++i) {
-        if (my_save.get_intrinsics()[i] == 1) {
+        if (my_save.get_intrinsics()[i] >= 1) {
             wattron(my_main_menu_intrinsics_box, COLOR_PAIR(4));
         }
         mvwaddstr(my_main_menu_intrinsics_box, 3+i, 5, properties_list[i].c_str());
@@ -103,15 +103,19 @@ void MainMenu::render_menu(std::string file_title, Savefile & my_save) {
             // magic cancellation
             std::string mc_num = " " + std::to_string(my_save.get_intrinsics()[i]);
             mvwaddstr(my_main_menu_intrinsics_box, 3+i, 23, mc_num.c_str());
-        }
-        if (i == 18) {
+        } else if (i == 18) {
             // speed
             std::string speed_num = " " + std::to_string(my_save.get_intrinsics()[i]);
             mvwaddstr(my_main_menu_intrinsics_box, 3+i, 10, speed_num.c_str());
+        } else if (i == 11) {
+            // protection
+            std::string prot_num = " " + std::to_string(my_save.get_intrinsics()[i]);
+            mvwaddstr(my_main_menu_intrinsics_box, 3+i, 15, prot_num.c_str());
         }
-        if (my_save.get_intrinsics()[i] == 1) {
+        if (my_save.get_intrinsics()[i] >= 1) {
             wattroff(my_main_menu_intrinsics_box, COLOR_PAIR(4));
         }
+        waddstr(my_main_menu_intrinsics_box, ((std::string)(" ")).c_str());
     } 
 
     // notes
@@ -228,16 +232,20 @@ void MainMenu::render_intrinsics_menu_default(Savefile & my_save) {
             // magic cancellation
             std::string mc_num = " " + std::to_string(my_save.get_intrinsics()[option_count]);
             mvwaddstr(my_main_menu_intrinsics_box, 3+option_count, 23, mc_num.c_str());
-        }
-        if (option_count == 18) {
+        } else if (option_count == 18) {
             //speed
             std::string speed_num = " " + std::to_string(my_save.get_intrinsics()[option_count]);
             mvwaddstr(my_main_menu_intrinsics_box, 3+option_count, 10, speed_num.c_str());
+        } else if (option_count == 11) {
+            // protection
+            std::string prot_num = " " + std::to_string(my_save.get_intrinsics()[option_count]);
+            mvwaddstr(my_main_menu_intrinsics_box, 3+option_count, 15, prot_num.c_str());
         }
         if (my_save.get_intrinsics()[option_count] >= 1) {
             wattroff(my_main_menu_intrinsics_box, COLOR_PAIR(4));
             wattroff(my_main_menu_intrinsics_box, A_STANDOUT);
         }
+        waddstr(my_main_menu_intrinsics_box, ((std::string)(" ")).c_str());
         ++option_count;
     }
 
@@ -257,12 +265,16 @@ void MainMenu::render_intrinsics_menu_on(Savefile & my_save) {
                 mvwaddstr(my_main_menu_intrinsics_box, 3+i, 1, ((std::string)("H/h)")).c_str());
                 std::string mc_num = " " + std::to_string(my_save.get_intrinsics()[i]);
                 mvwaddstr(my_main_menu_intrinsics_box, 3+i, 23, mc_num.c_str());
-            }
-            if (i == 18) {
+            } else if (i == 18) {
                 // speed
                 mvwaddstr(my_main_menu_intrinsics_box, 3+i, 1, ((std::string)("S/s)")).c_str());
                 std::string speed_num = " " + std::to_string(my_save.get_intrinsics()[i]);
                 mvwaddstr(my_main_menu_intrinsics_box, 3+i, 10, speed_num.c_str());
+            } else if (i == 11) {
+                // protection
+                mvwaddstr(my_main_menu_intrinsics_box, 3+i, 1, ((std::string)("L/l)")).c_str());
+                std::string prot_num = " " + std::to_string(my_save.get_intrinsics()[i]);
+                mvwaddstr(my_main_menu_intrinsics_box, 3+i, 15, prot_num.c_str());
             }
             mvwaddstr(my_main_menu_intrinsics_box, 3+i, 5, properties_list[i].c_str());
             wattroff(my_main_menu_intrinsics_box, COLOR_PAIR(4));
@@ -275,12 +287,16 @@ void MainMenu::render_intrinsics_menu_on(Savefile & my_save) {
                 mvwaddstr(my_main_menu_intrinsics_box, 3+i, 1, ((std::string)("H/h)")).c_str());
                 std::string mc_num = " " + std::to_string(my_save.get_intrinsics()[i]);
                 mvwaddstr(my_main_menu_intrinsics_box, 3+i, 23, mc_num.c_str());
-            }
-            if (i == 18) {
+            } else if (i == 18) {
                 // speed
                 mvwaddstr(my_main_menu_intrinsics_box, 3+i, 1, ((std::string)("S/s)")).c_str());
                 std::string speed_num = " " + std::to_string(my_save.get_intrinsics()[i]);
                 mvwaddstr(my_main_menu_intrinsics_box, 3+i, 10, speed_num.c_str());
+            } else if (i == 11) {
+                // protection
+                mvwaddstr(my_main_menu_intrinsics_box, 3+i, 1, ((std::string)("L/l)")).c_str());
+                std::string prot_num = " " + std::to_string(my_save.get_intrinsics()[i]);
+                mvwaddstr(my_main_menu_intrinsics_box, 3+i, 15, prot_num.c_str());
             }
             mvwaddstr(my_main_menu_intrinsics_box, 3+i, 5, properties_list[i].c_str());
         }
@@ -306,15 +322,19 @@ void MainMenu::render_intrinsics_menu_off(Savefile & my_save) {
             // magic cancellation
             std::string mc_num = " " + std::to_string(my_save.get_intrinsics()[i]);
             mvwaddstr(my_main_menu_intrinsics_box, 3+i, 23, mc_num.c_str());
-        }
-        if (i == 18) {
+        } else if (i == 18) {
             // speed
             std::string speed_num = " " + std::to_string(my_save.get_intrinsics()[i]);
             mvwaddstr(my_main_menu_intrinsics_box, 3+i, 10, speed_num.c_str());
+        } else if (i == 11) {
+            // protection
+            std::string prot_num = " " + std::to_string(my_save.get_intrinsics()[i]);
+            mvwaddstr(my_main_menu_intrinsics_box, 3+i, 15, prot_num.c_str());
         }
         if (my_save.get_intrinsics()[i] >= 1) {
             wattroff(my_main_menu_intrinsics_box, COLOR_PAIR(4));
         }
+        waddstr(my_main_menu_intrinsics_box, ((std::string)(" ")).c_str());
         ++option_count;
     }
 

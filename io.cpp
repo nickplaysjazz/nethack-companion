@@ -52,12 +52,24 @@ Savefile try_load_file(std::string & filename, Savefile & my_savefile) {
                     std::vector<int> list;
 
                     for (int i = 0; i < (int)line.length(); ++i) {
-                        if (line[i] == '1')  {
-                            list.push_back(1);
-                        } else if (line[i] == '0') {
-                            list.push_back(0);
-                        } else if (line[i] == '2') {
-                            list.push_back(2);
+                        // if (i == 12) {
+                        //     // handle protection separately since it has double digits
+                        //     list.push_back((line[i] - int('0'))*10 + (line[i+1] - int('0')));
+                        //     std::cout<<list[i]<<" "<<list[i+1]<<std::endl;
+                        // } else if (i == 13) {
+                        //     continue;
+                        // }
+                        // if (line[i] == '1')  {
+                        //     list.push_back(1);
+                        // } else if (line[i] == '0') {
+                        //     list.push_back(0);
+                        // } else if (line[i] == '2') {
+                        //     list.push_back(2);
+                        // }
+                        if (line[i] == int(' ')) {
+                            continue;
+                        } else {
+                            list.push_back(line[i] - int('0')); 
                         }
                     }
 

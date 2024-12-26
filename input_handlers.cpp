@@ -178,7 +178,7 @@ int properties_menu_action_handler(MainMenu & main_menu, Savefile & my_save) {
             main_menu.render_intrinsics_menu_off(my_save);
 
             is_inner_loop_running = false;
-        } else if (std::find(properties_buttons.begin(), properties_buttons.end(), ch1) != properties_buttons.end() || (ch1 == int('S')) || (ch1 == int('H'))) {
+        } else if (std::find(properties_buttons.begin(), properties_buttons.end(), ch1) != properties_buttons.end() || (ch1 == int('S')) || (ch1 == int('H')) || (ch1 == int('L'))) {
             std::vector<int> save_intrinsics = my_save.get_intrinsics();
 
             // Finding the index of val
@@ -188,6 +188,8 @@ int properties_menu_action_handler(MainMenu & main_menu, Savefile & my_save) {
                 index = 18;
             } else if (ch1 == int('H')) {
                 index = 7;
+            } else if (ch1 == int('L')) {
+                index = 11; 
             }
 
             if (index == 18) {
@@ -207,6 +209,16 @@ int properties_menu_action_handler(MainMenu & main_menu, Savefile & my_save) {
                     }
                 } else if (ch1 == int('h')) {
                     if (save_intrinsics[index] < 3) {
+                        ++save_intrinsics[index];
+                    }
+                }
+            } else if (index == 11) {
+                if (ch1 == int('L')) {
+                    if (save_intrinsics[index] > 0) {
+                        --save_intrinsics[index];
+                    }
+                } else if (ch1 == int('l')) {
+                    if (save_intrinsics[index] < 9) {
                         ++save_intrinsics[index];
                     }
                 }

@@ -66,17 +66,4 @@ class ProfileMenu : public Menu {
         void set_options_list(std::vector<std::string> new_options_list); 
 };
 
-// class IntrinsicMenu
-// {
-//     private:
-//         int sizey, sizex, locy, locx;
-//         WINDOW *my_win;  
-
-//     public: 
-//         IntrinsicMenu(int _sizey, int _sizex, int _locy, int _locx);
-//         void open_menu();
-//         void close_menu();
-//         //bool menu_action_handler(); 
-// };
-
 #endif
