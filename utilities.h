@@ -2,12 +2,14 @@
 #define UTILITIES_H
 
 #include <array>
+#include <cctype>
 #include <string>
 
 extern std::string ascii_title; 
 int count_newlines(const std::string & input_string);
 std::string num_to_alphabet(int input_num);
 char keycode_to_char(int keycode); 
+void make_str_lowercase(std::string & input_string);
 
 extern std::vector<int> legal_special_characters;
 extern std::vector<int> notes_special_characters;
@@ -25,5 +27,8 @@ extern std::vector<std::string> sokoban_3a;
 extern std::vector<std::string> sokoban_3b;
 extern std::vector<std::string> sokoban_4a;
 extern std::vector<std::string> sokoban_4b;
+
+extern std::vector<std::vector<std::string>> monster_list;
+extern std::vector<std::vector<std::string>> monster_benefits_list;
 
 #endif

@@ -45,6 +45,13 @@ class Menu {
             std::vector<int> progress_buttons, 
             std::vector<int> exit_buttons
         );
+        void create_table_filter(
+            Menu & menu_name,
+            WINDOW *my_popup_name,
+            std::string my_table_title,
+            std::vector<std::vector<std::string>> my_rows,
+            std::vector<int> exit_buttons
+        );
         std::string create_text_prompt(
             Menu & menu_name,
             WINDOW *my_text_prompt_name,

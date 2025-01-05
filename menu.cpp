@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <iostream>         // TODO REMOVE
 #include <ncurses/ncurses.h>
 #include <stdexcept>
 #include <string>
@@ -251,6 +252,126 @@ int Menu::create_popup_long(
         }
     }
     return -1;
+}
+
+void Menu::create_table_filter(
+    Menu & menu_name,
+    WINDOW *my_popup_name,
+    std::string my_table_title,
+    std::vector<std::vector<std::string>> my_rows,
+    std::vector<int> exit_buttons
+) {
+    // create popup
+    int my_row = 4; 
+    int my_col = 26;
+    my_popup_name = newwin(my_row, my_col, menu_name.get_size()[0]/2 - my_row/2, menu_name.get_size()[1]/2 - my_col/2);
+    //wbkgdset(my_popup_name, ' ');
+
+    // loop
+    bool is_text_prompt_running = true;
+    int xpos = 1;
+    std::string input_text = "";
+    while (is_text_prompt_running) {
+        // make sure that main screen will be redrawn
+        touchwin(menu_name.get_my_win());
+        touchwin(my_popup_name);
+        
+        // render as many as possible
+        if (input_text != "") {
+            // get filter text
+            std::vector<std::string> words;
+            std::size_t start = 0;
+            std::size_t end;
+            while ((end = input_text.find(' ', start)) != std::string::npos) {
+                std::string return_str = input_text.substr(start, end-start);
+                make_str_lowercase(return_str);
+                if (return_str != "") {
+                    words.push_back(return_str);
+                }
+                start = end + 1;
+            }
+            std::string return_str = input_text.substr(start, end-start);
+            make_str_lowercase(return_str);
+            if (return_str != "") {
+                words.push_back(return_str);
+            }
+
+            std::string words_str = "";
+            for (int i = 0; i < (int)words.size(); ++i) {
+                words_str = words_str + words[i];
+            }
+
+            // get possible items to display
+            std::vector<std::vector<std::string>> display_list;
+            for (int i = 0; i < (int)my_rows.size(); ++i) {
+                std::string row_str = "";
+                for (int j = 0; j < (int)my_rows[i].size(); ++j) {
+                    row_str = row_str + my_rows[i][j];
+                }
+                make_str_lowercase(row_str);
+
+                std::size_t index = row_str.find(words_str);
+
+                if (index != std::string::npos) {
+                    display_list.push_back(my_rows[i]);
+                }         
+            }
+
+            // display possible items
+            int num_rows = std::min((int)display_list.size(), 13);
+            wresize(my_popup_name, num_rows+5, my_col);
+            wattron(my_popup_name, COLOR_PAIR(2));
+            box(my_popup_name,0,0);
+            wattroff(my_popup_name, COLOR_PAIR(2));
+            mvwhline(my_popup_name, 3, 1, 0, my_col-2);
+            mvwaddstr(my_popup_name, 1, 1, my_table_title.c_str());
+            for (int i = 0; i < num_rows; ++i) {
+                wmove(my_popup_name, i+4, 1);
+                for (int j = 0; j < (int)display_list[i].size(); ++j) {
+                   std::string print_str = display_list[i][j] + " ";
+                   waddstr(my_popup_name, print_str.c_str());
+                }            
+            }
+        } else if (input_text == "") {
+            int num_rows = 4;
+            wresize(my_popup_name, num_rows, my_col);
+            wattron(my_popup_name, COLOR_PAIR(2));
+            box(my_popup_name,0,0);
+            wattroff(my_popup_name, COLOR_PAIR(2));
+            mvwaddstr(my_popup_name, 1, 1, my_table_title.c_str());
+        }
+
+        // instead of calling wrefresh twice, can prevent a double window update via the following
+        wnoutrefresh(menu_name.get_my_win());
+        wnoutrefresh(my_popup_name);
+        doupdate();
+
+        int ch = getch();
+        werase(my_popup_name);
+        if (std::find(exit_buttons.begin(), exit_buttons.end(), ch) != exit_buttons.end()) { 
+            werase(my_popup_name);
+            wrefresh(my_popup_name);
+            delwin(my_popup_name);
+            touchwin(menu_name.get_my_win());
+            refresh();
+            wrefresh(menu_name.get_my_win());
+            is_text_prompt_running = false;
+            return;
+        } else if ((ch >= int('a') && ch <= int('z')) || (ch >= int('A') && ch <= int('Z')) || (ch >= int('0') && ch <= int('9')) || (ch == 32) || (std::find(legal_special_characters.begin(), legal_special_characters.end(), ch) != legal_special_characters.end())) {
+            if (xpos+1 <= 25) {
+                input_text = input_text + keycode_to_char(ch); 
+                mvwaddstr(my_popup_name, 2, 1, input_text.c_str());
+                ++xpos;
+            } 
+        } else if (ch == 8 || ch == KEY_BACKSPACE) {
+            if (xpos-1 >= 1) {
+                input_text = input_text.substr(0, input_text.size() - 1); 
+                mvwaddstr(my_popup_name, 2, 1, input_text.c_str());
+                --xpos;
+            }
+        }
+    }
+    return;
 }
 
 std::string Menu::create_text_prompt(

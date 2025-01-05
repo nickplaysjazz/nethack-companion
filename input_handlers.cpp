@@ -57,6 +57,16 @@ int main_menu_action_handler(MainMenu & main_menu, ProfileMenu & profile_menu, S
             {},
             {}
         );
+    } else if (ch == int('m')) {
+        // monster lookup
+        WINDOW *my_monster_lookup = NULL;
+        main_menu.create_table_filter(
+            main_menu,
+            my_monster_lookup,
+            "Enter monster name: ",
+            monster_list,
+            {27}
+        );
     }
     return 1; 
 }
