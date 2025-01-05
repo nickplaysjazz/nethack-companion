@@ -185,7 +185,7 @@ void MainMenu::render_menu(std::string file_title, Savefile & my_save) {
     render_prices(my_save);
 
     // monster list
-    std::string monster_str = "m) MONSTER LOOKUP";
+    std::string monster_str = "m) MONSTER CORPSE EDIBILITY";
     wattron(my_win, COLOR_PAIR(3));
     mvwaddstr(my_win, 26, 31, monster_str.c_str());
     wattroff(my_win, COLOR_PAIR(3));
