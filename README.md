@@ -39,7 +39,6 @@ The FIGlet ASCII font "Standard" was created by Glenn Chappell & Ian Chai 3/93 b
 ## TO DO
 Version 1.0: 
 - Handle resizing window, or preventing window resizing. (This may be impossible with ncurses, need to look into this)
-- New menu accessed in lower middle-left: List of edible/inedible creatures (and add'l effects on eating)
 - Better price list handling (if list is too long, it just spills onto a second table. Can we make it the table double-column instead?). 
 - New submenu in lower middle-right: Prayer timeout counter with % chance
 - Intrinsics improvements: add additional uncommon intrinsics in another menu (protection from shape changers, aggravate monsters, amphibiousness, conflict, food appraisal, hunger, jumping, unbreathing)
@@ -57,3 +56,4 @@ Stretch goals:
 - Perhaps name can include the NetHack VAL-DWA-LAW-etc. notation. Could also pregen intrinsics from this? 
 - Handle capital keyboard inputs versus lowercase?
 - C++ improvements: use constexpr on utilities, use arrays instead of only vectors, double-check passing by copying in functions
+- Edible monster improvements (a little bit cleaner interface, maybe show when something is safe to eat)

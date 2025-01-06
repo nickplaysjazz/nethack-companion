@@ -29,6 +29,5 @@ extern std::vector<std::string> sokoban_4a;
 extern std::vector<std::string> sokoban_4b;
 
 extern std::vector<std::vector<std::string>> monster_list;
-extern std::vector<std::vector<std::string>> monster_benefits_list;
 
 #endif

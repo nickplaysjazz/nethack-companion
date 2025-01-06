@@ -263,7 +263,7 @@ void Menu::create_table_filter(
 ) {
     // create popup
     int my_row = 4; 
-    int my_col = 26;
+    int my_col = 110;
     my_popup_name = newwin(my_row, my_col, menu_name.get_size()[0]/2 - my_row/2, menu_name.get_size()[1]/2 - my_col/2);
     //wbkgdset(my_popup_name, ' ');
 
@@ -328,8 +328,21 @@ void Menu::create_table_filter(
             for (int i = 0; i < num_rows; ++i) {
                 wmove(my_popup_name, i+4, 1);
                 for (int j = 0; j < (int)display_list[i].size(); ++j) {
-                   std::string print_str = display_list[i][j] + " ";
-                   waddstr(my_popup_name, print_str.c_str());
+                    if (display_list[i][j] == "") {
+                        continue;
+                    }
+                    std::string print_str = display_list[i][j] + " ";
+                    if (j == (int)display_list[i].size() - 2) {
+                        wattron(my_popup_name, COLOR_PAIR(5));
+                    } else if (j == (int)display_list[i].size() - 1) {
+                        wattron(my_popup_name, COLOR_PAIR(6));
+                    }
+                    waddstr(my_popup_name, print_str.c_str());
+                    if (j == (int)display_list[i].size() - 2) {
+                        wattroff(my_popup_name, COLOR_PAIR(5));
+                    } else if (j == (int)display_list[i].size() - 1) {
+                        wattroff(my_popup_name, COLOR_PAIR(6));
+                    }
                 }            
             }
         } else if (input_text == "") {
