@@ -753,7 +753,7 @@ std::vector<std::vector<std::string>> monster_list = {
     {"King","Arthur","",""},
     {"kitten","","Aggravate Monster"},
     {"knight","",""},
-    {"kobold","",""},
+    {"kobold","","Poisonous"},
     {"kobold","lord","","Poisonous"},
     {"kobold","mummy","","Poisonous"},
     {"kobold","shaman","","Poisonous"},
