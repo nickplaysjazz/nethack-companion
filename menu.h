@@ -1,7 +1,13 @@
 #ifndef MENU_H
 #define MENU_H
 
+
+#ifdef _WIN32
 #include <ncurses/ncurses.h>
+#elif __linux__
+#include <ncurses.h>
+#endif
+
 #include <string>
 #include <vector>
 

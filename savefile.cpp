@@ -1,4 +1,8 @@
-#include <ncurses\curses.h>
+#ifdef _WIN32
+#include <ncurses/curses.h>
+#elif __linux__
+#include <curses.h>
+#endif
 
 #include "savefile.h"
 #include "utilities.h"

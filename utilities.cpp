@@ -1,7 +1,11 @@
 #include <algorithm>
 #include <array>
 #include <cctype>
+#ifdef _WIN32
 #include <ncurses/curses.h>
+#elif __linux__
+#include <curses.h>
+#endif
 #include <string>
 #include <vector>
 

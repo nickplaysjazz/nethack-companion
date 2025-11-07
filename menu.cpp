@@ -1,6 +1,12 @@
 #include <algorithm>
 #include <iostream>         // TODO REMOVE
+
+#ifdef _WIN32
 #include <ncurses/ncurses.h>
+#elif __linux__
+#include <ncurses.h>
+#endif
+
 #include <stdexcept>
 #include <string>
 #include <vector>

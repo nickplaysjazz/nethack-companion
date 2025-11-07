@@ -1,7 +1,13 @@
 #include <functional>
 #include <csignal>
 #include <iostream>
-#include <ncurses\ncurses.h>
+
+#ifdef _WIN32
+#include <ncurses/ncurses.h>
+#elif __linux__
+#include <ncurses.h>
+#endif
+
 #include <vector>
 
 #include "io.h"
@@ -99,7 +105,7 @@ int main() {
     );
 
     // Catch early termination by closing window.
-    signal(SIGBREAK, save_and_exit);
+    signal(SIGTERM, save_and_exit);
     // Catch early termination by ctrl-c.
     signal(SIGINT, save_and_exit);
 

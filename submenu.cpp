@@ -1,4 +1,10 @@
+
+#ifdef _WIN32
 #include <ncurses/ncurses.h>
+#elif __linux__
+#include <ncurses.h>
+#endif
+
 #include <iostream>
 
 #include "menu.h"

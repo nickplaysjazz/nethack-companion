@@ -1,6 +1,12 @@
 #include <algorithm>
 #include <iostream>
+
+#ifdef _WIN32
 #include <ncurses/ncurses.h>
+#elif __linux__
+#include <ncurses.h>
+#endif
+
 #include <string>
 #include <vector>
 
