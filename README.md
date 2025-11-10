@@ -56,4 +56,4 @@ Stretch goals:
 - Perhaps name can include the NetHack VAL-DWA-LAW-etc. notation. Could also pregen intrinsics from this? 
 - Handle capital keyboard inputs versus lowercase?
 - C++ improvements: use constexpr on utilities, use arrays instead of only vectors, double-check passing by copying in functions
-- Edible monster improvements (a little bit cleaner interface, maybe show when something is safe to eat)
+- Edible monster improvements (a little bit cleaner interface, maybe deliberately show a specific word/symbol when something is safe to eat)

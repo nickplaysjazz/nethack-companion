@@ -2,7 +2,7 @@
 #include <iostream>         // TODO REMOVE
 
 #ifdef _WIN32
-#include <ncurses/ncurses.h>
+#include <ncursesw/ncurses.h>
 #elif __linux__
 #include <ncurses.h>
 #endif
