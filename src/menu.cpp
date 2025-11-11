@@ -382,7 +382,7 @@ void Menu::create_table_filter(
                 mvwaddstr(my_popup_name, 2, 1, input_text.c_str());
                 ++xpos;
             } 
-        } else if (ch == 8 || ch == KEY_BACKSPACE) {
+        } else if (ch == 8 || ch == KEY_BACKSPACE || ch == 127 || ch == int('\b')) {
             if (xpos-1 >= 1) {
                 input_text = input_text.substr(0, input_text.size() - 1); 
                 mvwaddstr(my_popup_name, 2, 1, input_text.c_str());
@@ -443,7 +443,7 @@ std::string Menu::create_text_prompt(
                 wrefresh(my_text_prompt_name);
                 ++xpos;
             } 
-        } else if (ch == 8 || ch == KEY_BACKSPACE) {
+        } else if (ch == 8 || ch == KEY_BACKSPACE || ch == 127 || ch == int('\b')) {
             if (xpos-1 >= 1) {
                 mvwaddch(my_text_prompt_name, 2, xpos-1, ' ');
                 wrefresh(my_text_prompt_name);

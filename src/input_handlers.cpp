@@ -125,7 +125,7 @@ int profile_menu_action_handler(ProfileMenu & profile_menu, MainMenu & main_menu
                 "You have reached the max number of files. Please delete some and try again.",
                 std::vector<std::string> {},
                 std::vector<int> {},
-                std::vector<int> {27, 32, int('n'), int('y'), 10, 8, KEY_BACKSPACE}
+                std::vector<int> {27, 32, int('n'), int('y'), 10, 8, KEY_BACKSPACE, 127, int('\b')}
             );
             (void) result;
             return 0;
@@ -290,7 +290,7 @@ int notes_menu_action_handler(MainMenu & main_menu, Savefile & my_save) {
                 wrefresh(main_menu.get_my_main_menu_notes_box());
                 ++xpos;
             } 
-        } else if (ch1 == KEY_BACKSPACE || ch1 == 8) {
+        } else if (ch1 == KEY_BACKSPACE || ch1 == 127 || ch1 == int('\b') || ch1 == 8) {
             // backspace
             if (xpos-1 >= 1) {
                 mvwaddch(main_menu.get_my_main_menu_notes_box(), ypos, xpos-1, ' ');
