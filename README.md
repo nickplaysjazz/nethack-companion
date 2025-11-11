@@ -1,38 +1,33 @@
 # nethack-companion
-ASCII ncurses-based NetHack companion to contain useful character information between runs. 
+A simple ASCII ncurses app to contain useful NetHack character information between runs.  
 
-The app will save/load profiles with your characters' intrinsics, a price ID table, a notes section, and a Sokoban practice. 
+With this app, you can keep track of your characters' intrinsics, see a price ID table, take notes, practice Sokoban levels (including 3.7 flips/rotations), and more.
 
 ## Installation
 
-Currently, the NetHack Companion has only been tested on Windows devices. There are two options to use this app:
+On Windows devices, the NetHack Companion app is most easily compiled with a shell such as [MSYS2](https://www.msys2.org/). Linux and Mac users should be able to use their default terminal. 
 
-1) Build files from source (RECOMMENDED)
-First, install [MinGW-w64] (https://www.mingw-w64.org/). 
-Next, install [ncurses](https://invisible-island.net/ncurses/) using MinGW for Windows. 
-Then, navigate to the NetHack Companion app installation directory in your cmd terminal, and compile using the following command:
+The NetHack Companion uses a Makefile for consistent compilation. **Commands within the Makefile optionally may be executed directly in your terminal if you do not wish to install make.**
 
-```bash
-g++ -o NetHack_Companion.exe *.cpp -lncursesw -Wall
-```
+1) Install necessary prerequisite packages.
+Install the following using a package manager such as [pacman](https://www.msys2.org/docs/package-management/) for MSYS2 and Arch Linux, [brew](https://brew.sh/) for Mac, or [apt-get](https://wiki.debian.org/AptCLI) on Debian Linux.
+- A C/C++ compiler such as [gcc](https://www.gcc.gnu.org/) or [Clang](https://www.clang.llvm.org/).
+- The [make](https://www.gnu.org/software/make) command.
+- The [ncurses](https://invisible-island.net/ncurses/) package.
+- The [ncurses-dev](https://invisible-island.net/ncurses/) package.
 
-To compile the executable to run natively on other Windows systems without others needing to install MinGW or ncurses, the following command may work, but it is still being tested:
-
-```bash
-g++ -I/mingw64/include/ncurses -o NetHack_Companion.exe -g *.cpp -lncursesw -L/mingw64/bin -DNCURSES_STATIC
-```
-
-2) Download .exe file directly (NOT RECOMMENDED/SUPPORTED - still testing)
-First, download the pre-compiled .exe (NOT provided yet, still testing!)
-This file has only been reported to run with the .dll files of an ncurses installation present in the working directory of the .exe file. I cannot distribute these .dll files. As such, this installation method is currently not recommended or supported. 
-Creating a working .exe file is still in progress. 
+2) Build the executable 
+Navigate to the NetHack Companion app installation directory in your terminal, and compile using the following command:
+```make```
+This should generate the NetHack_Companion executable.
 
 ## Contributing
 Bug reports via GitHub's issues feature are welcome. When describing an issue, please include a minimal reproducible example, the expected behavior, and the actual behavior. 
 Feature requests are also welcome.
 
 ## Acknowledgments 
-Special thanks to Coderino for conceptualization, code review, and testing. 
+C0D3R1N0 : code review, conceptualization, and testing
+saundersresearch : testing
 
 The FIGlet ASCII font "Standard" was created by Glenn Chappell & Ian Chai 3/93 based on Frank's .sig. The font is used here under a BSD-3-Clause license. For more information, see http://www.figlet.org/. 
 
