@@ -1,5 +1,5 @@
 #ifdef _WIN32
-#include <ncursesw/ncurses.h>
+#include <ncurses/ncurses.h>
 #elif __linux__
 #include <ncurses.h>
 #elif __APPLE__
