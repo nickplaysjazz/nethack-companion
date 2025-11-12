@@ -1,11 +1,14 @@
-#include <algorithm>
-#include <array>
-#include <cctype>
 #ifdef _WIN32
 #include <ncurses/ncurses.h>
 #elif __linux__
 #include <curses.h>
+#elif __APPLE__
+#include <ncurses.h>
 #endif
+
+#include <algorithm>
+#include <array>
+#include <cctype>
 #include <string>
 #include <vector>
 

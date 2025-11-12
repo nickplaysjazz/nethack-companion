@@ -5,9 +5,10 @@
 #ifdef _WIN32
 #include <ncurses/ncurses.h>
 #elif __linux__
+#include <curses.h>
+#elif __APPLE__
 #include <ncurses.h>
 #endif
-
 
 #include "savefile.h"
 #include "submenu.h"

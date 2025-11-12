@@ -2,6 +2,8 @@
 #include <ncurses/ncurses.h>
 #elif __linux__
 #include <curses.h>
+#elif __APPLE__
+#include <ncurses.h>
 #endif
 
 #include "../include/savefile.h"
