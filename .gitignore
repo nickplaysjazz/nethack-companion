@@ -1,7 +1,8 @@
 *.exe
-*.zip
-*.json
+*.x
 *.vscode
-*.dll
 data/*
 Comestibles with Effects.md
+CMakeFiles
+*.cmake
+CMakeCache.txt
