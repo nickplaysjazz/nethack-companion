@@ -119,7 +119,7 @@ Savefile try_load_file(std::string & filename, Savefile & my_savefile) {
         my_file.close();
 
         my_savefile.flip_active_state();
-        std::string my_loc_name = "data\\";
+        std::string my_loc_name = "data/";
         my_savefile.set_filename(my_loc_name.append(filename));
 
         return my_savefile;

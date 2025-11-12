@@ -9,7 +9,7 @@ On Windows devices, the NetHack Companion app is most easily compiled with a she
 
 The NetHack Companion uses CMake for consistent building. 
 
-1) Install necessary prerequisite packages.
+1) **Install necessary prerequisite packages.**
 
 Install the following using a package manager such as [pacman](https://www.msys2.org/docs/package-management/) for MSYS2 and Arch Linux, [brew](https://brew.sh/) for Mac, or [apt-get](https://wiki.debian.org/AptCLI) on Debian Linux.
 - A C/C++ compiler such as [gcc](https://www.gcc.gnu.org/) or [Clang](https://www.clang.llvm.org/).
@@ -18,16 +18,19 @@ Install the following using a package manager such as [pacman](https://www.msys2
 - The [ncurses](https://invisible-island.net/ncurses/) package.
 - The [ncurses-dev](https://invisible-island.net/ncurses/) package.
 
-2) Build the executable 
+2) **Build the executable.**
 
 Navigate to the NetHack Companion app installation directory in your terminal, and build with the following commands:
+
 ```cmake .```
+
 ```make```
 
 This should generate the NetHack_Companion executable.
 
 ## Contributing
 Bug reports via GitHub's issues feature are welcome. When describing an issue, please include a minimal reproducible example, the expected behavior, and the actual behavior. 
+
 Feature requests are also welcome.
 
 ## Acknowledgments 
