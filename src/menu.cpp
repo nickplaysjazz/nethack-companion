@@ -7,7 +7,6 @@
 #endif
 
 #include <algorithm>
-#include <iostream>         // TODO REMOVE
 #include <stdexcept>
 #include <string>
 #include <vector>

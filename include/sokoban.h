@@ -19,7 +19,7 @@ class Sokoban
     private: 
         int sizey, sizex;
         WINDOW *my_sokoban_window;
-        WINDOW *my_level_select = NULL;
+        //WINDOW *my_level_select = NULL;
         WINDOW *my_sokoban_msg = NULL;
         WINDOW *my_sokoban_play = NULL;
         //Player player;
