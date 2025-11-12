@@ -1,7 +1,3 @@
-#include <functional>
-#include <csignal>
-#include <iostream>
-
 #ifdef _WIN32
 #include <ncurses/ncurses.h>
 #elif __linux__
@@ -10,6 +6,9 @@
 #include <ncurses.h>
 #endif
 
+#include <functional>
+#include <csignal>
+#include <iostream>
 #include <vector>
 
 #include "../include/io.h"

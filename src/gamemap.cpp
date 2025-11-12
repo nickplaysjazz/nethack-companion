@@ -1,5 +1,3 @@
-#include <functional>
-
 #ifdef _WIN32
 #include <ncurses/ncurses.h>
 #elif __linux__
@@ -8,6 +6,7 @@
 #include <ncurses.h>
 #endif
 
+#include <functional>
 #include <vector>
 
 #include "../include/gamemap.h"

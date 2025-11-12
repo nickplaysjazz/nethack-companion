@@ -1,6 +1,3 @@
-#include <algorithm>
-#include <iostream>         // TODO REMOVE
-
 #ifdef _WIN32
 #include <ncursesw/ncurses.h>
 #elif __linux__
@@ -9,6 +6,8 @@
 #include <ncurses.h>
 #endif
 
+#include <algorithm>
+#include <iostream>         // TODO REMOVE
 #include <stdexcept>
 #include <string>
 #include <vector>
