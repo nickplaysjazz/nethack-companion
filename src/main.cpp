@@ -138,6 +138,7 @@ int main() {
             case 99:
                 // quit
                 save_and_exit(0);
+                endwin();
                 is_running = false;
                 break;
         }
