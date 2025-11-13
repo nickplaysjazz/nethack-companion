@@ -115,6 +115,12 @@ Savefile try_load_file(std::string & filename, Savefile & my_savefile) {
                 }
                 ++line_no; 
             }
+        } else {
+            // bandaid fix to prevent crashes on linux & mac
+            // for some reason the intrinsics are not initialized properly and so we just hard-code them to be zero
+            // this only loads when the file is blank, so we aren't overriding anything
+            std::vector<int> n_list (properties_list.size(), 0);
+            my_savefile.set_intrinics(n_list);
         }
         my_file.close();
 

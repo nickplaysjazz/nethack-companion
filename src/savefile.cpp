@@ -9,9 +9,11 @@
 #include "../include/savefile.h"
 #include "../include/utilities.h"
 
+#include <iostream>
+
 Savefile::Savefile(
 ) {
-    intrinsics = std::vector<int> (properties_list.size(), 0);
+    intrinsics = std::vector<int> ((int)properties_list.size(), 0);
     notes = std::vector<char> (784, int(' '));
     charisma = 10;
 };
