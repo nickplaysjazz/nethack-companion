@@ -27,7 +27,7 @@ This should generate the NetHack_Companion executable.
 
 ### Optional) **Install the executable.**
 
-Simple execute `make install`!
+Simply execute `make install`!
 
 On Linux, NetHack Companion will be added to the Menu applet under the Games category.
 

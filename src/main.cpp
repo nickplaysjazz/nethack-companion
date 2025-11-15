@@ -37,9 +37,6 @@ void save_and_exit(int signal_number) {
 }
 
 int main() {
-    // TODO: This is a bandaid, preferably a proper resizing handler will be implemented if possible
-    // Reverted. This is causing my terminal WITHOUT resizing to look weird. Need to investigate more
-   // std::system("mode con: cols=110 lines=32");
     #ifdef _WIN32
         HWND console = GetConsoleWindow();
         MoveWindow(console, 100, 100, 920, 551, TRUE);
@@ -119,7 +116,7 @@ int main() {
     Sokoban my_sokoban(
         my_sokoban_win, totrow, totcol
     );
-
+    
     // Catch early termination by closing window.
     signal(SIGTERM, save_and_exit);
     // Catch early termination by ctrl-c.
