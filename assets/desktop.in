@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=NetHack Companion
+Version=1.0
+Comment=A simple ncurses app to contain useful NetHack character information between runs
+Type=Application
+Keywords=Games
+Terminal=true
+Categories=Game
+Exec="@CMAKE_BINARY_DIR@/NetHack_Companion"
+Icon=@CMAKE_SOURCE_DIR@/assets/nhc_icon.xpm

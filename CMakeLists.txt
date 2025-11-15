@@ -11,7 +11,7 @@ file(GLOB SOURCES ${CMAKE_SOURCE_DIR}/src/*.cpp)
 
 set(CMAKE_CXX_FLAGS "-Wall -Wextra -Werror -Wno-unused-parameter")
 
-add_executable(${PROJECT_NAME} ${SOURCES})
+add_executable(${PROJECT_NAME} ${SOURCES} ${CMAKE_SOURCE_DIR}/assets/resources.rc)
 
 if (MSYS OR MINGW)
     message(STATUS "Detected MSYS2/MinGW environment — linking with ncursesw")
@@ -22,6 +22,8 @@ elseif (WIN32)
 elseif (UNIX)
     message(STATUS "Detected Unix-like system — linking with ncurses")
     target_link_libraries(${PROJECT_NAME} ncurses)
+    configure_file("${CMAKE_SOURCE_DIR}/assets/desktop.in" "${CMAKE_SOURCE_DIR}/assets/NetHack_Companion.desktop" @ONLY)
+    install(PROGRAMS "${CMAKE_SOURCE_DIR}/assets/NetHack_Companion.desktop" DESTINATION /home/codi/.local/share/applications)
 else()
     message(WARNING "Unknown platform — defaulting to ncurses")
     target_link_libraries(${PROJECT_NAME} ncurses)
