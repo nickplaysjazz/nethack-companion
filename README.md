@@ -40,7 +40,7 @@ Special thanks to:
 
 The FIGlet ASCII font "Standard" was created by Glenn Chappell & Ian Chai 3/93 based on Frank's .sig. The font is used here under a BSD-3-Clause license. For more information, see http://www.figlet.org/. 
 
-The icon file nhc_icon.xpm is a recoloration of the cornuthaum/dunce cap tile from NetHack. This file is modified and used under the NetHack General Public License, a copy of which is included in the assets/ directory.
+The icon file nhc_icon.xpm is a recoloration of the cornuthaum/dunce cap tile from NetHack. This file is modified and used under the NetHack General Public License, a copy of which is included in the assets/ directory as NH_LICENSE.
 
 ## TO DO
 Version 1.0: 
