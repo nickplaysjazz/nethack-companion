@@ -26,9 +26,9 @@ Savefile my_open_save;
 
 void save_and_exit(int signal_number) {
     // this is where we handle saving and quitting, even abnormally
-   // std::cout << "\nInterrupt signal (" << signal_number << ") received.";
-
-   // TODO: get rid of signal parameter?
+    if (signal_number != 0) {
+        std::cout << "\nInterrupt signal (" << signal_number << ") received!" << std::endl;
+    }
    
     if (my_open_save.is_active()) {
         save_file(my_open_save.get_filename(), my_open_save);
