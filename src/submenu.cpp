@@ -386,7 +386,7 @@ void MainMenu::render_notes_menu_off(Savefile & my_save) {
     mvwaddstr(my_main_menu_notes_box, 1, 15 - notes_title.length()/2, notes_title.c_str());
     wattroff(my_main_menu_notes_box, COLOR_PAIR(5));
 
-    wrefresh(my_main_menu_notes_box);
+    wrefresh(my_main_menu_notes_box);   
 }
 
 void MainMenu::render_price_ID_menu_on(Savefile & my_save) {

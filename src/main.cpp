@@ -40,6 +40,14 @@ int main() {
     // Reverted. This is causing my terminal WITHOUT resizing to look weird. Need to investigate more
    // std::system("mode con: cols=110 lines=32");
 
+    // a weird bug causes Linux, Mac to delay on hitting escape button
+    // because ncurses somewhat handles alt key and escape key with the same code
+    // instead of waiting to check if two buttons are pressed, in which case it's treated as an "alt" button
+    // just have the code move on without checking
+    // if you hit escape and another key rapidly afterwards, you might run into it handling it as alt + another key
+    // but no big deal
+    ESCDELAY = 10;
+
     // Start curses
 	initscr();
     // Do not print characters that are input by user

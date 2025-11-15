@@ -167,7 +167,7 @@ int Menu::create_popup_long(
             wrefresh(my_popup_name);
             delwin(my_popup_name);
             touchwin(menu_name.get_my_win());
-            refresh();
+           //refresh();
             wrefresh(menu_name.get_my_win());
             return -1; 
         } else {
@@ -181,7 +181,7 @@ int Menu::create_popup_long(
                     wrefresh(my_popup_name);
                     delwin(my_popup_name);
                     touchwin(menu_name.get_my_win());
-                    refresh();
+                    //refresh();
                     wrefresh(menu_name.get_my_win());
                     is_inner_loop_running = false;
                     return -1; 
@@ -229,7 +229,7 @@ int Menu::create_popup_long(
                 wrefresh(my_popup_name);
                 delwin(my_popup_name);
                 touchwin(menu_name.get_my_win());
-                refresh();
+                //refresh();
                 wrefresh(menu_name.get_my_win());
                 if (rows_to_get_rid_of < menu_name.get_size()[0]) {
                     return -1; 
@@ -246,7 +246,7 @@ int Menu::create_popup_long(
                         wrefresh(my_popup_name);
                         delwin(my_popup_name);
                         touchwin(menu_name.get_my_win());
-                        refresh();
+                        //refresh();
                         wrefresh(menu_name.get_my_win());
                         is_inner_loop_running = false;
                         return -1; 
@@ -372,7 +372,7 @@ void Menu::create_table_filter(
             wrefresh(my_popup_name);
             delwin(my_popup_name);
             touchwin(menu_name.get_my_win());
-            refresh();
+            //refresh();
             wrefresh(menu_name.get_my_win());
             is_text_prompt_running = false;
             return;
@@ -423,7 +423,7 @@ std::string Menu::create_text_prompt(
             wrefresh(my_text_prompt_name);
             delwin(my_text_prompt_name);
             touchwin(menu_name.get_my_win());
-            refresh();
+            //refresh();
             wrefresh(menu_name.get_my_win());
             is_text_prompt_running = false;
             return "";
@@ -432,7 +432,7 @@ std::string Menu::create_text_prompt(
             wrefresh(my_text_prompt_name);
             delwin(my_text_prompt_name);
             touchwin(menu_name.get_my_win());
-            refresh();
+            //refresh();
             wrefresh(menu_name.get_my_win());
             is_text_prompt_running = false;
             return return_string;
