@@ -42,7 +42,7 @@ int main() {
    // std::system("mode con: cols=110 lines=32");
     #ifdef _WIN32
         HWND console = GetConsoleWindow();
-        MoveWindow(console, 100, 100, 110, 32, TRUE);
+        MoveWindow(console, 100, 100, 920, 551, TRUE);
     #endif
 
     // a weird bug causes Linux, Mac to delay on hitting escape button

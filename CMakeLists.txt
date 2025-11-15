@@ -28,14 +28,23 @@ else()
 endif()
 
 
-if (WIN32 || ${CMAKE_SYSTEM_NAME} STREQUAL "Windows"})
+if (EXISTS "C:/")
+    message(STATUS "Windows-like filesystem: installing to Start Menu")
+    message("${CMAKE_BINARY_DIR}")
     install(CODE "
-        string(REPLACE \"\\\\\" \"\\\\\\\\\" escapedAppData \$ENV{AppData})
+        string(REPLACE \"\\\\\" \"\\\\\\\\\" escapedAppData \$ENV{APPDATA})
+        string(REPLACE \"/c/\" \"C:/\" winBinaryDir ${CMAKE_BINARY_DIR})
         execute_process(
-            COMMAND powershell -Command \"$shell = New-Object -ComObject WScript.Shell; $shortcut = $shell.CreateShortcut('\${escapedAppData}/Microsoft/Windows/Start Menu/Programs/NetHack Companion.lnk'); $shortcut.TargetPath = '${CMAKE_BINARY_DIR}/NetHack_Companion.exe'; $shortcut.Save()\"
+            COMMAND powershell -Command \"
+                $shell = New-Object -ComObject WScript.Shell;
+                $shortcut = $shell.CreateShortcut('\${escapedAppData}/Microsoft/Windows/Start Menu/Programs/NetHack Companion.lnk');
+                $shortcut.TargetPath = '\${winBinaryDir}/NetHack_Companion.exe';
+                $shortcut.Save();
+            \"
         )
     ")
-elseif (UNIX || ${CMAKE_SYSTEM_NAME} STREQUAL "Linux"})
+elseif (EXISTS "~/.local/share/applications")
+    message(STATUS "Linux-like filesystem: installing to ~/.local/share/application")
     configure_file("${CMAKE_SOURCE_DIR}/assets/desktop.in" "${CMAKE_SOURCE_DIR}/assets/NetHack_Companion.desktop" @ONLY)
     install(PROGRAMS "${CMAKE_SOURCE_DIR}/assets/NetHack_Companion.desktop" DESTINATION ~/.local/share/applications)
 endif()
