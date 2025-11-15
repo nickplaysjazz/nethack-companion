@@ -28,14 +28,14 @@ else()
 endif()
 
 
-if (WIN32)
+if (WIN32 || ${CMAKE_SYSTEM_NAME} STREQUAL "Windows"})
     install(CODE "
         string(REPLACE \"\\\\\" \"\\\\\\\\\" escapedAppData \$ENV{AppData})
         execute_process(
             COMMAND powershell -Command \"$shell = New-Object -ComObject WScript.Shell; $shortcut = $shell.CreateShortcut('\${escapedAppData}/Microsoft/Windows/Start Menu/Programs/NetHack Companion.lnk'); $shortcut.TargetPath = '${CMAKE_BINARY_DIR}/NetHack_Companion.exe'; $shortcut.Save()\"
         )
     ")
-elseif (UNIX)
+elseif (UNIX || ${CMAKE_SYSTEM_NAME} STREQUAL "Linux"})
     configure_file("${CMAKE_SOURCE_DIR}/assets/desktop.in" "${CMAKE_SOURCE_DIR}/assets/NetHack_Companion.desktop" @ONLY)
     install(PROGRAMS "${CMAKE_SOURCE_DIR}/assets/NetHack_Companion.desktop" DESTINATION ~/.local/share/applications)
 endif()
