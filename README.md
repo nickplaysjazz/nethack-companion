@@ -1,7 +1,7 @@
 # nethack-companion
 A simple ASCII ncurses app to contain useful NetHack character information between runs.  
 
-With this app, you can keep track of your characters' intrinsics, see a price ID table, take notes, practice Sokoban levels (including 3.7 flips/rotations), and more.
+With this app, you can keep track of your character's intrinsics, see a price ID table, take notes, practice Sokoban levels (including 3.7 flips/rotations), and more.
 
 ## Installation
 
@@ -9,7 +9,7 @@ On Windows devices, the NetHack Companion app is most easily compiled with a she
 
 The NetHack Companion uses CMake for consistent building. 
 
-1) **Install necessary prerequisite packages.**
+### 1) **Install necessary prerequisite packages.**
 
 Install the following using a package manager such as [pacman](https://www.msys2.org/docs/package-management/) for MSYS2 and Arch Linux, [brew](https://brew.sh/) for Mac, or [apt-get](https://wiki.debian.org/AptCLI) on Debian Linux.
 - A C/C++ compiler such as [gcc](https://www.gcc.gnu.org/) or [Clang](https://www.clang.llvm.org/).
@@ -17,15 +17,17 @@ Install the following using a package manager such as [pacman](https://www.msys2
 - The [cmake](https://www.cmake.org/) command.
 - The [ncurses-dev](https://invisible-island.net/ncurses/) package, which may or may not be separate from the ncurses package depending on your OS. You should likely install both, should they be separately available.
 
-2) **Build the executable.**
+### 2) **Build the executable.**
 
-Navigate to the NetHack Companion app installation directory in your terminal, and build with the following commands:
+Navigate to the NetHack Companion repository directory (the same directory this README is in) in your terminal and execute:
 
-```cmake .```
-
-```make```
+`cmake . & make`
 
 This should generate the NetHack_Companion executable.
+
+### Optional) **Install the executable.**
+
+On Linux, executing `make install` will add NetHack Companion to the Menu applet under the Games category.
 
 ## Contributing
 Bug reports via GitHub's issues feature are welcome. When describing an issue, please include a minimal reproducible example, the expected behavior, and the actual behavior. 

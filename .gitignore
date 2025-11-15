@@ -9,4 +9,4 @@ CMakeCache.txt
 Makefile
 NetHack_Companion
 assets/NetHack_Companion.desktop
-build/install_manifest.txt
+**/install_manifest.txt
