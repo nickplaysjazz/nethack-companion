@@ -27,7 +27,11 @@ This should generate the NetHack_Companion executable.
 
 ### Optional) **Install the executable.**
 
-On Linux, executing `make install` will add NetHack Companion to the Menu applet under the Games category.
+Simple execute `make install`!
+
+On Linux, NetHack Companion will be added to the Menu applet under the Games category.
+
+On Windows, a NetHack Companion shortcut will be added to the start menu.
 
 ## Contributing
 Bug reports via GitHub's issues feature are welcome. When describing an issue, please include a minimal reproducible example, the expected behavior, and the actual behavior. 
