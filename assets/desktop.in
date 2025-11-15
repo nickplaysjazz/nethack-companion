@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=NetHack Companion
-Version=0.1
+Version=@CMAKE_PROJECT_VERSION@
 Comment=A simple ncurses app to contain useful NetHack character information between runs
 Type=Application
 Keywords=Games

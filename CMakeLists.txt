@@ -43,7 +43,7 @@ if (EXISTS "C:/")
             \"
         )
     ")
-elseif (EXISTS "~/.local/share/applications")
+elseif (EXISTS "/home/")
     message(STATUS "Linux-like filesystem: installing to ~/.local/share/application")
     configure_file("${CMAKE_SOURCE_DIR}/assets/desktop.in" "${CMAKE_SOURCE_DIR}/assets/NetHack_Companion.desktop" @ONLY)
     install(PROGRAMS "${CMAKE_SOURCE_DIR}/assets/NetHack_Companion.desktop" DESTINATION ~/.local/share/applications)
