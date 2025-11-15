@@ -1,5 +1,6 @@
 #ifdef _WIN32
 #include <ncurses/ncurses.h>
+#include <windows.h>
 #elif __linux__
 #include <ncurses.h>
 #elif __APPLE__
@@ -39,6 +40,10 @@ int main() {
     // TODO: This is a bandaid, preferably a proper resizing handler will be implemented if possible
     // Reverted. This is causing my terminal WITHOUT resizing to look weird. Need to investigate more
    // std::system("mode con: cols=110 lines=32");
+    #ifdef _WIN32
+        HWND console = GetConsoleWindow();
+        MoveWindow(console, 100, 100, 110, 32, TRUE);
+    #endif
 
     // a weird bug causes Linux, Mac to delay on hitting escape button
     // because ncurses somewhat handles alt key and escape key with the same code
