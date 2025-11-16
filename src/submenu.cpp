@@ -380,7 +380,7 @@ void MainMenu::render_notes_menu_on(Savefile & my_save) {
     wrefresh(my_main_menu_notes_box);
 }
 
-void MainMenu::render_notes_menu_off(Savefile & my_save) {
+void MainMenu::render_notes_menu_off() {
     std::string notes_title = "NOTES n)";
     wattron(my_main_menu_notes_box, COLOR_PAIR(5));
     mvwaddstr(my_main_menu_notes_box, 1, 15 - notes_title.length()/2, notes_title.c_str());
@@ -411,7 +411,7 @@ void MainMenu::render_price_ID_menu_on(Savefile & my_save) {
     render_prices(my_save); 
 }
 
-void MainMenu::render_price_ID_menu_off(Savefile & my_save) {
+void MainMenu::render_price_ID_menu_off() {
     std::string price_ID_title = "PRICE ID p)";
     wattron(my_main_menu_price_ID_box, COLOR_PAIR(6));
     mvwaddstr(my_main_menu_price_ID_box, 1, 25 - price_ID_title.length()/2, price_ID_title.c_str());

@@ -282,7 +282,7 @@ int notes_menu_action_handler(MainMenu & main_menu, Savefile & my_save) {
             }        
             my_save.set_notes(notes_panel); 
 
-            main_menu.render_notes_menu_off(my_save);
+            main_menu.render_notes_menu_off();
 
             is_inner_loop_running = false;
         } else if ((ch1 >= int('a') && ch1 <= int('z')) || (ch1 >= int('A') && ch1 <= int('Z')) || (ch1 >= int('0') && ch1 <= int('9')) || (ch1 == 32) || (std::find(notes_special_characters.begin(), notes_special_characters.end(), ch1) != notes_special_characters.end())) {
@@ -358,7 +358,7 @@ int price_ID_menu_action_handler(MainMenu & main_menu, Savefile & my_save) {
 
         if (ch1 == 27) {
             // escape
-            main_menu.render_price_ID_menu_off(my_save);
+            main_menu.render_price_ID_menu_off();
 
             is_inner_loop_running = false;
         } else if (ch1 == 259 || ch1 == 261) {

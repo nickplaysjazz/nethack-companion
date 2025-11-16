@@ -9,7 +9,7 @@ include_directories(${CMAKE_SOURCE_DIR}/include)
 
 file(GLOB SOURCES ${CMAKE_SOURCE_DIR}/src/*.cpp)
 
-set(CMAKE_CXX_FLAGS "-Wall -Wextra -Werror -Wno-unused-parameter")
+set(CMAKE_CXX_FLAGS "-Wall -Wextra -Werror")
 
 add_executable(${PROJECT_NAME} ${SOURCES} ${CMAKE_SOURCE_DIR}/assets/resources.rc)
 
