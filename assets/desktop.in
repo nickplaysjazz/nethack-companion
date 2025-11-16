@@ -5,6 +5,6 @@ Comment=A simple ncurses app to contain useful NetHack character information bet
 Type=Application
 Keywords=Games
 Terminal=false
-Categories=Games
+Categories=Game
 Exec=gnome-terminal --geometry=110x32 -- bash -c '"@CMAKE_BINARY_DIR@/NetHack_Companion"; exec bash & exit'
 Icon=@CMAKE_SOURCE_DIR@/assets/nhc_icon.ico
