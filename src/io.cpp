@@ -5,6 +5,9 @@
 #include <vector>
 #ifdef _WIN32
 #include <libloaderapi.h>
+#elif defined(__linux__)
+#include <unistd.h>
+#include <limits.h>
 #endif
 
 #include "../include/savefile.h"
@@ -13,10 +16,15 @@ std::filesystem::path get_exe_path() {
     #ifdef _WIN32
     char exeStr[MAX_PATH];
     GetModuleFileNameA(NULL, exeStr, MAX_PATH);
+
+    #elif defined(__linux__)
+    char exeStr[PATH_MAX];
+    readlink("/proc/self/exe", exeStr, PATH_MAX - 1);
+
+    #endif
+
     std::filesystem::path exePath(exeStr);
     return exePath.parent_path();
-    // TODO: Add the linux version of this
-    #endif
 }
 
 std::vector<std::string> get_filenames(const std::string & dirname) {
