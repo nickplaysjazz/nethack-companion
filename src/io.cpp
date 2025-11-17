@@ -20,7 +20,7 @@ std::filesystem::path get_exe_path() {
     #elif defined(__linux__)
     char exeStr[PATH_MAX];
     readlink("/proc/self/exe", exeStr, PATH_MAX - 1);
-
+    
     #endif
 
     std::filesystem::path exePath(exeStr);
@@ -147,8 +147,7 @@ Savefile try_load_file(std::string & filename, Savefile & my_savefile) {
         my_file.close();
 
         my_savefile.flip_active_state();
-        std::string my_loc_name = "data/";
-        my_savefile.set_filename(my_loc_name.append(filename));
+        my_savefile.set_filename(filename);
 
         return my_savefile;
     } else {
@@ -158,7 +157,7 @@ Savefile try_load_file(std::string & filename, Savefile & my_savefile) {
 
 int save_file(const std::string & filename, Savefile & file_to_save) {
     std::ofstream my_file;
-    my_file.open(filename, std::ofstream::out | std::ofstream::trunc); 
+    my_file.open(get_exe_path().append("data").append(filename), std::ofstream::out | std::ofstream::trunc);
     if (my_file.is_open()) {
         // intrinsics
         std::vector<int> file_intrinsics = file_to_save.get_intrinsics();
