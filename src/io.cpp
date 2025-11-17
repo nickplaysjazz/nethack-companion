@@ -3,11 +3,24 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#ifdef _WIN32
+#include <libloaderapi.h>
+#endif
 
 #include "../include/savefile.h"
 
+std::filesystem::path get_exe_path() {
+    #ifdef _WIN32
+    char exeStr[MAX_PATH];
+    GetModuleFileNameA(NULL, exeStr, MAX_PATH);
+    std::filesystem::path exePath(exeStr);
+    return exePath.parent_path();
+    // TODO: Add the linux version of this
+    #endif
+}
+
 std::vector<std::string> get_filenames(const std::string & dirname) {
-        std::filesystem::path file_directory =  std::filesystem::current_path().append(dirname) ; 
+        std::filesystem::path file_directory =  get_exe_path().append(dirname); 
         std::vector<std::string> filename_list; 
         for (const auto & file : std::filesystem::directory_iterator(file_directory)) {
             std::string filename = file.path().string(); 
@@ -26,7 +39,8 @@ std::vector<std::string> get_filenames(const std::string & dirname) {
 }
 
 std::vector<std::string> get_filepaths(const std::string & dirname) {
-    std::filesystem::path file_directory =  std::filesystem::current_path().append(dirname) ; 
+
+    std::filesystem::path file_directory =  get_exe_path().append(dirname) ; 
     std::vector<std::string> filepath_list; 
     for (const auto & file : std::filesystem::directory_iterator(file_directory)) {
         std::string filename = file.path().string(); 
@@ -39,7 +53,7 @@ Savefile try_load_file(std::string & filename, Savefile & my_savefile) {
     std::string line;
     std::ifstream my_file (filename);
 
-    std::filesystem::path full_filename =  std::filesystem::current_path().append("data").append(filename); 
+    std::filesystem::path full_filename =  get_exe_path().append("data").append(filename); 
 
     my_file.open(full_filename);
     
@@ -164,7 +178,7 @@ int save_file(const std::string & filename, Savefile & file_to_save) {
 
 int create_file(std::string filename) {
     std::ofstream my_file;
-    std::filesystem::path file_directory =  std::filesystem::current_path().append("data"); 
+    std::filesystem::path file_directory = get_exe_path().append("data"); 
     filename = filename.append(".dat");
     my_file.open(file_directory.append(filename));
     if (my_file.is_open()) {
@@ -181,9 +195,8 @@ void delete_file(const std::string & filename) {
 }
 
 void create_data_folder() {
-    const std::string folderName = "data";
-    std::filesystem::path folderPath = folderName;
-
+    std::filesystem::path folderPath = get_exe_path().append("data");
+    
     if (std::filesystem::exists(folderPath) && std::filesystem::is_directory(folderPath)) {
         return;
     } else {
