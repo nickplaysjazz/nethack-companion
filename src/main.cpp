@@ -37,11 +37,6 @@ void save_and_exit(int signal_number) {
 }
 
 int main() {
-    #ifdef _WIN32
-        HWND console = GetConsoleWindow();
-        MoveWindow(console, 100, 100, 920, 551, TRUE);
-    #endif
-
     // a weird bug causes Linux, Mac to delay on hitting escape button
     // because ncurses somewhat handles alt key and escape key with the same code
     // instead of waiting to check if two buttons are pressed, in which case it's treated as an "alt" button
@@ -49,6 +44,25 @@ int main() {
     // if you hit escape and another key rapidly afterwards, you might run into it handling it as alt + another key
     // but no big deal
     ESCDELAY = 10;
+    int totrow = 32; 
+    int totcol = 110;
+
+    // Set the window size
+    #ifdef _WIN32
+        HWND console = GetConsoleWindow();
+        HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+        CONSOLE_FONT_INFO cfi;
+        COORD fontSize;
+        RECT r;
+        
+        GetWindowRect(console, &r);
+        if (GetCurrentConsoleFont(hOut, FALSE, &cfi))
+            fontSize = GetConsoleFontSize(hOut, cfi.nFont);
+
+        resizeterm(totrow, totcol);
+        // TODO: Magic numbers for 5 & 3? Why??
+        MoveWindow(console, r.left, r.top, fontSize.X * (totcol+5), fontSize.Y * (totrow+3), TRUE);
+    #endif
 
     // Start curses
 	initscr();
@@ -94,8 +108,6 @@ int main() {
 
     // Initialize a GameMap. This will be blank for now
     // in NetHack there are 32 rows; 82 col for main screen and +38 for sidebar
-    int totrow = 32; 
-    int totcol = 110;
     GameMap PlayMap(
         0, totrow, totcol, totrow, totcol
     );
