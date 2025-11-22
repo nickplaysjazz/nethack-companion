@@ -215,6 +215,12 @@ void MainMenu::render_menu(std::string file_title, Savefile & my_save) {
     mvwaddstr(my_win, 29, 31, engrave_str.c_str());
     wattroff(my_win, COLOR_PAIR(3));
 
+    // armor ID
+    std::string armor_ID_str = "a) ARMOR ID";
+    wattron(my_win, COLOR_PAIR(3));
+    mvwaddstr(my_win, 26, 56, armor_ID_str.c_str());
+    wattroff(my_win, COLOR_PAIR(3));
+
 }
 
 void MainMenu::render_intrinsics_menu_default(Savefile & my_save) {

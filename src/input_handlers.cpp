@@ -74,6 +74,16 @@ int main_menu_action_handler(MainMenu & main_menu, ProfileMenu & profile_menu, S
             monster_list,
             {27}
         );
+    } else if (ch == int('a')) {
+        // armor ID
+        WINDOW *my_armor_ID = NULL;
+        main_menu.create_popup_long(
+            main_menu,
+            my_armor_ID,
+            engrave_list, 
+            {},
+            {}
+        );
     }
     return 1; 
 }
