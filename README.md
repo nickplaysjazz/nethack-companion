@@ -25,9 +25,11 @@ Navigate to the NetHack Companion repository directory (the same directory this 
 
 This should generate the NetHack_Companion executable.
 
-### Optional) **Install the executable.**
+### 3) **OPTIONAL: add the executable as an installation.**
 
-Simply execute `make install`!
+After building the executable, navigate to the NetHack Companion repository directory (the same directory this README is in) in your terminal and execute: 
+
+`make install`
 
 On Linux, NetHack Companion will be added to the Menu applet under the Games category.
 
@@ -46,7 +48,7 @@ Special thanks to:
 
 The FIGlet ASCII font "Standard" was created by Glenn Chappell & Ian Chai 3/93 based on Frank's .sig. The font is used here under a BSD-3-Clause license. For more information, see http://www.figlet.org/. 
 
-The icon file nhc_icon.xpm is a recoloration of the cornuthaum/dunce cap tile from NetHack. This file is modified and used under the NetHack General Public License, a copy of which is included in the assets/ directory as NH_LICENSE.
+The icon file nhc_icon.xpm utilizes modified tile files from the vanilla NetHack source code. These file are modified and used under the NetHack General Public License, a copy of which is included in the /assets/ directory as NH_LICENSE.
 
 ## TO DO
 Version 1.0: 
