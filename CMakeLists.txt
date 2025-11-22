@@ -7,6 +7,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 include_directories(${CMAKE_SOURCE_DIR}/include)
 
+find_package(nlohmann_json 3.10.0 REQUIRED)
+
 file(GLOB SOURCES ${CMAKE_SOURCE_DIR}/src/*.cpp)
 
 set(CMAKE_CXX_FLAGS "-Wall -Wextra -Werror")
@@ -26,6 +28,8 @@ else()
     message(WARNING "Unknown platform — defaulting to ncurses")
     target_link_libraries(${PROJECT_NAME} ncurses)
 endif()
+
+target_link_libraries(${PROJECT_NAME} nlohmann_json::nlohmann_json)
 
 
 if (EXISTS "C:/")
