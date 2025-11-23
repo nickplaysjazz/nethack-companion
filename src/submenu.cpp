@@ -193,25 +193,25 @@ void MainMenu::render_menu(std::string file_title, Savefile & my_save) {
     // monster list
     std::string monster_str = "m) MONSTER EDIBILITY";
     wattron(my_win, COLOR_PAIR(3));
-    mvwaddstr(my_win, 26, 31, monster_str.c_str());
+    mvwaddstr(my_win, 16, 31, monster_str.c_str());
     wattroff(my_win, COLOR_PAIR(3));
 
     // sokoban
     std::string sokoban_str = "s) SOKOBAN PRACTICE";
     wattron(my_win, COLOR_PAIR(3));
-    mvwaddstr(my_win, 27, 31, sokoban_str.c_str());
+    mvwaddstr(my_win, 17, 31, sokoban_str.c_str());
     wattroff(my_win, COLOR_PAIR(3));
 
     // xp
     std::string xp_str = "x) XP TO LVL";
     wattron(my_win, COLOR_PAIR(3));
-    mvwaddstr(my_win, 28, 31, xp_str.c_str());
+    mvwaddstr(my_win, 18, 31, xp_str.c_str());
     wattroff(my_win, COLOR_PAIR(3));
 
     // wand engrave
     std::string engrave_str = "z) WAND ENGRAVE ID";
     wattron(my_win, COLOR_PAIR(3));
-    mvwaddstr(my_win, 29, 31, engrave_str.c_str());
+    mvwaddstr(my_win, 19, 31, engrave_str.c_str());
     wattroff(my_win, COLOR_PAIR(3));
 
 }
