@@ -147,18 +147,18 @@ void MainMenu::render_menu(std::string file_title, Savefile & my_save) {
     }
 
     // price ID
-    my_main_menu_price_ID_box = subwin(my_win, 23, 52, 2, 29);
+    my_main_menu_price_ID_box = subwin(my_win, 14, 52, 2, 29);
     box(my_main_menu_price_ID_box, 0, 0); 
     mvwaddch(my_main_menu_price_ID_box, 0, 0, ACS_TTEE);
     mvwaddch(my_main_menu_price_ID_box, 0, 51, ACS_TTEE);
-    mvwaddch(my_main_menu_price_ID_box, 22, 0, ACS_LTEE);
-    mvwaddch(my_main_menu_price_ID_box, 22, 51, ACS_RTEE);
+    mvwaddch(my_main_menu_price_ID_box, 13, 0, ACS_LTEE);
+    mvwaddch(my_main_menu_price_ID_box, 13, 51, ACS_RTEE);
     std::string price_ID_title = "PRICE ID p)";
     wattron(my_main_menu_price_ID_box, COLOR_PAIR(6));
     mvwaddstr(my_main_menu_price_ID_box, 1, 25 - price_ID_title.length()/2, price_ID_title.c_str());
     wattroff(my_main_menu_price_ID_box, COLOR_PAIR(6));
 
-    std::string price_ID_cha = "             Ch: ";
+    std::string price_ID_cha = "             Ch: "; //FIXME: Center this
     mvwaddstr(my_main_menu_price_ID_box, 3, 2, price_ID_cha.c_str());
 
     std::string charisma_ch = std::to_string(my_save.get_charisma());
@@ -166,20 +166,21 @@ void MainMenu::render_menu(std::string file_title, Savefile & my_save) {
         charisma_ch = " " + charisma_ch;
     }
     mvwaddstr(get_my_main_menu_price_ID_box(), 3, 19, charisma_ch.c_str());
-    wrefresh(get_my_main_menu_price_ID_box());
-    std::string price_ID_being_duped = "    Being duped? ";
-    mvwaddstr(my_main_menu_price_ID_box, 4, 2, price_ID_being_duped.c_str());
-    std::string price_ID_headings = "  SELL PRICES       BUY PRICES       ITEM LIST";
-    mvwaddstr(my_main_menu_price_ID_box, 5, 2, price_ID_headings.c_str());
-    std::string delimiters = "                                              ";
-    for (int ys = 5; ys <= 21; ++ys) {
-        mvwaddch(my_main_menu_price_ID_box, ys, 18, ACS_VLINE);
-        mvwaddch(my_main_menu_price_ID_box, ys, 35, ACS_VLINE);
-    }
 
-    for (int ys = 6; ys <= 21; ++ys) {
-        mvwaddstr(my_main_menu_price_ID_box, ys, 42, "...");
-    }
+    wrefresh(get_my_main_menu_price_ID_box());
+    std::string price_ID_being_duped = "    Being duped? "; //FIXME: Center this
+    mvwaddstr(my_main_menu_price_ID_box, 4, 2, price_ID_being_duped.c_str());
+    std::string price_ID_headings = "             PRICE(UPCHARGED)[SELL]";
+    mvwaddstr(my_main_menu_price_ID_box, 2, 2, price_ID_headings.c_str());
+    std::string delimiters = "                                              ";
+
+    mvwaddstr(my_main_menu_price_ID_box, 6, 18, "BOOTS (b)");
+    mvwaddstr(my_main_menu_price_ID_box, 7, 18, "CLOAKS (c)");
+    mvwaddstr(my_main_menu_price_ID_box, 8, 18, "SCROLLS (s)");
+    mvwaddstr(my_main_menu_price_ID_box, 9, 18, "SPELLBOOKS (z)");
+    mvwaddstr(my_main_menu_price_ID_box, 10, 18, "POTIONS (p)");
+    mvwaddstr(my_main_menu_price_ID_box, 11, 18, "RINGS (r)");
+    mvwaddstr(my_main_menu_price_ID_box, 12, 18, "WANDS (w)");
 
     if (my_save.get_is_being_duped() == true) {
         std::string print_yes = "YES";
@@ -188,8 +189,6 @@ void MainMenu::render_menu(std::string file_title, Savefile & my_save) {
         std::string print_no = "NO ";
         mvwaddstr(get_my_main_menu_price_ID_box(), 4, 19, print_no.c_str());       
     }
-
-    render_prices(my_save);
 
     // monster list
     std::string monster_str = "m) MONSTER EDIBILITY";
@@ -402,13 +401,14 @@ void MainMenu::render_price_ID_menu_on(Savefile & my_save) {
     std::string dupe_instr = "(use enter key)";
     mvwaddstr(my_main_menu_price_ID_box, 4, 25, dupe_instr.c_str());
     
-    for (int ys = 6; ys <= 21; ++ys) {
-        mvwaddstr(my_main_menu_price_ID_box, ys, 42, num_to_alphabet(ys - 6).c_str());
-        waddstr(my_main_menu_price_ID_box, ") "); 
-    }
+    // for (int ys = 6; ys <= 21; ++ys) {
+    //     mvwaddstr(my_main_menu_price_ID_box, ys, 42, num_to_alphabet(ys - 6).c_str());
+    //     waddstr(my_main_menu_price_ID_box, ") "); 
+    // }
 
     // will render in render_prices
-    render_prices(my_save); 
+    my_save.is_active();
+    wrefresh(my_main_menu_price_ID_box);
 }
 
 void MainMenu::render_price_ID_menu_off() {
@@ -421,54 +421,6 @@ void MainMenu::render_price_ID_menu_off() {
     mvwaddstr(my_main_menu_price_ID_box, 3, 25, cha_instr.c_str());
     std::string dupe_instr = "               ";
     mvwaddstr(my_main_menu_price_ID_box, 4, 25, dupe_instr.c_str());
-
-    for (int ys = 6; ys <= 21; ++ys) {
-        mvwaddstr(my_main_menu_price_ID_box, ys, 42, "...");
-    }
-    wrefresh(my_main_menu_price_ID_box);
-}
-
-void MainMenu::render_prices(Savefile & my_save) {
-    // clear old prices
-    std::string clear = "          ";
-    for (int ys = 0; ys < (int)item_base_prices.size(); ++ys) {
-        mvwaddstr(my_main_menu_price_ID_box, 6+ys, 4, clear.c_str());
-        mvwaddstr(my_main_menu_price_ID_box, 6+ys, 21, clear.c_str());
-    }
-
-    int charisma = my_save.get_charisma();
-    float price_mod;
-    if (charisma <= 5) {
-        price_mod = 2.;
-    } else if (charisma <= 7) {
-        price_mod = 1.5;
-    } else if (charisma <= 10) {
-        price_mod = 1. + (1./3.);
-    } else if (charisma <= 15) {
-        price_mod = 1.;
-    } else if (charisma <= 17) {
-        price_mod = 3./4.;
-    } else if (charisma == 18) {
-        price_mod = 2./3.;
-    } else {
-        price_mod = 1./2.;
-    }
-
-    for (int ys = 0; ys < (int)item_base_prices.size(); ++ys) {
-        float this_price = ((my_save.get_is_being_duped() * (1./3.)) + (1 - my_save.get_is_being_duped()) * (1./2.)) * item_base_prices[ys];
-        mvwaddstr(my_main_menu_price_ID_box, 6+ys, 7 - std::to_string((int)(this_price*(3./4.) + 0.5)).length()/2, std::to_string((int)(this_price*(3./4.) + 0.5)).c_str());
-        waddch(my_main_menu_price_ID_box, ',');
-        waddstr(my_main_menu_price_ID_box, std::to_string((int)(this_price)).c_str());
-    }
-
-    for (int ys = 0; ys < (int)item_base_prices.size(); ++ys) {
-        float this_price = price_mod * item_base_prices[ys];
-        this_price = (my_save.get_is_being_duped())*(4./3.)*this_price + (1 - my_save.get_is_being_duped())*this_price ;
-        int price = (int)this_price;
-        mvwaddstr(my_main_menu_price_ID_box, 6+ys, 24 - std::to_string(price).length()/2, std::to_string(price).c_str());
-        waddch(my_main_menu_price_ID_box, ',');
-        waddstr(my_main_menu_price_ID_box, std::to_string((int)(this_price*(4./3.))).c_str());
-    }
 
     wrefresh(my_main_menu_price_ID_box);
 }

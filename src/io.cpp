@@ -158,7 +158,10 @@ Savefile try_load_file(std::string & filename, Savefile & my_savefile) {
 
 int save_file(const std::string & filename, Savefile & file_to_save) {
     std::ofstream my_file;
-    my_file.open(filename, std::ofstream::out | std::ofstream::trunc); 
+
+    std::filesystem::path full_filename =  get_exe_path().append(filename); 
+    my_file.open(full_filename, std::ofstream::out | std::ofstream::trunc);
+    
     if (my_file.is_open()) {
         // intrinsics
         std::vector<int> file_intrinsics = file_to_save.get_intrinsics();

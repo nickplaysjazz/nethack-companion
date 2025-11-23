@@ -10,6 +10,9 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <fstream>
+#include <nlohmann/json.hpp>
+using json = nlohmann::json;
 
 #include "../include/input_handlers.h"
 #include "../include/io.h"
@@ -66,12 +69,25 @@ int main_menu_action_handler(MainMenu & main_menu, ProfileMenu & profile_menu, S
         );
     } else if (ch == int('m')) {
         // monster lookup
+        std::string filepath(__FILE__);
+        std::ifstream file(filepath.substr(0, filepath.find_last_of("/\\")) + "/../assets/edibility.json");
+        json JSON;
+        file >> JSON;
+        
+        auto json_to_rows = [](json JSON) -> std::vector<std::vector<std::string>> {
+            std::vector<std::vector<std::string>> out = {};
+            for(auto& [key, val] : JSON.items()) {
+                out.push_back({key, val["benefits"], val["detriments"]});
+            }
+            return out;
+        };
+
         WINDOW *my_monster_lookup = NULL;
         main_menu.create_table_filter(
             main_menu,
             my_monster_lookup,
             "Enter monster name: ",
-            monster_list,
+            json_to_rows(JSON),
             {27}
         );
     }
@@ -373,7 +389,7 @@ int price_ID_menu_action_handler(MainMenu & main_menu, Savefile & my_save) {
                     charisma_ch = " " + charisma_ch;
                 }
                 mvwaddstr(main_menu.get_my_main_menu_price_ID_box(), 3, 19, charisma_ch.c_str());
-                main_menu.render_prices(my_save); 
+                wrefresh(main_menu.get_my_main_menu_price_ID_box());
             }
         } else if (ch1 == 258 || ch1 == 260) {
             // down or left arrow
@@ -388,7 +404,7 @@ int price_ID_menu_action_handler(MainMenu & main_menu, Savefile & my_save) {
                 }
 
                 mvwaddstr(main_menu.get_my_main_menu_price_ID_box(), 3, 19, charisma_ch.c_str());
-                main_menu.render_prices(my_save); 
+                wrefresh(main_menu.get_my_main_menu_price_ID_box());
             }
         } else if (ch1 == 10) {
             // enter
@@ -400,19 +416,79 @@ int price_ID_menu_action_handler(MainMenu & main_menu, Savefile & my_save) {
                 std::string print_no = "NO ";
                 mvwaddstr(main_menu.get_my_main_menu_price_ID_box(), 4, 19, print_no.c_str());       
             }
-            main_menu.render_prices(my_save); 
-        } else if (ch1 >= int('a') && ch1 <= int('p')) {
-            WINDOW *my_long_popup = NULL;
+            wrefresh(main_menu.get_my_main_menu_price_ID_box());
+        } else {
+            std::string filepath(__FILE__);
+            std::ifstream file(filepath.substr(0, filepath.find_last_of("/\\")) + "/../assets/prices.json");
+            json JSON;
+            file >> JSON;
             
-            std::vector<int> buttons = {};
-            std::vector<int> buttons2 = {};
-            main_menu.create_popup_long(
-                main_menu, 
-                my_long_popup,
-                items_by_prices[ch1 - int('a')],
-                {},
-                {}
-            );
+            float price_mod = 1. + (my_save.get_is_being_duped() * .33);
+            int charisma = my_save.get_charisma();
+            if (charisma <= 5)
+                price_mod *= 2.;
+            else if (charisma <= 7)
+                price_mod *= 1.5;
+            else if (charisma <= 10)
+                price_mod *= 1.33;
+            else if (charisma <= 15)
+                price_mod *= 1.;
+            else if (charisma <= 17)
+                price_mod *= 3./4.;
+            else if (charisma == 18)
+                price_mod *= 2./3.;
+            else
+                price_mod *= 1./2.;
+            
+            auto json_to_rows = [price_mod](json JSON) -> std::vector<std::string> {
+                std::vector<std::string> out = {};
+                for(auto& [key, val] : JSON.items()) {
+                    int price = ceil(stoi(key) * price_mod);
+
+                    out.push_back(std::to_string(price)+"("+std::to_string((int)(floor(price*1.33)))+")["+std::to_string((int)(stoi(key)*.5))+"]:");
+                    for (std::string item : val.get<std::vector<std::string>>())
+                        out.push_back("   "+item);
+                }
+                return out;
+            };
+            
+            auto do_popup = [json_to_rows, JSON](std::string category, Menu& main_menu) -> void {
+                WINDOW *my_long_popup = NULL;
+                main_menu.create_popup_long(
+                    main_menu, 
+                    my_long_popup,
+                    json_to_rows(JSON[category]),
+                    {},
+                    {}
+                );
+            };
+            switch (ch1)
+            {
+            case int('b'):
+                do_popup("boots", main_menu);
+                break;
+            case int('c'):
+                do_popup("cloaks", main_menu);
+                break;
+            case int('s'):
+                do_popup("scrolls", main_menu);
+                break;
+            case int('z'):
+                do_popup("spellbooks", main_menu);
+                break;
+            case int('p'):
+                do_popup("potions", main_menu);
+                break;
+            case int('w'):
+                do_popup("wands", main_menu);
+                break;
+            case int('r'):
+                do_popup("rings", main_menu);
+                break;
+            
+            default:
+                break;
+            }
         }
     }
     return 1; 
