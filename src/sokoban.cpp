@@ -56,8 +56,8 @@ void Sokoban::close_sokoban_windows() {
 void Sokoban::render_sokoban_command_list(int lvl_id) {
     std::string cmd_title = "SOKOBAN PRACTICE";
     std::string lvl_select = "Select level:";
-    std::vector<std::string> lvl_list = {"a) Level 1a", "b) Level 1b", "c) Level 2a", "d) Level 2b", "e) Level 3a", "f) Level 3b", "g) Level 4a", "h) Level 4b"};
-    std::vector<std::string> flip_list = {"1) Flip horizontal", "2) Flip vertical"};
+    std::vector<std::string> lvl_list = {"1) Level 1a", "2) Level 1b", "3) Level 2a", "4) Level 2b", "5) Level 3a", "6) Level 3b", "7) Level 4a", "8) Level 4b"};
+    std::vector<std::string> flip_list = {"r) Reverse (horiz.)", "f) Flip (vert.)"};
     std::string esc_msg = "Esc) Exit";
 
     wattron(my_sokoban_msg, COLOR_PAIR(3));
@@ -183,16 +183,16 @@ int Sokoban::sokoban_action_handler(MainMenu & main_menu, Savefile & my_save, in
 
             is_running = false;
             return 1;
-        } else if ((ch >= int('a') && ch <= int('h')) || (ch == int('1')) || (ch == int('2'))) {
+        } else if (ch >= int('1') && ch <= int('8') || (ch == int('r')) || (ch == int('f'))) {
             // change level
             turn_count = 0;
-            if (ch == int('1')) {
+            if (ch == int('r')) {
                 is_flip_horiz = !is_flip_horiz;
-            } else if (ch == int('2')) {
+            } else if (ch == int('f')) {
                 is_flip_vert = !is_flip_vert;
             }
-            if (ch >= int('a') && ch <= int('h')) {
-                current_lvl_id = ch - int('a');
+            if (ch >= int('1') && ch <= int('8')) {
+                current_lvl_id = ch - int('1');
             }
             if (current_lvl_id == 0) {
                 sokoban_map = sokoban_1a;
@@ -220,35 +220,35 @@ int Sokoban::sokoban_action_handler(MainMenu & main_menu, Savefile & my_save, in
                 }
             }
             enter_level(current_lvl_id);
-        } else if (ch == 258) {
+        } else if (ch == 258 || ch == int('j')) {
             attempt_player_move(1, 0); 
             render_game_map();
             render_player();
-        } else if (ch == 259) {
+        } else if (ch == 259 || ch == int('k')) {
             attempt_player_move(-1, 0); 
             render_game_map();
             render_player();
-        } else if (ch == 260) {
+        } else if (ch == 260 || ch == int('h')) {
             attempt_player_move(0, -1); 
             render_game_map();
             render_player();
-        } else if (ch == 261) {
+        } else if (ch == 261 || ch == int('l')) {
             attempt_player_move(0, 1); 
             render_game_map();
             render_player();
-        } else if (ch == 339) {
+        } else if (ch == 339 || ch == int('u')) {
             attempt_player_move(-1, 1); 
             render_game_map();
             render_player();
-        } else if (ch == 338) {
+        } else if (ch == 338 || ch == int('n')) {
             attempt_player_move(1, 1);
             render_game_map();
             render_player();
-        } else if (ch == 360) {
+        } else if (ch == 360 || ch == int('b')) {
             attempt_player_move(1, -1);
             render_game_map();
             render_player();
-        } else if (ch == 262) {
+        } else if (ch == 262 || ch == int('y')) {
             attempt_player_move(-1, -1);
             render_game_map();
             render_player();
