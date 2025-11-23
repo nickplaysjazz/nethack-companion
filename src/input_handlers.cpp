@@ -90,6 +90,8 @@ int main_menu_action_handler(MainMenu & main_menu, ProfileMenu & profile_menu, S
             json_to_rows(JSON),
             {27}
         );
+    } else if (ch == int('a')) {
+        armor_ID_menu_action_handler(main_menu, my_save);
     }
     return 1; 
 }
@@ -492,4 +494,83 @@ int price_ID_menu_action_handler(MainMenu & main_menu, Savefile & my_save) {
         }
     }
     return 1; 
+}
+
+int armor_ID_menu_action_handler(MainMenu & main_menu, Savefile & my_save) {
+    WINDOW *my_armor_ID = NULL;
+    std::vector<std::string> my_options_list = {"Helms", "Cuirasses", "Cloaks", "Gloves", "Boots", "Shields"};
+    std::string armor_ID_title = "Which class of armor would you like to see?";
+    std::vector<int> progress_buttons = {int('a'),int('b'),int('c'),int('d'),int('e'),int('f')};
+    std::vector<int> exit_buttons = {27, 32};
+
+    // Read in JSON files now 
+    nlohmann::json armor_ID_data = get_json_data("assets/items.json");
+    
+    int my_row = 4 + my_options_list.size(); 
+    if (my_options_list.size() == 0) {
+        my_row--; 
+    }
+    int my_col = 0;
+    for (int j = 0; j < (int)my_options_list.size(); ++j) {
+        if ((int)my_options_list[j].length() + 3 > my_col) {my_col = (int)my_options_list[j].length();}
+    }
+    if ((int)armor_ID_title.length() > my_col) {my_col = (int)armor_ID_title.length();}
+    my_col = my_col + 2;
+
+
+    my_armor_ID = newwin(my_row, my_col, main_menu.get_size()[0]/2 - my_row/2, main_menu.get_size()[1]/2 - my_col/2);
+    wattron(my_armor_ID, COLOR_PAIR(2));
+    box(my_armor_ID, 0, 0);
+    wattroff(my_armor_ID, COLOR_PAIR(2));
+    mvwaddstr(my_armor_ID, 1, 1, armor_ID_title.c_str());
+    int option_count = 0;
+    for (std::vector<std::string>::const_iterator it = my_options_list.begin(); it != my_options_list.end(); ++it) {
+        mvwaddstr(my_armor_ID, 3 + option_count, 1, num_to_alphabet(option_count).c_str());
+        waddstr(my_armor_ID, ") "); 
+        waddstr(my_armor_ID, it->c_str());
+        ++option_count;
+    }
+
+    // render window
+    wrefresh(my_armor_ID);
+
+    // loop window
+    bool is_inner_loop_running = true;
+    while (is_inner_loop_running) {
+        int ch1 = getch();
+        if (std::find(exit_buttons.begin(), exit_buttons.end(), ch1) != exit_buttons.end()) { 
+            werase(my_armor_ID);
+            wrefresh(my_armor_ID);
+            delwin(my_armor_ID);
+            touchwin(main_menu.get_my_win());
+            refresh();
+            wrefresh(main_menu.get_my_win());
+            is_inner_loop_running = false;
+            return -1; 
+        } else if (std::find(progress_buttons.begin(), progress_buttons.end(), ch1) != progress_buttons.end()) {
+            if (ch1 == int('a')) {
+                main_menu.render_armor_ID_subtable(armor_ID_data["helms"]);
+            } else if (ch1 == int('b')) {
+                main_menu.render_armor_ID_subtable(armor_ID_data["cuirasses"]);
+            } else if (ch1 == int('c')) {
+                main_menu.render_armor_ID_subtable(armor_ID_data["cloaks"]);
+            } else if (ch1 == int('d')) {
+                main_menu.render_armor_ID_subtable(armor_ID_data["gloves"]);
+            } else if (ch1 == int('e')) {
+                main_menu.render_armor_ID_subtable(armor_ID_data["boots"]);
+            } else if (ch1 == int('f')) {
+                main_menu.render_armor_ID_subtable(armor_ID_data["shields"]);
+            }
+            werase(my_armor_ID);
+            wrefresh(my_armor_ID);
+            delwin(my_armor_ID);
+            touchwin(main_menu.get_my_win());
+            refresh();
+            wrefresh(main_menu.get_my_win());
+            is_inner_loop_running = false;
+            return -1; 
+        }
+    }
+    return -1;
+
 }

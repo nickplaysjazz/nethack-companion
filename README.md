@@ -15,6 +15,7 @@ Install the following using a package manager such as [pacman](https://www.msys2
 - A C/C++ compiler such as [gcc](https://www.gcc.gnu.org/) or [Clang](https://www.clang.llvm.org/).
 - The [make](https://www.gnu.org/software/make) command.
 - The [cmake](https://www.cmake.org/) command.
+- The [nlohmann-json](https://github.com/nlohmann/json) package.
 - The [ncurses-dev](https://invisible-island.net/ncurses/) package, which may or may not be separate from the ncurses package depending on your OS. You should likely install both, should they be separately available.
 
 ### 2) **Build the executable.**

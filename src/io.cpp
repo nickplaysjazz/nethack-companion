@@ -1,6 +1,7 @@
 #include <filesystem>
 #include <fstream>
 #include <iostream>
+#include <nlohmann/json.hpp>
 #include <string>
 #include <vector>
 #ifdef _WIN32
@@ -55,6 +56,15 @@ std::vector<std::string> get_filepaths(const std::string & dirname) {
         filepath_list.push_back(filename);
     }
     return filepath_list;
+}
+
+nlohmann::json get_json_data(const std::string & filename) {
+    std::filesystem::path full_filename =  get_exe_path().append(filename); 
+    std::ifstream rawData(full_filename);
+
+    nlohmann::json readData = nlohmann::json::parse(rawData);
+
+    return readData;
 }
 
 Savefile try_load_file(std::string & filename, Savefile & my_savefile) {

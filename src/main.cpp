@@ -7,8 +7,9 @@
 #include <ncurses.h>
 #endif
 
-#include <functional>
 #include <csignal>
+#include <functional>
+#include <nlohmann/json.hpp>
 #include <iostream>
 #include <vector>
 
