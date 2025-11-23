@@ -1,0 +1,1518 @@
+{
+    "abbot": {
+        "benefits": "",
+        "detriments": "Hallucination"
+    },
+    "acid blob": {
+        "benefits": "Cures stoning; Always sacrificable; Untaintable",
+        "detriments": "Acidic"
+    },
+    "acolyte": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "air elemental": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "Aleax": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "aligned priest": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "Angel": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "ape": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "apprentice": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "Arch Priest": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "arch-lich": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "archeologist": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "Archon": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "Ashikaga Takauji": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "Asmodeus": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "attendant": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "Baalzebub": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "baby black dragon": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "baby blue dragon": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "baby crocodile": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "baby gray dragon": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "baby green dragon": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "baby long worm": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "baby orange dragon": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "baby purple worm": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "baby red dragon": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "baby silver dragon": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "baby white dragon": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "baby yellow dragon": {
+        "benefits": "Cures Stoning",
+        "detriments": ""
+    },
+    "balrog": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "baluchitherium": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "barbarian": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "barbed devil": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "barrow wight": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "bat": {
+        "benefits": "",
+        "detriments": "Stuns you for up to 30 turns"
+    },
+    "black dragon": {
+        "benefits": "Disintegration Resistance (100%)",
+        "detriments": ""
+    },
+    "black light": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "black naga": {
+        "benefits": "Poison Resistance (20%)",
+        "detriments": "Acidic"
+    },
+    "black naga hatchling": {
+        "benefits": "Poison Resistance (53%)",
+        "detriments": "Acidic"
+    },
+    "black pudding": {
+        "benefits": "Curses Stoning; Cold, Shock, and Poison Resistance (7%)",
+        "detriments": "Acidic"
+    },
+    "black unicorn": {
+        "benefits": "Poison Resistance (27%)",
+        "detriments": ""
+    },
+    "blue dragon": {
+        "benefits": "Shock Resistance (100%)",
+        "detriments": ""
+    },
+    "blue jelly": {
+        "benefits": "Cold, Poison Resistance (13%)",
+        "detriments": ""
+    },
+    "bone devil": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "brown mold": {
+        "benefits": "Poison, Cold Resistance (3%)",
+        "detriments": ""
+    },
+    "brown pudding": {
+        "benefits": "Cold, Shock, Poison Resistance (2.22%)",
+        "detriments": "Acidic"
+    },
+    "bugbear": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "captain": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "carnivorous ape": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "cave spider": {
+        "benefits": "Poison Resistance (7%)",
+        "detriments": ""
+    },
+    "caveman": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "cavewoman": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "centipede": {
+        "benefits": "Poison Resistance (13%)",
+        "detriments": ""
+    },
+    "chameleon": {
+        "benefits": "",
+        "detriments": "Polymorphs you"
+    },
+    "chickatrice": {
+        "benefits": "Poison Resistance (27%)",
+        "detriments": "Instant petrification"
+    },
+    "chieftain": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "Chromatic Dragon": {
+        "benefits": "Fire, Cold, Sleep, Disintegration, Shock, and Poison Resistance (100%)",
+        "detriments": "Poisonous"
+    },
+    "clay golem": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "cobra": {
+        "benefits": "Poison Resistance (40%)",
+        "detriments": "Poisonous"
+    },
+    "cockatrice": {
+        "benefits": "Poison Resistance (33%)",
+        "detriments": "Instant petrification"
+    },
+    "couatl": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "coyote": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "crocodile": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "Croesus": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "Cyclops": {
+        "benefits": "+1 STR (50%)",
+        "detriments": ""
+    },
+    "Dark One": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "Death": {
+        "benefits": "Teleport Control (100%)",
+        "detriments": "Instantly fatal"
+    },
+    "demilich": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "Demogorgon": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "dingo": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "disenchanter": {
+        "benefits": "",
+        "detriments": "Removes 1 random intrinsic"
+    },
+    "Dispater": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "djinni": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "dog": {
+        "benefits": "",
+        "detriments": "Aggravate Monster"
+    },
+    "doppelganger": {
+        "benefits": "",
+        "detriments": "Polymorphs you"
+    },
+    "dust vortex": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "dwarf": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "dwarf king": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "dwarf lord": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "dwarf mummy": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "dwarf zombie": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "earth elemental": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "electric eel": {
+        "benefits": "Shock Resistance (47%)",
+        "detriments": ""
+    },
+    "elf": {
+        "benefits": "Sleep Resistance (67%)",
+        "detriments": ""
+    },
+    "elf mummy": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "elf zombie": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "elf-lord": {
+        "benefits": "Sleep Resistance (53%)",
+        "detriments": ""
+    },
+    "Elvenking": {
+        "benefits": "Sleep Resistance (60%)",
+        "detriments": ""
+    },
+    "energy vortex": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "erinys": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "ettin": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "ettin mummy": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "ettin zombie": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "Famine": {
+        "benefits": "Teleport Control (100%)",
+        "detriments": "Instantly fatal"
+    },
+    "fire ant": {
+        "benefits": "Fire Resistance (20%)",
+        "detriments": ""
+    },
+    "fire elemental": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "fire giant": {
+        "benefits": "Fire Resistance (30%); +1 STR (50%)",
+        "detriments": ""
+    },
+    "fire vortex": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "flaming sphere": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "flesh golem": {
+        "benefits": "Fire, Cold, Shock, Sleep, Poison Resistance (12%)",
+        "detriments": ""
+    },
+    "floating eye": {
+        "benefits": "Telepathy (100%)",
+        "detriments": ""
+    },
+    "fog cloud": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "forest centaur": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "fox": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "freezing sphere": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "frost giant": {
+        "benefits": "Cold Resistance (33%); +1 STR (50%)",
+        "detriments": ""
+    },
+    "gargoyle": {
+        "benefits": "Cures Stoning; Temp Stoning Resistance ",
+        "detriments": ""
+    },
+    "garter snake": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "gas spore": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "gecko": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "gelatinous cube": {
+        "benefits": "Fire, Cold, Shock, & Sleep Resistance (10%)",
+        "detriments": "Acidic"
+    },
+    "Geryon": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "ghost": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "ghoul": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "giant": {
+        "benefits": "+1 STR (50%)",
+        "detriments": ""
+    },
+    "giant ant": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "giant bat": {
+        "benefits": "",
+        "detriments": "Stuns you for up to 30 turns"
+    },
+    "giant beetle": {
+        "benefits": "Poison Resistance (33%)",
+        "detriments": "Poisonous"
+    },
+    "giant eel": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "giant mimic": {
+        "benefits": "",
+        "detriments": "Polymorphs you into a pile of gold temporarily"
+    },
+    "giant mummy": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "giant rat": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "giant spider": {
+        "benefits": "Poison Resistance (33%)",
+        "detriments": "Poisonous"
+    },
+    "giant zombie": {
+        "benefits": "+1 STR (50%)",
+        "detriments": ""
+    },
+    "glass golem": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "glass piercer": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "gnome": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "gnome king": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "gnome lord": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "gnome mummy": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "gnome zombie": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "gnomish wizard": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "goblin": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "gold golem": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "golden naga": {
+        "benefits": "Poison Resistance (66%)",
+        "detriments": ""
+    },
+    "golden naga hatchling": {
+        "benefits": "Poison Resistance (20%)",
+        "detriments": ""
+    },
+    "Grand Master": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "gray dragon": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "gray ooze": {
+        "benefits": "Fire, Cold, Poison Resistance (7%); Can't rot",
+        "detriments": "Acidic"
+    },
+    "gray unicorn": {
+        "benefits": "Poison Resistance (27%)",
+        "detriments": ""
+    },
+    "green dragon": {
+        "benefits": "Poison Resistance (100%)",
+        "detriments": "Poisonous"
+    },
+    "green mold": {
+        "benefits": "Cures Stoning; Temp Stoning & Acid Resistance ",
+        "detriments": "Acidic"
+    },
+    "green slime": {
+        "benefits": "Cures Stoning",
+        "detriments": "Acidic, Poisonous, Sliming"
+    },
+    "Green-elf": {
+        "benefits": "Sleep Resistance (33%)",
+        "detriments": ""
+    },
+    "gremlin": {
+        "benefits": "Poison Resistance (33%)",
+        "detriments": "Poisonous"
+    },
+    "Grey-elf": {
+        "benefits": "Sleep Resistance (40%)",
+        "detriments": ""
+    },
+    "grid bug": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "guard": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "guardian naga": {
+        "benefits": "Poison Resistance (80%)",
+        "detriments": "Poisonous"
+    },
+    "guardian naga hatchling": {
+        "benefits": "Poison Resistance (20%)",
+        "detriments": ""
+    },
+    "guide": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "healer": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "hell hound": {
+        "benefits": "Fire Resistance (80%)",
+        "detriments": ""
+    },
+    "hell hound pup": {
+        "benefits": "Fire Resistance (47%)",
+        "detriments": ""
+    },
+    "hezrou": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "high priest": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "hill giant": {
+        "benefits": "+1 STR (50%)",
+        "detriments": ""
+    },
+    "hill orc": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "Hippocrates": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "hobbit": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "hobgoblin": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "homunculus": {
+        "benefits": "Sleep, Poison Resistance (7%)",
+        "detriments": "Poisonous"
+    },
+    "horned devil": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "horse": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "housecat": {
+        "benefits": "",
+        "detriments": "Aggravate Monster"
+    },
+    "human": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "human mummy": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "human zombie": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "hunter": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "ice devil": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "ice troll": {
+        "benefits": "Cold Resistance (60%)",
+        "detriments": ""
+    },
+    "ice vortex": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "iguana": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "imp": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "incubus": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "iron golem": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "iron piercer": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "Ixoth": {
+        "benefits": "Fire Resistance (100%)",
+        "detriments": ""
+    },
+    "jabberwock": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "jackal": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "jaguar": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "jellyfish": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "Juiblex": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "Keystone Kop": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "ki-rin": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "killer bee": {
+        "benefits": "Poison Resistance (30%)",
+        "detriments": "Poisonous"
+    },
+    "King Arthur": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "kitten": {
+        "benefits": "",
+        "detriments": "Aggravate Monster"
+    },
+    "knight": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "kobold": {
+        "benefits": "",
+        "detriments": "Poisonous"
+    },
+    "kobold lord": {
+        "benefits": "",
+        "detriments": "Poisonous"
+    },
+    "kobold mummy": {
+        "benefits": "",
+        "detriments": "Poisonous"
+    },
+    "kobold shaman": {
+        "benefits": "",
+        "detriments": "Poisonous"
+    },
+    "kobold zombie": {
+        "benefits": "",
+        "detriments": "Poisonous"
+    },
+    "Kop Kaptain": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "Kop Lieutenant": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "Kop Sergeant": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "kraken": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "large cat": {
+        "benefits": "",
+        "detriments": "Aggravate Monster"
+    },
+    "large dog": {
+        "benefits": "",
+        "detriments": "Aggravate Monster"
+    },
+    "large kobold": {
+        "benefits": "",
+        "detriments": "Poisonous"
+    },
+    "large mimic": {
+        "benefits": "",
+        "detriments": "Polymorphs you into a pile of gold temporarily"
+    },
+    "leather golem": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "lemure": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "leocrotta": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "leprechaun": {
+        "benefits": "",
+        "detriments": "Teleportitis (50%)"
+    },
+    "lich": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "lichen": {
+        "benefits": "Untaintable; Can't rot",
+        "detriments": ""
+    },
+    "lieutenant": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "little dog": {
+        "benefits": "",
+        "detriments": "Aggravate Monster"
+    },
+    "lizard": {
+        "benefits": "Cures Stoning; Reduces confusion & stunned by 2 turns; Can't rot; Untaintable",
+        "detriments": ""
+    },
+    "long worm": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "long worm tail": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "Lord Carnarvon": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "Lord Sato": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "Lord Surtur": {
+        "benefits": "Fire Resistance (50%); +1 STR (50%)",
+        "detriments": ""
+    },
+    "lurker above": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "lynx": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "mail daemon": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "manes": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "marilith": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "Master Assassin": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "Master Kaen": {
+        "benefits": "Poison Resistance (100%)",
+        "detriments": ""
+    },
+    "master lich": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "master mind flayer": {
+        "benefits": "Telepathy (50%) OR +1 INT(50%)",
+        "detriments": ""
+    },
+    "Master of Thieves": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "mastodon": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "Medusa": {
+        "benefits": "Poison Resistance (100%)",
+        "detriments": "Poisonous, Instant petrification"
+    },
+    "mind flayer": {
+        "benefits": "Telepathy (50%) OR +1 INT(50%)",
+        "detriments": ""
+    },
+    "Minion of Huhetotl": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "minotaur": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "monk": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "monkey": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "Mordor orc": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "mountain centaur": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "mountain nymph": {
+        "benefits": "",
+        "detriments": "Teleportitis (30%)"
+    },
+    "mumak": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "nalfeshnee": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "Nalzok": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "Nazgul": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "neanderthal": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "Neferet the Green": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "newt": {
+        "benefits": "Restores 1d3 power; If full, increases max by 1",
+        "detriments": ""
+    },
+    "ninja": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "Norn": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "nurse": {
+        "benefits": "Poison Resistance (73%); Fully heals you; Cures blindness",
+        "detriments": ""
+    },
+    "ochre jelly": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "ogre": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "ogre king": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "ogre lord": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "Olog-hai": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "Oracle": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "orange dragon": {
+        "benefits": "Sleep Resistance (100%)",
+        "detriments": ""
+    },
+    "orc": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "orc mummy": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "orc shaman": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "orc zombie": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "orc-captain": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "Orcus": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "Orion": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "owlbear": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "page": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "panther": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "paper golem": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "Pelias": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "Pestilence": {
+        "benefits": "Teleport Control (100%)",
+        "detriments": "Instantly fatal"
+    },
+    "piranha": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "pit fiend": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "pit viper": {
+        "benefits": "Poison Resistance (40%)",
+        "detriments": "Poisonous"
+    },
+    "plains centaur": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "pony": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "priest": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "priestess": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "prisoner": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "purple worm": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "pyrolisk": {
+        "benefits": "Fire, Poison Resistance (20%)",
+        "detriments": ""
+    },
+    "python": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "quantum mechanic": {
+        "benefits": "Toggles intrinsic fast speed",
+        "detriments": "Poisonous"
+    },
+    "quasit": {
+        "benefits": "Poison Resistance (20%)",
+        "detriments": ""
+    },
+    "queen bee": {
+        "benefits": "Poison Resistance (60%)",
+        "detriments": "Poisonous"
+    },
+    "quivering blob": {
+        "benefits": "Poison Resistance (33%)",
+        "detriments": ""
+    },
+    "rabid rat": {
+        "benefits": "",
+        "detriments": "Poisonous"
+    },
+    "ranger": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "raven": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "red dragon": {
+        "benefits": "Fire Resistance (100%)",
+        "detriments": ""
+    },
+    "red mold": {
+        "benefits": "Poison, Fire Resistance (3%)",
+        "detriments": ""
+    },
+    "red naga": {
+        "benefits": "Fire, Poison Resistance (20%)",
+        "detriments": ""
+    },
+    "red naga hatchling": {
+        "benefits": "Fire, Poison Resistance (10%)",
+        "detriments": ""
+    },
+    "rock mole": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "rock piercer": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "rock troll": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "rogue": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "rope golem": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "roshi": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "rothe": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "rust monster": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "salamander": {
+        "benefits": "Fire Resistance (53%)",
+        "detriments": "Poisonous"
+    },
+    "samurai": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "sandestin": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "sasquatch": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "scorpion": {
+        "benefits": "Poison Resistance (50%)",
+        "detriments": "Poisonous"
+    },
+    "Scorpius": {
+        "benefits": "Poison Resistance (100%)",
+        "detriments": "Poisonous"
+    },
+    "sergeant": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "sewer rat": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "shade": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "Shaman Karnov": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "shark": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "shocking sphere": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "shopkeeper": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "shrieker": {
+        "benefits": "Poison Resistance (20%)",
+        "detriments": ""
+    },
+    "silver dragon": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "skeleton": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "small mimic": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "snake": {
+        "benefits": "Poison Resistance (27%)",
+        "detriments": "Poisonous"
+    },
+    "soldier": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "soldier ant": {
+        "benefits": "Poison Resistance (20%)",
+        "detriments": "Poisonous"
+    },
+    "spotted jelly": {
+        "benefits": "Cures Stoning; Temp Stoning & Acid Resistance ",
+        "detriments": "Acidic"
+    },
+    "stalker": {
+        "benefits": "If already invisible, invisibile/see invisible intrinsics",
+        "detriments": "Stuns and turns you invisible for 50-149 turns."
+    },
+    "steam vortex": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "stone giant": {
+        "benefits": "+1 STR (50%)",
+        "detriments": ""
+    },
+    "stone golem": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "storm giant": {
+        "benefits": "Shock Resistance (50%); +1 STR (50%)",
+        "detriments": ""
+    },
+    "straw golem": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "student": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "succubus": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "tengu": {
+        "benefits": "Poison Resistance , Teleport Control (13%, 17%)",
+        "detriments": "Teleportitis (20%)"
+    },
+    "Thoth Amon": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "thug": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "tiger": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "titan": {
+        "benefits": "Restores power",
+        "detriments": ""
+    },
+    "titanothere": {
+        "benefits": "",
+        "detriments": "Nausea (50%)"
+    },
+    "tourist": {
+        "benefits": "Poison Resistance (27%)",
+        "detriments": ""
+    },
+    "trapper": {
+        "benefits": "",
+        "detriments": "Poisonous"
+    },
+    "troll": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "Twoflower": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "umber hulk": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "Uruk-hai": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "valkyrie": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "vampire": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "vampire bat": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "vampire lord": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "violet fungus": {
+        "benefits": "Poison Resistance (20%)",
+        "detriments": "Hallucination"
+    },
+    "Vlad the Impaler": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "vrock": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "warg": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "warhorse": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "warrior": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "watch captain": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "watchman": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "water demon": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "water elemental": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "water moccasin": {
+        "benefits": "Poison Resistance (27%)",
+        "detriments": "Poisonous"
+    },
+    "water nymph": {
+        "benefits": "",
+        "detriments": "Teleportitis (30%)"
+    },
+    "water troll": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "werejackal": {
+        "benefits": "",
+        "detriments": "Poisonous, Lycanthropy"
+    },
+    "wererat": {
+        "benefits": "",
+        "detriments": "Poisonous, Lycanthropy"
+    },
+    "werewolf": {
+        "benefits": "",
+        "detriments": "Poisonous, Lycanthropy"
+    },
+    "white dragon": {
+        "benefits": "Cold Resistance (100%)",
+        "detriments": ""
+    },
+    "white unicorn": {
+        "benefits": "Poison Resistance (27%)",
+        "detriments": ""
+    },
+    "winged gargoyle": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "winter wolf": {
+        "benefits": "Cold Resistance (47%)",
+        "detriments": ""
+    },
+    "winter wolf cub": {
+        "benefits": "Cold Resistance (33%)",
+        "detriments": ""
+    },
+    "wizard": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "Wizard of Yendor": {
+        "benefits": "Fire, Poison Resistance , Teleport Control (25%)",
+        "detriments": "Teleportitis (25%)"
+    },
+    "wolf": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "wood golem": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "wood nymph": {
+        "benefits": "",
+        "detriments": "Teleportitis (30%)"
+    },
+    "woodchuck": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "Woodland-elf": {
+        "benefits": "Sleep Resistance (27%)",
+        "detriments": ""
+    },
+    "wraith": {
+        "benefits": "Grants 1 level",
+        "detriments": ""
+    },
+    "wumpus": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "xan": {
+        "benefits": "Poison Resistance (46%)",
+        "detriments": "Poisonous"
+    },
+    "xorn": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "Yeenoghu": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "yellow dragon": {
+        "benefits": "Cures Stoning",
+        "detriments": "Acidic"
+    },
+    "yellow light": {
+        "benefits": "",
+        "detriments": ""
+    },
+    "yellow mold": {
+        "benefits": "Poison Resistance (7%)",
+        "detriments": "Poisonous, Hallucination"
+    },
+    "yeti": {
+        "benefits": "Cold Resistance (33%)",
+        "detriments": ""
+    },
+    "zruty": {
+        "benefits": "",
+        "detriments": ""
+    }
+}

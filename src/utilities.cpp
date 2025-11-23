@@ -30,140 +30,145 @@ int count_newlines(const std::string & input_string) {
 }
 
 std::string num_to_alphabet(int input_num) {
-    switch (input_num) {
-        case 0: return "a";
-        case 1: return "b";
-        case 2: return "c";
-        case 3: return "d";
-        case 4: return "e";
-        case 5: return "f";
-        case 6: return "g";
-        case 7: return "h";
-        case 8: return "i";
-        case 9: return "j";
-        case 10: return "k";
-        case 11: return "l";
-        case 12: return "m";
-        case 13: return "n";
-        case 14: return "o";
-        case 15: return "p";
-        case 16: return "q";
-        case 17: return "r";
-        case 18: return "s";
-        case 19: return "t";
-        case 20: return "u";
-        case 21: return "v";
-        case 22: return "w";
-        case 23: return "x";
-        case 24: return "y";
-        case 25: return "z";
-        default: return "!! ERROR !!";
-    }
+    if (input_num >= 0 && input_num <= 25)
+        return static_cast<char>(input_num+97)
+    else
+        return "!! ERROR !!"
+    // switch (input_num) {
+    //     case 0: return "a";
+    //     case 1: return "b";
+    //     case 2: return "c";
+    //     case 3: return "d";
+    //     case 4: return "e";
+    //     case 5: return "f";
+    //     case 6: return "g";
+    //     case 7: return "h";
+    //     case 8: return "i";
+    //     case 9: return "j";
+    //     case 10: return "k";
+    //     case 11: return "l";
+    //     case 12: return "m";
+    //     case 13: return "n";
+    //     case 14: return "o";
+    //     case 15: return "p";
+    //     case 16: return "q";
+    //     case 17: return "r";
+    //     case 18: return "s";
+    //     case 19: return "t";
+    //     case 20: return "u";
+    //     case 21: return "v";
+    //     case 22: return "w";
+    //     case 23: return "x";
+    //     case 24: return "y";
+    //     case 25: return "z";
+    //     default: return "!! ERROR !!";
+    // }
 }
 
 char keycode_to_char(int keycode) {
-    switch (keycode) {
-        case int('a'): return 'a';
-        case int('b'): return 'b';
-        case int('c'): return 'c';
-        case int('d'): return 'd';
-        case int('e'): return 'e';
-        case int('f'): return 'f';
-        case int('g'): return 'g';
-        case int('h'): return 'h';
-        case int('i'): return 'i';
-        case int('j'): return 'j';
-        case int('k'): return 'k';
-        case int('l'): return 'l';
-        case int('m'): return 'm';
-        case int('n'): return 'n';
-        case int('o'): return 'o';
-        case int('p'): return 'p';
-        case int('q'): return 'q';
-        case int('r'): return 'r';
-        case int('s'): return 's';
-        case int('t'): return 't';
-        case int('u'): return 'u';
-        case int('v'): return 'v';
-        case int('w'): return 'w';
-        case int('x'): return 'x';
-        case int('y'): return 'y';
-        case int('z'): return 'z';
+    return static_cast<char>(keycode);
+    // switch (keycode) {
+    //     case int('a'): return 'a';
+    //     case int('b'): return 'b';
+    //     case int('c'): return 'c';
+    //     case int('d'): return 'd';
+    //     case int('e'): return 'e';
+    //     case int('f'): return 'f';
+    //     case int('g'): return 'g';
+    //     case int('h'): return 'h';
+    //     case int('i'): return 'i';
+    //     case int('j'): return 'j';
+    //     case int('k'): return 'k';
+    //     case int('l'): return 'l';
+    //     case int('m'): return 'm';
+    //     case int('n'): return 'n';
+    //     case int('o'): return 'o';
+    //     case int('p'): return 'p';
+    //     case int('q'): return 'q';
+    //     case int('r'): return 'r';
+    //     case int('s'): return 's';
+    //     case int('t'): return 't';
+    //     case int('u'): return 'u';
+    //     case int('v'): return 'v';
+    //     case int('w'): return 'w';
+    //     case int('x'): return 'x';
+    //     case int('y'): return 'y';
+    //     case int('z'): return 'z';
 
-        case int('A'): return 'A';
-        case int('B'): return 'B';
-        case int('C'): return 'C';
-        case int('D'): return 'D';
-        case int('E'): return 'E';
-        case int('F'): return 'F';
-        case int('G'): return 'G';
-        case int('H'): return 'H';
-        case int('I'): return 'I';
-        case int('J'): return 'J';
-        case int('K'): return 'K';
-        case int('L'): return 'L';
-        case int('M'): return 'M';
-        case int('N'): return 'N';
-        case int('O'): return 'O';
-        case int('P'): return 'P';
-        case int('Q'): return 'Q';
-        case int('R'): return 'R';
-        case int('S'): return 'S';
-        case int('T'): return 'T';
-        case int('U'): return 'U';
-        case int('V'): return 'V';
-        case int('W'): return 'W';
-        case int('X'): return 'X';
-        case int('Y'): return 'Y';
-        case int('Z'): return 'Z';
+    //     case int('A'): return 'A';
+    //     case int('B'): return 'B';
+    //     case int('C'): return 'C';
+    //     case int('D'): return 'D';
+    //     case int('E'): return 'E';
+    //     case int('F'): return 'F';
+    //     case int('G'): return 'G';
+    //     case int('H'): return 'H';
+    //     case int('I'): return 'I';
+    //     case int('J'): return 'J';
+    //     case int('K'): return 'K';
+    //     case int('L'): return 'L';
+    //     case int('M'): return 'M';
+    //     case int('N'): return 'N';
+    //     case int('O'): return 'O';
+    //     case int('P'): return 'P';
+    //     case int('Q'): return 'Q';
+    //     case int('R'): return 'R';
+    //     case int('S'): return 'S';
+    //     case int('T'): return 'T';
+    //     case int('U'): return 'U';
+    //     case int('V'): return 'V';
+    //     case int('W'): return 'W';
+    //     case int('X'): return 'X';
+    //     case int('Y'): return 'Y';
+    //     case int('Z'): return 'Z';
 
-        case int('0'): return '0';
-        case int('1'): return '1';
-        case int('2'): return '2';
-        case int('3'): return '3';
-        case int('4'): return '4';
-        case int('5'): return '5';
-        case int('6'): return '6';
-        case int('7'): return '7';
-        case int('8'): return '8';
-        case int('9'): return '9';
+    //     case int('0'): return '0';
+    //     case int('1'): return '1';
+    //     case int('2'): return '2';
+    //     case int('3'): return '3';
+    //     case int('4'): return '4';
+    //     case int('5'): return '5';
+    //     case int('6'): return '6';
+    //     case int('7'): return '7';
+    //     case int('8'): return '8';
+    //     case int('9'): return '9';
 
-        case 32: return ' '; 
-        case 33: return '!';
-        case 63: return '?'; //
-        case 64: return '@';
-        case 35: return '#';
-        case 36: return '$';
-        case 37: return '%';
-        case 94: return '^';
-        case 38: return '&'; 
-        case 42: return '*'; //
-        case 40: return '(';
-        case 41: return ')';
-        case 95: return '_';
-        case 45: return '-';
-        case 43: return '+';
-        case 61: return '=';
-        case 91: return '[';
-        case 93: return ']';
-        case 123: return '{';
-        case 125: return '}';
-        case 124: return '|'; //
-        case 92: return '\\'; //
-        case 58: return ':'; //
-        case 59: return ';';
-        case 39: return '\'';
-        case 34: return '"'; //
-        case 60: return '<'; //
-        case 62: return '>'; //
-        case 44: return ',';
-        case 46: return '.'; //
-        case 47: return '/'; //
-        case 96: return '`';
-        case 126: return '~';
+    //     case 32: return ' '; 
+    //     case 33: return '!';
+    //     case 63: return '?'; //
+    //     case 64: return '@';
+    //     case 35: return '#';
+    //     case 36: return '$';
+    //     case 37: return '%';
+    //     case 94: return '^';
+    //     case 38: return '&'; 
+    //     case 42: return '*'; //
+    //     case 40: return '(';
+    //     case 41: return ')';
+    //     case 95: return '_';
+    //     case 45: return '-';
+    //     case 43: return '+';
+    //     case 61: return '=';
+    //     case 91: return '[';
+    //     case 93: return ']';
+    //     case 123: return '{';
+    //     case 125: return '}';
+    //     case 124: return '|'; //
+    //     case 92: return '\\'; //
+    //     case 58: return ':'; //
+    //     case 59: return ';';
+    //     case 39: return '\'';
+    //     case 34: return '"'; //
+    //     case 60: return '<'; //
+    //     case 62: return '>'; //
+    //     case 44: return ',';
+    //     case 46: return '.'; //
+    //     case 47: return '/'; //
+    //     case 96: return '`';
+    //     case 126: return '~';
 
-        default: return ' ';
-    }
+    //     default: return ' ';
+    // }
 }
 
 void make_str_lowercase(std::string & input_string) {
@@ -211,190 +216,7 @@ std::vector<std::string> properties_list = {
 
 std::array<int, 16> item_base_prices = {8, 20, 30, 50, 60, 80, 100, 150, 175, 200, 250, 300, 400, 500, 600, 700};
 
-std::vector<std::vector<std::string>> items_by_prices = {
-    {"Armor:",
-     "     elven boots",
-     "     kicking boots"},
-    {"Scrolls:",
-     "     identify"},
-    {"Armor:",
-     "     fumble boots",
-     "     levitation boots"},
-    {"Armor:",
-     "     jumping boots",
-     "     speed boots",
-     "     water walking boots",
-     "     cloak of protection",
-     "Scrolls:",
-     "     light",
-     "Potions:", 
-     "     booze",
-     "     fruit juice",
-     "     see invisible", 
-     "     sickness"},
-    {"Armor:", 
-     "     cloak of invisibility",
-     "     cloak of magic resistance",
-     "Scrolls:",
-     "     enchant weapon"},
-    {"Scrolls:",
-     "     enchant armor",
-     "     remove curse"},
-    {"Scrolls:",
-     "     confuse monster",
-     "     destroy armor",
-     "     fire",
-     "     food detection",
-     "     gold detection",
-     "     magic mapping",
-     "     scare monster",
-     "     teleportation", 
-     "Potions:",
-     "     confusion",
-     "     extra healing",
-     "     hallucination",
-     "     healing",
-     "     restore ability",
-     "     sleeping",
-     "Rings:",
-     "     adornment",
-     "     hunger",
-     "     protection",
-     "     protection from shape changers",
-     "     stealth",
-     "     sustain ability",
-     "     warning",
-     "Wands:",
-     "     light",
-     "     nothing",
-     "Spellbooks:",
-     "     force bolt",
-     "     protection", 
-     "     detect monsters",
-     "     light",
-     "     sleep",
-     "     jumping",
-     "     healing",
-     "     knock"},
-     {"Potions:",
-     "     blindness",
-     "     gain energy", 
-     "     invisibility",
-     "     monster detection", 
-     "     object detection",
-     "Rings:",
-     "     aggravate monster",
-     "     cold resistance",
-     "     gain constitution",
-     "     gain strength", 
-     "     increase accuracy",
-     "     increase damage", 
-     "     invisibility", 
-     "     poison resistance", 
-     "     see invisibile",
-     "     shock resistance",
-     "Wands:",
-     "     aggravate monster",
-     "     cold resistance",
-     "     gain constitution",
-     "     gain strength", 
-     "     increase accuracy", 
-     "     increase damage",
-     "     invisibility",
-     "     poison resistance",
-     "     see invisible", 
-     "     shock resistance"},
-     {"Wands:",
-     "     cold",
-     "     fire",
-     "     lightning", 
-     "     sleep"},
-     {"Scrolls:",
-     "     amnesia",
-     "     create monster",
-     "     earth", 
-     "     taming", 
-     "Potions:",
-     "     enlightenment",
-     "     full healing", 
-     "     levitation",
-     "     polymorph",
-     "     speed",
-     "Rings:",
-     "     fire resistance",
-     "     free action", 
-     "     levitation", 
-     "     regeneration", 
-     "     searching",
-     "     slow digestion", 
-     "     teleportation",
-     "Wands:", 
-     "     fire resistance",
-     "     free action", 
-     "     levitation",
-     "     regeneration",
-     "     searching", 
-     "     slow digestion",
-     "     teleportation",
-     "Spellbooks:",
-     "     drain life",
-     "     magic missile",
-     "     create monster", 
-     "     detect food", 
-     "     confuse monster", 
-     "     slow monster", 
-     "     cure blindness",
-     "     wizard lock"},
-     {"Potions:",
-     "     acid",
-     "     oil"},
-     {"Scrolls:",
-     "     charging",
-     "     genocide",
-     "     punishment",
-     "     stinking cloud",
-     "Potions:",
-     "     gain ability",
-     "     gain level", 
-     "     paralysis",
-     "Rings:",
-     "     conflict",
-     "     polymorph",
-     "     polymorph control",
-     "     teleport control",
-     "Spellbooks:",
-     "     remove curse",
-     "     clairvoyance",
-     "     detect unseen",
-     "     identify",
-     "     cause fear",
-     "     charm monster",
-     "     haste self",
-     "     cure sickness",
-     "     extra healing",
-     "     stone to flesh"},
-     {"Spellbooks:",
-     "     cone of cold",
-     "     fireball",
-     "     detect treasure",
-     "     invisibility",
-     "     levitation",
-     "     restore ability"},
-     {"Wands:",
-     "     death",
-     "     wishing",
-     "Spellbooks:",
-     "     magic mapping",
-     "     dig"},
-     {"Spellbooks:",
-     "     create familiar",
-     "     turn undead",
-     "     teleport away",
-     "     polymorph"},
-     {"Spellbooks:",
-     "     finger of death",
-     "     cancellation"}
-};
+auto items_by_prices = ;
 
 std::vector<std::string> xp_to_level = {
     "Lvl 1    0", "Lvl 2    20", "Lvl 3    40", "Lvl 4    80", "Lvl 5    160", "Lvl 6    320", "Lvl 7    640", "Lvl 8    1,280", "Lvl 9    2,560", "Lvl 10   5,120", 
@@ -466,869 +288,107 @@ std::vector<std::string> sokoban_1b = {
 };
 
 std::vector<std::string> sokoban_2a = {
-" ----          -----------",
-"--.>--------   |.........|",
-"|..........|   |.........|",
-"|.0-----0-.|   |.........|",
-"|..|...|.0.|   |....<....|",
-"|.0.0....0-|   |.........|",
-"|.0..0..|..|   |.........|",
-"|.----0.--.|   |.........|",
-"|..0...0.|.--  |.........|",
-"|.---0-...0.------------.|",
-"|...|..0-.0.^^^^^^^^^^^^.|",
-"|..0......----------------",
-"-----..|..|               ", 
-"    -------               "
+    " ----          -----------",
+    "--.>--------   |.........|",
+    "|..........|   |.........|",
+    "|.0-----0-.|   |.........|",
+    "|..|...|.0.|   |....<....|",
+    "|.0.0....0-|   |.........|",
+    "|.0..0..|..|   |.........|",
+    "|.----0.--.|   |.........|",
+    "|..0...0.|.--  |.........|",
+    "|.---0-...0.------------.|",
+    "|...|..0-.0.^^^^^^^^^^^^.|",
+    "|..0......----------------",
+    "-----..|..|               ", 
+    "    -------               "
 };
 
 std::vector<std::string> sokoban_2b = {
-"-----------       -----------",
-"|....|....---     |.........|",
-"|..00|00...>|     |.........|",
-"|.....0...---     |.........|",
-"|....|....|       |....<....|",
-"|-.---------      |.........|",
-"|..0.|.....|      |.........|",
-"|.00.|0.0.0|      |.........|",
-"|..0.....0.|      |.........|",
-"|.000|0..0.----------------.|",
-"|....|..0.0.^^^^^^^^^^^^^^^.|",
-"-----------------------------"
+    "-----------       -----------",
+    "|....|....---     |.........|",
+    "|..00|00...>|     |.........|",
+    "|.....0...---     |.........|",
+    "|....|....|       |....<....|",
+    "|-.---------      |.........|",
+    "|..0.|.....|      |.........|",
+    "|.00.|0.0.0|      |.........|",
+    "|..0.....0.|      |.........|",
+    "|.000|0..0.----------------.|",
+    "|....|..0.0.^^^^^^^^^^^^^^^.|",
+    "-----------------------------"
 };
 
 std::vector<std::string> sokoban_3a = {
-"  --------          ",  
-"---.|....|          ",   
-"|...0....|----------", 
-"|.-.00-00|.|.......|", 
-"|.00-......|.......|", 
-"|.-..0.|...|.......|", 
-"|....-0--0-|...<...|", 
-"|..00..0...|.......|", 
-"|.--...|...|.......|", 
-"|....-0|---|.......|", 
-"---..0.-----------.|", 
-"  |..0>^^^^^^^^^^^.|", 
-"  ------------------"
+    "  --------          ",  
+    "---.|....|          ",   
+    "|...0....|----------", 
+    "|.-.00-00|.|.......|", 
+    "|.00-......|.......|", 
+    "|.-..0.|...|.......|", 
+    "|....-0--0-|...<...|", 
+    "|..00..0...|.......|", 
+    "|.--...|...|.......|", 
+    "|....-0|---|.......|", 
+    "---..0.-----------.|", 
+    "  |..0>^^^^^^^^^^^.|", 
+    "  ------------------"
 };
 
 std::vector<std::string> sokoban_3b = {
-"--------------------",
-"|........|...|.....|",
-"|.00..-00|.-.|.....|",
-"|..|.0.0.|00.|.....|",
-"|-.|..-..|.-.|..<..|",
-"|...--.......|.....|",
-"|...|.0.-...-|.....|", 
-"|.0.|0.|...--|.....|", 
-"|-0.|..-----------.|", 
-"|..0....^^^^^^^^^^.|", 
-"|...|.>-------------", 
-"--------            "
+    "--------------------",
+    "|........|...|.....|",
+    "|.00..-00|.-.|.....|",
+    "|..|.0.0.|00.|.....|",
+    "|-.|..-..|.-.|..<..|",
+    "|...--.......|.....|",
+    "|...|.0.-...-|.....|", 
+    "|.0.|0.|...--|.....|", 
+    "|-0.|..-----------.|", 
+    "|..0....^^^^^^^^^^.|", 
+    "|...|.>-------------", 
+    "--------            "
 };
 
 std::vector<std::string> sokoban_4a = {
-"--------------------------",
-"|>......^^^^^^^^^^^^^^^^.|",
-"|.......----------------.|",
-"-------.------         |.|",
-" |...........|         |.|",
-" |.0.0.0.0.0.|         |.|",
-"--------.----|         |.|",
-"|...0.0..0.0.|         |.|",
-"|...0........|         |.|",
-"-----.--------   ------|.|",
-" |..0.0.0...|  --|.....|.|",
-" |.....0....|  |.......|.|",
-" |.0.0...0.--  |-|.....|.|",
-"-------.----   |<........|",
-"|..0.....|     |-|.....|--",
-"|........|     |.......|  ",
-"|...------     --|.....|  ",
-"-----            -------  "
+    "--------------------------",
+    "|>......^^^^^^^^^^^^^^^^.|",
+    "|.......----------------.|",
+    "-------.------         |.|",
+    " |...........|         |.|",
+    " |.0.0.0.0.0.|         |.|",
+    "--------.----|         |.|",
+    "|...0.0..0.0.|         |.|",
+    "|...0........|         |.|",
+    "-----.--------   ------|.|",
+    " |..0.0.0...|  --|.....|.|",
+    " |.....0....|  |.......|.|",
+    " |.0.0...0.--  |-|.....|.|",
+    "-------.----   |<........|",
+    "|..0.....|     |-|.....|--",
+    "|........|     |.......|  ",
+    "|...------     --|.....|  ",
+    "-----            -------  "
 };
 
 std::vector<std::string> sokoban_4b = {
-"  ------------------------",
-"  |..^^^^^^^^^^^^^^^^^^..|",
-"  |..-------------------.|",
-"----.|    -----        |.|",
-"|..|0--  --...|        |.|",
-"|.....|--|.0..|        |.|",
-"|.00..|..|..0.|        |.|",
-"--..00|...00.--        |.|",
-" |0..0...|0..|   ------|.|",
-" |.00.|..|..0| --|.....|.|",
-" |.0.0---|.0.| |.......|.|",
-" |.......|..-- |-|.....|.|",
-" ----.0..|.--  |<........|",
-"    ---.--.|   |-|.....|--",
-"     |.0...|   |.......|  ",
-"     |>.|..|   --|.....|  ",
-"     -------     -------  ",
+    "  ------------------------",
+    "  |..^^^^^^^^^^^^^^^^^^..|",
+    "  |..-------------------.|",
+    "----.|    -----        |.|",
+    "|..|0--  --...|        |.|",
+    "|.....|--|.0..|        |.|",
+    "|.00..|..|..0.|        |.|",
+    "--..00|...00.--        |.|",
+    " |0..0...|0..|   ------|.|",
+    " |.00.|..|..0| --|.....|.|",
+    " |.0.0---|.0.| |.......|.|",
+    " |.......|..-- |-|.....|.|",
+    " ----.0..|.--  |<........|",
+    "    ---.--.|   |-|.....|--",
+    "     |.0...|   |.......|  ",
+    "     |>.|..|   --|.....|  ",
+    "     -------     -------  "
 };
 
-std::vector<std::vector<std::string>> monster_list = {
-    {"abbot","","Hallucination"},
-    {"acid","blob","Cures stoning; Always sacrificable; Untaintable","Acidic"},
-    {"acolyte","",""},
-    {"air","elemental","",""},
-    {"Aleax","",""},
-    {"aligned","priest","",""},
-    {"Angel","",""},
-    {"ape","",""},
-    {"apprentice","",""},
-    {"Arch","Priest","",""},
-    {"arch-lich","",""},
-    {"archeologist","",""},
-    {"Archon","",""},
-    {"Ashikaga","Takauji","",""},
-    {"Asmodeus","",""},
-    {"attendant","",""},
-    {"Baalzebub","",""},
-    {"baby","black","dragon","",""},
-    {"baby","blue","dragon","",""},
-    {"baby","crocodile","",""},
-    {"baby","gray","dragon","",""},
-    {"baby","green","dragon","",""},
-    {"baby","long","worm","",""},
-    {"baby","orange","dragon","",""},
-    {"baby","purple","worm","",""},
-    {"baby","red","dragon","",""},
-    {"baby","silver","dragon","",""},
-    {"baby","white","dragon","",""},
-    {"baby","yellow","dragon","Cures Stoning",""},
-    {"balrog","",""},
-    {"baluchitherium","",""},
-    {"barbarian","",""},
-    {"barbed","devil","",""},
-    {"barrow","wight","",""},
-    {"bat","","Stuns you for up to 30 turns"},
-    {"black","dragon","Disintegration Resistance (100%)",""},
-    {"black","light","",""},
-    {"black","naga","Poison Resistance (20%)","Acidic"},
-    {"black","naga","hatchling","Poison Resistance (53%)","Acidic"},
-    {"black","pudding","Curses Stoning; Cold, Shock, and Poison Resistance (7%)","Acidic"},
-    {"black","unicorn","Poison Resistance (27%)",""},
-    {"blue","dragon","Shock Resistance (100%)",""},
-    {"blue","jelly","Cold, Poison Resistance (13%)",""},
-    {"bone","devil","",""},
-    {"brown","mold","Poison, Cold Resistance (3%)",""},
-    {"brown","pudding","Cold, Shock, Poison Resistance (2.22%)","Acidic"},
-    {"bugbear","",""},
-    {"captain","",""},
-    {"carnivorous","ape","",""},
-    {"cave","spider","Poison Resistance (7%)",""},
-    {"caveman","",""},
-    {"cavewoman","",""},
-    {"centipede","Poison Resistance (13%)",""},
-    {"chameleon","","Polymorphs you"},
-    {"chickatrice","Poison Resistance (27%)","Instant petrification"},
-    {"chieftain","",""},
-    {"Chromatic","Dragon","Fire, Cold, Sleep, Disintegration, Shock, and Poison Resistance (100%)","Poisonous"},
-    {"clay","golem","",""},
-    {"cobra","Poison Resistance (40%)","Poisonous"},
-    {"cockatrice","Poison Resistance (33%)","Instant petrification"},
-    {"couatl","",""},
-    {"coyote","",""},
-    {"crocodile","",""},
-    {"Croesus","",""},
-    {"Cyclops","+1 STR (50%)",""},
-    {"Dark","One","",""},
-    {"Death","Teleport Control (100%)","Instantly fatal"},
-    {"demilich","",""},
-    {"Demogorgon","",""},
-    {"dingo","",""},
-    {"disenchanter","","Removes 1 random intrinsic"},
-    {"Dispater","",""},
-    {"djinni","",""},
-    {"dog","","Aggravate Monster"},
-    {"doppelganger","","Polymorphs you"},
-    {"dust","vortex","",""},
-    {"dwarf","",""},
-    {"dwarf","king","",""},
-    {"dwarf","lord","",""},
-    {"dwarf","mummy","",""},
-    {"dwarf","zombie","",""},
-    {"earth","elemental","",""},
-    {"electric","eel","Shock Resistance (47%)",""},
-    {"elf","Sleep Resistance (67%)",""},
-    {"elf","mummy","",""},
-    {"elf","zombie","",""},
-    {"elf-lord","Sleep Resistance (53%)",""},
-    {"Elvenking","Sleep Resistance (60%)",""},
-    {"energy","vortex","",""},
-    {"erinys","",""},
-    {"ettin","",""},
-    {"ettin","mummy","",""},
-    {"ettin","zombie","",""},
-    {"Famine","Teleport Control (100%)","Instantly fatal"},
-    {"fire","ant","Fire Resistance (20%)",""},
-    {"fire","elemental","",""},
-    {"fire","giant","Fire Resistance (30%); +1 STR (50%)",""},
-    {"fire","vortex","",""},
-    {"flaming","sphere","",""},
-    {"flesh","golem","Fire, Cold, Shock, Sleep, Poison Resistance (12%)",""},
-    {"floating","eye","Telepathy (100%)",""},
-    {"fog","cloud","",""},
-    {"forest","centaur","",""},
-    {"fox","",""},
-    {"freezing","sphere","",""},
-    {"frost","giant","Cold Resistance (33%); +1 STR (50%)",""},
-    {"gargoyle","Cures Stoning; Temp Stoning Resistance ",""},
-    {"garter","snake","",""},
-    {"gas","spore","",""},
-    {"gecko","",""},
-    {"gelatinous","cube","Fire, Cold, Shock, & Sleep Resistance (10%)","Acidic"},
-    {"Geryon","",""},
-    {"ghost","",""},
-    {"ghoul","",""},
-    {"giant","+1 STR (50%)",""},
-    {"giant","ant","",""},
-    {"giant","bat","","Stuns you for up to 30 turns"},
-    {"giant","beetle","Poison Resistance (33%)","Poisonous"},
-    {"giant","eel","",""},
-    {"giant","mimic","","Polymorphs you into a pile of gold temporarily"},
-    {"giant","mummy","",""},
-    {"giant","rat","",""},
-    {"giant","spider","Poison Resistance (33%)","Poisonous"},
-    {"giant","zombie","+1 STR (50%)",""},
-    {"glass","golem","",""},
-    {"glass","piercer","",""},
-    {"gnome","",""},
-    {"gnome","king","",""},
-    {"gnome","lord","",""},
-    {"gnome","mummy","",""},
-    {"gnome","zombie","",""},
-    {"gnomish","wizard","",""},
-    {"goblin","",""},
-    {"gold","golem","",""},
-    {"golden","naga","Poison Resistance (66%)",""},
-    {"golden","naga","hatchling","Poison Resistance (20%)",""},
-    {"Grand","Master","",""},
-    {"gray","dragon","",""},
-    {"gray","ooze","Fire, Cold, Poison Resistance (7%); Can't rot","Acidic"},
-    {"gray","unicorn","Poison Resistance (27%)",""},
-    {"green","dragon","Poison Resistance (100%)","Poisonous"},
-    {"green","mold","Cures Stoning; Temp Stoning & Acid Resistance ","Acidic"},
-    {"green","slime","Cures Stoning","Acidic, Poisonous, Sliming"},
-    {"Green-elf","Sleep Resistance (33%)",""},
-    {"gremlin","Poison Resistance (33%)","Poisonous"},
-    {"Grey-elf","Sleep Resistance (40%)",""},
-    {"grid","bug","",""},
-    {"guard","",""},
-    {"guardian","naga","Poison Resistance (80%)","Poisonous"},
-    {"guardian","naga","hatchling","Poison Resistance (20%)",""},
-    {"guide","",""},
-    {"healer","",""},
-    {"hell","hound","Fire Resistance (80%)",""},
-    {"hell","hound","pup","Fire Resistance (47%)",""},
-    {"hezrou","",""},
-    {"high","priest","",""},
-    {"hill","giant","+1 STR (50%)",""},
-    {"hill","orc","",""},
-    {"Hippocrates","",""},
-    {"hobbit","",""},
-    {"hobgoblin","",""},
-    {"homunculus","Sleep, Poison Resistance (7%)","Poisonous"},
-    {"horned","devil","",""},
-    {"horse","",""},
-    {"housecat","","Aggravate Monster"},
-    {"human","",""},
-    {"human","mummy","",""},
-    {"human","zombie","",""},
-    {"hunter","",""},
-    {"ice","devil","",""},
-    {"ice","troll","Cold Resistance (60%)",""},
-    {"ice","vortex","",""},
-    {"iguana","",""},
-    {"imp","",""},
-    {"incubus","",""},
-    {"iron","golem","",""},
-    {"iron","piercer","",""},
-    {"Ixoth","Fire Resistance (100%)",""},
-    {"jabberwock","",""},
-    {"jackal","",""},
-    {"jaguar","",""},
-    {"jellyfish","",""},
-    {"Juiblex","",""},
-    {"Keystone","Kop","",""},
-    {"ki-rin","",""},
-    {"killer","bee","Poison Resistance (30%)","Poisonous"},
-    {"King","Arthur","",""},
-    {"kitten","","Aggravate Monster"},
-    {"knight","",""},
-    {"kobold","","Poisonous"},
-    {"kobold","lord","","Poisonous"},
-    {"kobold","mummy","","Poisonous"},
-    {"kobold","shaman","","Poisonous"},
-    {"kobold","zombie","","Poisonous"},
-    {"Kop","Kaptain","",""},
-    {"Kop","Lieutenant","",""},
-    {"Kop","Sergeant","",""},
-    {"kraken","",""},
-    {"large","cat","","Aggravate Monster"},
-    {"large","dog","","Aggravate Monster"},
-    {"large","kobold","","Poisonous"},
-    {"large","mimic","","Polymorphs you into a pile of gold temporarily"},
-    {"leather","golem","",""},
-    {"lemure","",""},
-    {"leocrotta","",""},
-    {"leprechaun","","Teleportitis (50%)"},
-    {"lich","",""},
-    {"lichen","Untaintable; Can't rot",""},
-    {"lieutenant","",""},
-    {"little","dog","","Aggravate Monster"},
-    {"lizard","Cures Stoning; Reduces confusion & stunned by 2 turns; Can't rot; Untaintable",""},
-    {"long","worm","",""},
-    {"long","worm","tail","",""},
-    {"Lord","Carnarvon","",""},
-    {"Lord","Sato","",""},
-    {"Lord","Surtur","Fire Resistance (50%); +1 STR (50%)",""},
-    {"lurker","above","",""},
-    {"lynx","",""},
-    {"mail","daemon","",""},
-    {"manes","",""},
-    {"marilith","",""},
-    {"Master","Assassin","",""},
-    {"Master","Kaen","Poison Resistance (100%)",""},
-    {"master","lich","",""},
-    {"master","mind","flayer","Telepathy (50%) OR +1 INT(50%)",""},
-    {"Master","of","Thieves","",""},
-    {"mastodon","",""},
-    {"Medusa","Poison Resistance (100%)","Poisonous, Instant petrification"},
-    {"mind","flayer","Telepathy (50%) OR +1 INT(50%)",""},
-    {"Minion","of","Huhetotl","",""},
-    {"minotaur","",""},
-    {"monk","",""},
-    {"monkey","",""},
-    {"Mordor","orc","",""},
-    {"mountain","centaur","",""},
-    {"mountain","nymph","","Teleportitis (30%)"},
-    {"mumak","",""},
-    {"nalfeshnee","",""},
-    {"Nalzok","",""},
-    {"Nazgul","",""},
-    {"neanderthal","",""},
-    {"Neferet","the","Green","",""},
-    {"newt","Restores 1d3 power; If full, increases max by 1",""},
-    {"ninja","",""},
-    {"Norn","",""},
-    {"nurse","Poison Resistance (73%); Fully heals you; Cures blindness",""},
-    {"ochre","jelly","",""},
-    {"ogre","",""},
-    {"ogre","king","",""},
-    {"ogre","lord","",""},
-    {"Olog-hai","",""},
-    {"Oracle","",""},
-    {"orange","dragon","Sleep Resistance (100%)",""},
-    {"orc","",""},
-    {"orc","mummy","",""},
-    {"orc","shaman","",""},
-    {"orc","zombie","",""},
-    {"orc-captain","",""},
-    {"Orcus","",""},
-    {"Orion","",""},
-    {"owlbear","",""},
-    {"page","",""},
-    {"panther","",""},
-    {"paper","golem","",""},
-    {"Pelias","",""},
-    {"Pestilence","Teleport Control (100%)","Instantly fatal"},
-    {"piranha","",""},
-    {"pit","fiend","",""},
-    {"pit","viper","Poison Resistance (40%)","Poisonous"},
-    {"plains","centaur","",""},
-    {"pony","",""},
-    {"priest","",""},
-    {"priestess","",""},
-    {"prisoner","",""},
-    {"purple","worm","",""},
-    {"pyrolisk","Fire, Poison Resistance (20%)",""},
-    {"python","",""},
-    {"quantum","mechanic","Toggles intrinsic fast speed","Poisonous"},
-    {"quasit","Poison Resistance (20%)",""},
-    {"queen","bee","Poison Resistance (60%)","Poisonous"},
-    {"quivering","blob","Poison Resistance (33%)",""},
-    {"rabid","rat","","Poisonous"},
-    {"ranger","",""},
-    {"raven","",""},
-    {"red","dragon","Fire Resistance (100%)",""},
-    {"red","mold","Poison, Fire Resistance (3%)",""},
-    {"red","naga","Fire, Poison Resistance (20%)",""},
-    {"red","naga","hatchling","Fire, Poison Resistance (10%)",""},
-    {"rock","mole","",""},
-    {"rock","piercer","",""},
-    {"rock","troll","",""},
-    {"rogue","",""},
-    {"rope","golem","",""},
-    {"roshi","",""},
-    {"rothe","",""},
-    {"rust","monster","",""},
-    {"salamander","Fire Resistance (53%)","Poisonous"},
-    {"samurai","",""},
-    {"sandestin","",""},
-    {"sasquatch","",""},
-    {"scorpion","Poison Resistance (50%)","Poisonous"},
-    {"Scorpius","Poison Resistance (100%)","Poisonous"},
-    {"sergeant","",""},
-    {"sewer","rat","",""},
-    {"shade","",""},
-    {"Shaman","Karnov","",""},
-    {"shark","",""},
-    {"shocking","sphere","",""},
-    {"shopkeeper","",""},
-    {"shrieker","Poison Resistance (20%)",""},
-    {"silver","dragon","",""},
-    {"skeleton","",""},
-    {"small","mimic","",""},
-    {"snake","Poison Resistance (27%)","Poisonous"},
-    {"soldier","",""},
-    {"soldier","ant","Poison Resistance (20%)","Poisonous"},
-    {"spotted","jelly","Cures Stoning; Temp Stoning & Acid Resistance ","Acidic"},
-    {"stalker","If already invisible, invisibile/see invisible intrinsics","Stuns and turns you invisible for 50-149 turns."},
-    {"steam","vortex","",""},
-    {"stone","giant","+1 STR (50%)",""},
-    {"stone","golem","",""},
-    {"storm","giant","Shock Resistance (50%); +1 STR (50%)",""},
-    {"straw","golem","",""},
-    {"student","",""},
-    {"succubus","",""},
-    {"tengu","Poison Resistance , Teleport Control (13%, 17%)","Teleportitis (20%)"},
-    {"Thoth","Amon","",""},
-    {"thug","",""},
-    {"tiger","",""},
-    {"titan","Restores power",""},
-    {"titanothere","","Nausea (50%)"},
-    {"tourist","Poison Resistance (27%)",""},
-    {"trapper","","Poisonous"},
-    {"troll","",""},
-    {"Twoflower","",""},
-    {"umber","hulk","",""},
-    {"Uruk-hai","",""},
-    {"valkyrie","",""},
-    {"vampire","",""},
-    {"vampire","bat","",""},
-    {"vampire","lord","",""},
-    {"violet","fungus","Poison Resistance (20%)","Hallucination"},
-    {"Vlad","the","Impaler","",""},
-    {"vrock","",""},
-    {"warg","",""},
-    {"warhorse","",""},
-    {"warrior","",""},
-    {"watch","captain","",""},
-    {"watchman","",""},
-    {"water","demon","",""},
-    {"water","elemental","",""},
-    {"water","moccasin","Poison Resistance (27%)","Poisonous"},
-    {"water","nymph","","Teleportitis (30%)"},
-    {"water","troll","",""},
-    {"werejackal","","Poisonous, Lycanthropy"},
-    {"wererat","","Poisonous, Lycanthropy"},
-    {"werewolf","","Poisonous, Lycanthropy"},
-    {"white","dragon","Cold Resistance (100%)",""},
-    {"white","unicorn","Poison Resistance (27%)",""},
-    {"winged","gargoyle","",""},
-    {"winter","wolf","Cold Resistance (47%)",""},
-    {"winter","wolf","cub","Cold Resistance (33%)",""},
-    {"wizard","",""},
-    {"Wizard","of","Yendor","Fire, Poison Resistance , Teleport Control (25%)","Teleportitis (25%)"},
-    {"wolf","",""},
-    {"wood","golem","",""},
-    {"wood","nymph","","Teleportitis (30%)"},
-    {"woodchuck","",""},
-    {"Woodland-elf","Sleep Resistance (27%)",""},
-    {"wraith","Grants 1 level",""},
-    {"wumpus","",""},
-    {"xan","Poison Resistance (46%)","Poisonous"},
-    {"xorn","",""},
-    {"Yeenoghu","",""},
-    {"yellow","dragon","Cures Stoning","Acidic"},
-    {"yellow","light","",""},
-    {"yellow","mold","Poison Resistance (7%)","Poisonous, Hallucination"},
-    {"yeti","Cold Resistance (33%)",""},
-    {"zruty","",""}
-};
-
-// std::vector<std::vector<std::string>> monster_list = {
-//     {"abbot"},
-//     {"acid","blob"},
-//     {"acolyte"},
-//     {"air","elemental"},
-//     {"Aleax"},
-//     {"aligned","priest"},
-//     {"Angel"},
-//     {"ape"},
-//     {"apprentice"},
-//     {"Arch","Priest"},
-//     {"arch-lich"},
-//     {"archeologist"},
-//     {"Archon"},
-//     {"Ashikaga","Takauji"},
-//     {"Asmodeus"},
-//     {"attendant"},
-//     {"Baalzebub"},
-//     {"baby","black","dragon"},
-//     {"baby","blue","dragon"},
-//     {"baby","crocodile"},
-//     {"baby","gray","dragon"},
-//     {"baby","green","dragon"},
-//     {"baby","long","worm"},
-//     {"baby","orange","dragon"},
-//     {"baby","purple","worm"},
-//     {"baby","red","dragon"},
-//     {"baby","silver","dragon"},
-//     {"baby","white","dragon"},
-//     {"baby","yellow","dragon"},
-//     {"balrog"},
-//     {"baluchitherium"},
-//     {"barbarian"},
-//     {"barbed","devil"},
-//     {"barrow","wight"},
-//     {"bat"},
-//     {"black","dragon"},
-//     {"black","light"},
-//     {"black","naga"},
-//     {"black","naga","hatchling"},
-//     {"black","pudding"},
-//     {"black","unicorn"},
-//     {"blue","dragon"},
-//     {"blue","jelly"},
-//     {"bone","devil"},
-//     {"brown","mold"},
-//     {"brown","pudding"},
-//     {"bugbear"},
-//     {"captain"},
-//     {"carnivorous","ape"},
-//     {"cave","spider"},
-//     {"caveman"},
-//     {"cavewoman"},
-//     {"centipede"},
-//     {"chameleon"},
-//     {"chickatrice"},
-//     {"chieftain"},
-//     {"Chromatic","Dragon"},
-//     {"clay","golem"},
-//     {"cobra"},
-//     {"cockatrice"},
-//     {"couatl"},
-//     {"coyote"},
-//     {"crocodile"},
-//     {"Croesus"},
-//     {"Cyclops"},
-//     {"Dark","One"},
-//     {"Death"},
-//     {"demilich"},
-//     {"Demogorgon"},
-//     {"dingo"},
-//     {"disenchanter"},
-//     {"Dispater"},
-//     {"djinni"},
-//     {"dog"},
-//     {"doppelganger"},
-//     {"dust","vortex"},
-//     {"dwarf"},
-//     {"dwarf","king"},
-//     {"dwarf","lord"},
-//     {"dwarf","mummy"},
-//     {"dwarf","zombie"},
-//     {"earth","elemental"},
-//     {"electric","eel"},
-//     {"elf"},
-//     {"elf","mummy"},
-//     {"elf","zombie"},
-//     {"elf-lord"},
-//     {"Elvenking"},
-//     {"energy","vortex"},
-//     {"erinys"},
-//     {"ettin"},
-//     {"ettin","mummy"},
-//     {"ettin","zombie"},
-//     {"Famine"},
-//     {"fire","ant"},
-//     {"fire","elemental"},
-//     {"fire","giant"},
-//     {"fire","vortex"},
-//     {"flaming","sphere"},
-//     {"flesh","golem"},
-//     {"floating","eye"},
-//     {"fog","cloud"},
-//     {"forest","centaur"},
-//     {"fox"},
-//     {"freezing","sphere"},
-//     {"frost","giant"},
-//     {"gargoyle"},
-//     {"garter","snake"},
-//     {"gas","spore"},
-//     {"gecko"},
-//     {"gelatinous","cube"},
-//     {"Geryon"},
-//     {"ghost"},
-//     {"ghoul"},
-//     {"giant"},
-//     {"giant","ant"},
-//     {"giant","bat"},
-//     {"giant","beetle"},
-//     {"giant","eel"},
-//     {"giant","mimic"},
-//     {"giant","mummy"},
-//     {"giant","rat"},
-//     {"giant","spider"},
-//     {"giant","zombie"},
-//     {"glass","golem"},
-//     {"glass","piercer"},
-//     {"gnome"},
-//     {"gnome","king"},
-//     {"gnome","lord"},
-//     {"gnome","mummy"},
-//     {"gnome","zombie"},
-//     {"gnomish","wizard"},
-//     {"goblin"},
-//     {"gold","golem"},
-//     {"golden","naga"},
-//     {"golden","naga","hatchling"},
-//     {"Grand","Master"},
-//     {"gray","dragon"},
-//     {"gray","ooze"},
-//     {"gray","unicorn"},
-//     {"green","dragon"},
-//     {"green","mold"},
-//     {"green","slime"},
-//     {"Green-elf"},
-//     {"gremlin"},
-//     {"Grey-elf"},
-//     {"grid","bug"},
-//     {"guard"},
-//     {"guardian","naga"},
-//     {"guardian","naga","hatchling"},
-//     {"guide"},
-//     {"healer"},
-//     {"hell","hound"},
-//     {"hell","hound","pup"},
-//     {"hezrou"},
-//     {"high","priest"},
-//     {"hill","giant"},
-//     {"hill","orc"},
-//     {"Hippocrates"},
-//     {"hobbit"},
-//     {"hobgoblin"},
-//     {"homunculus"},
-//     {"horned","devil"},
-//     {"horse"},
-//     {"housecat"},
-//     {"human"},
-//     {"human","mummy"},
-//     {"human","zombie"},
-//     {"hunter"},
-//     {"ice","devil"},
-//     {"ice","troll"},
-//     {"ice","vortex"},
-//     {"iguana"},
-//     {"imp"},
-//     {"incubus"},
-//     {"iron","golem"},
-//     {"iron","piercer"},
-//     {"Ixoth"},
-//     {"jabberwock"},
-//     {"jackal"},
-//     {"jaguar"},
-//     {"jellyfish"},
-//     {"Juiblex"},
-//     {"Keystone","Kop"},
-//     {"ki-rin"},
-//     {"killer","bee"},
-//     {"King","Arthur"},
-//     {"kitten"},
-//     {"knight"},
-//     {"kobold"},
-//     {"kobold","lord"},
-//     {"kobold","mummy"},
-//     {"kobold","shaman"},
-//     {"kobold","zombie"},
-//     {"Kop","Kaptain"},
-//     {"Kop","Lieutenant"},
-//     {"Kop","Sergeant"},
-//     {"kraken"},
-//     {"large","cat"},
-//     {"large","dog"},
-//     {"large","kobold"},
-//     {"large","mimic"},
-//     {"leather","golem"},
-//     {"lemure"},
-//     {"leocrotta"},
-//     {"leprechaun"},
-//     {"lich"},
-//     {"lichen"},
-//     {"lieutenant"},
-//     {"little","dog"},
-//     {"lizard"},
-//     {"long","worm"},
-//     {"long","worm","tail"},
-//     {"Lord","Carnarvon"},
-//     {"Lord","Sato"},
-//     {"Lord","Surtur"},
-//     {"lurker","above"},
-//     {"lynx"},
-//     {"mail","daemon"},
-//     {"manes"},
-//     {"marilith"},
-//     {"Master","Assassin"},
-//     {"Master","Kaen"},
-//     {"master","lich"},
-//     {"master","mind","flayer"},
-//     {"Master","of","Thieves"},
-//     {"mastodon"},
-//     {"Medusa"},
-//     {"mind","flayer"},
-//     {"Minion","of","Huhetotl"},
-//     {"minotaur"},
-//     {"monk"},
-//     {"monkey"},
-//     {"Mordor","orc"},
-//     {"mountain","centaur"},
-//     {"mountain","nymph"},
-//     {"mumak"},
-//     {"nalfeshnee"},
-//     {"Nalzok"},
-//     {"Nazgul"},
-//     {"neanderthal"},
-//     {"Neferet","the","Green"},
-//     {"newt"},
-//     {"ninja"},
-//     {"Norn"},
-//     {"nurse"},
-//     {"ochre","jelly"},
-//     {"ogre"},
-//     {"ogre","king"},
-//     {"ogre","lord"},
-//     {"Olog-hai"},
-//     {"Oracle"},
-//     {"orange","dragon"},
-//     {"orc"},
-//     {"orc","mummy"},
-//     {"orc","shaman"},
-//     {"orc","zombie"},
-//     {"orc-captain"},
-//     {"Orcus"},
-//     {"Orion"},
-//     {"owlbear"},
-//     {"page"},
-//     {"panther"},
-//     {"paper","golem"},
-//     {"Pelias"},
-//     {"Pestilence"},
-//     {"piranha"},
-//     {"pit","fiend"},
-//     {"pit","viper"},
-//     {"plains","centaur"},
-//     {"pony"},
-//     {"priest"},
-//     {"priestess"},
-//     {"prisoner"},
-//     {"purple","worm"},
-//     {"pyrolisk"},
-//     {"python"},
-//     {"quantum","mechanic"},
-//     {"quasit"},
-//     {"queen","bee"},
-//     {"quivering","blob"},
-//     {"rabid","rat"},
-//     {"ranger"},
-//     {"raven"},
-//     {"red","dragon"},
-//     {"red","mold"},
-//     {"red","naga"},
-//     {"red","naga","hatchling"},
-//     {"rock","mole"},
-//     {"rock","piercer"},
-//     {"rock","troll"},
-//     {"rogue"},
-//     {"rope","golem"},
-//     {"roshi"},
-//     {"rothe"},
-//     {"rust","monster"},
-//     {"salamander"},
-//     {"samurai"},
-//     {"sandestin"},
-//     {"sasquatch"},
-//     {"scorpion"},
-//     {"Scorpius"},
-//     {"sergeant"},
-//     {"sewer","rat"},
-//     {"shade"},
-//     {"Shaman","Karnov"},
-//     {"shark"},
-//     {"shocking","sphere"},
-//     {"shopkeeper"},
-//     {"shrieker"},
-//     {"silver","dragon"},
-//     {"skeleton"},
-//     {"small","mimic"},
-//     {"snake"},
-//     {"soldier"},
-//     {"soldier","ant"},
-//     {"spotted","jelly"},
-//     {"stalker"},
-//     {"steam","vortex"},
-//     {"stone","giant"},
-//     {"stone","golem"},
-//     {"storm","giant"},
-//     {"straw","golem"},
-//     {"student"},
-//     {"succubus"},
-//     {"tengu"},
-//     {"Thoth","Amon"},
-//     {"thug"},
-//     {"tiger"},
-//     {"titan"},
-//     {"titanothere"},
-//     {"tourist"},
-//     {"trapper"},
-//     {"troll"},
-//     {"Twoflower"},
-//     {"umber","hulk"},
-//     {"Uruk-hai"},
-//     {"valkyrie"},
-//     {"vampire"},
-//     {"vampire","bat"},
-//     {"vampire","lord"},
-//     {"violet","fungus"},
-//     {"Vlad","the","Impaler"},
-//     {"vrock"},
-//     {"warg"},
-//     {"warhorse"},
-//     {"warrior"},
-//     {"watch","captain"},
-//     {"watchman"},
-//     {"water","demon"},
-//     {"water","elemental"},
-//     {"water","moccasin"},
-//     {"water","nymph"},
-//     {"water","troll"},
-//     {"werejackal"},
-//     {"wererat"},
-//     {"werewolf"},
-//     {"white","dragon"},
-//     {"white","unicorn"},
-//     {"winged","gargoyle"},
-//     {"winter","wolf"},
-//     {"winter","wolf","cub"},
-//     {"wizard"},
-//     {"Wizard","of","Yendor"},
-//     {"wolf"},
-//     {"wood","golem"},
-//     {"wood","nymph"},
-//     {"woodchuck"},
-//     {"Woodland-elf"},
-//     {"wraith"},
-//     {"wumpus"},
-//     {"xan"},
-//     {"xorn"},
-//     {"Yeenoghu"},
-//     {"yellow","dragon"},
-//     {"yellow","light"},
-//     {"yellow","mold"},
-//     {"yeti"},
-//     {"zruty"}
-// };
+std::vector<std::vector<std::string>> monster_list = //Open edibility.json
