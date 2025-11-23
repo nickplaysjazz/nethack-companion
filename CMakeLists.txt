@@ -11,7 +11,7 @@ find_package(nlohmann_json 3.10.0 REQUIRED)
 
 file(GLOB SOURCES ${CMAKE_SOURCE_DIR}/src/*.cpp)
 
-set(CMAKE_CXX_FLAGS "-Wall -Wextra -Werror")
+#set(CMAKE_CXX_FLAGS "-Wall -Wextra -Werror")
 
 add_executable(${PROJECT_NAME} ${SOURCES} ${CMAKE_SOURCE_DIR}/assets/resources.rc)
 

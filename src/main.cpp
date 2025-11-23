@@ -7,8 +7,9 @@
 #include <ncurses.h>
 #endif
 
-#include <functional>
 #include <csignal>
+#include <functional>
+#include <nlohmann/json.hpp>
 #include <iostream>
 #include <vector>
 
@@ -105,9 +106,6 @@ int main() {
 
     // Read in file names now
     std::vector<std::string> character_filenames = get_filenames("data");
-
-    // Read in JSON files now too
-    //std::vector<std::string> armor_ID_data = get_json_data();
 
     // Initialize a GameMap. This will be blank for now
     // in NetHack there are 32 rows; 82 col for main screen and +38 for sidebar
