@@ -126,7 +126,7 @@ int profile_menu_action_handler(ProfileMenu & profile_menu, MainMenu & main_menu
 
             if (result2 != -1) {
                 delete_file(get_filepaths("data")[result-int('a')]);
-                profile_menu.set_options_list(get_filenames("data"));
+                profile_menu.set_options_list(get_filenames("data")); //FIXME: Crash here!
                 werase(profile_menu.get_my_win());
                 profile_menu.render_menu();
                 wrefresh(profile_menu.get_my_win());
