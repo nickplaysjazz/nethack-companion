@@ -473,18 +473,26 @@ int armor_ID_menu_action_handler(MainMenu & main_menu, Savefile & my_save) {
             return -1; 
         } else if (std::find(progress_buttons.begin(), progress_buttons.end(), ch1) != progress_buttons.end()) {
             if (ch1 == int('a')) {
-                std::cout<<armor_ID_data["helms"]<<std::endl;
+                main_menu.render_armor_ID_subtable(armor_ID_data["helms"]);
             } else if (ch1 == int('b')) {
-                std::cout<<armor_ID_data["cuirasses"]<<std::endl;
+                main_menu.render_armor_ID_subtable(armor_ID_data["cuirasses"]);
             } else if (ch1 == int('c')) {
-                std::cout<<armor_ID_data["cloaks"]<<std::endl;
+                main_menu.render_armor_ID_subtable(armor_ID_data["cloaks"]);
             } else if (ch1 == int('d')) {
-                std::cout<<armor_ID_data["gloves"]<<std::endl;
+                main_menu.render_armor_ID_subtable(armor_ID_data["gloves"]);
             } else if (ch1 == int('e')) {
-                std::cout<<armor_ID_data["boots"]<<std::endl;
+                main_menu.render_armor_ID_subtable(armor_ID_data["boots"]);
             } else if (ch1 == int('f')) {
-                std::cout<<armor_ID_data["shields"]<<std::endl;
+                main_menu.render_armor_ID_subtable(armor_ID_data["shields"]);
             }
+            werase(my_armor_ID);
+            wrefresh(my_armor_ID);
+            delwin(my_armor_ID);
+            touchwin(main_menu.get_my_win());
+            refresh();
+            wrefresh(main_menu.get_my_win());
+            is_inner_loop_running = false;
+            return -1; 
         }
     }
     return -1;

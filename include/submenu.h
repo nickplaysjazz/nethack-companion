@@ -4,6 +4,8 @@
 #include "menu.h"
 #include "savefile.h"
 
+#include <nlohmann/json.hpp>
+
 class MainMenu : public Menu {
     private:
         WINDOW *my_main_menu_intrinsics_box;
@@ -34,6 +36,8 @@ class MainMenu : public Menu {
         void render_notes_menu_on(Savefile & my_save);
         void render_notes_menu_off(); 
 
+        void render_armor_ID_subtable(nlohmann::json & armor);
+
         void render_price_ID_menu_on(Savefile & my_save); 
         void render_price_ID_menu_off(); 
         void render_prices(Savefile & my_save);
@@ -46,6 +50,8 @@ class MainMenu : public Menu {
         WINDOW *get_my_main_menu_title_box();
         WINDOW *get_my_main_menu_notes_box();
         WINDOW *get_my_main_menu_price_ID_box();
+
+        std::vector<int> get_main_menu_size();
 
         std::string get_filetitle(); 
 };

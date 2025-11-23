@@ -69,6 +69,10 @@ std::string MainMenu::get_filetitle() {
     return my_filename;
 }
 
+std::vector<int> MainMenu::get_main_menu_size() {
+    return {sizey, sizex};
+}
+
 void MainMenu::render_menu() {
     // necessary but this version is not used
     return;
@@ -477,6 +481,119 @@ void MainMenu::render_prices(Savefile & my_save) {
     }
 
     wrefresh(my_main_menu_price_ID_box);
+}
+
+void MainMenu::render_armor_ID_subtable(nlohmann::json & armor) {
+    int name_len = 4;
+    int AC_len = 2;
+    int appearance_len = 10;
+    int cost_len = 4;
+    int don_doff_len = 8;
+    int effect_len = 6;
+    int material_len = 8;
+    int mc_len = 2;
+    int weight_len = 5; 
+    for (auto it = armor.begin(); it != armor.end(); ++it) {
+        if (it.key() != "random_appearance") {
+            if (it.key().size() > name_len) {name_len = it.key().size();}
+            // sub items
+            for (auto it2 = it->begin(); it2 != it->end(); ++it2) {
+                // convert to std::string quite explicitly if needed
+                auto &value = *it2;
+                std::string str_to_use = "";
+                if (value.is_number_integer()) {
+                    str_to_use = nlohmann::to_string(value);
+                } else {
+                    str_to_use = value;
+                }
+                if (it2.key() == "appearance") {
+                    if (str_to_use.size() > appearance_len) {appearance_len = str_to_use.size();}
+                } else if (it2.key() == "cost") {
+                    if (str_to_use.size() > cost_len) {cost_len = str_to_use.size();}
+                } else if (it2.key() == "effect") {
+                    if (str_to_use.size() > effect_len) {effect_len = str_to_use.size();}
+                } else if (it2.key() == "material") {
+                    if (str_to_use.size() > material_len) {material_len = str_to_use.size();}
+                } 
+            }
+        }
+    }
+
+    int my_row = 4 + armor.size(); 
+    int my_col = 2 + name_len + 1 + AC_len + 1 + appearance_len + 1 + cost_len + 1 + don_doff_len + 1 + effect_len + 1 + material_len + 1 + mc_len + 1 + weight_len + 1;
+
+    std::string first_line = "Random appearances: ";
+    first_line.append(armor["random_appearance"]);
+
+    if (first_line.size() + 2 > my_col) {my_col = first_line.size() + 2;}
+
+    WINDOW *popup_table = NULL;
+    popup_table = newwin(my_row, my_col, get_main_menu_size()[0]/2 - my_row/2, get_main_menu_size()[1]/2 - my_col/2);
+    wattron(popup_table, COLOR_PAIR(2));
+    box(popup_table, 0, 0);
+    wattroff(popup_table, COLOR_PAIR(2));
+
+    // RENDER HERE
+    mvwaddstr(popup_table, 1, 1, first_line.c_str());
+
+    std::string headers = "";
+    headers.append(name_len+1,' ').append("AC").append(AC_len-2+1,' ').append("APPEARANCE").append(appearance_len-10+1,' ').append("COST").append(cost_len-4+1,' ');
+    headers.append("DON/DOFF").append(don_doff_len-8+1,' ').append("EFFECT").append(effect_len-6+1,' ').append("MATERIAL").append(material_len-8+1,' ').append("MC").append(mc_len-2+1,' ').append("WEIGHT");
+
+    wattron(popup_table, COLOR_PAIR(5));
+    mvwaddstr(popup_table, 3, 1, headers.c_str());
+    wattroff(popup_table, COLOR_PAIR(5));
+
+    int list_count = 0;
+    for (auto it = armor.begin(); it != armor.end(); ++it) {
+        if (it.key() != "random_appearance") {
+            mvwaddstr(popup_table, 4 + list_count, 1, it.key().c_str());
+            for (auto it2 = it->begin(); it2 != it->end(); ++it2) {
+                // convert to std::string quite explicitly if needed
+                auto &value = *it2;
+                std::string str_to_use = "";
+                if (value.is_number_integer()) {
+                    str_to_use = nlohmann::to_string(value);
+                } else {
+                    str_to_use = value;
+                }
+                int col_pos = 1 + name_len + 1;
+                if (it2.key() == "AC") {mvwaddstr(popup_table, 4+list_count, col_pos, str_to_use.c_str());}
+                col_pos = col_pos + AC_len + 1;
+                if (it2.key() == "appearance") {mvwaddstr(popup_table, 4+list_count, col_pos, str_to_use.c_str());}
+                col_pos = col_pos + appearance_len + 1;
+                if (it2.key() == "cost") {mvwaddstr(popup_table, 4+list_count, col_pos, str_to_use.c_str());}
+                col_pos = col_pos + cost_len + 1;
+                if (it2.key() == "don/doff") {mvwaddstr(popup_table, 4+list_count, col_pos, str_to_use.c_str());}
+                col_pos = col_pos + don_doff_len + 1;
+                if (it2.key() == "effect") {mvwaddstr(popup_table, 4+list_count, col_pos, str_to_use.c_str());}
+                col_pos = col_pos + effect_len + 1;
+                if (it2.key() == "material") {mvwaddstr(popup_table, 4+list_count, col_pos, str_to_use.c_str());}
+                col_pos = col_pos + material_len + 1;
+                if (it2.key() == "MC") {mvwaddstr(popup_table, 4+list_count, col_pos, str_to_use.c_str());}
+                col_pos = col_pos + mc_len + 1;
+                if (it2.key() == "weight") {mvwaddstr(popup_table, 4+list_count, col_pos, str_to_use.c_str());}
+            }
+            ++list_count;
+        }
+    }
+
+    wrefresh(popup_table);
+
+    // loop window
+    bool running_loop = true;
+    std::vector<int> exit_buttons = {27, 32};
+    while (running_loop) {
+        int ch1 = getch();
+        if (std::find(exit_buttons.begin(), exit_buttons.end(), ch1) != exit_buttons.end()) { 
+            werase(popup_table);
+            wrefresh(popup_table);
+            delwin(popup_table);
+            running_loop = false;
+            return; 
+        } 
+    }
+    return;
 }
 
 ProfileMenu::ProfileMenu(

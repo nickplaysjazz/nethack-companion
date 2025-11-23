@@ -41,7 +41,7 @@
             "appearance": "Dented Pot",
             "don/doff": 0
         },
-        "helmet (kabuto)": {
+        "helmet (kabuto)": {
             "cost": 10,
             "weight": 30,
             "AC": 1,
@@ -119,7 +119,7 @@
             "weight": 40,
             "AC": 9,
             "material": "dragon hide",
-            "effect": "Magical, Resistance based on color",
+            "effect": "Magical, Resist (color)",
             "MC": 0,
             "appearance": "dragon scale mail",
             "don/doff": 5
@@ -134,7 +134,7 @@
             "appearance": "crystal plate mail",
             "don/doff": 5
         },
-        "plate mail (tanko)": {
+        "plate mail (tanko)": {
             "cost": 600,
             "weight": 450,
             "AC": 7,
