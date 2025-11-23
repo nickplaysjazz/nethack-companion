@@ -488,7 +488,7 @@ void MainMenu::render_armor_ID_subtable(nlohmann::json & armor) {
     int AC_len = 2;
     int appearance_len = 10;
     int cost_len = 4;
-    int don_doff_len = 8;
+    int don_doff_len = 3;
     int effect_len = 6;
     int material_len = 8;
     int mc_len = 2;
@@ -538,7 +538,7 @@ void MainMenu::render_armor_ID_subtable(nlohmann::json & armor) {
 
     std::string headers = "";
     headers.append(name_len+1,' ').append("AC").append(AC_len-2+1,' ').append("APPEARANCE").append(appearance_len-10+1,' ').append("COST").append(cost_len-4+1,' ');
-    headers.append("DON/DOFF").append(don_doff_len-8+1,' ').append("EFFECT").append(effect_len-6+1,' ').append("MATERIAL").append(material_len-8+1,' ').append("MC").append(mc_len-2+1,' ').append("WEIGHT");
+    headers.append("DON").append(don_doff_len-3+1,' ').append("EFFECT").append(effect_len-6+1,' ').append("MATERIAL").append(material_len-8+1,' ').append("MC").append(mc_len-2+1,' ').append("WEIGHT");
 
     wattron(popup_table, COLOR_PAIR(5));
     mvwaddstr(popup_table, 3, 1, headers.c_str());
