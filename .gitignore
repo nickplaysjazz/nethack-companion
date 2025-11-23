@@ -3,6 +3,7 @@
 *.vscode
 **/data/*
 Comestibles with Effects.md
+Items ID.md
 CMakeFiles
 *.cmake
 CMakeCache.txt

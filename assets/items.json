@@ -1,0 +1,630 @@
+{
+    "helms": {
+        "random_appearance": "plumed, etched, crested, visored",
+        "fedora": {
+            "cost": 1,
+            "weight": 3,
+            "AC": 0,
+            "material": "cloth",
+            "effect": "",
+            "MC": 0,
+            "appearance": "Fedora",
+            "don/doff": 0
+        },
+        "dunce cap": {
+            "cost": 1,
+            "weight": 4,
+            "AC": 0,
+            "material": "cloth",
+            "effect": "Stupid",
+            "MC": 0,
+            "appearance": "Conical Hat",
+            "don/doff": 1
+        },
+        "cornuthaum": {
+            "cost": 80,
+            "weight": 4,
+            "AC": 0,
+            "material": "cloth",
+            "effect": "Clair",
+            "MC": 0,
+            "appearance": "Conical Hat",
+            "don/doff": 1
+        },
+        "dented pot": {
+            "cost": 8,
+            "weight": 10,
+            "AC": 1,
+            "material": "iron",
+            "effect": "",
+            "MC": 0,
+            "appearance": "Dented Pot",
+            "don/doff": 0
+        },
+        "helmet (kabuto)": {
+            "cost": 10,
+            "weight": 30,
+            "AC": 1,
+            "material": "iron",
+            "effect": "",
+            "MC": 0,
+            "appearance": "Random",
+            "don/doff": 1
+        },
+        "orcish helm": {
+            "cost": 10,
+            "weight": 30,
+            "AC": 1,
+            "material": "iron",
+            "effect": "",
+            "MC": 0,
+            "appearance": "Iron Skull Cap",
+            "don/doff": 1
+        },
+        "helm of brilliance": {
+            "cost": 50,
+            "weight": 50,
+            "AC": 1,
+            "material": "iron",
+            "effect": "Int+Wis",
+            "MC": 0,
+            "appearance": "Random",
+            "don/doff": 1
+        },
+        "helm of opposite alignment": {
+            "cost": 50,
+            "weight": 50,
+            "AC": 1,
+            "material": "iron",
+            "effect": "Align",
+            "MC": 0,
+            "appearance": "Random",
+            "don/doff": 1
+        },
+        "helm of telepathy": {
+            "cost": 50,
+            "weight": 50,
+            "AC": 1,
+            "material": "iron",
+            "effect": "ESP",
+            "MC": 0,
+            "appearance": "Random",
+            "don/doff": 1
+        },
+        "dwarvish iron helm": {
+            "cost": 20,
+            "weight": 40,
+            "AC": 2,
+            "material": "iron",
+            "effect": "",
+            "MC": 0,
+            "appearance": "Hard Hat",
+            "don/doff": 1
+        },
+        "elven leather helm": {
+            "cost": 8,
+            "weight": 3,
+            "AC": 1,
+            "material": "leather",
+            "effect": "",
+            "MC": 0,
+            "appearance": "Leather Hat",
+            "don/doff": 1
+        }
+    },
+    "cuirasses": {
+        "random_appearance": "cannot be random",
+        "dragon scale mail": {
+            "cost": 900,
+            "weight": 40,
+            "AC": 9,
+            "material": "dragon hide",
+            "effect": "Magical, Resistance based on color",
+            "MC": 0,
+            "appearance": "dragon scale mail",
+            "don/doff": 5
+        },
+        "crystal plate mail": {
+            "cost": 820,
+            "weight": 450,
+            "AC": 7,
+            "material": "glass",
+            "effect": "",
+            "MC": 2,
+            "appearance": "crystal plate mail",
+            "don/doff": 5
+        },
+        "plate mail (tanko)": {
+            "cost": 600,
+            "weight": 450,
+            "AC": 7,
+            "material": "iron",
+            "effect": "",
+            "MC": 2,
+            "appearance": "plate mail (tanko)",
+            "don/doff": 5
+        },
+        "bronze plate mail": {
+            "cost": 400,
+            "weight": 450,
+            "AC": 6,
+            "material": "copper",
+            "effect": "",
+            "MC": 1,
+            "appearance": "bronze plate mail",
+            "don/doff": 5
+        },
+        "splint mail": {
+            "cost": 80,
+            "weight": 400,
+            "AC": 6,
+            "material": "iron",
+            "effect": "",
+            "MC": 1,
+            "appearance": "splint mail",
+            "don/doff": 5
+        },
+        "banded mail": {
+            "cost": 90,
+            "weight": 350,
+            "AC": 6,
+            "material": "iron",
+            "effect": "",
+            "MC": 1,
+            "appearance": "banded mail",
+            "don/doff": 5
+        },
+        "dwarvish mithril-coat": {
+            "cost": 240,
+            "weight": 150,
+            "AC": 6,
+            "material": "mithril",
+            "effect": "",
+            "MC": 2,
+            "appearance": "dwarvish mithril-coat",
+            "don/doff": 1
+        },
+        "chain mail": {
+            "cost": 75,
+            "weight": 300,
+            "AC": 5,
+            "material": "iron",
+            "effect": "",
+            "MC": 1,
+            "appearance": "chain mail",
+            "don/doff": 5
+        },
+        "elven mithril-coat": {
+            "cost": 240,
+            "weight": 150,
+            "AC": 5,
+            "material": "mithril",
+            "effect": "",
+            "MC": 2,
+            "appearance": "elven mithril-coat",
+            "don/doff": 1
+        },
+        "scale mail": {
+            "cost": 45,
+            "weight": 250,
+            "AC": 4,
+            "material": "iron",
+            "effect": "",
+            "MC": 1,
+            "appearance": "scale mail",
+            "don/doff": 5
+        },
+        "orcish chain mail": {
+            "cost": 75,
+            "weight": 300,
+            "AC": 4,
+            "material": "iron",
+            "effect": "",
+            "MC": 1,
+            "appearance": "orcish chain mail",
+            "don/doff": 5
+        },
+        "dragon scales": {
+            "cost": 500,
+            "weight": 40,
+            "AC": 3,
+            "material": "dragon hide",
+            "effect": "",
+            "MC": 0,
+            "appearance": "dragon scales",
+            "don/doff": 5
+        },
+        "ring mail": {
+            "cost": 100,
+            "weight": 250,
+            "AC": 3,
+            "material": "iron",
+            "effect": "",
+            "MC": 1,
+            "appearance": "ring mail",
+            "don/doff": 5
+        },
+        "studded leather armor": {
+            "cost": 15,
+            "weight": 200,
+            "AC": 3,
+            "material": "leather",
+            "effect": "",
+            "MC": 1,
+            "appearance": "studded leather armor",
+            "don/doff": 3
+        },
+        "orcish ring mail": {
+            "cost": 80,
+            "weight": 250,
+            "AC": 2,
+            "material": "iron",
+            "effect": "",
+            "MC": 1,
+            "appearance": "orcish ring mail",
+            "don/doff": 5
+        },
+        "leather armor": {
+            "cost": 5,
+            "weight": 150,
+            "AC": 2,
+            "material": "leather",
+            "effect": "",
+            "MC": 1,
+            "appearance": "leather armor",
+            "don/doff": 3
+        },
+        "leather jacket": {
+            "cost": 10,
+            "weight": 30,
+            "AC": 1,
+            "material": "leather",
+            "effect": "",
+            "MC": 0,
+            "appearance": "leather jacket",
+            "don/doff": 0
+        }
+    },
+    "cloaks": {
+        "random_appearance": "tattered, ornamental, opera, piece of cloth",
+        "mummy wrapping": {
+            "cost": 2,
+            "weight": 3,
+            "AC": 0,
+            "material": "cloth",
+            "effect": "Vis",
+            "MC": 1,
+            "appearance": "Mummy Wrapping",
+            "don/doff": 0
+        },
+        "orcish cloak": {
+            "cost": 40,
+            "weight": 10,
+            "AC": 0,
+            "material": "cloth",
+            "effect": "",
+            "MC": 1,
+            "appearance": "Coarse Mantelet",
+            "don/doff": 0
+        },
+        "dwarvish cloak": {
+            "cost": 50,
+            "weight": 10,
+            "AC": 0,
+            "material": "cloth",
+            "effect": "",
+            "MC": 1,
+            "appearance": "Hooded Cloak",
+            "don/doff": 0
+        },
+        "cloak of displacement": {
+            "cost": 50,
+            "weight": 10,
+            "AC": 1,
+            "material": "cloth",
+            "effect": "Displ",
+            "MC": 1,
+            "appearance": "Random",
+            "don/doff": 0
+        },
+        "oilskin cloak": {
+            "cost": 50,
+            "weight": 10,
+            "AC": 1,
+            "material": "cloth",
+            "effect": "Water",
+            "MC": 2,
+            "appearance": "Slippery Cloak",
+            "don/doff": 0
+        },
+        "alchemy smock": {
+            "cost": 50,
+            "weight": 10,
+            "AC": 1,
+            "material": "cloth",
+            "effect": "Poi+Acd",
+            "MC": 1,
+            "appearance": "Apron",
+            "don/doff": 0
+        },
+        "cloak of invisibility": {
+            "cost": 60,
+            "weight": 10,
+            "AC": 1,
+            "material": "cloth",
+            "effect": "Invis",
+            "MC": 1,
+            "appearance": "Random",
+            "don/doff": 0
+        },
+        "cloak of magic resistance": {
+            "cost": 60,
+            "weight": 10,
+            "AC": 1,
+            "material": "cloth",
+            "effect": "Magic",
+            "MC": 1,
+            "appearance": "Random",
+            "don/doff": 0
+        },
+        "elven cloak": {
+            "cost": 60,
+            "weight": 10,
+            "AC": 1,
+            "material": "cloth",
+            "effect": "Stealth",
+            "MC": 1,
+            "appearance": "Faded Pall",
+            "don/doff": 0
+        },
+        "robe": {
+            "cost": 50,
+            "weight": 15,
+            "AC": 2,
+            "material": "cloth",
+            "effect": "Spell1",
+            "MC": 2,
+            "appearance": "Robe",
+            "don/doff": 0
+        },
+        "cloak of protection": {
+            "cost": 50,
+            "weight": 10,
+            "AC": 3,
+            "material": "cloth",
+            "effect": "Prot",
+            "MC": 3,
+            "appearance": "Random",
+            "don/doff": 0
+        },
+        "leather cloak": {
+            "cost": 40,
+            "weight": 15,
+            "AC": 1,
+            "material": "leather",
+            "effect": "",
+            "MC": 1,
+            "appearance": "Leather Cloak",
+            "don/doff": 0
+        }
+    },
+    "gloves": {
+        "random_appearance": "old, padded, riding, fencing",
+        "leather gloves (yugake)": {
+            "cost": 8,
+            "weight": 10,
+            "AC": 1,
+            "material": "leather",
+            "effect": "",
+            "MC": 0,
+            "appearance": "random",
+            "don/doff": 1
+        },
+        "gauntlets of dexterity": {
+            "cost": 50,
+            "weight": 10,
+            "AC": 1,
+            "material": "leather",
+            "effect": "Dex",
+            "MC": 0,
+            "appearance": "random",
+            "don/doff": 1
+        },
+        "gauntlets of fumbling": {
+            "cost": 50,
+            "weight": 10,
+            "AC": 1,
+            "material": "leather",
+            "effect": "Fumble",
+            "MC": 0,
+            "appearance": "random",
+            "don/doff": 1
+        },
+        "gauntlets of power": {
+            "cost": 50,
+            "weight": 30,
+            "AC": 1,
+            "material": "iron",
+            "effect": "Str",
+            "MC": 0,
+            "appearance": "random",
+            "don/doff": 1
+        }
+    },
+    "boots": {
+        "random_appearance": "mud, snow, riding, buckled, hiking, combat, jungle",
+        "low boots": {
+            "cost": 8,
+            "weight": 10,
+            "AC": 1,
+            "material": "leather",
+            "effect": "",
+            "MC": 0,
+            "appearance": "Walking Shoes",
+            "don/doff": 2
+        },
+        "elven boots": {
+            "cost": 8,
+            "weight": 15,
+            "AC": 1,
+            "material": "leather",
+            "effect": "Stealth",
+            "MC": 0,
+            "appearance": "Random",
+            "don/doff": 2
+        },
+        "kicking boots": {
+            "cost": 8,
+            "weight": 50,
+            "AC": 1,
+            "material": "iron",
+            "effect": "Kick",
+            "MC": 0,
+            "appearance": "Random",
+            "don/doff": 2
+        },
+        "fumble boots": {
+            "cost": 30,
+            "weight": 20,
+            "AC": 1,
+            "material": "leather",
+            "effect": "Fumble",
+            "MC": 0,
+            "appearance": "Random",
+            "don/doff": 2
+        },
+        "levitation boots": {
+            "cost": 30,
+            "weight": 15,
+            "AC": 1,
+            "material": "leather",
+            "effect": "Lev",
+            "MC": 0,
+            "appearance": "Random",
+            "don/doff": 2
+        },
+        "jumping boots": {
+            "cost": 50,
+            "weight": 20,
+            "AC": 1,
+            "material": "leather",
+            "effect": "Jump",
+            "MC": 0,
+            "appearance": "Random",
+            "don/doff": 2
+        },
+        "speed boots": {
+            "cost": 50,
+            "weight": 20,
+            "AC": 1,
+            "material": "leather",
+            "effect": "Speed",
+            "MC": 0,
+            "appearance": "Random",
+            "don/doff": 2
+        },
+        "water walking boots": {
+            "cost": 50,
+            "weight": 20,
+            "AC": 1,
+            "material": "leather",
+            "effect": "Water Walk",
+            "MC": 0,
+            "appearance": "Random",
+            "don/doff": 2
+        },
+        "high boots": {
+            "cost": 12,
+            "weight": 20,
+            "AC": 2,
+            "material": "leather",
+            "effect": "",
+            "MC": 0,
+            "appearance": "Jackboots",
+            "don/doff": 2
+        },
+        "iron shoes": {
+            "cost": 16,
+            "weight": 50,
+            "AC": 2,
+            "material": "iron",
+            "effect": "",
+            "MC": 0,
+            "appearance": "Hard Shoes",
+            "don/doff": 2
+        }
+    },
+    "shields": {
+        "random_appearance": "cannot be random",
+        "small shield": {
+            "cost": 3,
+            "weight": 30,
+            "AC": 1,
+            "material": "wood",
+            "effect": "Spell2",
+            "MC": 0,
+            "appearance": "small shield",
+            "don/doff": 0
+        },
+        "orcish shield": {
+            "cost": 7,
+            "weight": 50,
+            "AC": 1,
+            "material": "iron",
+            "effect": "",
+            "MC": 0,
+            "appearance": "orcish shield",
+            "don/doff": 0
+        },
+        "Uruk-hai shield": {
+            "cost": 7,
+            "weight": 50,
+            "AC": 1,
+            "material": "iron",
+            "effect": "",
+            "MC": 0,
+            "appearance": "Uruk-hai shield",
+            "don/doff": 0
+        },
+        "elven shield": {
+            "cost": 7,
+            "weight": 40,
+            "AC": 2,
+            "material": "wood",
+            "effect": "",
+            "MC": 0,
+            "appearance": "elven shield",
+            "don/doff": 0
+        },
+        "dwarvish roundshield": {
+            "cost": 10,
+            "weight": 100,
+            "AC": 2,
+            "material": "iron",
+            "effect": "",
+            "MC": 0,
+            "appearance": "dwarvish roundshield",
+            "don/doff": 0
+        },
+        "large shield": {
+            "cost": 10,
+            "weight": 100,
+            "AC": 2,
+            "material": "iron",
+            "effect": "",
+            "MC": 0,
+            "appearance": "large shield",
+            "don/doff": 0
+        },
+        "shield of reflection": {
+            "cost": 50,
+            "weight": 50,
+            "AC": 2,
+            "material": "silver",
+            "effect": "Reflect",
+            "MC": 0,
+            "appearance": "shield of reflection",
+            "don/doff": 0
+        }
+    }
+}
