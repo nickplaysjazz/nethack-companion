@@ -32,7 +32,7 @@ void save_and_exit(int signal_number) {
     }
    
     if (my_open_save.is_active()) {
-        save_file(my_open_save.get_filename(), my_open_save);
+        save_file_json(my_open_save.get_filename(), my_open_save);
     }
 
 }

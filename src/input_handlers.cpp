@@ -12,7 +12,6 @@
 #include <vector>
 #include <fstream>
 #include <nlohmann/json.hpp>
-using json = nlohmann::json;
 
 #include "../include/input_handlers.h"
 #include "../include/io.h"
@@ -28,7 +27,7 @@ int main_menu_action_handler(MainMenu & main_menu, ProfileMenu & profile_menu, S
         profile_menu.render_menu();
 
         my_save.flip_active_state();
-        save_file(my_save.get_filename(), my_save);
+        save_file_json(my_save.get_filename(), my_save);
         my_save.clear();
 
         return 0;
@@ -69,9 +68,9 @@ int main_menu_action_handler(MainMenu & main_menu, ProfileMenu & profile_menu, S
         );
     } else if (ch == int('m')) {
         // monster lookup
-        json JSON = get_json_data("assets/edibility.json");
+        nlohmann::json JSON = get_json_data("assets/edibility.json");
         
-        auto json_to_rows = [](json JSON) -> std::vector<std::vector<std::string>> {
+        auto json_to_rows = [](nlohmann::json JSON) -> std::vector<std::vector<std::string>> {
             std::vector<std::vector<std::string>> out = {};
             for(auto& [key, val] : JSON.items()) {
                 out.push_back({key, val["benefits"], val["detriments"]});
@@ -178,7 +177,7 @@ int profile_menu_action_handler(ProfileMenu & profile_menu, MainMenu & main_menu
         return 99; 
     } else if (std::find(progress_buttons.begin(), progress_buttons.end(), ch) != progress_buttons.end()) {
         profile_menu.close_menu();
-        try_load_file((profile_menu.get_options_list()[ch - int('a')]).append(".dat"), my_savefile);
+        try_load_file((profile_menu.get_options_list()[ch - int('a')]).append(".json"), my_savefile);
 
         main_menu.open_menu();
         main_menu.render_menu(profile_menu.get_options_list()[ch - int('a')], my_savefile);
@@ -417,7 +416,7 @@ int price_ID_menu_action_handler(MainMenu & main_menu, Savefile & my_save) {
             }
             wrefresh(main_menu.get_my_main_menu_price_ID_box());
         } else {
-            json JSON = get_json_data("assets/prices.json");
+            nlohmann::json JSON = get_json_data("assets/prices.json");
             
             float price_mod = 1. + (my_save.get_is_being_duped() * .33);
             int charisma = my_save.get_charisma();
@@ -436,7 +435,7 @@ int price_ID_menu_action_handler(MainMenu & main_menu, Savefile & my_save) {
             else
                 price_mod *= 1./2.;
             
-            auto json_to_rows = [price_mod](json JSON) -> std::vector<std::string> {
+            auto json_to_rows = [price_mod](nlohmann::json JSON) -> std::vector<std::string> {
                 std::vector<std::string> out = {};
                 for(auto& [key, val] : JSON.items()) {
                     int price = ceil(stoi(key) * price_mod);
@@ -492,7 +491,7 @@ int price_ID_menu_action_handler(MainMenu & main_menu, Savefile & my_save) {
 
 int armor_ID_menu_action_handler(MainMenu & main_menu, Savefile & my_save) {
     WINDOW *my_armor_ID = NULL;
-    std::vector<std::string> my_options_list = {"Helms", "Cuirasses", "Cloaks", "Gloves", "Boots", "Shields"};
+    std::vector<std::string> my_options_list = {"Helms", "Cuirasses", "Cloaks", "Glove`s", "Boots", "Shields"};
     std::string armor_ID_title = "Which class of armor would you like to see?";
     std::vector<int> progress_buttons = {int('a'),int('b'),int('c'),int('d'),int('e'),int('f')};
     std::vector<int> exit_buttons = {27, 32};

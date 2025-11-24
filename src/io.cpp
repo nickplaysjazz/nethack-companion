@@ -37,8 +37,8 @@ std::vector<std::string> get_filenames(const std::string & dirname) {
         for (const auto & file : std::filesystem::directory_iterator(file_directory)) {
             std::string filename = file.path().string(); 
             filename = filename.substr(filename.find(dirname) + dirname.length() + 1);
-            std::size_t pos_to_erase = filename.find(".dat");
-            // ignore if file is not .dat
+            std::size_t pos_to_erase = filename.find(".json");
+            // ignore if file is not .json
             try {
                 filename.erase(pos_to_erase);
             } catch (std::out_of_range const&) {
@@ -71,80 +71,21 @@ Savefile try_load_file(std::string & filename, Savefile & my_savefile) {
 
     std::filesystem::path full_filename =  get_exe_path().append("data").append(filename); 
 
+    std::string local_filename = "data/";
+    local_filename.append(filename);
+    
     my_file.open(full_filename);
     
     if (my_file.is_open()) {
         if (!std::filesystem::is_empty(full_filename)) {
-            int line_no = 0; 
-            while (getline(my_file, line)) {
-                if (line_no == 0) {
-                    // intrinsics
-                    std::vector<int> list;
+            nlohmann::json data = get_json_data(local_filename);
 
-                    for (int i = 0; i < (int)line.length(); ++i) {
-                        if (line[i] == int(' ') || i == 23) {
-                            continue;
-                        } else {
-                            if (i == 22 && line[i+1] != int(' ')) {
-                                list.push_back((line[i] - int('0'))*10 + line[i+1] - int('0'));
-                            } else {
-                                list.push_back(line[i] - int('0')); 
-                            }
-                        }
-                    }
-
-                    my_savefile.set_intrinics(list);
-                } else if (line_no == 1) {
-                    // notes
-                    std::vector<char> notes_l; 
-                    for (int i = 0; i < (int)line.length(); ++i) {
-                        char cstr = line[i];
-                        notes_l.push_back(cstr);
-                    }
-                    my_savefile.set_notes(notes_l);
-                } else if (line_no == 2) {
-                    // price ID
-                    std::vector<int> price_v;
-                    for (int i = 0; i <= (int)line.length(); ++i) {
-                        int cstr = line[i];
-                        price_v.push_back(cstr);
-                    }
-                    std::vector<int> digits;
-                    for (int i = 0; i <= (int)price_v.size(); ++i) {
-                        if (price_v[i] == 0) {
-                            break;
-                        } 
-                        digits.push_back(price_v[i] - int('0'));
-                    }
-
-                    if (digits.size() == 1) {
-                        int cha = digits[0];
-                        my_savefile.set_charisma(cha);
-                    } else {
-                        int cha = digits[1];
-                        if (digits[0] == 2) {
-                            cha = cha + 20;
-                        } else if (digits[0] == 1) {
-                            cha = cha + 10;
-                        } else {
-                            cha = 0;
-                        }
-                        my_savefile.set_charisma(cha);
-                    }                    
-                } else if (line_no == 3) {
-                    //being duped
-                    bool is_duping;
-                    for (int i = 0; i < (int)line.length(); ++i) {
-                        if (line[i] == '1')  {
-                            is_duping = true;
-                        } else if (line[i] == '0') {
-                            is_duping = false; 
-                        }
-                    }
-                    my_savefile.set_is_being_duped(is_duping); 
-                }
-                ++line_no; 
-            }
+            std::vector<int> intr = data["intrinsics"].get<std::vector<int>>();
+            my_savefile.set_intrinics(intr);
+            my_savefile.set_charisma(data["charisma"]);
+            my_savefile.set_is_being_duped(data["is_being_duped"]);
+            std::vector<char> note = data["notes"].get<std::vector<char>>();
+            my_savefile.set_notes(note);
         } else {
             // bandaid fix to prevent crashes on linux & mac
             // for some reason the intrinsics are not initialized properly and so we just hard-code them to be zero
@@ -163,38 +104,10 @@ Savefile try_load_file(std::string & filename, Savefile & my_savefile) {
     }
 }
 
-int save_file(const std::string & filename, Savefile & file_to_save) {
-    std::ofstream my_file;
-    my_file.open(get_exe_path().append("data").append(filename), std::ofstream::out | std::ofstream::trunc);
-    if (my_file.is_open()) {
-        // intrinsics
-        std::vector<int> file_intrinsics = file_to_save.get_intrinsics();
-        for (int i = 0; i < (int)properties_list.size(); ++i) {
-            my_file<<file_intrinsics[i]<<" ";
-        }        
-        my_file<<std::endl;
-        // notes
-        std::vector<char> file_notes = file_to_save.get_notes();
-        for (int i = 0; i < (int)file_notes.size(); ++i) {
-            my_file<<file_notes[i];
-        }
-        my_file<<std::endl;
-        // price ID
-        my_file<<std::to_string(file_to_save.get_charisma());
-        my_file<<std::endl;
-        // is_duped
-        my_file<<file_to_save.get_is_being_duped(); 
-        my_file.close();
-        return 0;
-    } else {
-        return 1; 
-    }
-}
-
 int create_file(std::string filename) {
     std::ofstream my_file;
     std::filesystem::path file_directory = get_exe_path().append("data"); 
-    filename = filename.append(".dat");
+    filename = filename.append(".json");
     my_file.open(file_directory.append(filename));
     if (my_file.is_open()) {
         my_file.close();
@@ -216,5 +129,23 @@ void create_data_folder() {
         return;
     } else {
         std::filesystem::create_directory(folderPath);
+    }
+}
+
+int save_file_json(const std::string & filename, Savefile & file_to_save) {
+    nlohmann::json jsonfile;
+    jsonfile["intrinsics"] = file_to_save.get_intrinsics();
+    jsonfile["notes"] = file_to_save.get_notes();
+    jsonfile["charisma"] = file_to_save.get_charisma();
+    jsonfile["is_being_duped"] = file_to_save.get_is_being_duped();
+
+    std::ofstream my_file;
+    my_file.open(get_exe_path().append("data").append(filename), std::ofstream::out | std::ofstream::trunc);
+    if (my_file.is_open()) {
+        my_file << jsonfile;
+        my_file.close();
+        return 0;
+    } else {
+        return 1; 
     }
 }
