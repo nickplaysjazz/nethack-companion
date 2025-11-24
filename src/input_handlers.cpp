@@ -69,10 +69,7 @@ int main_menu_action_handler(MainMenu & main_menu, ProfileMenu & profile_menu, S
         );
     } else if (ch == int('m')) {
         // monster lookup
-        std::string filepath(__FILE__);
-        std::ifstream file(filepath.substr(0, filepath.find_last_of("/\\")) + "/../assets/edibility.json");
-        json JSON;
-        file >> JSON;
+        json JSON = get_json_data("assets/edibility.json");
         
         auto json_to_rows = [](json JSON) -> std::vector<std::vector<std::string>> {
             std::vector<std::vector<std::string>> out = {};
@@ -420,10 +417,7 @@ int price_ID_menu_action_handler(MainMenu & main_menu, Savefile & my_save) {
             }
             wrefresh(main_menu.get_my_main_menu_price_ID_box());
         } else {
-            std::string filepath(__FILE__);
-            std::ifstream file(filepath.substr(0, filepath.find_last_of("/\\")) + "/../assets/prices.json");
-            json JSON;
-            file >> JSON;
+            json JSON = get_json_data("assets/prices.json");
             
             float price_mod = 1. + (my_save.get_is_being_duped() * .33);
             int charisma = my_save.get_charisma();

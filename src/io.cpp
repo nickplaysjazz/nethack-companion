@@ -24,8 +24,11 @@ std::filesystem::path get_exe_path() {
     
     #endif
 
-    std::filesystem::path exePath(exeStr);
-    return exePath.parent_path();
+    return std::filesystem::path(exeStr).parent_path();
+}
+
+std::filesystem::path get_root_path() {
+    return std::filesystem::path(__FILE__).parent_path().parent_path();
 }
 
 std::vector<std::string> get_filenames(const std::string & dirname) {
@@ -59,12 +62,7 @@ std::vector<std::string> get_filepaths(const std::string & dirname) {
 }
 
 nlohmann::json get_json_data(const std::string & filename) {
-    std::filesystem::path full_filename =  get_exe_path().append(filename); 
-    std::ifstream rawData(full_filename);
-
-    nlohmann::json readData = nlohmann::json::parse(rawData);
-
-    return readData;
+    return nlohmann::json::parse(std::ifstream(get_root_path().append(filename)));
 }
 
 Savefile try_load_file(std::string & filename, Savefile & my_savefile) {
