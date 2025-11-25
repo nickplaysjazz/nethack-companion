@@ -71,14 +71,11 @@ Savefile try_load_file(std::string & filename, Savefile & my_savefile) {
 
     std::filesystem::path full_filename =  get_exe_path().append("data").append(filename); 
 
-    std::string local_filename = "data/";
-    local_filename.append(filename);
-    
     my_file.open(full_filename);
     
     if (my_file.is_open()) {
         if (!std::filesystem::is_empty(full_filename)) {
-            nlohmann::json data = get_json_data(local_filename);
+            nlohmann::json data = get_json_data(full_filename.string());
 
             std::vector<int> intr = data["intrinsics"].get<std::vector<int>>();
             my_savefile.set_intrinics(intr);

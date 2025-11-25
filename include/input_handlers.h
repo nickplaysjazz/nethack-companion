@@ -11,6 +11,6 @@ int main_menu_action_handler(MainMenu & main_menu, ProfileMenu & profile_menu, S
 int properties_menu_action_handler(MainMenu & main_menu, Savefile & my_save);
 int notes_menu_action_handler(MainMenu & main_menu, Savefile & my_save);
 int price_ID_menu_action_handler(MainMenu & main_menu, Savefile & my_save);
-int armor_ID_menu_action_handler(MainMenu & main_menu, Savefile & my_save);
+int armor_ID_menu_action_handler(MainMenu & main_menu);
 
 #endif

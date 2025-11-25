@@ -87,7 +87,7 @@ int main_menu_action_handler(MainMenu & main_menu, ProfileMenu & profile_menu, S
             {27}
         );
     } else if (ch == int('a')) {
-        armor_ID_menu_action_handler(main_menu, my_save);
+        armor_ID_menu_action_handler(main_menu);
     }
     return 1; 
 }
@@ -489,7 +489,7 @@ int price_ID_menu_action_handler(MainMenu & main_menu, Savefile & my_save) {
     return 1; 
 }
 
-int armor_ID_menu_action_handler(MainMenu & main_menu, Savefile & my_save) {
+int armor_ID_menu_action_handler(MainMenu & main_menu) {
     WINDOW *my_armor_ID = NULL;
     std::vector<std::string> my_options_list = {"Helms", "Cuirasses", "Cloaks", "Glove`s", "Boots", "Shields"};
     std::string armor_ID_title = "Which class of armor would you like to see?";

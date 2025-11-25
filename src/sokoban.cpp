@@ -183,7 +183,7 @@ int Sokoban::sokoban_action_handler(MainMenu & main_menu, Savefile & my_save, in
 
             is_running = false;
             return 1;
-        } else if (ch >= int('1') && ch <= int('8') || (ch == int('r')) || (ch == int('f'))) {
+        } else if ((ch >= int('1') && ch <= int('8')) || (ch == int('r')) || (ch == int('f'))) {
             // change level
             turn_count = 0;
             if (ch == int('r')) {
