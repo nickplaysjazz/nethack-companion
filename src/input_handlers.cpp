@@ -386,7 +386,7 @@ int price_ID_menu_action_handler(MainMenu & main_menu, Savefile & my_save) {
                 if (charisma_ch.size() != 2) {
                     charisma_ch = " " + charisma_ch;
                 }
-                mvwaddstr(main_menu.get_my_main_menu_price_ID_box(), 3, 19, charisma_ch.c_str());
+                mvwaddstr(main_menu.get_my_main_menu_price_ID_box(), 2, 14, charisma_ch.c_str());
                 wrefresh(main_menu.get_my_main_menu_price_ID_box());
             }
         } else if (ch1 == 258 || ch1 == 260) {
@@ -401,7 +401,7 @@ int price_ID_menu_action_handler(MainMenu & main_menu, Savefile & my_save) {
                     charisma_ch = " " + charisma_ch;
                 }
 
-                mvwaddstr(main_menu.get_my_main_menu_price_ID_box(), 3, 19, charisma_ch.c_str());
+                mvwaddstr(main_menu.get_my_main_menu_price_ID_box(), 2, 14, charisma_ch.c_str());
                 wrefresh(main_menu.get_my_main_menu_price_ID_box());
             }
         } else if (ch1 == 10) {
@@ -409,10 +409,10 @@ int price_ID_menu_action_handler(MainMenu & main_menu, Savefile & my_save) {
             my_save.flip_is_being_duped();
             if (my_save.get_is_being_duped() == true) {
                 std::string print_yes = "YES";
-                mvwaddstr(main_menu.get_my_main_menu_price_ID_box(), 4, 19, print_yes.c_str());
+                mvwaddstr(main_menu.get_my_main_menu_price_ID_box(), 2, 45, print_yes.c_str());
             } else {
                 std::string print_no = "NO ";
-                mvwaddstr(main_menu.get_my_main_menu_price_ID_box(), 4, 19, print_no.c_str());       
+                mvwaddstr(main_menu.get_my_main_menu_price_ID_box(), 2, 45, print_no.c_str());       
             }
             wrefresh(main_menu.get_my_main_menu_price_ID_box());
         } else {

@@ -151,79 +151,69 @@ void MainMenu::render_menu(std::string file_title, Savefile & my_save) {
     }
 
     // price ID
-    my_main_menu_price_ID_box = subwin(my_win, 14, 52, 2, 29);
+    my_main_menu_price_ID_box = subwin(my_win, 26, 52, 2, 29);
     box(my_main_menu_price_ID_box, 0, 0); 
     mvwaddch(my_main_menu_price_ID_box, 0, 0, ACS_TTEE);
     mvwaddch(my_main_menu_price_ID_box, 0, 51, ACS_TTEE);
-    mvwaddch(my_main_menu_price_ID_box, 13, 0, ACS_LTEE);
-    mvwaddch(my_main_menu_price_ID_box, 13, 51, ACS_RTEE);
+    mvwaddch(my_main_menu_price_ID_box, 25, 0, ACS_LTEE);
+    mvwaddch(my_main_menu_price_ID_box, 25, 51, ACS_RTEE);
     std::string price_ID_title = "PRICE ID p)";
     wattron(my_main_menu_price_ID_box, COLOR_PAIR(6));
     mvwaddstr(my_main_menu_price_ID_box, 1, 25 - price_ID_title.length()/2, price_ID_title.c_str());
     wattroff(my_main_menu_price_ID_box, COLOR_PAIR(6));
 
-    std::string price_ID_cha = "             Ch: "; //FIXME: Center this
-    mvwaddstr(my_main_menu_price_ID_box, 3, 2, price_ID_cha.c_str());
+    std::string price_ID_cha = "Charisma: "; //FIXME: Center this
+    mvwaddstr(my_main_menu_price_ID_box, 2, 4, price_ID_cha.c_str());
 
     std::string charisma_ch = std::to_string(my_save.get_charisma());
     if (charisma_ch.size() != 2) {
         charisma_ch = " " + charisma_ch;
     }
-    mvwaddstr(get_my_main_menu_price_ID_box(), 3, 19, charisma_ch.c_str());
+    mvwaddstr(get_my_main_menu_price_ID_box(), 2, 14, charisma_ch.c_str());
 
     wrefresh(get_my_main_menu_price_ID_box());
-    std::string price_ID_being_duped = "    Being duped? "; //FIXME: Center this
-    mvwaddstr(my_main_menu_price_ID_box, 4, 2, price_ID_being_duped.c_str());
-    std::string price_ID_headings = "             PRICE(UPCHARGED)[SELL]";
-    mvwaddstr(my_main_menu_price_ID_box, 2, 2, price_ID_headings.c_str());
-    std::string delimiters = "                                              ";
+    std::string price_ID_being_duped = "Being duped? "; //FIXME: Center this
+    mvwaddstr(my_main_menu_price_ID_box, 2, 32, price_ID_being_duped.c_str());
 
-    mvwaddstr(my_main_menu_price_ID_box, 6, 18, "BOOTS (b)");
-    mvwaddstr(my_main_menu_price_ID_box, 7, 18, "CLOAKS (c)");
-    mvwaddstr(my_main_menu_price_ID_box, 8, 18, "SCROLLS (s)");
-    mvwaddstr(my_main_menu_price_ID_box, 9, 18, "SPELLBOOKS (z)");
-    mvwaddstr(my_main_menu_price_ID_box, 10, 18, "POTIONS (p)");
-    mvwaddstr(my_main_menu_price_ID_box, 11, 18, "RINGS (r)");
-    mvwaddstr(my_main_menu_price_ID_box, 12, 18, "WANDS (w)");
+    mvwaddstr(my_main_menu_price_ID_box, 3, 3, " ARMOR | SCROLL | BOOK | POTION | RING | WAND ");
 
     if (my_save.get_is_being_duped() == true) {
         std::string print_yes = "YES";
-        mvwaddstr(get_my_main_menu_price_ID_box(), 4, 19, print_yes.c_str());
+        mvwaddstr(get_my_main_menu_price_ID_box(), 2, 45, print_yes.c_str());
     } else {
         std::string print_no = "NO ";
-        mvwaddstr(get_my_main_menu_price_ID_box(), 4, 19, print_no.c_str());       
+        mvwaddstr(get_my_main_menu_price_ID_box(), 2, 45, print_no.c_str());       
     }
+
+    // armor ID
+    std::string armor_ID_str = "a) ARMOR ID";
+    wattron(my_win, COLOR_PAIR(3));
+    mvwaddstr(my_win, 28, 31, armor_ID_str.c_str());
+    wattroff(my_win, COLOR_PAIR(3));
 
     // monster list
     std::string monster_str = "m) MONSTER EDIBILITY";
     wattron(my_win, COLOR_PAIR(3));
-    mvwaddstr(my_win, 16, 31, monster_str.c_str());
+    mvwaddstr(my_win, 29, 31, monster_str.c_str());
     wattroff(my_win, COLOR_PAIR(3));
 
     // sokoban
     std::string sokoban_str = "s) SOKOBAN PRACTICE";
     wattron(my_win, COLOR_PAIR(3));
-    mvwaddstr(my_win, 17, 31, sokoban_str.c_str());
+    mvwaddstr(my_win, 30, 31, sokoban_str.c_str());
     wattroff(my_win, COLOR_PAIR(3));
 
     // xp
     std::string xp_str = "x) XP TO LVL";
     wattron(my_win, COLOR_PAIR(3));
-    mvwaddstr(my_win, 18, 31, xp_str.c_str());
+    mvwaddstr(my_win, 28, 56, xp_str.c_str());
     wattroff(my_win, COLOR_PAIR(3));
 
     // wand engrave
     std::string engrave_str = "z) WAND ENGRAVE ID";
     wattron(my_win, COLOR_PAIR(3));
-    mvwaddstr(my_win, 19, 31, engrave_str.c_str());
+    mvwaddstr(my_win, 29, 56, engrave_str.c_str());
     wattroff(my_win, COLOR_PAIR(3));
-
-    // armor ID
-    std::string armor_ID_str = "a) ARMOR ID";
-    wattron(my_win, COLOR_PAIR(3));
-    mvwaddstr(my_win, 26, 56, armor_ID_str.c_str());
-    wattroff(my_win, COLOR_PAIR(3));
-
 }
 
 void MainMenu::render_intrinsics_menu_default(Savefile & my_save) {
@@ -407,30 +397,27 @@ void MainMenu::render_price_ID_menu_on(Savefile & my_save) {
     wattroff(my_main_menu_price_ID_box, COLOR_PAIR(6));
 
     std::string cha_instr = "(use arrow keys)";
-    mvwaddstr(my_main_menu_price_ID_box, 3, 25, cha_instr.c_str());
+    mvwaddstr(my_main_menu_price_ID_box, 1, 1, cha_instr.c_str());
     std::string dupe_instr = "(use enter key)";
-    mvwaddstr(my_main_menu_price_ID_box, 4, 25, dupe_instr.c_str());
-    
-    // for (int ys = 6; ys <= 21; ++ys) {
-    //     mvwaddstr(my_main_menu_price_ID_box, ys, 42, num_to_alphabet(ys - 6).c_str());
-    //     waddstr(my_main_menu_price_ID_box, ") "); 
-    // }
+    mvwaddstr(my_main_menu_price_ID_box, 1, 36, dupe_instr.c_str());
 
+    mvwaddstr(my_main_menu_price_ID_box, 3, 2, "a)ARMOR s)SCROLL z)BOOK p)POTION r)RING w)WAND");
+    
     // will render in render_prices
     my_save.is_active();
     wrefresh(my_main_menu_price_ID_box);
 }
 
 void MainMenu::render_price_ID_menu_off() {
+    std::string cha_instr = "                                                  ";
+    mvwaddstr(my_main_menu_price_ID_box, 1, 1, cha_instr.c_str());
+
     std::string price_ID_title = "PRICE ID p)";
     wattron(my_main_menu_price_ID_box, COLOR_PAIR(6));
     mvwaddstr(my_main_menu_price_ID_box, 1, 25 - price_ID_title.length()/2, price_ID_title.c_str());
     wattroff(my_main_menu_price_ID_box, COLOR_PAIR(6));
 
-    std::string cha_instr = "                ";
-    mvwaddstr(my_main_menu_price_ID_box, 3, 25, cha_instr.c_str());
-    std::string dupe_instr = "               ";
-    mvwaddstr(my_main_menu_price_ID_box, 4, 25, dupe_instr.c_str());
+    mvwaddstr(my_main_menu_price_ID_box, 3, 2, "  ARMOR | SCROLL | BOOK | POTION | RING | WAND ");
 
     wrefresh(my_main_menu_price_ID_box);
 }
