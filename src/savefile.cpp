@@ -43,6 +43,14 @@ int Savefile::get_charisma() {
     return charisma;
 }
 
+int Savefile::get_active_price_ID() {
+    return active_price_ID;
+}
+
+void Savefile::set_active_price_ID(int new_subtable) {
+    active_price_ID = new_subtable;
+}
+
 void Savefile::set_filename(std::string & new_filename) {
     filename = new_filename;
 }

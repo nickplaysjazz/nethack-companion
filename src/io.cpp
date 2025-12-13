@@ -83,6 +83,7 @@ Savefile try_load_file(std::string & filename, Savefile & my_savefile) {
             my_savefile.set_is_being_duped(data["is_being_duped"]);
             std::vector<char> note = data["notes"].get<std::vector<char>>();
             my_savefile.set_notes(note);
+            my_savefile.set_active_price_ID(data["active_price_ID"]);
         } else {
             // bandaid fix to prevent crashes on linux & mac
             // for some reason the intrinsics are not initialized properly and so we just hard-code them to be zero
@@ -135,6 +136,7 @@ int save_file_json(const std::string & filename, Savefile & file_to_save) {
     jsonfile["notes"] = file_to_save.get_notes();
     jsonfile["charisma"] = file_to_save.get_charisma();
     jsonfile["is_being_duped"] = file_to_save.get_is_being_duped();
+    jsonfile["active_price_ID"] = file_to_save.get_active_price_ID();
 
     std::ofstream my_file;
     my_file.open(get_exe_path().append("data").append(filename), std::ofstream::out | std::ofstream::trunc);

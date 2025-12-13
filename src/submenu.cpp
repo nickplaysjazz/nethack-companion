@@ -177,6 +177,9 @@ void MainMenu::render_menu(std::string file_title, Savefile & my_save) {
 
     mvwaddstr(my_main_menu_price_ID_box, 3, 3, " ARMOR | SCROLL | BOOK | POTION | RING | WAND ");
 
+    mvwaddstr(my_main_menu_price_ID_box, 4, 2, "Buy (Sell)               Buy (Sell)           ");
+    mvwvline(my_main_menu_price_ID_box, 4, 25, ACS_VLINE, 21);
+
     if (my_save.get_is_being_duped() == true) {
         std::string print_yes = "YES";
         mvwaddstr(get_my_main_menu_price_ID_box(), 2, 45, print_yes.c_str());

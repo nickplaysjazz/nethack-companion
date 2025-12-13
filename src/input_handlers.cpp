@@ -12,6 +12,7 @@
 #include <vector>
 #include <fstream>
 #include <nlohmann/json.hpp>
+#include <utility>
 
 #include "../include/input_handlers.h"
 #include "../include/io.h"
@@ -364,7 +365,47 @@ int notes_menu_action_handler(MainMenu & main_menu, Savefile & my_save) {
 }
 
 int price_ID_menu_action_handler(MainMenu & main_menu, Savefile & my_save) {
+    
     main_menu.render_price_ID_menu_on(my_save);
+
+    auto read_json = [&my_save](std::string item) -> std::vector<std::pair<std::string, int>> {
+        nlohmann::json JSON = get_json_data("assets/prices.json");
+
+        float price_mod = 1. + (my_save.get_is_being_duped() * .33);
+        int charisma = my_save.get_charisma();
+        if (charisma <= 5)
+            price_mod *= 2.;
+        else if (charisma <= 7)
+            price_mod *= 1.5;
+        else if (charisma <= 10)
+            price_mod *= 1.33;
+        else if (charisma <= 15)
+            price_mod *= 1.;
+        else if (charisma <= 17)
+            price_mod *= 3./4.;
+        else if (charisma == 18)
+            price_mod *= 2./3.;
+        else
+            price_mod *= 1./2.;
+        
+        // sell price is (int)(stoi(key)*.5) WITHOUT the duping?
+
+        std::vector<std::pair<std::string, int>> out = {};
+        for(auto& [key, val] : JSON[item].items()) {
+            int price = ceil(stoi(key) * price_mod);
+
+            if (my_save.get_is_being_duped()) {
+               price = (int)(floor(price*1.33));
+            }
+
+            for (auto & i : val ) {
+                std::pair<std::string, int> ret = {i, price};
+                out.push_back(ret);
+            }
+        }
+
+        return out;
+    };
     
     bool is_inner_loop_running = true;
     while (is_inner_loop_running) {
@@ -415,75 +456,38 @@ int price_ID_menu_action_handler(MainMenu & main_menu, Savefile & my_save) {
                 mvwaddstr(main_menu.get_my_main_menu_price_ID_box(), 2, 45, print_no.c_str());       
             }
             wrefresh(main_menu.get_my_main_menu_price_ID_box());
-        } else {
-            nlohmann::json JSON = get_json_data("assets/prices.json");
-            
-            float price_mod = 1. + (my_save.get_is_being_duped() * .33);
-            int charisma = my_save.get_charisma();
-            if (charisma <= 5)
-                price_mod *= 2.;
-            else if (charisma <= 7)
-                price_mod *= 1.5;
-            else if (charisma <= 10)
-                price_mod *= 1.33;
-            else if (charisma <= 15)
-                price_mod *= 1.;
-            else if (charisma <= 17)
-                price_mod *= 3./4.;
-            else if (charisma == 18)
-                price_mod *= 2./3.;
-            else
-                price_mod *= 1./2.;
-            
-            auto json_to_rows = [price_mod](nlohmann::json JSON) -> std::vector<std::string> {
-                std::vector<std::string> out = {};
-                for(auto& [key, val] : JSON.items()) {
-                    int price = ceil(stoi(key) * price_mod);
+        } else if (ch1 == int('a')) {
+            // armor
+            my_save.set_active_price_ID(int('a'));
+            std::vector<std::pair<std::string, int>> item_list = read_json("boots");
+            std::vector<std::pair<std::string, int>> item_list2 = read_json("cloaks");
+            item_list.insert(item_list.end(), item_list2.begin(), item_list2.end());
 
-                    out.push_back(std::to_string(price)+"("+std::to_string((int)(floor(price*1.33)))+")["+std::to_string((int)(stoi(key)*.5))+"]:");
-                    for (std::string item : val.get<std::vector<std::string>>())
-                        out.push_back("   "+item);
-                }
-                return out;
-            };
-            
-            auto do_popup = [json_to_rows, JSON](std::string category, Menu& main_menu) -> void {
-                WINDOW *my_long_popup = NULL;
-                main_menu.create_popup_long(
-                    main_menu, 
-                    my_long_popup,
-                    json_to_rows(JSON[category]),
-                    {},
-                    {}
-                );
-            };
-            switch (ch1)
-            {
-            case int('b'):
-                do_popup("boots", main_menu);
-                break;
-            case int('c'):
-                do_popup("cloaks", main_menu);
-                break;
-            case int('s'):
-                do_popup("scrolls", main_menu);
-                break;
-            case int('z'):
-                do_popup("spellbooks", main_menu);
-                break;
-            case int('p'):
-                do_popup("potions", main_menu);
-                break;
-            case int('w'):
-                do_popup("wands", main_menu);
-                break;
-            case int('r'):
-                do_popup("rings", main_menu);
-                break;
-            
-            default:
-                break;
-            }
+        } else if (ch1 == int('s')) {
+            // scroll
+            my_save.set_active_price_ID(int('s'));
+            std::vector<std::pair<std::string, int>> item_list = read_json("scrolls");
+
+        } else if (ch1 == int('z')) {
+            // spellbooks
+            my_save.set_active_price_ID(int('z'));
+            std::vector<std::pair<std::string, int>> item_list = read_json("spellbooks");
+
+        } else if (ch1 == int('p')) {
+            // potions
+            my_save.set_active_price_ID(int('p'));
+            std::vector<std::pair<std::string, int>> item_list = read_json("potions");
+
+        } else if (ch1 == int('r')) {
+            // rings
+            my_save.set_active_price_ID(int('r'));
+            std::vector<std::pair<std::string, int>> item_list = read_json("rings");
+
+        } else if (ch1 == int('w')) {
+            // wands
+            my_save.set_active_price_ID(int('w'));
+            std::vector<std::pair<std::string, int>> item_list = read_json("wands");
+
         }
     }
     return 1; 
@@ -491,7 +495,7 @@ int price_ID_menu_action_handler(MainMenu & main_menu, Savefile & my_save) {
 
 int armor_ID_menu_action_handler(MainMenu & main_menu) {
     WINDOW *my_armor_ID = NULL;
-    std::vector<std::string> my_options_list = {"Helms", "Cuirasses", "Cloaks", "Glove`s", "Boots", "Shields"};
+    std::vector<std::string> my_options_list = {"Helms", "Cuirasses", "Cloaks", "Gloves", "Boots", "Shields"};
     std::string armor_ID_title = "Which class of armor would you like to see?";
     std::vector<int> progress_buttons = {int('a'),int('b'),int('c'),int('d'),int('e'),int('f')};
     std::vector<int> exit_buttons = {27, 32};

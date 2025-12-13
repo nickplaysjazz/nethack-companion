@@ -20,6 +20,7 @@ class Savefile {
         std::string filename; 
         int charisma;
         bool is_being_duped = false;
+        int active_price_ID = 0;
 
         std::vector<char> notes; 
 
@@ -32,7 +33,9 @@ class Savefile {
         std::string get_filename();
         std::vector<char> get_notes(); 
         int get_charisma(); 
+        int get_active_price_ID();
 
+        void set_active_price_ID(int new_subtable);
         void set_filename(std::string & new_filename);
         void set_intrinics(std::vector<int> & new_intrinsics);
         void set_notes(std::vector<char> & new_notes);

@@ -12,6 +12,7 @@ find_package(nlohmann_json 3.10.0 REQUIRED)
 file(GLOB SOURCES ${CMAKE_SOURCE_DIR}/src/*.cpp)
 
 #set(CMAKE_CXX_FLAGS "-Wall -Wextra -Werror")
+set(CMAKE_CXX_FLAGS "-g")
 
 add_executable(${PROJECT_NAME} ${SOURCES} ${CMAKE_SOURCE_DIR}/assets/resources.rc)
 
@@ -19,7 +20,7 @@ if (MSYS OR MINGW)
     message(STATUS "Detected MSYS2/MinGW environment — linking with ncursesw")
     target_link_libraries(${PROJECT_NAME} ncursesw)
 elseif (WIN32)
-    message(STATUS "Detected native Windows environment — linking with ncursesw (Windows build)")
+    message(STATUS "Detected native Windows environment — linking with ncursesw")
     target_link_libraries(${PROJECT_NAME} ncursesw)
 elseif (UNIX)
     message(STATUS "Detected Unix-like system — linking with ncurses")
