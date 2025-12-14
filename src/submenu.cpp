@@ -9,6 +9,7 @@
 #include <iostream>
 
 #include "../include/menu.h"
+#include "../include/io.h"
 #include "../include/savefile.h"
 #include "../include/submenu.h"
 #include "../include/utilities.h"
@@ -162,7 +163,7 @@ void MainMenu::render_menu(std::string file_title, Savefile & my_save) {
     mvwaddstr(my_main_menu_price_ID_box, 1, 25 - price_ID_title.length()/2, price_ID_title.c_str());
     wattroff(my_main_menu_price_ID_box, COLOR_PAIR(6));
 
-    std::string price_ID_cha = "Charisma: "; //FIXME: Center this
+    std::string price_ID_cha = "Charisma: ";
     mvwaddstr(my_main_menu_price_ID_box, 2, 4, price_ID_cha.c_str());
 
     std::string charisma_ch = std::to_string(my_save.get_charisma());
@@ -172,12 +173,14 @@ void MainMenu::render_menu(std::string file_title, Savefile & my_save) {
     mvwaddstr(get_my_main_menu_price_ID_box(), 2, 14, charisma_ch.c_str());
 
     wrefresh(get_my_main_menu_price_ID_box());
-    std::string price_ID_being_duped = "Being duped? "; //FIXME: Center this
+    std::string price_ID_being_duped = "Being duped? ";
     mvwaddstr(my_main_menu_price_ID_box, 2, 32, price_ID_being_duped.c_str());
 
     mvwaddstr(my_main_menu_price_ID_box, 3, 3, " ARMOR | SCROLL | BOOK | POTION | RING | WAND ");
 
-    mvwaddstr(my_main_menu_price_ID_box, 4, 2, "Buy (Sell)               Buy (Sell)           ");
+    wattron(my_main_menu_price_ID_box, COLOR_PAIR(6));
+    mvwaddstr(my_main_menu_price_ID_box, 4, 1, "Buy (Sell)               Buy (Sell)           ");
+    wattroff(my_main_menu_price_ID_box, COLOR_PAIR(6));
     mvwvline(my_main_menu_price_ID_box, 4, 25, ACS_VLINE, 21);
 
     if (my_save.get_is_being_duped() == true) {
@@ -187,6 +190,8 @@ void MainMenu::render_menu(std::string file_title, Savefile & my_save) {
         std::string print_no = "NO ";
         mvwaddstr(get_my_main_menu_price_ID_box(), 2, 45, print_no.c_str());       
     }
+
+    render_price_ID_menu_default(my_save);
 
     // armor ID
     std::string armor_ID_str = "a) ARMOR ID";
@@ -423,6 +428,100 @@ void MainMenu::render_price_ID_menu_off() {
     mvwaddstr(my_main_menu_price_ID_box, 3, 2, "  ARMOR | SCROLL | BOOK | POTION | RING | WAND ");
 
     wrefresh(my_main_menu_price_ID_box);
+}
+
+void MainMenu::render_price_ID_menu_default(Savefile & my_save) {
+    auto conv_button_to_str = [](int conv) -> std::string {
+        std::string ret = "";
+        if (conv == int('a')) 
+            ret = "armor";
+        else if (conv == int('s'))
+            ret = "scrolls";
+        else if (conv == int('z'))
+            ret = "spellbooks";
+        else if (conv == int('p'))
+            ret = "potions";
+        else if (conv == int('r'))
+            ret = "rings";
+        else if (conv == int('w'))
+            ret = "wands";
+
+        return ret;
+    };
+
+    auto read_json = [&my_save](std::string item) -> std::vector<std::pair<std::string, std::string>> {
+        nlohmann::json JSON = get_json_data("assets/prices.json");
+
+        float price_mod = 1. + (my_save.get_is_being_duped() * .33);
+        int charisma = my_save.get_charisma();
+        if (charisma <= 5)
+            price_mod *= 2.;
+        else if (charisma <= 7)
+            price_mod *= 1.5;
+        else if (charisma <= 10)
+            price_mod *= 1.33;
+        else if (charisma <= 15)
+            price_mod *= 1.;
+        else if (charisma <= 17)
+            price_mod *= 3./4.;
+        else if (charisma == 18)
+            price_mod *= 2./3.;
+        else
+            price_mod *= 1./2.;
+
+        std::vector<std::pair<std::string, std::string>> out = {};
+        for(auto& [key, val] : JSON[item].items()) {
+            int price = ceil(stoi(key) * price_mod);
+            int sell_price = (int)(stoi(key)*.5); 
+
+            if (my_save.get_is_being_duped()) {
+               price = (int)(floor(price*1.33));
+            }
+
+            std::string price_str = std::to_string(price)+" ("+std::to_string(sell_price)+")";
+
+            for (auto & i : val ) {
+                std::pair<std::string, std::string> ret = {i, price_str};
+                out.push_back(ret);
+            }
+        }
+        return out;
+    };
+
+    auto display_items = [&](std::vector<std::pair<std::string, std::string>> & itemlist) {
+        mvwvline(my_main_menu_price_ID_box, 4, 25, ACS_VLINE, 21);
+
+        int row = 0;
+        int col = 1;
+        int for_right_align = 24;
+        for (auto i : itemlist) {
+            if (row >= 20) {
+                col = 26;
+                row = 0;
+                for_right_align = 25;
+            }
+            std::string item_price = i.second;
+            std::string item_name = i.first;
+            mvwaddstr(my_main_menu_price_ID_box, 5+row, col, item_price.c_str());
+            mvwaddstr(my_main_menu_price_ID_box, 5+row, col+for_right_align - item_name.length(), item_name.c_str());
+            ++row;
+        }
+
+        wrefresh(my_main_menu_price_ID_box);
+    };
+
+    int current_sublist = my_save.get_active_price_ID();
+    std::vector<std::pair<std::string, std::string>> item_list;
+
+    if (conv_button_to_str(current_sublist) == "armor") {
+        item_list = read_json("boots");
+        std::vector<std::pair<std::string, std::string>> item_list2 = read_json("cloaks");
+        item_list.insert(item_list.end(), item_list2.begin(), item_list2.end());
+    } else {
+        item_list = read_json(conv_button_to_str(current_sublist));
+    }
+
+    display_items(item_list);
 }
 
 void MainMenu::render_armor_ID_subtable(nlohmann::json & armor) {

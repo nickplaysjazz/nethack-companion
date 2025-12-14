@@ -368,7 +368,27 @@ int price_ID_menu_action_handler(MainMenu & main_menu, Savefile & my_save) {
     
     main_menu.render_price_ID_menu_on(my_save);
 
-    auto read_json = [&my_save](std::string item) -> std::vector<std::pair<std::string, int>> {
+    WINDOW* price_ID_box = main_menu.get_my_main_menu_price_ID_box();
+
+    auto conv_button_to_str = [](int conv) -> std::string {
+        std::string ret = "";
+        if (conv == int('a')) 
+            ret = "armor";
+        else if (conv == int('s'))
+            ret = "scrolls";
+        else if (conv == int('z'))
+            ret = "spellbooks";
+        else if (conv == int('p'))
+            ret = "potions";
+        else if (conv == int('r'))
+            ret = "rings";
+        else if (conv == int('w'))
+            ret = "wands";
+
+        return ret;
+    };
+
+    auto read_json = [&my_save](std::string item) -> std::vector<std::pair<std::string, std::string>> {
         nlohmann::json JSON = get_json_data("assets/prices.json");
 
         float price_mod = 1. + (my_save.get_is_being_duped() * .33);
@@ -387,28 +407,84 @@ int price_ID_menu_action_handler(MainMenu & main_menu, Savefile & my_save) {
             price_mod *= 2./3.;
         else
             price_mod *= 1./2.;
-        
-        // sell price is (int)(stoi(key)*.5) WITHOUT the duping?
 
-        std::vector<std::pair<std::string, int>> out = {};
+        std::vector<std::pair<std::string, std::string>> out = {};
         for(auto& [key, val] : JSON[item].items()) {
             int price = ceil(stoi(key) * price_mod);
+            int sell_price = (int)(stoi(key)*.5); 
 
             if (my_save.get_is_being_duped()) {
                price = (int)(floor(price*1.33));
             }
 
+            std::string price_str = std::to_string(price)+" ("+std::to_string(sell_price)+")";
+
             for (auto & i : val ) {
-                std::pair<std::string, int> ret = {i, price};
+                std::pair<std::string, std::string> ret = {i, price_str};
                 out.push_back(ret);
             }
         }
-
         return out;
     };
-    
+
+    auto display_items = [&main_menu](std::vector<std::pair<std::string, std::string>> & itemlist) {
+        WINDOW* price_ID_box = main_menu.get_my_main_menu_price_ID_box();
+        // clear previous
+        for (int k = 0; k < 20; ++k) {
+            std::string clear = "                                                  ";
+            mvwaddstr(price_ID_box, 5+k, 1, clear.c_str());
+        }
+        mvwvline(price_ID_box, 4, 25, ACS_VLINE, 21);
+
+        int row = 0;
+        int col = 1;
+        int for_right_align = 24;
+        for (auto i : itemlist) {
+            if (row >= 20) {
+                col = 26;
+                row = 0;
+                for_right_align = 25;
+            }
+            std::string item_price = i.second;
+            std::string item_name = i.first;
+            mvwaddstr(price_ID_box, 5+row, col, item_price.c_str());
+            mvwaddstr(price_ID_box, 5+row, col+for_right_align - item_name.length(), item_name.c_str());
+            ++row;
+        }
+
+        wrefresh(price_ID_box);
+    };
+
     bool is_inner_loop_running = true;
+    int current_sublist = my_save.get_active_price_ID();
+    std::vector<std::pair<std::string, std::string>> item_list;
+
+    if (conv_button_to_str(current_sublist) == "armor") {
+        item_list = read_json("boots");
+        std::vector<std::pair<std::string, std::string>> item_list2 = read_json("cloaks");
+        item_list.insert(item_list.end(), item_list2.begin(), item_list2.end());
+    } else {
+        item_list = read_json(conv_button_to_str(current_sublist));
+    }
+
+    bool do_update = true;
     while (is_inner_loop_running) {
+
+        if (do_update == true) {
+            int current_sublist = my_save.get_active_price_ID();
+            std::vector<std::pair<std::string, std::string>> item_list;
+
+            if (conv_button_to_str(current_sublist) == "armor") {
+                item_list = read_json("boots");
+                std::vector<std::pair<std::string, std::string>> item_list2 = read_json("cloaks");
+                item_list.insert(item_list.end(), item_list2.begin(), item_list2.end());
+            } else {
+                item_list = read_json(conv_button_to_str(current_sublist));
+            }
+            display_items(item_list);
+            do_update = false;
+        }
+
         int ch1 = getch();
 
         if (ch1 == 27) {
@@ -427,8 +503,9 @@ int price_ID_menu_action_handler(MainMenu & main_menu, Savefile & my_save) {
                 if (charisma_ch.size() != 2) {
                     charisma_ch = " " + charisma_ch;
                 }
-                mvwaddstr(main_menu.get_my_main_menu_price_ID_box(), 2, 14, charisma_ch.c_str());
-                wrefresh(main_menu.get_my_main_menu_price_ID_box());
+                mvwaddstr(price_ID_box, 2, 14, charisma_ch.c_str());
+                wrefresh(price_ID_box);
+                do_update = true;
             }
         } else if (ch1 == 258 || ch1 == 260) {
             // down or left arrow
@@ -442,52 +519,48 @@ int price_ID_menu_action_handler(MainMenu & main_menu, Savefile & my_save) {
                     charisma_ch = " " + charisma_ch;
                 }
 
-                mvwaddstr(main_menu.get_my_main_menu_price_ID_box(), 2, 14, charisma_ch.c_str());
-                wrefresh(main_menu.get_my_main_menu_price_ID_box());
+                mvwaddstr(price_ID_box, 2, 14, charisma_ch.c_str());
+                wrefresh(price_ID_box);
+                do_update = true;
             }
         } else if (ch1 == 10) {
             // enter
             my_save.flip_is_being_duped();
             if (my_save.get_is_being_duped() == true) {
                 std::string print_yes = "YES";
-                mvwaddstr(main_menu.get_my_main_menu_price_ID_box(), 2, 45, print_yes.c_str());
+                mvwaddstr(price_ID_box, 2, 45, print_yes.c_str());
             } else {
                 std::string print_no = "NO ";
-                mvwaddstr(main_menu.get_my_main_menu_price_ID_box(), 2, 45, print_no.c_str());       
+                mvwaddstr(price_ID_box, 2, 45, print_no.c_str());       
             }
-            wrefresh(main_menu.get_my_main_menu_price_ID_box());
+            wrefresh(price_ID_box);
+            do_update = true;
         } else if (ch1 == int('a')) {
             // armor
             my_save.set_active_price_ID(int('a'));
-            std::vector<std::pair<std::string, int>> item_list = read_json("boots");
-            std::vector<std::pair<std::string, int>> item_list2 = read_json("cloaks");
-            item_list.insert(item_list.end(), item_list2.begin(), item_list2.end());
-
+            do_update = true;
         } else if (ch1 == int('s')) {
             // scroll
             my_save.set_active_price_ID(int('s'));
-            std::vector<std::pair<std::string, int>> item_list = read_json("scrolls");
-
+            do_update = true;
         } else if (ch1 == int('z')) {
             // spellbooks
             my_save.set_active_price_ID(int('z'));
-            std::vector<std::pair<std::string, int>> item_list = read_json("spellbooks");
-
+            do_update = true;
         } else if (ch1 == int('p')) {
             // potions
             my_save.set_active_price_ID(int('p'));
-            std::vector<std::pair<std::string, int>> item_list = read_json("potions");
-
+            do_update = true;
         } else if (ch1 == int('r')) {
             // rings
             my_save.set_active_price_ID(int('r'));
-            std::vector<std::pair<std::string, int>> item_list = read_json("rings");
-
+            do_update = true;
         } else if (ch1 == int('w')) {
             // wands
             my_save.set_active_price_ID(int('w'));
-            std::vector<std::pair<std::string, int>> item_list = read_json("wands");
-
+            do_update = true;
+        } else {
+            do_update = false;
         }
     }
     return 1; 

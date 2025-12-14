@@ -11,7 +11,7 @@
         "50": [
             "Jumping boots",
             "Speed boots",
-            "Water walking boots"
+            "Water walk boots"
         ]
     },
     "cloaks": {
@@ -24,228 +24,228 @@
         ],
         "50": [
             "Alchemy smock",
-            "Cloak of displacement",
+            "Cloak of displ",
             "Dwarvish cloak",
             "Oilskin cloak",
-            "Cloak of protection",
+            "Cloak of prot",
             "Robe"
         ],
         "60": [
             "Elven cloak",
-            "Cloak of invisibility",
-            "Cloak of magic resistance"
+            "Cloak of invis",
+            "Cloak of magic r"
         ]
     },
     "scrolls": {
         "20": [
-            "Scroll of identify"
+            "identify"
         ],
         "50": [
-            "Scroll of light"
+            "light"
         ],
         "60": [
-            "Scroll of blank paper",
-            "Scroll of enchant weapon"
+            "blank paper",
+            "enchant weapon"
         ],
         "80": [
-            "Scroll of enchant armor",
-            "Scroll of remove curse"
+            "enchant armor",
+            "remove curse"
         ],
         "100": [
-            "Scroll of confuse monster",
-            "Scroll of destroy armor",
-            "Scroll of fire",
-            "Scroll of food detection",
-            "Scroll of gold detection",
-            "Scroll of magic mapping",
-            "Scroll of scare monster",
-            "Scroll of teleportation"
+            "confuse monst",
+            "destroy armor",
+            "fire",
+            "food detection",
+            "gold detection",
+            "magic mapping",
+            "scare monster",
+            "teleportation"
         ],
         "200": [
-            "Scroll of amnesia",
-            "Scroll of create monster",
-            "Scroll of earth",
-            "Scroll of taming"
+            "amnesia",
+            "create monst",
+            "earth",
+            "taming"
         ],
         "300": [
-            "Scroll of charging",
-            "Scroll of genocide",
-            "Scroll of punishment",
-            "Scroll of stinking cloud"
+            "charging",
+            "genocide",
+            "punishment",
+            "stinking cloud"
         ]
     },
     "potions": {
         "0": [
-            "Potion of water"
+            "water"
         ],
         "50": [
-            "Potion of booze",
-            "Potion of fruit juice",
-            "Potion of see invisible",
-            "Potion of sickness"
+            "booze",
+            "fruit juice",
+            "see invisible",
+            "sickness"
         ],
         "100": [
-            "Potion of confusion",
-            "Potion of extra healing",
-            "Potion of hallucination",
-            "Potion of healing",
-            "Potion of holy water",
-            "Potion of unholy water",
-            "Potion of restore ability",
-            "Potion of sleeping"
+            "confusion",
+            "extra healing",
+            "hallucination",
+            "healing",
+            "holy water",
+            "unholy water",
+            "restore ability",
+            "sleeping"
         ],
         "150": [
-            "Potion of blindness",
-            "Potion of gain energy",
-            "Potion of invisibility",
-            "Potion of monster detection",
-            "Potion of object detection"
+            "blindness",
+            "gain energy",
+            "invisibility",
+            "monst detection",
+            "obj detection"
         ],
         "200": [
-            "Potion of enlightenment",
-            "Potion of full healing",
-            "Potion of levitation",
-            "Potion of polymorph",
-            "Potion of speed"
+            "enlightenment",
+            "full healing",
+            "levitation",
+            "polymorph",
+            "speed"
         ],
         "250": [
-            "Potion of acid",
-            "Potion of oil"
+            "acid",
+            "oil"
         ],
         "300": [
-            "Potion of gain ability",
-            "Potion of gain level",
-            "Potion of paralysis"
+            "gain ability",
+            "gain level",
+            "paralysis"
         ]
     },
     "rings": {
         "100": [
-            "Ring of adornment",
-            "Ring of hunger",
-            "Ring of protection",
-            "Ring of protection from shape changers",
-            "Ring of stealth",
-            "Ring of sustain ability",
-            "Ring of warning"
+            "adornment",
+            "hunger",
+            "protection",
+            "prot fr sh chg",
+            "stealth",
+            "sustain ability",
+            "warning"
         ],
         "150": [
-            "Ring of aggravate monster",
-            "Ring of cold resistance",
-            "Ring of gain constitution",
-            "Ring of gain strength",
-            "Ring of increase accuracy",
-            "Ring of increase damage",
-            "Ring of invisibility",
-            "Ring of poison resistance",
-            "Ring of see invisible",
-            "Ring of shock resistance"
+            "aggravate monst",
+            "cold resistance",
+            "gain CON",
+            "gain STR",
+            "incr accuracy",
+            "incr damage",
+            "invisibility",
+            "poison resist",
+            "see invisible",
+            "shock resist"
         ],
         "200": [
-            "Ring of fire resistance",
-            "Ring of free action",
-            "Ring of levitation",
-            "Ring of regeneration",
-            "Ring of searching",
-            "Ring of slow digestion",
-            "Ring of teleportation"
+            "fire resist",
+            "free action",
+            "levitation",
+            "regeneration",
+            "searching",
+            "slow digestion",
+            "teleportation"
         ],
         "300": [
-            "Ring of conflict",
-            "Ring of polymorph",
-            "Ring of polymorph control",
-            "Ring of teleport control"
+            "conflict",
+            "polymorph",
+            "polymorph contr",
+            "teleport contr"
         ]
     },
     "wands": {
         "100": [
-            "Wand of light",
-            "Wand of nothing"
+            "light",
+            "nothing"
         ],
         "150": [
-            "Wand of digging",
-            "Wand of enlightenment",
-            "Wand of locking",
-            "Wand of magic missile",
-            "Wand of make invisible",
-            "Wand of opening",
-            "Wand of probing",
-            "Wand of secret door detection",
-            "Wand of slow monster",
-            "Wand of speed monster",
-            "Wand of striking",
-            "Wand of undead turning"
+            "digging",
+            "enlightenment",
+            "locking",
+            "magic missile",
+            "make invisible",
+            "opening",
+            "probing",
+            "secr door det",
+            "slow monster",
+            "speed monster",
+            "striking",
+            "undead turning"
         ],
         "175": [
-            "Wand of cold",
-            "Wand of fire",
-            "Wand of lightning",
-            "Wand of sleep"
+            "cold",
+            "fire",
+            "lightning",
+            "sleep"
         ],
         "200": [
-            "Wand of cancellation",
-            "Wand of create monster",
-            "Wand of polymorph",
-            "Wand of teleportation"
+            "cancellation",
+            "create monst",
+            "polymorph",
+            "teleportation"
         ],
         "500": [
-            "Wand of death",
-            "Wand of wishing"
+            "death",
+            "wishing"
         ]
     },
     "spellbooks": {
         "100": [
-            "Spellbook of force bolt",
-            "Spellbook of protection",
-            "Spellbook of detect monsters",
-            "Spellbook of light",
-            "Spellbook of sleep",
-            "Spellbook of jumping",
-            "Spellbook of healing",
-            "Spellbook of knock"
+            "force bolt",
+            "protection",
+            "detect monsters",
+            "light",
+            "sleep",
+            "jumping",
+            "healing",
+            "knock"
         ],
         "200": [
-            "Spellbook of magic missile",
-            "Spellbook of drain life",
-            "Spellbook of create monster",
-            "Spellbook of detect food",
-            "Spellbook of confuse monster",
-            "Spellbook of slow monster",
-            "Spellbook of cure blindness",
-            "Spellbook of wizard lock"
+            "magic missile",
+            "drain life",
+            "create monst",
+            "detect food",
+            "confuse monst",
+            "slow monster",
+            "cure blindness",
+            "wizard lock"
         ],
         "300": [
-            "Spellbook of remove curse",
-            "Spellbook of clairvoyance",
-            "Spellbook of detect unseen",
-            "Spellbook of identify",
-            "Spellbook of cause fear",
-            "Spellbook of charm monster",
-            "Spellbook of haste self",
-            "Spellbook of cure sickness",
-            "Spellbook of extra healing",
-            "Spellbook of stone to flesh"
+            "remove curse",
+            "clairvoyance",
+            "detect unseen",
+            "identify",
+            "cause fear",
+            "charm monster",
+            "haste self",
+            "cure sickness",
+            "extra healing",
+            "stone to flesh"
         ],
         "400": [
-            "Spellbook of cone of cold",
-            "Spellbook of fireball",
-            "Spellbook of detect treasure",
-            "Spellbook of invisibility",
-            "Spellbook of levitation",
-            "Spellbook of restore ability"
+            "cone of cold",
+            "fireball",
+            "detect treasure",
+            "invisibility",
+            "levitation",
+            "restore ability"
         ],
         "500": [
-            "Spellbook of magic mapping",
-            "Spellbook of dig"
+            "magic mapping",
+            "dig"
         ],
         "600": [
-            "Spellbook of create familiar",
-            "Spellbook of turn undead",
-            "Spellbook of teleport away",
-            "Spellbook of polymorph"
+            "create familiar",
+            "turn undead",
+            "teleport away",
+            "polymorph"
         ],
         "700": [
-            "Spellbook of finger of death",
-            "Spellbook of cancellation"
+            "finger of death",
+            "cancellation"
         ]
     }
 }
