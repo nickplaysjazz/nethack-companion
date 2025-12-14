@@ -420,7 +420,7 @@ void MainMenu::render_price_ID_menu_on(Savefile & my_save) {
     std::vector<std::pair<int, std::string>> title = {{int('a')," a)ARMOR"}, {int('s'),"s)SCROLL"}, {int('z'),"z)BOOK"}, {int('p'),"p)POTION"}, {int('r'),"r)RING"}, {int('w'),"w)WAND "}};
     wmove(my_main_menu_price_ID_box, 3, 1);
     std::string delim = " ";
-    for (auto v : title) {
+    for (auto & v : title) {
         chtype c = color_title(my_save.get_active_price_ID(), v.first);
         if (c != COLOR_PAIR(1)) {
             wattron(my_main_menu_price_ID_box, A_STANDOUT);
@@ -460,7 +460,7 @@ void MainMenu::render_price_ID_menu_off(Savefile & my_save) {
     wmove(my_main_menu_price_ID_box, 3, 1);
     std::string delim = " | ";
     waddstr(my_main_menu_price_ID_box, delim.c_str());
-    for (auto v : title) {
+    for (auto & v : title) {
         chtype c = color_title(my_save.get_active_price_ID(), v.first);
         wattron(my_main_menu_price_ID_box, c);
         waddstr(my_main_menu_price_ID_box, v.second.c_str());
@@ -519,7 +519,17 @@ void MainMenu::render_price_ID_menu_default(Savefile & my_save) {
             price_mod *= 1./2.;
 
         std::vector<std::pair<std::string, std::string>> out = {};
-        for(auto& [key, val] : JSON[item].items()) {
+
+        auto& obj = JSON[item];
+        std::vector<std::pair<std::string, nlohmann::json>> entries;
+
+        for (auto& [key, val] : obj.items()) {
+            entries.emplace_back(key, val);
+        }
+
+        std::sort(entries.begin(), entries.end(), [](const auto& a, const auto& b) {return std::stoi(a.first) < std::stoi(b.first);});
+
+        for(auto& [key, val] : entries) {
             int price = ceil(stoi(key) * price_mod);
             int sell_price = (int)(stoi(key)*.5); 
 
@@ -543,7 +553,7 @@ void MainMenu::render_price_ID_menu_default(Savefile & my_save) {
         int row = 0;
         int col = 1;
         int for_right_align = 24;
-        for (auto i : itemlist) {
+        for (auto & i : itemlist) {
             if (row >= 20) {
                 col = 26;
                 row = 0;
@@ -560,7 +570,7 @@ void MainMenu::render_price_ID_menu_default(Savefile & my_save) {
         wmove(my_main_menu_price_ID_box, 3, 1);
         std::string delim = " | ";
         waddstr(my_main_menu_price_ID_box, delim.c_str());
-        for (auto v : title) {
+        for (auto & v : title) {
             chtype c = color_title(my_save.get_active_price_ID(), v.first);
             wattron(my_main_menu_price_ID_box, c);
             waddstr(my_main_menu_price_ID_box, v.second.c_str());
@@ -576,6 +586,8 @@ void MainMenu::render_price_ID_menu_default(Savefile & my_save) {
 
     if (conv_button_to_str(current_sublist) == "armor") {
         item_list = read_json("boots");
+        std::pair<std::string,std::string> delim = {"",""};
+        item_list.push_back(delim);
         std::vector<std::pair<std::string, std::string>> item_list2 = read_json("cloaks");
         item_list.insert(item_list.end(), item_list2.begin(), item_list2.end());
     } else {

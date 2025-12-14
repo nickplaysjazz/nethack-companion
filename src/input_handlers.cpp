@@ -417,7 +417,16 @@ int price_ID_menu_action_handler(MainMenu & main_menu, Savefile & my_save) {
             price_mod *= 1./2.;
 
         std::vector<std::pair<std::string, std::string>> out = {};
-        for(auto& [key, val] : JSON[item].items()) {
+        auto& obj = JSON[item];
+        std::vector<std::pair<std::string, nlohmann::json>> entries;
+
+        for (auto& [key, val] : obj.items()) {
+            entries.emplace_back(key, val);
+        }
+
+        std::sort(entries.begin(), entries.end(), [](const auto& a, const auto& b) {return std::stoi(a.first) < std::stoi(b.first);});
+
+        for(auto& [key, val] : entries) {
             int price = ceil(stoi(key) * price_mod);
             int sell_price = (int)(stoi(key)*.5); 
 
@@ -486,6 +495,8 @@ int price_ID_menu_action_handler(MainMenu & main_menu, Savefile & my_save) {
 
     if (conv_button_to_str(current_sublist) == "armor") {
         item_list = read_json("boots");
+            std::pair<std::string,std::string> delim = {"",""};
+        item_list.push_back(delim);
         std::vector<std::pair<std::string, std::string>> item_list2 = read_json("cloaks");
         item_list.insert(item_list.end(), item_list2.begin(), item_list2.end());
     } else {
@@ -501,6 +512,8 @@ int price_ID_menu_action_handler(MainMenu & main_menu, Savefile & my_save) {
 
             if (conv_button_to_str(current_sublist) == "armor") {
                 item_list = read_json("boots");
+                std::pair<std::string,std::string> delim = {"",""};
+                item_list.push_back(delim);
                 std::vector<std::pair<std::string, std::string>> item_list2 = read_json("cloaks");
                 item_list.insert(item_list.end(), item_list2.begin(), item_list2.end());
             } else {
