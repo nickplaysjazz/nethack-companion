@@ -397,6 +397,14 @@ void MainMenu::render_notes_menu_off() {
 }
 
 void MainMenu::render_price_ID_menu_on(Savefile & my_save) {
+    auto color_title = [](int current_active_color, int check_this) -> chtype {
+        if (check_this == current_active_color) {
+            return COLOR_PAIR(6);
+        } else {
+            return COLOR_PAIR(1);
+        }
+    };
+
     std::string price_ID_title = "PRICE ID p)";
     wattron(my_main_menu_price_ID_box, COLOR_PAIR(6));
     wattron(my_main_menu_price_ID_box, A_STANDOUT);
@@ -409,14 +417,37 @@ void MainMenu::render_price_ID_menu_on(Savefile & my_save) {
     std::string dupe_instr = "(use enter key)";
     mvwaddstr(my_main_menu_price_ID_box, 1, 36, dupe_instr.c_str());
 
-    mvwaddstr(my_main_menu_price_ID_box, 3, 2, "a)ARMOR s)SCROLL z)BOOK p)POTION r)RING w)WAND");
+    std::vector<std::pair<int, std::string>> title = {{int('a')," a)ARMOR"}, {int('s'),"s)SCROLL"}, {int('z'),"z)BOOK"}, {int('p'),"p)POTION"}, {int('r'),"r)RING"}, {int('w'),"w)WAND "}};
+    wmove(my_main_menu_price_ID_box, 3, 1);
+    std::string delim = " ";
+    for (auto v : title) {
+        chtype c = color_title(my_save.get_active_price_ID(), v.first);
+        if (c != COLOR_PAIR(1)) {
+            wattron(my_main_menu_price_ID_box, A_STANDOUT);
+        }
+        wattron(my_main_menu_price_ID_box, c);
+        waddstr(my_main_menu_price_ID_box, v.second.c_str());
+        wattroff(my_main_menu_price_ID_box, c);
+        if (c != COLOR_PAIR(1)) {
+            wattroff(my_main_menu_price_ID_box, A_STANDOUT);
+        }
+        waddstr(my_main_menu_price_ID_box, delim.c_str());
+    }
     
     // will render in render_prices
     my_save.is_active();
     wrefresh(my_main_menu_price_ID_box);
 }
 
-void MainMenu::render_price_ID_menu_off() {
+void MainMenu::render_price_ID_menu_off(Savefile & my_save) {
+    auto color_title = [](int current_active_color, int check_this) -> chtype {
+        if (check_this == current_active_color) {
+            return COLOR_PAIR(6);
+        } else {
+            return COLOR_PAIR(1);
+        }
+    };
+
     std::string cha_instr = "                                                  ";
     mvwaddstr(my_main_menu_price_ID_box, 1, 1, cha_instr.c_str());
 
@@ -425,12 +456,30 @@ void MainMenu::render_price_ID_menu_off() {
     mvwaddstr(my_main_menu_price_ID_box, 1, 25 - price_ID_title.length()/2, price_ID_title.c_str());
     wattroff(my_main_menu_price_ID_box, COLOR_PAIR(6));
 
-    mvwaddstr(my_main_menu_price_ID_box, 3, 2, "  ARMOR | SCROLL | BOOK | POTION | RING | WAND ");
+    std::vector<std::pair<int, std::string>> title = {{int('a'),"ARMOR"}, {int('s'),"SCROLL"}, {int('z'),"BOOK"}, {int('p'),"POTION"}, {int('r'),"RING"}, {int('w'),"WAND"}};
+    wmove(my_main_menu_price_ID_box, 3, 1);
+    std::string delim = " | ";
+    waddstr(my_main_menu_price_ID_box, delim.c_str());
+    for (auto v : title) {
+        chtype c = color_title(my_save.get_active_price_ID(), v.first);
+        wattron(my_main_menu_price_ID_box, c);
+        waddstr(my_main_menu_price_ID_box, v.second.c_str());
+        wattroff(my_main_menu_price_ID_box, c);
+        waddstr(my_main_menu_price_ID_box, delim.c_str());
+    }
 
     wrefresh(my_main_menu_price_ID_box);
 }
 
 void MainMenu::render_price_ID_menu_default(Savefile & my_save) {
+    auto color_title = [](int current_active_color, int check_this) -> chtype {
+        if (check_this == current_active_color) {
+            return COLOR_PAIR(6);
+        } else {
+            return COLOR_PAIR(1);
+        }
+    };
+
     auto conv_button_to_str = [](int conv) -> std::string {
         std::string ret = "";
         if (conv == int('a')) 
@@ -505,6 +554,18 @@ void MainMenu::render_price_ID_menu_default(Savefile & my_save) {
             mvwaddstr(my_main_menu_price_ID_box, 5+row, col, item_price.c_str());
             mvwaddstr(my_main_menu_price_ID_box, 5+row, col+for_right_align - item_name.length(), item_name.c_str());
             ++row;
+        }
+
+        std::vector<std::pair<int, std::string>> title = {{int('a'),"ARMOR"}, {int('s'),"SCROLL"}, {int('z'),"BOOK"}, {int('p'),"POTION"}, {int('r'),"RING"}, {int('w'),"WAND"}};
+        wmove(my_main_menu_price_ID_box, 3, 1);
+        std::string delim = " | ";
+        waddstr(my_main_menu_price_ID_box, delim.c_str());
+        for (auto v : title) {
+            chtype c = color_title(my_save.get_active_price_ID(), v.first);
+            wattron(my_main_menu_price_ID_box, c);
+            waddstr(my_main_menu_price_ID_box, v.second.c_str());
+            wattroff(my_main_menu_price_ID_box, c);
+            waddstr(my_main_menu_price_ID_box, delim.c_str());
         }
 
         wrefresh(my_main_menu_price_ID_box);

@@ -370,6 +370,14 @@ int price_ID_menu_action_handler(MainMenu & main_menu, Savefile & my_save) {
 
     WINDOW* price_ID_box = main_menu.get_my_main_menu_price_ID_box();
 
+    auto color_title = [](int current_active_color, int check_this) -> chtype {
+        if (check_this == current_active_color) {
+            return COLOR_PAIR(6);
+        } else {
+            return COLOR_PAIR(1);
+        }
+    };
+
     auto conv_button_to_str = [](int conv) -> std::string {
         std::string ret = "";
         if (conv == int('a')) 
@@ -427,7 +435,7 @@ int price_ID_menu_action_handler(MainMenu & main_menu, Savefile & my_save) {
         return out;
     };
 
-    auto display_items = [&main_menu](std::vector<std::pair<std::string, std::string>> & itemlist) {
+    auto display_items = [&main_menu, &color_title](int current_select, std::vector<std::pair<std::string, std::string>> & itemlist) {
         WINDOW* price_ID_box = main_menu.get_my_main_menu_price_ID_box();
         // clear previous
         for (int k = 0; k < 20; ++k) {
@@ -450,6 +458,23 @@ int price_ID_menu_action_handler(MainMenu & main_menu, Savefile & my_save) {
             mvwaddstr(price_ID_box, 5+row, col, item_price.c_str());
             mvwaddstr(price_ID_box, 5+row, col+for_right_align - item_name.length(), item_name.c_str());
             ++row;
+        }
+
+        std::vector<std::pair<int, std::string>> title = {{int('a')," a)ARMOR"}, {int('s'),"s)SCROLL"}, {int('z'),"z)BOOK"}, {int('p'),"p)POTION"}, {int('r'),"r)RING"}, {int('w'),"w)WAND "}};
+        wmove(price_ID_box, 3, 1);
+        std::string delim = " ";
+        for (auto v : title) {
+            chtype c = color_title(current_select, v.first);
+            if (c != COLOR_PAIR(1)) {
+                wattron(price_ID_box, A_STANDOUT);
+            }
+            wattron(price_ID_box, c);
+            waddstr(price_ID_box, v.second.c_str());
+            wattroff(price_ID_box, c);
+            if (c != COLOR_PAIR(1)) {
+                wattroff(price_ID_box, A_STANDOUT);
+            }
+            waddstr(price_ID_box, delim.c_str());
         }
 
         wrefresh(price_ID_box);
@@ -481,7 +506,7 @@ int price_ID_menu_action_handler(MainMenu & main_menu, Savefile & my_save) {
             } else {
                 item_list = read_json(conv_button_to_str(current_sublist));
             }
-            display_items(item_list);
+            display_items(current_sublist, item_list);
             do_update = false;
         }
 
@@ -489,7 +514,7 @@ int price_ID_menu_action_handler(MainMenu & main_menu, Savefile & my_save) {
 
         if (ch1 == 27) {
             // escape
-            main_menu.render_price_ID_menu_off();
+            main_menu.render_price_ID_menu_off(my_save);
 
             is_inner_loop_running = false;
         } else if (ch1 == 259 || ch1 == 261) {

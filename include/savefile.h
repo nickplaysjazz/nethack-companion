@@ -20,7 +20,7 @@ class Savefile {
         std::string filename; 
         int charisma;
         bool is_being_duped = false;
-        int active_price_ID = 0;
+        int active_price_ID = int('a');
 
         std::vector<char> notes; 
 

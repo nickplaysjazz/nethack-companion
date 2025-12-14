@@ -16,6 +16,7 @@ Savefile::Savefile(
     intrinsics = std::vector<int> ((int)properties_list.size(), 0);
     notes = std::vector<char> (784, int(' '));
     charisma = 10;
+    active_price_ID = int('a');
 };
 
 void Savefile::clear() {
@@ -25,6 +26,7 @@ void Savefile::clear() {
     filename = "";
     notes = std::vector<char> (784, int(' '));
     charisma = 10;
+    active_price_ID = int('a');
 }
 
 std::vector<int> Savefile::get_intrinsics() {

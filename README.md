@@ -54,21 +54,15 @@ The icon file nhc_icon.xpm utilizes modified tile files from the vanilla NetHack
 ## TO DO
 Version 1.0: 
 - Handle resizing window, or preventing window resizing. (This may be impossible with ncurses, need to look into this)
-- Better price list handling (if list is too long, it just spills onto a second table. Can we make it the table double-column instead?). 
 - New submenu in lower middle-right: Prayer timeout counter with % chance
 - Intrinsics improvements: add additional uncommon intrinsics in another menu (protection from shape changers, aggravate monsters, amphibiousness, conflict, food appraisal, hunger, jumping, unbreathing)
 
 Stretch goals:
 - Checklist -- user can add items and check them off? 
 - Better notes section handling (functioning delete key, word bumps to next line when reaching end of line, typing/deleting before a set of words moves words, maybe even vertical scrolling, etc.)
-- NetHack message lookup menu (maybe just 'you feel' & 'you hear' messages?)
 - Sink ring ID table
-- Display start date of run
-- Speedrun timer
-- Input file improvements (use checksum on input file, use binary file for inputs/maybe json, use istream c++ features)
 - Create help button with "?" that shows controls
 - Ability to change filename. Chop off prepended spaces in file names. Prevent overwriting of file names. 
 - Perhaps name can include the NetHack VAL-DWA-LAW-etc. notation. Could also pregen intrinsics from this? 
 - Handle capital keyboard inputs versus lowercase?
 - C++ improvements: use constexpr on utilities, use arrays instead of only vectors, double-check passing by copying in functions
-- Edible monster improvements (a little bit cleaner interface, maybe deliberately show a specific word/symbol when something is safe to eat)

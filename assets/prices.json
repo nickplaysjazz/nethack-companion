@@ -1,39 +1,39 @@
 {
     "boots": {
         "8": [
-            "Elven boots",
-            "Kicking boots"
+            "elven boots",
+            "kicking boots"
         ],
         "30": [
-            "Fumble boots",
-            "Levitation boots"
+            "fumble boots",
+            "levitation boots"
         ],
         "50": [
-            "Jumping boots",
-            "Speed boots",
-            "Water walk boots"
+            "jumping boots",
+            "speed boots",
+            "water walk boots"
         ]
     },
     "cloaks": {
         "2": [
-            "Mummy wrapping"
+            "mummy wrapping"
         ],
         "40": [
-            "Leather cloak",
-            "Orcish cloak"
+            "leather cloak",
+            "orcish cloak"
         ],
         "50": [
-            "Alchemy smock",
-            "Cloak of displ",
-            "Dwarvish cloak",
-            "Oilskin cloak",
-            "Cloak of prot",
-            "Robe"
+            "alchemy smock",
+            "cloak of displ",
+            "dwarvish cloak",
+            "oilskin cloak",
+            "cloak of prot",
+            "robe"
         ],
         "60": [
-            "Elven cloak",
-            "Cloak of invis",
-            "Cloak of magic r"
+            "elven cloak",
+            "cloak of invis",
+            "cloak of magic r"
         ]
     },
     "scrolls": {
