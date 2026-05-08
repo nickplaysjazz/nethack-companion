@@ -11,3 +11,5 @@ Makefile
 NetHack_Companion
 assets/NetHack_Companion.desktop
 **/install_manifest.txt
+_deps
+build/*

@@ -1,40 +1,30 @@
 # nethack-companion
-A simple ASCII ncurses app to contain useful NetHack character information between runs.  
+A simple ASCII ncurses app to contain useful NetHack character information between runs, updated for NetHack 5.0.
 
-With this app, you can keep track of your character's intrinsics, see a price ID table, take notes, practice Sokoban levels (including 3.7 flips/rotations), and more.
+With this app, you can keep track of your character's intrinsics, see a price ID table, take notes, practice Sokoban levels (including flipped & rotated Sokoban levels), and more.
 
-## Installation
+## Building from Source
 
-On Windows devices, the NetHack Companion app is most easily compiled with a shell such as [MSYS2](https://www.msys2.org/). Linux and Mac users should be able to use their default terminal. 
+1) **Open a terminal.**
+    - Windows devices: the NetHack Companion app is easily compiled with a shell such as MSYS2. Download [MSYS2](https://www.msys2.org/) and open the UCRT64 terminal. The package manager [pacman](https://www.msys2.org/docs/package-management/) should be installed.
+    - MacOS devices: the default terminal should work. If you do not have it installed, [Homebrew](https://brew.sh/) is the standard package manager for Mac. In the terminal, run `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
+    - Linux devices: the default terminal should work. For Debian Linux distributions, use the package manager [apt-get](https://wiki.debian.org/AptCLI). For Arch Linux, use the [pacman](https://www.msys2.org/docs/package-management/) package manager. For Red Hat-based Linux distributions, use the [DNF](https://rpm-software-management.github.io/) package manager.
 
-The NetHack Companion uses CMake for consistent building. 
+2) **Install prerequisite packages.**
+    - Windows devices: run the command `pacman -S mingw-w64-ucrt-x86_64-gcc mingw-w64-ucrt-x86_64-cmake mingw-w64-ucrt-x86_64-ncurses mingw-w64-ucrt-x86_64-pkg-config make`
+    - MacOS devices: run the command `brew install cmake ncurses`
+    - Linux devices: using the appropriate package manager, install the prerequisite packages. For apt-get, run `sudo apt update && sudo apt install -y build-essential cmake libncursesw5-dev`
 
-### 1) **Install necessary prerequisite packages.**
+3) **In the `build` subdirectory, build with `cmake ..` then `make`.**
 
-Install the following using a package manager such as [pacman](https://www.msys2.org/docs/package-management/) for MSYS2 and Arch Linux, [brew](https://brew.sh/) for Mac, or [apt-get](https://wiki.debian.org/AptCLI) on Debian Linux.
-- A C/C++ compiler such as [gcc](https://www.gcc.gnu.org/) or [Clang](https://www.clang.llvm.org/).
-- The [make](https://www.gnu.org/software/make) command.
-- The [cmake](https://www.cmake.org/) command.
-- The [nlohmann-json](https://github.com/nlohmann/json) package.
-- The [ncurses-dev](https://invisible-island.net/ncurses/) package, which may or may not be separate from the ncurses package depending on your OS. You should likely install both, should they be separately available.
+    This should generate the NetHack_Companion executable.
 
-### 2) **Build the executable.**
+4) **Optional: run `make install` to add a NetHack Companion shortcut.**
 
-Navigate to the NetHack Companion repository directory (the same directory this README is in) in your terminal and execute:
+    On Windows, a NetHack Companion shortcut will be added to your Start Menu.
 
-`cmake . & make`
+    On Linux, a NetHack Companion will be added to the Menu applet under the Games category.
 
-This should generate the NetHack_Companion executable.
-
-### 3) **OPTIONAL: add the executable as an installation.**
-
-After building the executable, navigate to the NetHack Companion repository directory (the same directory this README is in) in your terminal and execute: 
-
-`make install`
-
-On Linux, NetHack Companion will be added to the Menu applet under the Games category.
-
-On Windows, a NetHack Companion shortcut will be added to the start menu.
 
 ## Contributing
 Bug reports via GitHub's issues feature are welcome. When describing an issue, please include a minimal reproducible example, the expected behavior, and the actual behavior. 
@@ -51,18 +41,16 @@ The FIGlet ASCII font "Standard" was created by Glenn Chappell & Ian Chai 3/93 b
 
 The icon file nhc_icon.xpm utilizes modified tile files from the vanilla NetHack source code. These file are modified and used under the NetHack General Public License, a copy of which is included in the /assets/ directory as NH_LICENSE.
 
-## TO DO
-Version 1.0: 
-- Handle resizing window, or preventing window resizing. (This may be impossible with ncurses, need to look into this)
-- New submenu in lower middle-right: Prayer timeout counter with % chance
-- Intrinsics improvements: add additional uncommon intrinsics in another menu (protection from shape changers, aggravate monsters, amphibiousness, conflict, food appraisal, hunger, jumping, unbreathing)
+### To-Do
+Beta release: 
+- Pre-compiled binaries available via GitHub releases feature
 
-Stretch goals:
-- Checklist -- user can add items and check them off? 
-- Better notes section handling (functioning delete key, word bumps to next line when reaching end of line, typing/deleting before a set of words moves words, maybe even vertical scrolling, etc.)
+Suggested ideas: 
+- Checklist: user can add items and check them off
+- Intrinsics improvements: add'l uncommon intrinsics not now included (protection from shape changers, aggravate monsters, amphibiousness, conflict, food appraisal, hunger, jumping, unbreathing)
+- Notes section improvements: functioning delete key, word bumps to next line when reaching end of line, typing/deleting before a set of words moves words, vertical scrolling. Consider using ncurses text widgets here.
 - Sink ring ID table
-- Create help button with "?" that shows controls
-- Ability to change filename. Chop off prepended spaces in file names. Prevent overwriting of file names. 
-- Perhaps name can include the NetHack VAL-DWA-LAW-etc. notation. Could also pregen intrinsics from this? 
-- Handle capital keyboard inputs versus lowercase?
-- C++ improvements: use constexpr on utilities, use arrays instead of only vectors, double-check passing by copying in functions
+- Help button with "?" that shows controls
+- File handling improvements: ability to change filename, removing prepended spaces in file names, prevent overwriting of file names, include VAL-DWA-LAW-etc. notation somewhere (could also pregen intrinsics from this?)
+- Input improvements: right now, lowercase & uppercase letters are handled separately
+- Prayer timeout counter with % chance of success
