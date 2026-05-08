@@ -27,6 +27,11 @@ set(CMAKE_CXX_FLAGS "-g")
 
 add_executable(${PROJECT_NAME} ${SOURCES}) #${CMAKE_SOURCE_DIR}/assets/resources.rc)
 
+if(WIN32)
+    set(CMAKE_EXE_LINKER_FLAGS "-static -static-libgcc -static-libstdc++")
+    set(PKG_CONFIG_ARGN "--static")
+endif()
+
 find_package(PkgConfig REQUIRED)
 if (WIN32 OR MSYS)
     pkg_check_modules(NCURSES REQUIRED ncursesw)
