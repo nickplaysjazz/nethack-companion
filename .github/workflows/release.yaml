@@ -1,0 +1,87 @@
+name: Publish Release
+
+on:
+  push:
+    tags:
+      - 'v*' # Triggers when you push a tag like v1.0, v2.1.3, etc.
+
+jobs:
+  build:
+    name: Build on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        include:
+          - os: ubuntu-latest
+            artifact_name: nethack-companion-linux
+            asset_name: nethack-companion-linux.tar.gz
+          - os: macos-latest
+            artifact_name: nethack-companion-mac
+            asset_name: nethack-companion-mac.zip
+          - os: windows-latest
+            artifact_name: nethack-companion-windows
+            asset_name: nethack-companion-windows.zip
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      
+      - name: Install Dependencies (Linux)
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libncursesw5-dev pkg-config cmake build-essential
+
+      - name: Install Dependencies (macOS)
+        if: matrix.os == 'macos-latest'
+        run: brew install ncurses pkg-config cmake
+
+      - name: Install Dependencies (Windows/MSYS2)
+        if: matrix.os == 'windows-latest'
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: UCRT64
+          update: true
+          install: >-
+            mingw-w64-ucrt-x86_64-gcc
+            mingw-w64-ucrt-x86_64-cmake
+            mingw-w64-ucrt-x86_64-ncurses
+            mingw-w64-ucrt-x86_64-pkg-config
+            make
+
+      - name: Build Project (Linux/macOS)
+        if: matrix.os != 'windows-latest'
+        run: |
+          mkdir build && cd build
+          cmake .. -DCMAKE_BUILD_TYPE=Release
+          make
+
+      - name: Build Project (Windows)
+        if: matrix.os == 'windows-latest'
+        shell: msys2 {0}
+        run: |
+          mkdir build && cd build
+          cmake .. -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
+          make
+
+      - name: Package (Linux)
+        if: matrix.os == 'ubuntu-latest'
+        run: tar -czvf ${{ matrix.asset_name }} -C build NetHack_Companion
+
+      - name: Package (macOS/Windows)
+        if: matrix.os != 'ubuntu-latest'
+        uses: thedoctor0/zip-release@master
+        with:
+          type: 'zip'
+          filename: ${{ matrix.asset_name }}
+          directory: 'build'
+          path: 'NetHack_Companion${{ matrix.os == windows-latest && ".exe" || "" }}'
+
+      - name: Upload Release Asset
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ matrix.os == 'ubuntu-latest' && matrix.asset_name || format('build/{0}', matrix.asset_name) }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -3,7 +3,11 @@ A simple ASCII ncurses app to contain useful NetHack character information betwe
 
 With this app, you can keep track of your character's intrinsics, see a price ID table, take notes, practice Sokoban levels (including flipped & rotated Sokoban levels), and more.
 
-## Building from Source
+## Downloading
+Pre-compiled executables for Windows, Mac, and Linux devices are available on the Release page on GitHub.
+
+## Building from source
+Follow these instructions only if you wish to compile an executable yourself. 
 
 1) **Open a terminal.**
     - Windows devices: the NetHack Companion app is easily compiled with a shell such as MSYS2. Download [MSYS2](https://www.msys2.org/) and open the UCRT64 terminal. The package manager [pacman](https://www.msys2.org/docs/package-management/) should be installed.
