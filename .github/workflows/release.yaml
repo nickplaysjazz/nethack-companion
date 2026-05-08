@@ -77,8 +77,8 @@ jobs:
           type: 'zip'
           filename: ${{ matrix.asset_name }}
           directory: 'build'
-          path: 'NetHack_Companion${{ matrix.os == windows-latest && ".exe" || "" }}'
-
+          # Use this exact line:
+          path: ${{ matrix.os == 'windows-latest' && 'NetHack_Companion.exe' || 'NetHack_Companion' }}
       - name: Upload Release Asset
         uses: softprops/action-gh-release@v2
         with:
