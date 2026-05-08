@@ -41,7 +41,11 @@ else()
     pkg_check_modules(NCURSES REQUIRED ncurses)
 endif()
 
-target_link_libraries(${PROJECT_NAME} PRIVATE ${NCURSES_LIBRARIES} nlohmann_json $<$<PLATFORM_ID:Windows>:panelw menuw formw tinfow>)
+target_link_libraries(${PROJECT_NAME} PRIVATE 
+    ${NCURSES_LIBRARIES} 
+    nlohmann_json
+    $<$<PLATFORM_ID:Windows>:psapi>
+)
 target_include_directories(${PROJECT_NAME} PRIVATE ${NCURSES_INCLUDE_DIRS})
 target_compile_options(${PROJECT_NAME} PRIVATE ${NCURSES_CFLAGS_OTHER})
 target_link_options(${PROJECT_NAME} PRIVATE ${NCURSES_LDFLAGS_OTHER})
