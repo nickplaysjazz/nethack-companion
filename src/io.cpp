@@ -10,6 +10,9 @@
 #include <unistd.h>
 #include <limits.h>
 #endif
+#ifdef __APPLE__
+#include <mach-o/dyld.h>
+#endif
 
 #include "../include/savefile.h"
 
@@ -20,8 +23,17 @@ std::filesystem::path get_exe_path() {
 
     #elif defined(__linux__)
     char exeStr[PATH_MAX];
-    readlink("/proc/self/exe", exeStr, PATH_MAX - 1);
+    ssize_t count = readlink("/proc/self/exe", exeStr, PATH_MAX - 1);
+    if (count != -1) exeStr[count] = '\0';
     
+    #elif defined(__APPLE__)
+    char exeStr[1024];
+    uint32_t size = sizeof(exeStr);
+    _NSGetExecutablePath(exeStr, &size);
+    
+    #else
+    // unknown platforms
+    return std::filesystem::current_path();
     #endif
 
     return std::filesystem::path(exeStr).parent_path();
