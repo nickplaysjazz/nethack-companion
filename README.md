@@ -15,7 +15,7 @@ With this app, you can keep track of your character's intrinsics, see a price ID
     - MacOS devices: run the command `brew install cmake ncurses`
     - Linux devices: using the appropriate package manager, install the prerequisite packages. For apt-get, run `sudo apt update && sudo apt install -y build-essential cmake libncursesw5-dev`
 
-3) **In the `build` subdirectory, build with `cmake ..` then `make`.**
+3) **`mkdir build` if the directory does not exist. In the `build` subdirectory, build with `cmake ..` then `make`.**
 
     This should generate the NetHack_Companion executable.
 
