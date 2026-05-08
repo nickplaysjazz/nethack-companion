@@ -27,6 +27,14 @@ set(CMAKE_CXX_FLAGS "-g")
 
 add_executable(${PROJECT_NAME} ${SOURCES}) #${CMAKE_SOURCE_DIR}/assets/resources.rc)
 
+# Copy assets folder to build directory
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+    ${CMAKE_SOURCE_DIR}/assets
+    ${CMAKE_BINARY_DIR}/assets
+    COMMENT "Copying assets to build directory"
+)
+
 if(WIN32)
     add_definitions(-DNCURSES_STATIC)
     set(CMAKE_EXE_LINKER_FLAGS "-static -static-libgcc -static-libstdc++")

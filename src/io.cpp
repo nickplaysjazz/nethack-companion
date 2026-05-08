@@ -4,6 +4,7 @@
 #include <nlohmann/json.hpp>
 #include <string>
 #include <vector>
+#include <cstdlib>
 #ifdef _WIN32
 #include <libloaderapi.h>
 #elif defined(__linux__)
@@ -39,12 +40,52 @@ std::filesystem::path get_exe_path() {
     return std::filesystem::path(exeStr).parent_path();
 }
 
+std::filesystem::path get_data_path() {
+    std::filesystem::path dataPath;
+
+    #ifdef _WIN32
+    const char* appdata = std::getenv("APPDATA");
+    if (appdata != nullptr) {
+        dataPath = std::filesystem::path(appdata) / "nethack-companion";
+    } else {
+        dataPath = std::filesystem::path(std::getenv("USERPROFILE")) / "AppData" / "Roaming" / "nethack-companion";
+    }
+
+    #elif defined(__APPLE__)
+    const char* home = std::getenv("HOME");
+    if (home != nullptr) {
+        dataPath = std::filesystem::path(home) / "Library" / "Application Support" / "nethack-companion";
+    } else {
+        dataPath = std::filesystem::path("/tmp/nethack-companion");
+    }
+
+    #elif defined(__linux__)
+    const char* xdgDataHome = std::getenv("XDG_DATA_HOME");
+    if (xdgDataHome != nullptr) {
+        dataPath = std::filesystem::path(xdgDataHome) / "nethack-companion";
+    } else {
+        const char* home = std::getenv("HOME");
+        if (home != nullptr) {
+            dataPath = std::filesystem::path(home) / ".local" / "share" / "nethack-companion";
+        } else {
+            dataPath = std::filesystem::path("/tmp/nethack-companion");
+        }
+    }
+
+    #else
+    // Unknown platform, fallback to current directory
+    dataPath = std::filesystem::current_path() / "nethack-companion";
+    #endif
+
+    return dataPath;
+}
+
 std::filesystem::path get_root_path() {
     return std::filesystem::path(__FILE__).parent_path().parent_path();
 }
 
 std::vector<std::string> get_filenames(const std::string & dirname) {
-        std::filesystem::path file_directory =  get_exe_path().append(dirname); 
+        std::filesystem::path file_directory = get_data_path() / dirname; 
         std::vector<std::string> filename_list; 
         for (const auto & file : std::filesystem::directory_iterator(file_directory)) {
             std::string filename = file.path().string(); 
@@ -64,7 +105,7 @@ std::vector<std::string> get_filenames(const std::string & dirname) {
 
 std::vector<std::string> get_filepaths(const std::string & dirname) {
 
-    std::filesystem::path file_directory =  get_exe_path().append(dirname) ; 
+    std::filesystem::path file_directory = get_data_path() / dirname; 
     std::vector<std::string> filepath_list; 
     for (const auto & file : std::filesystem::directory_iterator(file_directory)) {
         std::string filename = file.path().string(); 
@@ -74,14 +115,36 @@ std::vector<std::string> get_filepaths(const std::string & dirname) {
 }
 
 nlohmann::json get_json_data(const std::string & filename) {
-    return nlohmann::json::parse(std::ifstream(get_root_path().append(filename)));
+    std::filesystem::path asset_path = get_data_path() / filename;
+    return nlohmann::json::parse(std::ifstream(asset_path));
+}
+
+void initialize_assets() {
+    std::filesystem::path src_assets = get_exe_path() / "assets";
+    std::filesystem::path dst_assets = get_data_path() / "assets";
+    
+    if (!std::filesystem::exists(dst_assets)) {
+        try {
+            if (!std::filesystem::exists(src_assets)) {
+                std::cerr << "Warning: Asset source folder not found at " << src_assets << std::endl;
+                return;
+            }
+            
+            std::filesystem::copy(src_assets, dst_assets, 
+                std::filesystem::copy_options::recursive | 
+                std::filesystem::copy_options::overwrite_existing);
+            std::cout << "Assets initialized to: " << dst_assets << std::endl;
+        } catch (const std::filesystem::filesystem_error& e) {
+            std::cerr << "Warning: Failed to copy assets: " << e.what() << std::endl;
+        }
+    }
 }
 
 Savefile try_load_file(std::string & filename, Savefile & my_savefile) {
     std::string line;
     std::ifstream my_file (filename);
 
-    std::filesystem::path full_filename =  get_exe_path().append("data").append(filename); 
+    std::filesystem::path full_filename = get_data_path() / "data" / filename; 
 
     my_file.open(full_filename);
     
@@ -116,9 +179,9 @@ Savefile try_load_file(std::string & filename, Savefile & my_savefile) {
 
 int create_file(std::string filename) {
     std::ofstream my_file;
-    std::filesystem::path file_directory = get_exe_path().append("data"); 
+    std::filesystem::path file_directory = get_data_path() / "data"; 
     filename = filename.append(".json");
-    my_file.open(file_directory.append(filename));
+    my_file.open(file_directory / filename);
     if (my_file.is_open()) {
         my_file.close();
         return 0; 
@@ -133,12 +196,12 @@ void delete_file(const std::string & filename) {
 }
 
 void create_data_folder() {
-    std::filesystem::path folderPath = get_exe_path().append("data");
+    std::filesystem::path folderPath = get_data_path() / "data";
     
     if (std::filesystem::exists(folderPath) && std::filesystem::is_directory(folderPath)) {
         return;
     } else {
-        std::filesystem::create_directory(folderPath);
+        std::filesystem::create_directories(folderPath);
     }
 }
 
@@ -151,7 +214,7 @@ int save_file_json(const std::string & filename, Savefile & file_to_save) {
     jsonfile["active_price_ID"] = file_to_save.get_active_price_ID();
 
     std::ofstream my_file;
-    my_file.open(get_exe_path().append("data").append(filename), std::ofstream::out | std::ofstream::trunc);
+    my_file.open(get_data_path() / "data" / filename, std::ofstream::out | std::ofstream::trunc);
     if (my_file.is_open()) {
         my_file << jsonfile;
         my_file.close();

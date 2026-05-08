@@ -104,6 +104,9 @@ int main() {
     // if needed, create /data/ folder
     create_data_folder();
 
+    // Initialize assets (copy to appdata on first run)
+    initialize_assets();
+
     // Read in file names now
     std::vector<std::string> character_filenames = get_filenames("data");
 

@@ -73,7 +73,7 @@ jobs:
 
       - name: Package (Linux)
         if: matrix.os == 'ubuntu-latest'
-        run: tar -czvf ${{ matrix.asset_name }} -C build NetHack_Companion
+        run: tar -czvf ${{ matrix.asset_name }} -C build NetHack_Companion assets
 
       - name: Package (macOS/Windows)
         if: matrix.os != 'ubuntu-latest'
@@ -82,8 +82,10 @@ jobs:
           type: 'zip'
           filename: ${{ matrix.asset_name }}
           directory: 'build'
-          # Use this exact line:
-          path: ${{ matrix.os == 'windows-latest' && 'NetHack_Companion.exe' || 'NetHack_Companion' }}
+          path: |
+            NetHack_Companion${{ matrix.os == 'windows-latest' && '.exe' || '' }}
+            assets
+
       - name: Upload Release Asset
         uses: softprops/action-gh-release@v2
         with:

@@ -6,6 +6,8 @@
 
 #include "savefile.h"
 
+std::filesystem::path get_data_path();
+void initialize_assets();
 void delete_file(const std::string & filename);
 std::vector<std::string> get_filenames(const std::string & dirname);
 std::vector<std::string> get_filepaths(const std::string & dirname);
