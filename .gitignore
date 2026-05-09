@@ -1,15 +1,11 @@
 *.exe
 *.x
 *.vscode
-**/data/*
-Comestibles with Effects.md
-Items ID.md
 CMakeFiles
 *.cmake
 CMakeCache.txt
 Makefile
 NetHack_Companion
-assets/NetHack_Companion.desktop
 **/install_manifest.txt
 _deps
 build/*
