@@ -4,7 +4,7 @@ A simple ASCII ncurses app to contain useful NetHack character information betwe
 With this app, you can keep track of your character's intrinsics, see a price ID table, take notes, practice Sokoban levels (including flipped & rotated Sokoban levels), and more.
 
 ## Downloading
-Pre-compiled executables for Windows, Mac, and Linux devices are available on the Release page on GitHub.
+Pre-compiled executables for Windows, Mac, and Linux devices are available via the Release page on GitHub.
 
 ## Building from source
 Follow these instructions only if you wish to compile an executable yourself. 
@@ -22,6 +22,8 @@ Follow these instructions only if you wish to compile an executable yourself.
 3) **`mkdir build` if the directory does not exist. In the `build` subdirectory, build with `cmake ..` then `make`.**
 
     This should generate the NetHack_Companion executable.
+
+Savefiles are stored in "C:\Users\\[User]\\AppData\Roaming\nethack-companion" in Windows, "~/Library/Application Support/nethack-companion" on Mac devices, and "~/.local/share/nethack-companion" on Linux devices.
 
 ## Contributing
 Bug reports via GitHub's issues feature are welcome. When describing an issue, please include a minimal reproducible example, the expected behavior, and the actual behavior. 
