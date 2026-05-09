@@ -21,6 +21,7 @@
 #include "../include/sokoban.h"
 #include "../include/submenu.h"
 #include "../include/utilities.h"
+#include "../include/terminal.h"
 
 // MUST be global in order to be saved on improper exit
 Savefile my_open_save;
@@ -48,22 +49,8 @@ int main() {
     int totrow = 32; 
     int totcol = 110;
 
-    // Set the window size
-    #ifdef _WIN32
-        HWND console = GetConsoleWindow();
-        HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
-        CONSOLE_FONT_INFO cfi;
-        COORD fontSize;
-        RECT r;
-        
-        GetWindowRect(console, &r);
-        if (GetCurrentConsoleFont(hOut, FALSE, &cfi))
-            fontSize = GetConsoleFontSize(hOut, cfi.nFont);
-
-        resizeterm(totrow, totcol);
-        // TODO: Magic numbers for 5 & 3? Why??
-        MoveWindow(console, r.left, r.top, fontSize.X * (totcol+5), fontSize.Y * (totrow+3), TRUE);
-    #endif
+    // Set terminal size to 110x32 (cross-platform)
+    set_terminal_size();
 
     // Start curses
 	initscr();

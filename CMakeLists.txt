@@ -26,7 +26,13 @@ set(CMAKE_CXX_FLAGS "-Wall -Wextra -Werror")
 set(CMAKE_CXX_FLAGS "-g")
 
 if(WIN32)
-    set(RESOURCE_FILE ${CMAKE_SOURCE_DIR}/assets/resources.rc)
+    # Generate resource file with absolute path to icon
+    configure_file(
+        ${CMAKE_SOURCE_DIR}/assets/resources.rc.in
+        ${CMAKE_BINARY_DIR}/resources.rc
+        @ONLY
+    )
+    set(RESOURCE_FILE ${CMAKE_BINARY_DIR}/resources.rc)
 else()
     set(RESOURCE_FILE "")
 endif()
