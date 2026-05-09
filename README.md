@@ -48,6 +48,7 @@ The icon file nhc_icon.xpm utilizes modified tile files from the vanilla NetHack
 ### To-Do
 Beta release: 
 - Pre-compiled binaries available via GitHub releases feature
+- Icon not appearing on binaries? 
 
 Suggested ideas: 
 - Checklist: user can add items and check them off

@@ -25,16 +25,18 @@ file(GLOB SOURCES ${CMAKE_SOURCE_DIR}/src/*.cpp)
 set(CMAKE_CXX_FLAGS "-Wall -Wextra -Werror")
 set(CMAKE_CXX_FLAGS "-g")
 
+set(RESOURCE_FILE "")
+
 if(WIN32)
-    # Generate resource file with absolute path to icon
-    configure_file(
-        ${CMAKE_SOURCE_DIR}/assets/resources.rc.in
-        ${CMAKE_BINARY_DIR}/resources.rc
-        @ONLY
-    )
+    # Convert path to Windows format (backslashes) for RC compiler
+    string(REPLACE "/" "\\" ICON_PATH_WIN "${CMAKE_SOURCE_DIR}/assets/nhc_icon.ico")
+    
+    # Create RC file with proper Windows path
+    file(WRITE ${CMAKE_BINARY_DIR}/resources.rc "IDI_ICON1 ICON \"${ICON_PATH_WIN}\"\n")
+    
     set(RESOURCE_FILE ${CMAKE_BINARY_DIR}/resources.rc)
-else()
-    set(RESOURCE_FILE "")
+    enable_language(RC)
+    set(CMAKE_RC_COMPILE_OBJECT "<CMAKE_RC_COMPILER> <DEFINES> <INCLUDES> <FLAGS> /fo <OBJECT> <SOURCE>")
 endif()
 
 add_executable(${PROJECT_NAME} ${SOURCES} ${RESOURCE_FILE})
