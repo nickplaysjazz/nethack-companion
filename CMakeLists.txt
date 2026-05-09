@@ -25,7 +25,13 @@ file(GLOB SOURCES ${CMAKE_SOURCE_DIR}/src/*.cpp)
 set(CMAKE_CXX_FLAGS "-Wall -Wextra -Werror")
 set(CMAKE_CXX_FLAGS "-g")
 
-add_executable(${PROJECT_NAME} ${SOURCES}) #${CMAKE_SOURCE_DIR}/assets/resources.rc)
+if(WIN32)
+    set(RESOURCE_FILE ${CMAKE_SOURCE_DIR}/assets/resources.rc)
+else()
+    set(RESOURCE_FILE "")
+endif()
+
+add_executable(${PROJECT_NAME} ${SOURCES} ${RESOURCE_FILE})
 
 # Copy assets folder to build directory
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
