@@ -23,7 +23,7 @@ Follow these instructions only if you wish to compile an executable yourself.
 
     This should generate the NetHack_Companion executable.
 
-Savefiles are stored in "C:\Users\\[User]\\AppData\Roaming\nethack-companion" in Windows, "~/Library/Application Support/nethack-companion" on Mac devices, and "~/.local/share/nethack-companion" on Linux devices.
+Savefiles are stored in "C:\Users\\[User]\\AppData\Roaming\nethack-companion" in Windows, "/home/Library/Application Support/nethack-companion" on Mac devices, and "/home/.local/share/nethack-companion" on Linux devices.
 
 ## Contributing
 Bug reports via GitHub's issues feature are welcome. When describing an issue, please include a minimal reproducible example, the expected behavior, and the actual behavior. 
