@@ -73,7 +73,7 @@ jobs:
 
       - name: Package (Linux)
         if: matrix.os == 'ubuntu-latest'
-        run: tar -czvf ${{ matrix.asset_name }} -C build NetHack_Companion assets
+        run: tar -czvf ${{ matrix.asset_name }} -C build NetHack_Companion
 
       - name: Package (macOS/Windows)
         if: matrix.os != 'ubuntu-latest'
@@ -84,7 +84,6 @@ jobs:
           directory: 'build'
           path: |
             NetHack_Companion${{ matrix.os == 'windows-latest' && '.exe' || '' }}
-            assets
 
       - name: Upload Release Asset
         uses: softprops/action-gh-release@v2
