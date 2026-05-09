@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.11)
 
 # Might need to include RC for windows icon
-project(NetHack_Companion VERSION 1.0.0 LANGUAGES CXX RC)
+project(NetHack_Companion VERSION 1.0.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -38,6 +38,7 @@ list(APPEND SOURCES "${CMAKE_BINARY_DIR}/src/embedded_assets.cpp")
 
 # add resource file to the sources list if on Windows/MSYS
 if(WIN32 OR MSYS)
+    enable_language(RC)
     list(APPEND SOURCES "${CMAKE_SOURCE_DIR}/resources.rc")
 endif()
 
