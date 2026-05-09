@@ -22,7 +22,19 @@ if(NOT json_POPULATED)
     target_include_directories(nlohmann_json INTERFACE ${json_SOURCE_DIR}/include)
 endif()
 
+# Embed JSON assets into the executable
+file(READ "${CMAKE_SOURCE_DIR}/assets/edibility.json" EDIBILITY_JSON)
+file(READ "${CMAKE_SOURCE_DIR}/assets/items.json" ITEMS_JSON)
+file(READ "${CMAKE_SOURCE_DIR}/assets/prices.json" PRICES_JSON)
+file(MAKE_DIRECTORY "${CMAKE_BINARY_DIR}/src")
+configure_file(
+    "${CMAKE_SOURCE_DIR}/src/embedded_assets.cpp.in"
+    "${CMAKE_BINARY_DIR}/src/embedded_assets.cpp"
+    @ONLY
+)
+
 file(GLOB SOURCES ${CMAKE_SOURCE_DIR}/src/*.cpp)
+list(APPEND SOURCES "${CMAKE_BINARY_DIR}/src/embedded_assets.cpp")
 
 # add resource file to the sources list if on Windows/MSYS
 if(WIN32 OR MSYS)
@@ -35,15 +47,6 @@ add_executable(${PROJECT_NAME} ${SOURCES})
 if(WIN32 OR MSYS)
     target_include_directories(${PROJECT_NAME} PRIVATE "${CMAKE_SOURCE_DIR}/assets")
 endif()
-
-# Copy assets folder to build directory
-# Kind of a workaround for now
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_directory
-    ${CMAKE_SOURCE_DIR}/assets
-    ${CMAKE_BINARY_DIR}/assets
-    COMMENT "Copying assets to build directory"
-)
 
 # Static linking -- needed to avoid .dll issues on Windows
 if(WIN32)

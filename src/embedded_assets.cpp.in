@@ -1,0 +1,16 @@
+#include "embedded_assets.h"
+
+namespace embedded_assets {
+
+constexpr std::string_view edibility_json = R"JSON_ASSET(@EDIBILITY_JSON@)JSON_ASSET";
+constexpr std::string_view items_json = R"JSON_ASSET(@ITEMS_JSON@)JSON_ASSET";
+constexpr std::string_view prices_json = R"JSON_ASSET(@PRICES_JSON@)JSON_ASSET";
+
+std::string_view get_embedded_json(const std::string & filename) noexcept {
+    if (filename == "assets/edibility.json") return edibility_json;
+    if (filename == "assets/items.json") return items_json;
+    if (filename == "assets/prices.json") return prices_json;
+    return {};
+}
+
+}

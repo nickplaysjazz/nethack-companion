@@ -16,6 +16,7 @@
 #endif
 
 #include "../include/savefile.h"
+#include "../include/embedded_assets.h"
 
 std::filesystem::path get_exe_path() {
     #ifdef _WIN32
@@ -115,6 +116,10 @@ std::vector<std::string> get_filepaths(const std::string & dirname) {
 }
 
 nlohmann::json get_json_data(const std::string & filename) {
+    if (auto embedded_json = embedded_assets::get_embedded_json(filename); !embedded_json.empty()) {
+        return nlohmann::json::parse(std::string(embedded_json));
+    }
+
     std::filesystem::path asset_path = get_data_path() / filename;
     return nlohmann::json::parse(std::ifstream(asset_path));
 }
@@ -126,10 +131,11 @@ void initialize_assets() {
     if (!std::filesystem::exists(dst_assets)) {
         try {
             if (!std::filesystem::exists(src_assets)) {
-                std::cerr << "Warning: Asset source folder not found at " << src_assets << std::endl;
+                // JSON assets are embedded into the executable, so missing source assets
+                // is not fatal for run-time JSON loading.
                 return;
             }
-            
+
             std::filesystem::copy(src_assets, dst_assets, 
                 std::filesystem::copy_options::recursive | 
                 std::filesystem::copy_options::overwrite_existing);
