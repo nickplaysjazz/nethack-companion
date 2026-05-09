@@ -23,13 +23,6 @@ Follow these instructions only if you wish to compile an executable yourself.
 
     This should generate the NetHack_Companion executable.
 
-4) **Optional: run `make install` to add a NetHack Companion shortcut.**
-
-    On Windows, a NetHack Companion shortcut will be added to your Start Menu.
-
-    On Linux, a NetHack Companion will be added to the Menu applet under the Games category.
-
-
 ## Contributing
 Bug reports via GitHub's issues feature are welcome. When describing an issue, please include a minimal reproducible example, the expected behavior, and the actual behavior. 
 
@@ -48,7 +41,6 @@ The icon file nhc_icon.xpm utilizes modified tile files from the vanilla NetHack
 ### To-Do
 Beta release: 
 - Pre-compiled binaries available via GitHub releases feature
-- Icon not appearing on binaries? 
 
 Suggested ideas: 
 - Checklist: user can add items and check them off
