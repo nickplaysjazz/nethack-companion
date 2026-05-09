@@ -50,7 +50,7 @@ if(WIN32 OR MSYS)
 endif()
 
 # Static linking -- needed to avoid .dll issues on Windows
-if(WIN32)
+if(WIN32 OR MSYS)
     add_definitions(-DNCURSES_STATIC)
     set(CMAKE_EXE_LINKER_FLAGS "-static -static-libgcc -static-libstdc++")
     set(PKG_CONFIG_ARGN "--static")
