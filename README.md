@@ -11,7 +11,7 @@ Follow these instructions only if you wish to compile an executable yourself.
 
 1) **Open a terminal.**
     - Windows devices: the NetHack Companion app is easily compiled with a shell such as MSYS2. Download [MSYS2](https://www.msys2.org/) and open the UCRT64 terminal. The package manager [pacman](https://www.msys2.org/docs/package-management/) should be installed.
-    - MacOS devices: the default terminal should work. If you do not have it installed, [Homebrew](https://brew.sh/) is the standard package manager for Mac. In the terminal, run `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
+    - MacOS devices: the default terminal should work. The package manager [Homebrew](https://brew.sh/) should be installed.
     - Linux devices: the default terminal should work. For Debian Linux distributions, use the package manager [apt-get](https://wiki.debian.org/AptCLI). For Arch Linux, use the [pacman](https://www.msys2.org/docs/package-management/) package manager. For Red Hat-based Linux distributions, use the [DNF](https://rpm-software-management.github.io/) package manager.
 
 2) **Install prerequisite packages.**
